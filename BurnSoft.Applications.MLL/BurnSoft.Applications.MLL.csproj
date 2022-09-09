@@ -53,6 +53,7 @@
     <Compile Include="Database.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Global\GeneralSettings.cs" />
+    <Compile Include="Global\MyRegistry.cs" />
     <Compile Include="Global\WeightValues.cs" />
     <Compile Include="Helpers\Converters.cs" />
     <Compile Include="Helpers\General.cs" />

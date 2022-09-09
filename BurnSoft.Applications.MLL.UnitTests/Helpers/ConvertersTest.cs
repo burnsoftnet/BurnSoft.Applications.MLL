@@ -108,7 +108,9 @@ namespace BurnSoft.Applications.MLL.UnitTests.Helpers
             TestContext.WriteLine($"RETURNED VALUE: {value}, explected {ConvertWeightLbsToGramsExpected} grams from {ConvertWeight} lbs");
             General.HasTrueValue(value == ConvertWeightLbsToGramsExpected, _errOut);
         }
-
+        /// <summary>
+        /// Defines the test method ConvertToDollarsTest.
+        /// </summary>
         [TestMethod, TestCategory("Helpers - Converters")]
         public void ConvertToDollarsTest()
         {
