@@ -46,6 +46,10 @@ namespace BurnSoft.Applications.MLL.UnitTests.Helpers
         /// The convert weight LBS to grams expected
         /// </summary>
         private double ConvertWeightLbsToGramsExpected;
+
+        public double ConvertToDollars;
+
+        public double ConvertToDollarsExpectedValue;
         /// <summary>
         /// Initializes this instance.
         /// </summary>
@@ -61,6 +65,8 @@ namespace BurnSoft.Applications.MLL.UnitTests.Helpers
             ConvertWeight = Convert.ToDouble(Vs2019.GetSetting("ConvertWeight", TestContext));
             ConvertWeightLbsToGrainsExpected = Convert.ToDouble(Vs2019.GetSetting("ConvertWeightLbsToGrainsExpected", TestContext));
             ConvertWeightLbsToGramsExpected = Convert.ToDouble(Vs2019.GetSetting("ConvertWeightLbsToGramsExpected", TestContext));
+            ConvertToDollars = Convert.ToDouble(Vs2019.GetSetting("ConvertToDollars", TestContext));
+            ConvertToDollarsExpectedValue = Convert.ToDouble(Vs2019.GetSetting("ConvertToDollarsExpectedValue", TestContext));
         }
         /// <summary>
         /// Defines the test method ConvertToNumberTest.
@@ -101,6 +107,14 @@ namespace BurnSoft.Applications.MLL.UnitTests.Helpers
             double value = MLL.Helpers.Converters.ConvertWeight(ConvertWeight, WeightValues.WeightType.Grams, WeightValues.WeightType.Pounds, out _errOut);
             TestContext.WriteLine($"RETURNED VALUE: {value}, explected {ConvertWeightLbsToGramsExpected} grams from {ConvertWeight} lbs");
             General.HasTrueValue(value == ConvertWeightLbsToGramsExpected, _errOut);
+        }
+
+        [TestMethod, TestCategory("Helpers - Converters")]
+        public void ConvertToDollarsTest()
+        {
+            double value = MLL.Helpers.Converters.ConvertToDollars(ConvertToDollars);
+            TestContext.WriteLine($"RETURNED VALUE: {value}, explected {ConvertToDollarsExpectedValue} from {ConvertToDollars}");
+            General.HasTrueValue(value == ConvertToDollarsExpectedValue, _errOut);
         }
     }
 }

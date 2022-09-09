@@ -236,6 +236,16 @@ namespace BurnSoft.Applications.MLL.Helpers
             }
             return Convert.ToDouble(Strings.FormatNumber(dAns, 6));
         }
+        /// <summary>
+        /// Converts long double  to dollars format, at least with 3 decimal places on thr right.
+        /// </summary>
+        /// <param name="dValue">The d value.</param>
+        /// <returns>System.Double.</returns>
+        public static double ConvertToDollars(double dValue)
+        {
+            double dAns = Math.Round(dValue, 2);
+            return dAns;
+        }
 
 
     }
