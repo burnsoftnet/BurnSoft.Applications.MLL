@@ -1,11 +1,12 @@
 ﻿using System;
+using BurnSoft.Applications.MLL.Global;
 using Microsoft.VisualBasic;
 // ReSharper disable UnusedMember.Local
 
 namespace BurnSoft.Applications.MLL.Helpers
 {
     /// <summary>
-    /// Class Converters contains functions that can be used to conver tvalues for the application
+    /// Class Converters contains functions that can be used to convert values for the application
     /// </summary>
     public class Converters
     {
@@ -185,6 +186,55 @@ namespace BurnSoft.Applications.MLL.Helpers
                 errOut = ErrorMessage("ConvertOuncesToDouble", ex);
             }
             return dAns;
+        }
+        /// <summary>
+        /// Converts the value to a specifict weight type, so if you had 2 lbs of powder you can convert it to grains etc.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="convertTo">The convert to.</param>
+        /// <param name="convertFrom">The convert from.</param>
+        /// <returns>System.Double.</returns>
+        public static double ConvertWeight(double value, WeightValues.WeightType convertTo, WeightValues.WeightType convertFrom, out string errOut)
+        {
+            double dAns = 0;
+            errOut = "";
+            try
+            {
+                switch (convertTo)
+                {
+                    case WeightValues.WeightType.Pounds:
+                    {
+                        if (convertFrom == WeightValues.WeightType.Grains)
+                            dAns = value / WeightValues.WEIGHT_GRAINS_1LBS;
+                        else if (convertFrom == WeightValues.WeightType.Grams)
+                            dAns = value / WeightValues.WEIGHT_GRAMS_1LBS;
+                        break;
+                    }
+
+                    case WeightValues.WeightType.Grams:
+                    {
+                        if (convertFrom == WeightValues.WeightType.Pounds)
+                            dAns = value * WeightValues.WEIGHT_GRAMS_1LBS;
+                        else if (convertFrom == WeightValues.WeightType.Grains)
+                            dAns = value / WeightValues.WEIGHT_GRAINS_1GM;
+                        break;
+                    }
+
+                    case WeightValues.WeightType.Grains:
+                    {
+                        if (convertFrom == WeightValues.WeightType.Pounds)
+                            dAns = value * WeightValues.WEIGHT_GRAINS_1LBS;
+                        else if (convertFrom == WeightValues.WeightType.Grams)
+                            dAns = value * WeightValues.WEIGHT_GRAINS_1GM;
+                        break;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("ConvertWeight", e);
+            }
+            return Convert.ToDouble(Strings.FormatNumber(dAns, 6));
         }
 
 
