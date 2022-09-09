@@ -1,4 +1,4 @@
-
+.vs
 .vs/
 packages/
 BurnSoft.Applications.MLL/obj/
@@ -17,3 +17,4 @@ BurnSoft.Applications.MLL/obj/Debug/BurnSoft.Applications.MLL.csproj.AssemblyRef
 .vs/BurnSoft.Applications.MLL/v16/.suo
 .vs/BurnSoft.Applications.MLL/v16/TestStore/0/000.testlog
 BurnSoft.Applications.MLL/obj/Debug/BurnSoft.Applications.MLL.csproj.AssemblyReference.cache
+BurnSoft.Applications.MLL/obj

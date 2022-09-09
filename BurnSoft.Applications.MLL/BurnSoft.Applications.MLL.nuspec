@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>1.0.0.1-alpha</version>
+    <title>$title$</title>
+    <authors>burnsoftnet</authors>
+    <owners>burnsoftnet</owners>
+    <projectUrl>https://github.com/burnsoftnet/BurnSoft.Applications.MLL.git</projectUrl>
+    <repository type="git" url="https://github.com/burnsoftnet/BurnSoft.Applications.MLL.git" />
+    <iconUrl>https://avatars0.githubusercontent.com/u/24593581?s=460</iconUrl>
+    <icon>bswtsicon.png</icon>
+    <license type="expression">MIT</license>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>This library was created to perform the main database function that the [My Loader Log](https://github.com/burnsoftnet/MyLoadersLog) Application.</description>
+    <releaseNotes>Initial Release.</releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>burnsoft main, MyLoadersLog MLL</tags>
+  </metadata>
+  <files>
+    <file src="bswtsicon.png" target="" />
+    <file src="bin/$configuration$/$id$.chm" target="content/$id$.chm" />
+  </files>
+</package>
