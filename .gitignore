@@ -6,3 +6,11 @@ BurnSoft.Applications.MLL/obj/
 BurnSoft.Applications.MLL/BurnSoft.Universal.chm
 BurnSoft.Applications.MLL/BurnSoft.Security.RegularEncryption.chm
 .vs/BurnSoft.Applications.MLL/v16/.suo
+BurnSoft.Applications.MLL.UnitTests/obj/
+BurnSoft.Applications.MLL.UnitTests/bin/
+BurnSoft.Applications.MLL/bin/
+.vs/BurnSoft.Applications.MLL/v16/.suo
+BurnSoft.Applications.MLL/obj/Debug/BurnSoft.Applications.MLL.csproj.AssemblyReference.cache
+BurnSoft.Applications.MLL/obj/Debug/BurnSoft.Applications.MLL.csproj.AssemblyReference.cache
+.vs/BurnSoft.Applications.MLL/v16/TestStore/0/000.testlog
+.vs/BurnSoft.Applications.MLL/v16/.suo

@@ -55,12 +55,12 @@ namespace BurnSoft.Applications.MLL.Helpers
         private static string ErrorMessage(string functionName, ArgumentNullException e) => $"{_classLocation}.{functionName} - {e.Message}";
         #endregion        
         /// <summary>
-        /// Converts string to Double.
+        /// Converts string to Double and removes any non characters
         /// </summary>
         /// <param name="strValue">The string value.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns>System.Double.</returns>
-        public double ConvertToNumber(string strValue, out string errOut)
+        public static double ConvertToNumber(string strValue, out string errOut)
         {
             double dAns = 0;
             errOut = "";
