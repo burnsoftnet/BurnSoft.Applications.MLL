@@ -35,5 +35,21 @@ namespace BurnSoft.Applications.MLL.Global
         /// The menu shop
         /// </summary>
         public const string MENU_SHOP = "http://shopping.burnsoft.net";
+        /// <summary>
+        /// The menu bug
+        /// </summary>
+        public const string MENU_BUG = "http://bugreport.burnsoft.net";
+        /// <summary>
+        /// The menu support
+        /// </summary>
+        public const string MENU_SUPPORT = "http://support.burnsoft.net";
+        /// <summary>
+        /// The menu sitesearch
+        /// </summary>
+        public const string MENU_SITESEARCH = "http://www.burnsoft.net/Search_Site.aspx";
+        /// <summary>
+        /// The menu links
+        /// </summary>
+        public const string MENU_LINKS = "http://wiki.burnsoft.net/Links_Firearm_reloading.ashx";
     }
 }

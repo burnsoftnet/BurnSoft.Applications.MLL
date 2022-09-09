@@ -37,7 +37,8 @@ namespace BurnSoft.Applications.MLL.UnitTests.Settings
             ls.Add(new Tuple<string, string>("DatabasePath", "data\\mgc.mdb"));
             ls.Add(new Tuple<string, string>("ConverThisToNumber", "$234.56"));
             ls.Add(new Tuple<string, string>("ConverThisToNumberExpected", "234.56"));
-
+            ls.Add(new Tuple<string, string>("ConvertOuncesToDouble", "7/8"));
+            ls.Add(new Tuple<string, string>("ConvertOuncesToDoubleExpected", "0.875"));
             //ls.Add(new Tuple<string, string>("", ""));
             return ls;
         }

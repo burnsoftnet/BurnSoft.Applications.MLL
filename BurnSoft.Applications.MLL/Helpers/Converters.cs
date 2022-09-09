@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.VisualBasic;
 // ReSharper disable UnusedMember.Local
 
@@ -67,11 +63,10 @@ namespace BurnSoft.Applications.MLL.Helpers
             try
             {
                 int intChar = strValue.Length;
-                int i;
                 string newValue = "";
                 string lastValue = "";
                 bool needDiv = false;
-                for (i = 1; i <= intChar; i++)
+                for (int i = 1; i <= intChar; i++)
                 {
                     var curValue = Strings.Mid(strValue, i, 1);
                     if (curValue == " ")
@@ -82,10 +77,11 @@ namespace BurnSoft.Applications.MLL.Helpers
                             lastValue = Strings.Mid(newValue, Strings.Len(newValue), 1);
                         else
                             lastValue = curValue;
+
                         if (!needDiv)
                             newValue += curValue;
                         else
-                            newValue = $"{Convert.ToDouble(curValue) / (double)Convert.ToDouble(lastValue)}";
+                            newValue = $"{Convert.ToDouble(curValue) / Convert.ToDouble(lastValue)}";
                         needDiv = false;
                     }
                     else
@@ -110,6 +106,83 @@ namespace BurnSoft.Applications.MLL.Helpers
             catch (Exception ex)
             {
                 errOut = ErrorMessage("ConvertToNumber", ex);
+            }
+            return dAns;
+        }
+        /// <summary>
+        /// Converts the ounces to double.
+        /// </summary>
+        /// <param name="sValue">The s value.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Double.</returns>
+        public static double ConvertOuncesToDouble(string sValue, out string errOut)
+        {
+            double dAns = 0;
+            errOut = "";
+            try
+            {
+                int charCount = Strings.Len(sValue);
+                string newValue = "";
+                string lastValue = "";
+                string endValue = "0";
+                bool needDiv = false;
+                bool isDec = false;
+                for (int i = 1; i <= charCount; i++)
+                {
+                    var curValue = Strings.Mid(sValue, i, 1);
+                    var isFraction = false;
+                    if (Information.IsNumeric(curValue))
+                    {
+                        if (!needDiv)
+                        {
+                            newValue = curValue;
+                            isDec = false;
+                        }
+                        else
+                        {
+                            newValue = $"{Convert.ToDouble(lastValue) / Convert.ToDouble(curValue)}";
+                            isDec = true;
+                        }
+                        needDiv = false;
+                        lastValue = curValue;
+                    }
+                    else
+                        switch (curValue)
+                        {
+                            case ".":
+                                {
+                                    newValue += curValue;
+                                    needDiv = false;
+                                    break;
+                                }
+
+                            case "/":
+                                {
+                                    needDiv = true;
+                                    break;
+                                }
+
+                            default:
+                                {
+                                    newValue = "";
+                                    break;
+                                }
+                        }
+                    if (Strings.Mid(sValue, i + 1, 1) == "/")
+                        isFraction = true;
+                    if (!isFraction & !needDiv)
+                    {
+                        if (!isDec)
+                            endValue += newValue;
+                        else
+                            endValue = $"{Convert.ToDouble(endValue) + Convert.ToDouble(newValue)}";
+                    }
+                }
+                dAns = Convert.ToDouble(endValue);
+            }
+            catch (Exception ex)
+            {
+                errOut = ErrorMessage("ConvertOuncesToDouble", ex);
             }
             return dAns;
         }
