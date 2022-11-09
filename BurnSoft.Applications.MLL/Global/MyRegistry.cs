@@ -104,7 +104,11 @@ namespace BurnSoft.Applications.MLL.Global
        
         private static bool _loadertypeShotgun = false;
 
+        private static bool _viewFps = true;
+        private static bool _viewCups = true;
         private static bool _loadertypeNonShotgun = true;
+        private static string _defaultList;
+
         /// <summary>
         /// The reg indv reports
         /// </summary>
@@ -291,6 +295,23 @@ namespace BurnSoft.Applications.MLL.Global
         {
             get => _loadertypeNonShotgun;
             set => _loadertypeNonShotgun = value;
+        }
+        
+        private static bool ViewFps
+        {
+            get => _viewFps;
+            set => _viewFps = value;
+        }
+
+        private static bool ViewCups
+        {
+            get => _viewCups;
+            set => _viewCups = value;
+        }
+        private static string DefaultList
+        {
+            get => _defaultList;
+            set => _defaultList = value;
         }
         /// <summary>
         /// Gets or sets a value indicating whether [reg indv reports].
@@ -547,9 +568,11 @@ namespace BurnSoft.Applications.MLL.Global
                     myReg.SetValue("BackupOnExit", RegBackupOnExit);
                     myReg.SetValue("UseOrgImage", RegUseOrgImage);
                     myReg.SetValue("LOADERTYPE_SHOTGUN", LoadertypeShotgun);
+                    myReg.SetValue("LOADERTYPE_NONSHOTGUN", LoaderTypeNonShotgun);
                     myReg.SetValue("IndvReports", RegIndvReports);
-                    myReg.SetValue("UseNumberCatOnly", RegUseNumberCatOnly);
-                    myReg.SetValue("AUDITAMMO", RegAuditammo);
+                    myReg.SetValue("DefaultList", DefaultList);
+                    myReg.SetValue("VIEW_FPS", ViewFps);
+                    myReg.SetValue("VIEW_CUPS", ViewCups);
                     myReg.Close();
 
                     //for (int i = 1; i < HotFix.NumberOfFixes + 1; i++)
@@ -572,29 +595,29 @@ namespace BurnSoft.Applications.MLL.Global
         /// </summary>
         /// <param name="errOut">The error out.</param>
         /// <returns>List&lt;HotFixList&gt;.</returns>
-        public static List<HotFixList> GetHotxes(out string errOut)
-        {
-            List<HotFixList> lst = new List<HotFixList>();
-            errOut = "";
-            try
-            {
-                string strValue = DefaultRegPath + @"\HotFix";
-                RegistryKey key = Registry.CurrentUser.OpenSubKey(strValue);
-                foreach (var v in key.GetValueNames())
-                {
-                    //Console.WriteLine(v);
-                    string hotfixId = v;
-                    string dateinstalled = key.GetValue(v).ToString();
-                    lst.Add(new HotFixList() { Id = hotfixId, DateInstalled = dateinstalled, WasFromInstall = dateinstalled.Equals("OnInstall") });
-                }
-            }
-            catch (Exception e)
-            {
-                errOut = ErrorMessage("GetHotfixes", e);
-            }
+        //public static List<HotFixList> GetHotxes(out string errOut)
+        //{
+        //    List<HotFixList> lst = new List<HotFixList>();
+        //    errOut = "";
+        //    try
+        //    {
+        //        string strValue = DefaultRegPath + @"\HotFix";
+        //        RegistryKey key = Registry.CurrentUser.OpenSubKey(strValue);
+        //        foreach (var v in key.GetValueNames())
+        //        {
+        //            //Console.WriteLine(v);
+        //            string hotfixId = v;
+        //            string dateinstalled = key.GetValue(v).ToString();
+        //            lst.Add(new HotFixList() { Id = hotfixId, DateInstalled = dateinstalled, WasFromInstall = dateinstalled.Equals("OnInstall") });
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        errOut = ErrorMessage("GetHotfixes", e);
+        //    }
 
-            return lst;
-        }
+        //    return lst;
+        //}
         /// <summary>
         /// Settingses the exists.
         /// </summary>
@@ -616,24 +639,9 @@ namespace BurnSoft.Applications.MLL.Global
             return bAns;
         }
 
-        /// <summary>
-        /// Gets the settings.
-        /// </summary>
-        /// <param name="lastSucBackup">The last suc backup.</param>
-        /// <param name="alertOnBackUp">if set to <c>true</c> [alert on back up].</param>
-        /// <param name="trackHistoryDays">The track history days.</param>
-        /// <param name="trackHistory">if set to <c>true</c> [track history].</param>
-        /// <param name="autoBackup">if set to <c>true</c> [automatic backup].</param>
-        /// <param name="uoimg">if set to <c>true</c> [uoimg].</param>
-        /// <param name="usePl">if set to <c>true</c> [use pl].</param>
-        /// <param name="useIPer">if set to <c>true</c> [use i per].</param>
-        /// <param name="useCcid">if set to <c>true</c> [use ccid].</param>
-        /// <param name="useaa">if set to <c>true</c> [useaa].</param>
-        /// <param name="useAacid">if set to <c>true</c> [use aacid].</param>
-        /// <param name="useUniqueCustId">if set to <c>true</c> [use unique customer identifier].</param>
-        /// <param name="bUseselectiveboundbook">if set to <c>true</c> [b useselectiveboundbook].</param>
-        /// <param name="errOut">The error out.</param>
-        public static void GetSettings(out string lastSucBackup, out bool alertOnBackUp, out int trackHistoryDays, out bool trackHistory, out bool autoBackup, out bool uoimg, out bool usePl, out bool useIPer, out bool useCcid, out bool useaa, out bool useAacid, out bool useUniqueCustId, out bool bUseselectiveboundbook, out string errOut)
+        public static void GetSettings(out string lastSucBackup, out bool alertOnBackUp, out int trackHistoryDays, out bool trackHistory,
+            out bool autoBackup, out bool uoimg, out bool usePl, out bool useIPer, out bool useCcid, out bool useaa, out bool useAacid,
+            out bool useUniqueCustId, out bool bUseselectiveboundbook, out string errOut)
         {
             errOut = "";
             lastSucBackup = "";
@@ -669,11 +677,11 @@ namespace BurnSoft.Applications.MLL.Global
                     uoimg = Convert.ToBoolean(GetRegSubKeyValue(strValue, "UseOrgImage", RegUseOrgImage.ToString(), out errOut));
                     usePl = Convert.ToBoolean(GetRegSubKeyValue(strValue, "ViewPetLoads", LoadertypeShotgun.ToString(), out errOut));
                     useIPer = Convert.ToBoolean(GetRegSubKeyValue(strValue, "IndvReports", RegIndvReports.ToString(), out errOut));
-                    useCcid = Convert.ToBoolean(GetRegSubKeyValue(strValue, "UseNumberCatOnly", RegUseNumberCatOnly.ToString(), out errOut));
-                    useaa = Convert.ToBoolean(GetRegSubKeyValue(strValue, "AUDITAMMO", RegAuditammo.ToString(), out errOut));
-                    useAacid = Convert.ToBoolean(GetRegSubKeyValue(strValue, "USEAUTOASSIGN", RegUseautoassign.ToString(), out errOut));
-                    useUniqueCustId = Convert.ToBoolean(GetRegSubKeyValue(strValue, "DISABLEUNIQUECUSTCATID", RegUniquecustcatid.ToString(), out errOut));
-                    bUseselectiveboundbook = Convert.ToBoolean(GetRegSubKeyValue(strValue, "USESELECTIVEBOUNDBOOK", RegUseselectiveboundbook.ToString(), out errOut));
+                    //useCcid = Convert.ToBoolean(GetRegSubKeyValue(strValue, "UseNumberCatOnly", RegUseNumberCatOnly.ToString(), out errOut));
+                    //useaa = Convert.ToBoolean(GetRegSubKeyValue(strValue, "AUDITAMMO", RegAuditammo.ToString(), out errOut));
+                    //useAacid = Convert.ToBoolean(GetRegSubKeyValue(strValue, "USEAUTOASSIGN", RegUseautoassign.ToString(), out errOut));
+                    //useUniqueCustId = Convert.ToBoolean(GetRegSubKeyValue(strValue, "DISABLEUNIQUECUSTCATID", RegUniquecustcatid.ToString(), out errOut));
+                    //bUseselectiveboundbook = Convert.ToBoolean(GetRegSubKeyValue(strValue, "USESELECTIVEBOUNDBOOK", RegUseselectiveboundbook.ToString(), out errOut));
                 }
                 else
                 {
