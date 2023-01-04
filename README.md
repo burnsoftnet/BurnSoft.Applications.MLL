@@ -1,4 +1,7 @@
 # BurnSoft.Applications.MLL
+
+![](https://img.shields.io/badge/license-MIT-blue.svg?maxAge=3600) 
+
 The Main Library for the [My Loaders Log](https://github.com/burnsoftnet/MyLoadersLog) Application that handles a majority of the work that is required.
 
 This application was seperated from the project to be added to the site nuget package so we can also use this in the [My Gun Collection](https://github.com/burnsoftnet/MyGunCollection)]
