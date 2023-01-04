@@ -22,3 +22,4 @@ BurnSoft.Applications.MLL/obj
 *.testlog
 .vs/BurnSoft.Applications.MLL/v16/.suo
 *.cache
+*.cache
