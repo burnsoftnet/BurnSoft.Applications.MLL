@@ -14,12 +14,12 @@ namespace BurnSoft.Applications.MLL
         /// <summary>
         /// The database password
         /// </summary>
-        internal const string DbPassword = "14un0t2n0";
+        internal const string DbPassword = "wtf.m@t3";
         #region "Exception Error Handling"        
         /// <summary>
         /// The class location
         /// </summary>
-        private static string ClassLocation = "BurnSoft.Applications.MGC.Database";
+        private static string ClassLocation = "BurnSoft.Applications.MLL.Database";
         /// <summary>
         /// Errors the message for regular Exceptions
         /// </summary>
@@ -56,16 +56,19 @@ namespace BurnSoft.Applications.MLL
         /// <returns>System.String.</returns>
         private static string ErrorMessage(string functionName, ArgumentNullException e) => $"{ClassLocation}.{functionName} - {e.Message}";
         #endregion
-        //End Snippet
+        //End Snippet        
+        /// <summary>
+        /// The connection
+        /// </summary>
         internal OdbcConnection _conn;
         #region "Connection Strings"
 
         /// <summary>
         /// Connection String Format Used to Connect to MS Access Databases using the Microsoft Access Driver
         /// </summary>
-        /// <param name="databasePath"></param>
+        /// <param name="databasePath">The Database Path</param>
         /// <param name="databaseName"></param>
-        /// <param name="errOut"></param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <param name="password"></param>
         /// <returns>string</returns>
         /// <example>
@@ -117,7 +120,7 @@ namespace BurnSoft.Applications.MLL
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="databaseName">Name of the database.</param>
-        /// <param name="errOut"></param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <param name="password">The password.</param>
         /// <returns>System.String.</returns>
         /// <example>
@@ -258,6 +261,7 @@ namespace BurnSoft.Applications.MLL
                     OdbcCommand cmd = new OdbcCommand(sql, _conn);
                     cmd.ExecuteNonQuery();
                     cmd.Connection.Close();
+                    _conn.Close();
                     _conn = null;
                     bAns = true;
                 }
@@ -287,7 +291,17 @@ namespace BurnSoft.Applications.MLL
             obj.Close(out _);
             return passed;
         }
-
+        /// <summary>
+        /// Runs the SQL.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="sql">The SQL.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool RunSql(string databasePath, string sql, out string errOut)
+        {
+            return hotixes.HfDatabase.RunSql(databasePath, sql, out errOut, true);
+        }
         /// <summary>
         /// Gets the data.
         /// </summary>
@@ -341,7 +355,7 @@ namespace BurnSoft.Applications.MLL
         /// <param name="connection"></param>
         /// <param name="sql"></param>
         /// <param name="identitySeedColumnName"></param>
-        /// <param name="errOut"></param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns>number</returns>
         /// <example>
         /// string sql = "select id from sometable where something='something'"; <br/>
