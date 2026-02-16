@@ -236,6 +236,68 @@ namespace BurnSoft.Applications.MLL.Helpers
             }
             return Convert.ToDouble(Strings.FormatNumber(dAns, 6));
         }
+
+        /// <summary>
+        /// Convs string to number and get rid of anything is is not a number.
+        /// </summary>
+        /// <param name="strValue">The string value.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Double.</returns>
+        public static double ConvToNum(string strValue, out string errOut)
+        {
+            double dAns = 0;
+            errOut = "";
+            try
+            {
+                int intChar = Strings.Len(strValue);
+                int i = 0;
+                string CurValue = "";
+                string NewValue = "";
+                string LastValue = "";
+                bool NeedDiv = false;
+                for (i = 1; i <= intChar; i++)
+                {
+                    CurValue = Strings.Mid(strValue, i, 1);
+                    if (CurValue == " ")
+                        break;
+                    if (Information.IsNumeric(CurValue))
+                    {
+                        if (Strings.Len(LastValue) != 0)
+                            LastValue = Strings.Mid(NewValue, Strings.Len(NewValue), 1);
+                        else
+                            LastValue = CurValue;
+                        if (!NeedDiv)
+                            NewValue += CurValue;
+                        else
+                            NewValue = Convert.ToString(Convert.ToDouble(CurValue) / Convert.ToDouble(LastValue));
+                        NeedDiv = false;
+                    }
+                    else
+                        switch (CurValue)
+                        {
+                            case ".":
+                                {
+                                    NewValue += CurValue;
+                                    NeedDiv = false;
+                                    break;
+                                }
+
+                            case "/":
+                                {
+                                    NeedDiv = true;
+                                    break;
+                                }
+                        }
+                }
+                dAns = Convert.ToDouble(NewValue);
+            }
+            catch (Exception ex)
+            {
+                errOut = ErrorMessage("ConvertToNum", ex);
+            }
+            return dAns;
+        }
+
         /// <summary>
         /// Converts long double  to dollars format, at least with 3 decimal places on thr right.
         /// </summary>
