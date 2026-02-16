@@ -299,6 +299,88 @@ namespace BurnSoft.Applications.MLL.Helpers
         }
 
         /// <summary>
+        /// Converts the ounces to double.
+        /// </summary>
+        /// <param name="sValue">The string value.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Double.</returns>
+        public static double ConvertOzToDouble(string sValue, out string errOut)
+        {
+            double dAns = 0;
+            errOut = "";
+            try
+            {
+                int char_count = Strings.Len(sValue);
+                int i = 0;
+                string CurValue = "";
+                string NewValue = "";
+                string LastValue = "";
+                string EndValue = "0";
+                bool NeedDiv = false;
+                bool isFraction = false;
+                bool IsDec = false;
+                for (i = 1; i <= char_count; i++)
+                {
+                    CurValue = Strings.Mid(sValue, i, 1);
+                    isFraction = false;
+                    if (Information.IsNumeric(CurValue))
+                    {
+                        if (!NeedDiv)
+                        {
+                            NewValue = CurValue;
+                            IsDec = false;
+                        }
+                        else
+                        {
+                            NewValue = Convert.ToString(Convert.ToDouble(LastValue) / Convert.ToDouble(CurValue));
+                            IsDec = true;
+                        }
+                        NeedDiv = false;
+                        LastValue = CurValue;
+                    }
+                    else
+                        switch (CurValue)
+                        {
+                            case ".":
+                                {
+                                    NewValue += CurValue;
+                                    NeedDiv = false;
+                                    break;
+                                }
+
+                            case "/":
+                                {
+                                    NeedDiv = true;
+                                    break;
+                                }
+
+                            default:
+                                {
+                                    NewValue = "";
+                                    break;
+                                }
+                        }
+                    if (Strings.Mid(sValue, i + 1, 1) == "/")
+                        isFraction = true;
+                    if (!isFraction & !NeedDiv)
+                    {
+                        if (!IsDec)
+                            EndValue += NewValue;
+                        else
+                            EndValue = Convert.ToString(Convert.ToDouble(EndValue) + Convert.ToDouble(NewValue));
+                    }
+                }
+                dAns = Convert.ToDouble(EndValue);
+            }
+            catch (Exception ex)
+            {
+                errOut = ErrorMessage("ConvertOZToDouble", ex);
+            }
+            return dAns;
+        }
+
+
+        /// <summary>
         /// Converts long double  to dollars format, at least with 3 decimal places on thr right.
         /// </summary>
         /// <param name="dValue">The d value.</param>
