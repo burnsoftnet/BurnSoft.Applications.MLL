@@ -101,12 +101,25 @@ namespace BurnSoft.Applications.MLL.Global
         /// The reg use org image
         /// </summary>
         private static bool _regUseOrgImage;
-       
+        /// <summary>
+        /// The loadertype shotgun
+        /// </summary>
         private static bool _loadertypeShotgun = false;
-
+        /// <summary>
+        /// The view FPS
+        /// </summary>
         private static bool _viewFps = true;
+        /// <summary>
+        /// The view cups
+        /// </summary>
         private static bool _viewCups = true;
+        /// <summary>
+        /// The loadertype non shotgun
+        /// </summary>
         private static bool _loadertypeNonShotgun = true;
+        /// <summary>
+        /// The default list
+        /// </summary>
         private static string _defaultList;
 
         /// <summary>
