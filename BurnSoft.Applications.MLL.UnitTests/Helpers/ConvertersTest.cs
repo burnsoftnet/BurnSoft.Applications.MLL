@@ -140,5 +140,23 @@ namespace BurnSoft.Applications.MLL.UnitTests.Helpers
             TestContext.WriteLine($"RETURNED VALUE: {value}, from {sValue}");
             General.HasTrueValue(value == 2.75, _errOut);
         }
+
+        [TestMethod, TestCategory("Helpers - Converters")]
+        public void CostOfRoundsOfAmmoMetalicTest()
+        {
+            double value = MLL.Helpers.Converters.CostOfRoundsOfAmmoMetalic(primer: 0.02799, cases: 0, 
+                bullets: 0.1699, powder: 0.00271286101837288, midPowder: 7);
+            TestContext.WriteLine($"RETURNED VALUE: {value}");
+            General.HasTrueValue(value == 0.22, _errOut);
+        }
+
+        [TestMethod, TestCategory("Helpers - Converters")]
+        public void CostOfRoundsOfAmmoShotGunTest()
+        {
+            double value = MLL.Helpers.Converters.CostOfRoundsOfAmmoShotGun(primer: 0.02799, cases: 0,
+                bullets: 0.1699, powder: 0.00271286101837288, midPowder: 7, wad: 0.80);
+            TestContext.WriteLine($"RETURNED VALUE: {value}");
+            General.HasTrueValue(value == 1.02, _errOut);
+        }
     }
 }

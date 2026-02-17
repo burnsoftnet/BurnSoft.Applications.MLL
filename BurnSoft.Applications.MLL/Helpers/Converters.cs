@@ -379,7 +379,6 @@ namespace BurnSoft.Applications.MLL.Helpers
             return dAns;
         }
 
-
         /// <summary>
         /// Converts long double  to dollars format, at least with 3 decimal places on thr right.
         /// </summary>
@@ -391,6 +390,40 @@ namespace BurnSoft.Applications.MLL.Helpers
             return dAns;
         }
 
-
+        /// <summary>
+        /// Costs the of rounds of ammo metalic to sum up how much it will cost to make this load.
+        /// </summary>
+        /// <param name="primer">The primer.</param>
+        /// <param name="cases">The cases.</param>
+        /// <param name="bullets">The bullets.</param>
+        /// <param name="powder">The powder.</param>
+        /// <param name="midPowder">The mid powder.</param>
+        /// <returns>System.Double.</returns>
+        public static double CostOfRoundsOfAmmoMetalic(double primer, double cases, double bullets, 
+            double powder, double midPowder)
+        {
+            double dAns = 0;
+            dAns = (ConvertToDollars(powder * midPowder) + ConvertToDollars(cases) + 
+                ConvertToDollars(primer) + ConvertToDollars(bullets));
+            return ConvertToDollars(dAns);
+        }
+        /// <summary>
+        /// Costs the of rounds of ammo shot gunto sum up how much it will cost to make this load.
+        /// </summary>
+        /// <param name="primer">The primer.</param>
+        /// <param name="cases">The cases.</param>
+        /// <param name="bullets">The bullets.</param>
+        /// <param name="powder">The powder.</param>
+        /// <param name="midPowder">The mid powder.</param>
+        /// <param name="wad">The wad.</param>
+        /// <returns>System.Double.</returns>
+        public static double CostOfRoundsOfAmmoShotGun(double primer, double cases, double bullets,
+            double powder, double midPowder, double wad)
+        {
+            double dAns = 0;
+            dAns = (ConvertToDollars(powder * midPowder) + ConvertToDollars(cases) +
+                ConvertToDollars(primer) + ConvertToDollars(bullets) + ConvertToDollars(wad));
+            return ConvertToDollars(dAns);
+        }
     }
 }

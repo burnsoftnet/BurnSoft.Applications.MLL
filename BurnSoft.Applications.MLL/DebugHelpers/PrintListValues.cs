@@ -42,6 +42,29 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
             }
             return sAns;
         }
+
+        /// <summary>
+        /// Logins the information only data.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string LoginInformationOnlyData(List<LoginInformationOnly> value)
+        {
+            string sAns = "";
+            if (value.Count > 0)
+            {
+                foreach (LoginInformationOnly p in value)
+                {
+                    sAns += $"UseLock : {p.UseLock}{Environment.NewLine}";
+                    sAns += $"UserName : {p.UserName}{Environment.NewLine}";
+                    sAns += $"Password : {p.Password}{Environment.NewLine}";
+                    sAns += $"Forgot : {p.Forgot}{Environment.NewLine}";
+                    sAns += $"ForgetPhrase : {p.ForgetPhrase}{Environment.NewLine}";
+                }
+            }
+            return sAns;
+        }
+
         /// <summary>
         /// Configurations the list data metalic data.
         /// </summary>

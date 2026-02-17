@@ -352,7 +352,7 @@ namespace BurnSoft.Applications.MLL
         /// <summary>
         /// Get the Identity seed from the table base on your T SQl statement.
         /// </summary>
-        /// <param name="connection"></param>
+        /// <param name="databasePath"></param>
         /// <param name="sql"></param>
         /// <param name="identitySeedColumnName"></param>
         /// <param name="errOut">If an exception occurs the message will be in this string</param>
@@ -362,14 +362,14 @@ namespace BurnSoft.Applications.MLL
         /// int value = GetIDFromTableBasedOnTSQL(SomeConnectionString, sql, "id", out var errOut);
         /// 
         /// </example>
-        public static int GetIDFromTableBasedOnTSQL(string connection, string sql, string identitySeedColumnName, out string errOut)
+        public static int GetIDFromTableBasedOnTSQL(string databasePath, string sql, string identitySeedColumnName, out string errOut)
         {
             int iAns = 0;
             errOut = @"";
             try
             {
                 Database obj = new Database();
-                string con = ConnectionString(connection, out errOut);
+                string con = ConnectionString(databasePath, out errOut);
                 DataTable dt = obj.GetData(con, sql, out errOut);
                 if (errOut?.Length > 0) throw new Exception(errOut);
                 foreach (DataRow dr in dt.Rows)
@@ -438,7 +438,7 @@ namespace BurnSoft.Applications.MLL
             return bAns;
         }
         #endregion
-        #region "Gun Collection Related"        
+        #region "Sync and Database Version Related"        
         /// <summary>
         /// Updates the synchronize data tables.
         /// </summary>
@@ -492,32 +492,6 @@ namespace BurnSoft.Applications.MLL
             catch (Exception e)
             {
                 errOut = ErrorMessage("SaveDatabaseVersion", e);
-            }
-            return bAns;
-        }
-        /// <summary>
-        /// Inserts the new contact.
-        /// </summary>
-        /// <param name="databasePath">The database path.</param>
-        /// <param name="sValue">The s value.</param>
-        /// <param name="sTable">The s table.</param>
-        /// <param name="sColumn">The s column.</param>
-        /// <param name="errOut">The error out.</param>
-        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        /// <exception cref="Exception"></exception>
-        public bool InsertNewContact(string databasePath, string sValue, string sTable, string sColumn, out string errOut)
-        {
-            bool bAns = false;
-            errOut = @"";
-            try
-            {
-                string sql = $"INSERT INTO {sTable}({sColumn},Address1,City,State,Zip,sync_lastupdate) VALUES('{sValue}','N/A','N/A','N/A','N/A',Now())";
-                bAns = ConnExec(ConnectionString(databasePath, out errOut), sql, out errOut);
-                if (errOut?.Length > 0) throw new Exception(errOut);
-            }
-            catch (Exception e)
-            {
-                errOut = ErrorMessage("InsertNewContact", e);
             }
             return bAns;
         }
