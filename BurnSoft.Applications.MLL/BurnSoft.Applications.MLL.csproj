@@ -66,6 +66,7 @@
     <Compile Include="Types\ConfigListDataMetalic.cs" />
     <Compile Include="Types\LoginInformationOnly.cs" />
     <Compile Include="Types\PersonalInformation.cs" />
+    <Compile Include="Types\RegistrySettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bswtsicon.png" />

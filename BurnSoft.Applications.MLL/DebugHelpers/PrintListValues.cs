@@ -90,5 +90,38 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
             }
             return sAns;
         }
+        /// <summary>
+        /// Registries the settings data.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string RegistrySettingsData(List<RegistrySettings> value)
+        {
+            string sAns = "";
+            if (value.Count > 0)
+            {
+                foreach (RegistrySettings v in value)
+                {
+                    sAns += $"TrackHistoryDays : {v.TrackHistoryDays}{Environment.NewLine}";
+                    sAns += $"LastSucBackup : {v.LastSucBackup}{Environment.NewLine}";
+                    sAns += $"AlertOnBackUp : {v.AlertOnBackUp}{Environment.NewLine}";
+                    sAns += $"TrackHistory : {v.TrackHistory}{Environment.NewLine}";
+                    sAns += $"AutoBackup : {v.AutoBackup}{Environment.NewLine}";
+                    sAns += $"UseOrgImage : {v.UseOrgImage}{Environment.NewLine}";
+                    sAns += $"IndvReports : {v.IndvReports}{Environment.NewLine}";
+                    sAns += $"ConfigSort : {v.ConfigSort}{Environment.NewLine}";
+                    sAns += $"NumberFormat : {v.NumberFormat}{Environment.NewLine}";
+                    sAns += $"AutoUpdate : {v.AutoUpdate}{Environment.NewLine}";
+                    sAns += $"UseProxy : {v.UseProxy}{Environment.NewLine}";
+                    sAns += $"LoaderTypeShotGun : {v.LoaderTypeShotGun}{Environment.NewLine}";
+                    sAns += $"LoaderTypeMetalic : {v.LoaderTypeMetalic}{Environment.NewLine}";
+                    sAns += $"ViewFps : {v.ViewFps}{Environment.NewLine}";
+                    sAns += $"ViewCups : {v.ViewCups}{Environment.NewLine}";
+                    sAns += $"DefaultList : {v.DefaultList}{Environment.NewLine}";
+                    sAns += $"BackupOnExit : {v.BackupOnExit}{Environment.NewLine}";
+                }
+            }
+            return sAns;
+        }
     }
 }

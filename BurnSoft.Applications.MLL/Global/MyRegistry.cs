@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using BurnSoft.Applications.MLL.Types;
 using Microsoft.Win32;
 // ReSharper disable PossibleNullReferenceException
 // ReSharper disable RedundantAssignment
@@ -619,34 +620,7 @@ namespace BurnSoft.Applications.MLL.Global
 
             return bAns;
         }
-        /// <summary>
-        /// Gets the hotxes and puts them in a list to process
-        /// </summary>
-        /// <param name="errOut">The error out.</param>
-        /// <returns>List&lt;HotFixList&gt;.</returns>
-        //public static List<HotFixList> GetHotxes(out string errOut)
-        //{
-        //    List<HotFixList> lst = new List<HotFixList>();
-        //    errOut = "";
-        //    try
-        //    {
-        //        string strValue = DefaultRegPath + @"\HotFix";
-        //        RegistryKey key = Registry.CurrentUser.OpenSubKey(strValue);
-        //        foreach (var v in key.GetValueNames())
-        //        {
-        //            //Console.WriteLine(v);
-        //            string hotfixId = v;
-        //            string dateinstalled = key.GetValue(v).ToString();
-        //            lst.Add(new HotFixList() { Id = hotfixId, DateInstalled = dateinstalled, WasFromInstall = dateinstalled.Equals("OnInstall") });
-        //        }
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        errOut = ErrorMessage("GetHotfixes", e);
-        //    }
-
-        //    return lst;
-        //}
+        
         /// <summary>
         /// Settingses the exists.
         /// </summary>
@@ -667,95 +641,67 @@ namespace BurnSoft.Applications.MLL.Global
             }
             return bAns;
         }
-
         /// <summary>
-        /// Gets the settings from the main registry key.
+        /// Gets the settings.
         /// </summary>
-        /// <param name="lastSucBackup">The last suc backup.</param>
-        /// <param name="alertOnBackUp">if set to <c>true</c> [alert on back up].</param>
-        /// <param name="trackHistoryDays">The track history days.</param>
-        /// <param name="trackHistory">if set to <c>true</c> [track history].</param>
-        /// <param name="autoBackup">if set to <c>true</c> [automatic backup].</param>
-        /// <param name="uoimg">if set to <c>true</c> [uoimg].</param>
-        /// <param name="usePl">if set to <c>true</c> [use pl].</param>
-        /// <param name="useIPer">if set to <c>true</c> [use i per].</param>
-        /// <param name="useCcid">if set to <c>true</c> [use ccid].</param>
-        /// <param name="useaa">if set to <c>true</c> [useaa].</param>
-        /// <param name="useAacid">if set to <c>true</c> [use aacid].</param>
-        /// <param name="useUniqueCustId">if set to <c>true</c> [use unique customer identifier].</param>
-        /// <param name="bUseselectiveboundbook">if set to <c>true</c> [b useselectiveboundbook].</param>
         /// <param name="errOut">The error out.</param>
-        /// <exception cref="System.Exception"></exception>
-        public static void GetSettings(out string lastSucBackup, out bool alertOnBackUp, out int trackHistoryDays, out bool trackHistory,
-            out bool autoBackup, out bool uoimg, out bool usePl, out bool useIPer, out bool useCcid, out bool useaa, out bool useAacid,
-            out bool useUniqueCustId, out bool bUseselectiveboundbook, out string errOut)
+        /// <returns>List&lt;RegistrySettings&gt;.</returns>
+        public static List<RegistrySettings> GetSettings(out string errOut)
         {
             errOut = "";
-            lastSucBackup = "";
-            alertOnBackUp = false;
-            trackHistoryDays = 30;
-            trackHistory = false;
-            autoBackup = false;
-            uoimg = false;
-            usePl = false;
-            useIPer = false;
-            useCcid = false;
-            useaa = false;
-            useAacid = false;
-            useUniqueCustId = false;
-            bUseselectiveboundbook = false;
-
+            List<RegistrySettings> lst = new List<RegistrySettings>();
             RegistryKey myReg;
-
             string strValue = DefaultRegPath + @"\Settings";
             try
             {
-                myReg = Registry.CurrentUser.OpenSubKey(strValue, true);
-                if (myReg == null)
-                    SetSettingDetails(out errOut);
-                if (errOut.Length > 0) throw new Exception(errOut);
-                if ((myReg != null))
+                int TrackHistoryDays = 15;
+                bool TrackHistory = false;
+                string NumberFormat = "0000";
+                bool AutoUpdate = false;
+                bool UseProxy = false;
+                string Successful = DateTime.Now.ToString();
+                bool AlertOnBackUp = false;
+                bool BackupOnExit = false;
+                bool UseOrgImage = true;
+                bool LOADERTYPE_SHOTGUN = false;
+                bool LOADERTYPE_NONSHOTGUN = true;
+                bool VIEW_FPS = true;
+                bool VIEW_CUPS = true;
+                string DefaultList = "Caliber List";
+                bool IndvReports = true;
+                string ConfigSort = "All";
+
+                lst.Add(new RegistrySettings()
                 {
-                    trackHistoryDays = Convert.ToInt32(GetRegSubKeyValue(strValue, "TrackHistoryDays", RegTrackHistoryDays.ToString(), out errOut));
-                    trackHistory = Convert.ToBoolean(GetRegSubKeyValue(strValue, "TrackHistory", RegTrackHistory.ToString(), out errOut));
-                    lastSucBackup = GetRegSubKeyValue(strValue, "Successful", RegSuccessful, out errOut);
-                    alertOnBackUp = Convert.ToBoolean(GetRegSubKeyValue(strValue, "AlertOnBackUp", RegAlertOnBackUp.ToString(), out errOut));
-                    autoBackup = Convert.ToBoolean(GetRegSubKeyValue(strValue, "BackupOnExit", RegBackupOnExit.ToString(), out errOut));
-                    uoimg = Convert.ToBoolean(GetRegSubKeyValue(strValue, "UseOrgImage", RegUseOrgImage.ToString(), out errOut));
-                    usePl = Convert.ToBoolean(GetRegSubKeyValue(strValue, "ViewPetLoads", LoadertypeShotgun.ToString(), out errOut));
-                    useIPer = Convert.ToBoolean(GetRegSubKeyValue(strValue, "IndvReports", RegIndvReports.ToString(), out errOut));
-                    //useCcid = Convert.ToBoolean(GetRegSubKeyValue(strValue, "UseNumberCatOnly", RegUseNumberCatOnly.ToString(), out errOut));
-                    //useaa = Convert.ToBoolean(GetRegSubKeyValue(strValue, "AUDITAMMO", RegAuditammo.ToString(), out errOut));
-                    //useAacid = Convert.ToBoolean(GetRegSubKeyValue(strValue, "USEAUTOASSIGN", RegUseautoassign.ToString(), out errOut));
-                    //useUniqueCustId = Convert.ToBoolean(GetRegSubKeyValue(strValue, "DISABLEUNIQUECUSTCATID", RegUniquecustcatid.ToString(), out errOut));
-                    //bUseselectiveboundbook = Convert.ToBoolean(GetRegSubKeyValue(strValue, "USESELECTIVEBOUNDBOOK", RegUseselectiveboundbook.ToString(), out errOut));
-                }
-                else
-                {
-                    trackHistoryDays = RegTrackHistoryDays;
-                    trackHistory = RegTrackHistory;
-                    lastSucBackup = RegSuccessful;
-                    alertOnBackUp = RegAlertOnBackUp;
-                    autoBackup = RegBackupOnExit;
-                    uoimg = RegUseOrgImage;
-                    usePl = LoadertypeShotgun;
-                    useIPer = RegIndvReports;
-                    useCcid = RegUseNumberCatOnly;
-                    useaa = RegAuditammo;
-                    useAacid = RegUseautoassign;
-                    useUniqueCustId = RegUniquecustcatid;
-                    bUseselectiveboundbook = RegUseselectiveboundbook;
-                }
+                    TrackHistoryDays = Convert.ToInt32(GetRegSubKeyValue(strValue, "TrackHistoryDays", TrackHistoryDays.ToString(), out _)),
+                    TrackHistory = Convert.ToBoolean(GetRegSubKeyValue(strValue, "TrackHistory", TrackHistory.ToString(), out _)),
+                    NumberFormat = GetRegSubKeyValue(strValue, "NumberFormat", NumberFormat, out errOut),
+                    LastSucBackup = GetRegSubKeyValue(strValue, "Successful", NumberFormat, out errOut),
+                    AutoUpdate = Convert.ToBoolean(GetRegSubKeyValue(strValue, "AutoUpdate", AutoUpdate.ToString(), out _)),
+                    UseProxy = Convert.ToBoolean(GetRegSubKeyValue(strValue, "UseProxy", UseProxy.ToString(), out _)),
+                    AlertOnBackUp = Convert.ToBoolean(GetRegSubKeyValue(strValue, "AlertOnBackUp", AlertOnBackUp.ToString(), out _)),
+                    BackupOnExit = Convert.ToBoolean(GetRegSubKeyValue(strValue, "BackupOnExit", BackupOnExit.ToString(), out _)),
+                    UseOrgImage = Convert.ToBoolean(GetRegSubKeyValue(strValue, "UseOrgImage", UseOrgImage.ToString(), out _)),
+                    LoaderTypeShotGun = Convert.ToBoolean(GetRegSubKeyValue(strValue, "LOADERTYPE_SHOTGUN", LOADERTYPE_SHOTGUN.ToString(), out _)),
+                    LoaderTypeMetalic = Convert.ToBoolean(GetRegSubKeyValue(strValue, "LOADERTYPE_NONSHOTGUN", LOADERTYPE_NONSHOTGUN.ToString(), out _)),
+                    ViewFps = Convert.ToBoolean(GetRegSubKeyValue(strValue, "VIEW_FPS", VIEW_FPS.ToString(), out _)),
+                    ViewCups = Convert.ToBoolean(GetRegSubKeyValue(strValue, "VIEW_CUPS", VIEW_CUPS.ToString(), out _)),
+                    DefaultList = GetRegSubKeyValue(strValue, "DefaultList", DefaultList, out errOut),
+                    ConfigSort = GetRegSubKeyValue(strValue, "ConfigSort", ConfigSort, out errOut),
+                    IndvReports = Convert.ToBoolean(GetRegSubKeyValue(strValue, "VIEW_CUPS", IndvReports.ToString(), out _)),
+                });
+
             }
             catch (Exception ex)
             {
                 errOut = ErrorMessage("GetSettings", ex);
-                //long myErr = ex.Number;
-                //if (myErr == 13)
-                //    SetSettingDetails();
+                //TODO IF ERROR CREATE KEYS IF THEY DON"T EXIST
+                //SetSettingDetails();
             }
+            return lst;
         }
 
+        
         /// <summary>
         /// Saves the settings.
         /// </summary>
