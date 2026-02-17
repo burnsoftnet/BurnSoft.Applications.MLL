@@ -21,32 +21,32 @@ namespace BurnSoft.Applications.MLL.Types
         /// Gets or sets the clnid.  Config List Name ID
         /// </summary>
         /// <value>The clnid.</value>
-        public int CLNID { get; set; }
+        public int ConfgId { get; set; }
         /// <summary>
         /// Gets or sets the atid. Ammunition Type ID
         /// </summary>
         /// <value>The atid.</value>
-        public int ATID { get; set; }
+        public int AmmoTypeId { get; set; }
         /// <summary>
         /// Gets or sets the calid. Caliber ID
         /// </summary>
         /// <value>The calid.</value>
-        public int CALID { get; set; }
+        public int CaliberId { get; set; }
         /// <summary>
         /// Gets or sets the bid. Bullet ID
         /// </summary>
         /// <value>The bid.</value>
-        public int BID { get; set; }
+        public int BulletId { get; set; }
         /// <summary>
         /// Gets or sets the prid. Primer ID
         /// </summary>
         /// <value>The prid.</value>
-        public int PRID { get; set; }
+        public int PrimerId { get; set; }
         /// <summary>
         /// Gets or sets the caid. Case ID
         /// </summary>
         /// <value>The caid.</value>
-        public int CAID { get; set; }
+        public int CaseId { get; set; }
         /// <summary>
         /// Gets or sets the source. If not Personal Referance a souce (optional)
         /// </summary>
