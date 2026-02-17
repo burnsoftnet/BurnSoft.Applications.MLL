@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 // ReSharper disable InconsistentNaming
 
@@ -33,8 +34,10 @@ namespace BurnSoft.Applications.MLL.UnitTests.Settings
         private static List<Tuple<string, string>> GeneralSettings()
         {
             string testCaliber = @"10mm gunny";
+            string AppPath = AppDomain.CurrentDomain.BaseDirectory;
             List<Tuple<string, string>> ls = new List<Tuple<string, string>>();
-            ls.Add(new Tuple<string, string>("DatabasePath", "data\\mgc.mdb"));
+            ls.Add(new Tuple<string, string>("DatabasePath", Path.Combine(AppPath, "data\\mll.mdb")));
+            ls.Add(new Tuple<string, string>("OwnerId", "1"));
             ls.Add(new Tuple<string, string>("ConverThisToNumber", "$234.56"));
             ls.Add(new Tuple<string, string>("ConverThisToNumberExpected", "234.56"));
             ls.Add(new Tuple<string, string>("ConvertOuncesToDouble", "7/8"));
