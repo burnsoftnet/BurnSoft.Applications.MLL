@@ -297,30 +297,46 @@ namespace BurnSoft.Applications.MLL.Global
             get => _regUseOrgImage;
             set => _regUseOrgImage = value;
         }
-        
+        /// <summary>
+        /// Gets or sets a value indicating whether [loadertype shotgun].
+        /// </summary>
+        /// <value><c>true</c> if [loadertype shotgun]; otherwise, <c>false</c>.</value>
         private static bool LoadertypeShotgun
         {
             get => _loadertypeShotgun;
             set => _loadertypeShotgun = value;
         }
-
+        /// <summary>
+        /// Gets or sets a value indicating whether [loader type non shotgun].
+        /// </summary>
+        /// <value><c>true</c> if [loader type non shotgun]; otherwise, <c>false</c>.</value>
         private static bool LoaderTypeNonShotgun
         {
             get => _loadertypeNonShotgun;
             set => _loadertypeNonShotgun = value;
         }
-        
+        /// <summary>
+        /// Gets or sets a value indicating whether [view FPS].
+        /// </summary>
+        /// <value><c>true</c> if [view FPS]; otherwise, <c>false</c>.</value>
         private static bool ViewFps
         {
             get => _viewFps;
             set => _viewFps = value;
         }
-
+        /// <summary>
+        /// Gets or sets a value indicating whether [view cups].
+        /// </summary>
+        /// <value><c>true</c> if [view cups]; otherwise, <c>false</c>.</value>
         private static bool ViewCups
         {
             get => _viewCups;
             set => _viewCups = value;
         }
+        /// <summary>
+        /// Gets or sets the default list.
+        /// </summary>
+        /// <value>The default list.</value>
         private static string DefaultList
         {
             get => _defaultList;
@@ -652,6 +668,24 @@ namespace BurnSoft.Applications.MLL.Global
             return bAns;
         }
 
+        /// <summary>
+        /// Gets the settings from the main registry key.
+        /// </summary>
+        /// <param name="lastSucBackup">The last suc backup.</param>
+        /// <param name="alertOnBackUp">if set to <c>true</c> [alert on back up].</param>
+        /// <param name="trackHistoryDays">The track history days.</param>
+        /// <param name="trackHistory">if set to <c>true</c> [track history].</param>
+        /// <param name="autoBackup">if set to <c>true</c> [automatic backup].</param>
+        /// <param name="uoimg">if set to <c>true</c> [uoimg].</param>
+        /// <param name="usePl">if set to <c>true</c> [use pl].</param>
+        /// <param name="useIPer">if set to <c>true</c> [use i per].</param>
+        /// <param name="useCcid">if set to <c>true</c> [use ccid].</param>
+        /// <param name="useaa">if set to <c>true</c> [useaa].</param>
+        /// <param name="useAacid">if set to <c>true</c> [use aacid].</param>
+        /// <param name="useUniqueCustId">if set to <c>true</c> [use unique customer identifier].</param>
+        /// <param name="bUseselectiveboundbook">if set to <c>true</c> [b useselectiveboundbook].</param>
+        /// <param name="errOut">The error out.</param>
+        /// <exception cref="System.Exception"></exception>
         public static void GetSettings(out string lastSucBackup, out bool alertOnBackUp, out int trackHistoryDays, out bool trackHistory,
             out bool autoBackup, out bool uoimg, out bool usePl, out bool useIPer, out bool useCcid, out bool useaa, out bool useAacid,
             out bool useUniqueCustId, out bool bUseselectiveboundbook, out string errOut)
