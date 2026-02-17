@@ -109,5 +109,31 @@ namespace BurnSoft.Applications.MLL.PeopleAndPlaces
             }
             return lst;
         }
+        /// <summary>
+        /// Gets all data from the Personal Information Table
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;PersonalInformation&gt;.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static List<PersonalInformation> GetAllData(string databasePath,out string errOut)
+        {
+            List<PersonalInformation> lst = new List<PersonalInformation>();
+            errOut = @"";
+            try
+            {
+                string sql = "SELECT * from Personal_Information order by ID ASC";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                lst = GetList(dt, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetAllData", e);
+            }
+            return lst;
+        }
+
     }
 }
