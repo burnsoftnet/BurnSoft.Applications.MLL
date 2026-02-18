@@ -43,6 +43,7 @@
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,6 +52,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoFill\ConfigShotgun.cs" />
+    <Compile Include="AutoFill\General.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="DebugHelpers\PrintListValues.cs" />
     <Compile Include="GlobalSuppressions.cs" />
