@@ -1,8 +1,11 @@
-﻿using System;
+﻿using BurnSoft.Applications.MLL.Types;
+using Microsoft.VisualBasic.ApplicationServices;
+using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
-using BurnSoft.Applications.MLL.Types;
-using Microsoft.Win32;
+using System.Runtime.CompilerServices;
+using System.Xml.Linq;
 // ReSharper disable PossibleNullReferenceException
 // ReSharper disable RedundantAssignment
 // ReSharper disable TooWideLocalVariableScope
@@ -471,7 +474,8 @@ namespace BurnSoft.Applications.MLL.Global
         /// <param name="databasePath">The database path.</param>
         /// <param name="appDataPath">The application data path.</param>
         /// <param name="errOut">The error out.</param>
-        public static bool UpDateAppDetails(string productVersion, string productName, string executablePath, string appPath, string logFile, string databasePath, string appDataPath, out string errOut)
+        public static bool UpdateAppDetails(string productVersion, string productName, string executablePath, 
+            string appPath, string logFile, string databasePath, string appDataPath, out string errOut)
         {
             errOut = "";
             bool bAns = false;
@@ -584,31 +588,9 @@ namespace BurnSoft.Applications.MLL.Global
                 {
                     string strValue = DefaultRegPath + @"\Settings";
                     RegistryKey myReg = Registry.CurrentUser.OpenSubKey(strValue, true);
-
                     myReg = Registry.CurrentUser.CreateSubKey(strValue);
-
-                    myReg.SetValue("Successful", RegSuccessful);
-                    myReg.SetValue("SetHistListtb", RegSetHistListtb ?? "");
-                    myReg.SetValue("SetHistListdt", RegSetHistListdt ?? "");
-                    myReg.SetValue("AlertOnBackUp", RegAlertOnBackUp);
-                    myReg.SetValue("TrackHistoryDays", RegTrackHistoryDays);
-                    myReg.SetValue("TrackHistory", RegTrackHistory);
-                    myReg.SetValue("LastPath", RegLastPath);
-                    myReg.SetValue("LastFile", RegLastFile);
-                    myReg.SetValue("BackupOnExit", RegBackupOnExit);
-                    myReg.SetValue("UseOrgImage", RegUseOrgImage);
-                    myReg.SetValue("LOADERTYPE_SHOTGUN", LoadertypeShotgun);
-                    myReg.SetValue("LOADERTYPE_NONSHOTGUN", LoaderTypeNonShotgun);
-                    myReg.SetValue("IndvReports", RegIndvReports);
-                    myReg.SetValue("DefaultList", DefaultList);
-                    myReg.SetValue("VIEW_FPS", ViewFps);
-                    myReg.SetValue("VIEW_CUPS", ViewCups);
-                    myReg.Close();
-
-                    //for (int i = 1; i < HotFix.NumberOfFixes + 1; i++)
-                    //{
-                    //    if (!SetHotFix(i, out errOut)) throw new Exception(errOut);
-                    //}
+                    List<RegistrySettings> reg = BuildRegistry();
+                    if (!SaveSettings(reg, out errOut)) throw new Exception(errOut);
                 }
                 if (errOut.Length > 0) throw new Exception(errOut);
                 bAns = true;
@@ -656,7 +638,7 @@ namespace BurnSoft.Applications.MLL.Global
             {
                 int TrackHistoryDays = 15;
                 bool TrackHistory = false;
-                string NumberFormat = "0000";
+                string NumberFormat = "0000";  // TODO This registry settings is no longer needed
                 bool AutoUpdate = false;
                 bool UseProxy = false;
                 string Successful = DateTime.Now.ToString();
@@ -676,7 +658,7 @@ namespace BurnSoft.Applications.MLL.Global
                     TrackHistoryDays = Convert.ToInt32(GetRegSubKeyValue(strValue, "TrackHistoryDays", TrackHistoryDays.ToString(), out _)),
                     TrackHistory = Convert.ToBoolean(GetRegSubKeyValue(strValue, "TrackHistory", TrackHistory.ToString(), out _)),
                     NumberFormat = GetRegSubKeyValue(strValue, "NumberFormat", NumberFormat, out errOut),
-                    LastSucBackup = GetRegSubKeyValue(strValue, "Successful", NumberFormat, out errOut),
+                    LastSucBackup = GetRegSubKeyValue(strValue, "Successful", Successful, out errOut),
                     AutoUpdate = Convert.ToBoolean(GetRegSubKeyValue(strValue, "AutoUpdate", AutoUpdate.ToString(), out _)),
                     UseProxy = Convert.ToBoolean(GetRegSubKeyValue(strValue, "UseProxy", UseProxy.ToString(), out _)),
                     AlertOnBackUp = Convert.ToBoolean(GetRegSubKeyValue(strValue, "AlertOnBackUp", AlertOnBackUp.ToString(), out _)),
@@ -701,51 +683,102 @@ namespace BurnSoft.Applications.MLL.Global
             return lst;
         }
 
-        
+        /// <summary>
+        /// Builds the registry list string to use for saving
+        /// </summary>
+        /// <param name="AutoUpdate">if set to <c>true</c> [automatic update].</param>
+        /// <param name="UseProxy">if set to <c>true</c> [use proxy].</param>
+        /// <param name="Successful">The successful.</param>
+        /// <param name="AlertOnBackUp">if set to <c>true</c> [alert on back up].</param>
+        /// <param name="BackupOnExit">if set to <c>true</c> [backup on exit].</param>
+        /// <param name="UseOrgImage">if set to <c>true</c> [use org image].</param>
+        /// <param name="LOADERTYPE_SHOTGUN">if set to <c>true</c> [loadertype shotgun].</param>
+        /// <param name="LOADERTYPE_NONSHOTGUN">if set to <c>true</c> [loadertype nonshotgun].</param>
+        /// <param name="VIEW_FPS">if set to <c>true</c> [view FPS].</param>
+        /// <param name="IndvReports">if set to <c>true</c> [indv reports].</param>
+        /// <param name="VIEW_CUPS">if set to <c>true</c> [view cups].</param>
+        /// <param name="DefaultList">The default list.</param>
+        /// <param name="ConfigSort">The configuration sort.</param>
+        /// <param name="TrackHistoryDays">The track history days.</param>
+        /// <param name="TrackHistory">if set to <c>true</c> [track history].</param>
+        /// <returns>List&lt;RegistrySettings&gt;.</returns>
+        public static List<RegistrySettings> BuildRegistry(bool AutoUpdate = false, bool UseProxy = false, 
+            string Successful = "", bool AlertOnBackUp = false, bool BackupOnExit = false, bool UseOrgImage = true, 
+            bool LOADERTYPE_SHOTGUN = false, bool LOADERTYPE_NONSHOTGUN = true, bool VIEW_FPS = true,
+            bool IndvReports = true, bool VIEW_CUPS = true, string DefaultList = "Caliber List", 
+            string ConfigSort = "All", int TrackHistoryDays = 15, bool TrackHistory = false)
+        {
+            List<RegistrySettings> lst = new List<RegistrySettings>();
+            string errOut = "";
+            try
+            {
+                Successful = Successful.Length == 0 ? DateTime.Now.ToString() : Successful;
+                string NumberFormat = "0000";
+
+                lst.Add(new RegistrySettings()
+                {
+                    TrackHistoryDays = TrackHistoryDays,
+                    TrackHistory = TrackHistory,
+                    NumberFormat = NumberFormat,
+                    LastSucBackup = Successful,
+                    AutoUpdate = AutoUpdate,
+                    UseProxy = UseProxy,
+                    AlertOnBackUp = AlertOnBackUp,
+                    BackupOnExit = BackupOnExit,
+                    UseOrgImage = UseOrgImage,
+                    LoaderTypeShotGun = LOADERTYPE_SHOTGUN,
+                    LoaderTypeMetalic = LOADERTYPE_NONSHOTGUN,
+                    ViewFps = VIEW_FPS,
+                    ViewCups = VIEW_CUPS,
+                    DefaultList = DefaultList,
+                    ConfigSort = ConfigSort,
+                    IndvReports = IndvReports,
+                });
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("BuildRegistry", e);
+            }
+            return lst;
+        }
+
         /// <summary>
         /// Saves the settings.
         /// </summary>
-        /// <param name="numberFormat">The number format.</param>
-        /// <param name="trackHistory">if set to <c>true</c> [track history].</param>
-        /// <param name="trackHistoryDays">The track history days.</param>
-        /// <param name="autoUpdate">if set to <c>true</c> [automatic update].</param>
-        /// <param name="alertOnBackUp">if set to <c>true</c> [alert on back up].</param>
-        /// <param name="autoBackup">if set to <c>true</c> [automatic backup].</param>
-        /// <param name="uoimg">if set to <c>true</c> [uoimg].</param>
-        /// <param name="usePl">if set to <c>true</c> [use pl].</param>
-        /// <param name="useIPer">if set to <c>true</c> [use i per].</param>
-        /// <param name="usenccid">if set to <c>true</c> [usenccid].</param>
-        /// <param name="useaa">if set to <c>true</c> [useaa].</param>
-        /// <param name="useAacid">if set to <c>true</c> [use aacid].</param>
-        /// <param name="useUniqueCustId">if set to <c>true</c> [use unique customer identifier].</param>
-        /// <param name="bUseselectiveboundbook">if set to <c>true</c> [b useselectiveboundbook].</param>
-        /// <param name="errOut"></param>
-        public static bool SaveSettings(string numberFormat, bool trackHistory, int trackHistoryDays, bool autoUpdate, bool alertOnBackUp, bool autoBackup,
-            bool uoimg, bool usePl, bool useIPer, bool usenccid, bool useaa, bool useAacid, bool useUniqueCustId, bool bUseselectiveboundbook, out string errOut)
+        /// <param name="settings">The settings.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool SaveSettings(List<RegistrySettings> settings, out string errOut)
         {
             bool bAns = false;
             errOut = "";
             try
             {
-                string strValue = DefaultRegPath + @"\Settings";
-                RegistryKey myReg = Registry.CurrentUser.OpenSubKey(strValue, true);
-                if (myReg == null)
-                    myReg = Registry.CurrentUser.CreateSubKey(strValue);
-                myReg.SetValue("TrackHistoryDays", trackHistoryDays);
-                myReg.SetValue("TrackHistory", trackHistory);
-                myReg.SetValue("NumberFormat", numberFormat);
-                myReg.SetValue("AutoUpdate", autoUpdate);
-                myReg.SetValue("AlertOnBackUp", alertOnBackUp);
-                myReg.SetValue("BackupOnExit", autoBackup);
-                myReg.SetValue("UseOrgImage", uoimg);
-                myReg.SetValue("ViewPetLoads", usePl);
-                myReg.SetValue("IndvReports", useIPer);
-                myReg.SetValue("UseNumberCatOnly", usenccid);
-                myReg.SetValue("AUDITAMMO", useaa);
-                myReg.SetValue("USEAUTOASSIGN", useAacid);
-                myReg.SetValue("DISABLEUNIQUECUSTCATID", useUniqueCustId);
-                myReg.SetValue("USESELECTIVEBOUNDBOOK", bUseselectiveboundbook);
-                myReg.Close();
+                if (settings.Count > 0)
+                {
+                    string strValue = DefaultRegPath + @"\Settings";
+                    RegistryKey myReg = Registry.CurrentUser.OpenSubKey(strValue, true);
+                    if (myReg == null)
+                        myReg = Registry.CurrentUser.CreateSubKey(strValue);
+                    foreach (RegistrySettings s in settings)
+                    {
+                        myReg.SetValue("TrackHistoryDays", s.TrackHistoryDays);
+                        myReg.SetValue("TrackHistory", s.TrackHistory);
+                        myReg.SetValue("NumberFormat", s.NumberFormat);
+                        myReg.SetValue("AutoUpdate", s.AutoUpdate);
+                        myReg.SetValue("AlertOnBackUp", s.AlertOnBackUp);
+                        myReg.SetValue("BackupOnExit", s.BackupOnExit);
+                        myReg.SetValue("UseOrgImage", s.UseOrgImage);
+                        myReg.SetValue("LOADERTYPE_SHOTGUN", s.LoaderTypeShotGun);
+                        myReg.SetValue("IndvReports", s.IndvReports);
+                        myReg.SetValue("LOADERTYPE_NONSHOTGUN", s.LoaderTypeMetalic);
+                        myReg.SetValue("DefaultList", s.DefaultList);
+                        myReg.SetValue("VIEW_FPS", s.ViewFps);
+                        myReg.SetValue("VIEW_CUPS", s.ViewCups);
+                        myReg.Close();
+                    }
+
+                }
                 bAns = true;
             }
             catch (Exception e)
@@ -755,6 +788,7 @@ namespace BurnSoft.Applications.MLL.Global
 
             return bAns;
         }
+        
         /// <summary>
         /// Saves the last working dir.
         /// </summary>
@@ -842,6 +876,60 @@ namespace BurnSoft.Applications.MLL.Global
             return bAns;
         }
         /// <summary>
+        /// Saves the view settings.
+        /// </summary>
+        /// <param name="key">The key.</param>
+        /// <param name="value">The value.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool SaveViewSettings(string key, string value, out string errOut)
+        {
+            bool bAns = false;
+            errOut = "";
+            try
+            {
+                string strValue = $"{DefaultRegPath}\\Settings";
+                RegistryKey myReg = Registry.CurrentUser.CreateSubKey(strValue, RegistryKeyPermissionCheck.Default);
+                if (myReg == null)
+                    myReg = Registry.CurrentUser.CreateSubKey(strValue);
+                myReg.SetValue(key, value);
+                myReg.Close();
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("SaveViewSettings", e);
+            }
+            return bAns;
+        }
+
+        /// <summary>
+        /// Saves the configuration sort.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool SaveConfigSort(string value, out string errOut)
+        {
+            bool bAns = false;
+            errOut = "";
+            try
+            {
+                string strValue = $"{DefaultRegPath}\\Settings";
+                RegistryKey myReg = Registry.CurrentUser.CreateSubKey(strValue, RegistryKeyPermissionCheck.Default);
+                if (myReg == null)
+                    myReg = Registry.CurrentUser.CreateSubKey(strValue);
+                myReg.SetValue("ConfigSort", value);
+                myReg.Close();
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("SaveConfigSort", e);
+            }
+            return bAns;
+        }
+        /// <summary>
         /// Sets the last update.
         /// </summary>
         /// <param name="hotfixNumber">The hotfix number.</param>
@@ -896,34 +984,6 @@ namespace BurnSoft.Applications.MLL.Global
             return sAns;
         }
         /// <summary>
-        /// Saves the firearm list sort.
-        /// </summary>
-        /// <param name="configSort">The configuration sort.</param>
-        /// <param name="errOut">The error out.</param>
-        /// <exception cref="System.Exception"></exception>
-        public static bool SaveFirearmListSort(string configSort, out string errOut)
-        {
-            errOut = "";
-            bool bAns = false;
-            try
-            {
-                string strValue = DefaultRegPath + @"\Settings";
-                if (!RegSubKeyExists(strValue, out errOut))
-                    CreateSubKey(strValue, out errOut);
-                if (errOut.Length > 0) throw new Exception(errOut);
-                RegistryKey myReg = Registry.CurrentUser.OpenSubKey(strValue, true);
-                myReg.SetValue("VIEW_FirearmList", configSort);
-                myReg.Close();
-                bAns = true;
-            }
-            catch (Exception e)
-            {
-                errOut = ErrorMessage("SaveFirearmListSort", e);
-            }
-
-            return bAns;
-        }
-        /// <summary>
         /// Gets the view settings.
         /// </summary>
         /// <param name="sKey">The s key.</param>
@@ -971,13 +1031,13 @@ namespace BurnSoft.Applications.MLL.Global
         }
 
         /// <summary>
-        /// Gets the MGC executable path.
+        /// Gets the executable path.
         /// </summary>
         /// <param name="errOut">The error out.</param>
         /// <param name="sDefault">The s default.</param>
         /// <returns>System.String.</returns>
         /// <exception cref="System.Exception"></exception>
-        public static string GetMgcExePath(out string errOut, string sDefault = "")
+        public static string GetExePath(out string errOut, string sDefault = "")
         {
             string sAns = "";
             errOut = "";
@@ -993,7 +1053,7 @@ namespace BurnSoft.Applications.MLL.Global
             return sAns;
         }
         /// <summary>
-        /// Mies the gun collection is installed.
+        /// Checks to see if the gun collection is installed.
         /// </summary>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
