@@ -1,19 +1,7 @@
 ﻿using BurnSoft.Applications.MLL.Types;
-using Microsoft.VisualBasic.ApplicationServices;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Runtime.CompilerServices;
-using System.Xml.Linq;
-// ReSharper disable PossibleNullReferenceException
-// ReSharper disable RedundantAssignment
-// ReSharper disable TooWideLocalVariableScope
-// ReSharper disable UnusedMember.Global
-// ReSharper disable ConvertIfStatementToNullCoalescingExpression
-
-// ReSharper disable UnusedMember.Local
-// ReSharper disable ConvertToAutoProperty
 
 namespace BurnSoft.Applications.MLL.Global
 {
@@ -22,7 +10,6 @@ namespace BurnSoft.Applications.MLL.Global
     /// </summary>
     public class MyRegistry
     {
-
         #region "Exception Error Handling"        
         /// <summary>
         /// The class location
@@ -63,109 +50,11 @@ namespace BurnSoft.Applications.MLL.Global
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
         private static string ErrorMessage(string functionName, ArgumentNullException e) => $"{_classLocation}.{functionName} - {e.Message}";
-        #endregion
-        //End Snippet        
+        #endregion        
         /// <summary>
         /// The reg path
         /// </summary>
         private static string _regPath;
-        /// <summary>
-        /// The reg successful
-        /// </summary>
-        private static string _regSuccessful;
-        /// <summary>
-        /// The reg set hist listtb
-        /// </summary>
-        private static string _regSetHistListtb;
-        /// <summary>
-        /// The reg set hist listdt
-        /// </summary>
-        private static string _regSetHistListdt;
-        /// <summary>
-        /// The reg alert on back up
-        /// </summary>
-        private static bool _regAlertOnBackUp = true;
-        /// <summary>
-        /// The reg track history days
-        /// </summary>
-        private static int _regTrackHistoryDays;
-        /// <summary>
-        /// The reg last path
-        /// </summary>
-        private static string _regLastPath;
-        /// <summary>
-        /// The reg last file
-        /// </summary>
-        private static string _regLastFile;
-        /// <summary>
-        /// The reg backup on exit
-        /// </summary>
-        private static bool _regBackupOnExit;
-        /// <summary>
-        /// The reg use org image
-        /// </summary>
-        private static bool _regUseOrgImage;
-        /// <summary>
-        /// The loadertype shotgun
-        /// </summary>
-        private static bool _loadertypeShotgun = false;
-        /// <summary>
-        /// The view FPS
-        /// </summary>
-        private static bool _viewFps = true;
-        /// <summary>
-        /// The view cups
-        /// </summary>
-        private static bool _viewCups = true;
-        /// <summary>
-        /// The loadertype non shotgun
-        /// </summary>
-        private static bool _loadertypeNonShotgun = true;
-        /// <summary>
-        /// The default list
-        /// </summary>
-        private static string _defaultList;
-
-        /// <summary>
-        /// The reg indv reports
-        /// </summary>
-        private static bool _regIndvReports = true;
-        /// <summary>
-        /// The reg track history
-        /// </summary>
-        private static bool _regTrackHistory = true;
-        /// <summary>
-        /// The reg number format
-        /// </summary>
-        private static string _regNumberFormat;
-        /// <summary>
-        /// The reg automatic update
-        /// </summary>
-        private static bool _regAutoUpdate;
-        /// <summary>
-        /// The reg use proxy
-        /// </summary>
-        private static bool _regUseProxy;
-        /// <summary>
-        /// The reg use number cat only
-        /// </summary>
-        private static bool _regUseNumberCatOnly;
-        /// <summary>
-        /// The reg auditammo
-        /// </summary>
-        private static bool _regAuditammo;
-        /// <summary>
-        /// The reg useautoassign
-        /// </summary>
-        private static bool _regUseautoassign;
-        /// <summary>
-        /// The reg uniquecustcatid/
-        /// </summary>
-        private static bool _regUniquecustcatid;
-        /// <summary>
-        /// The reg useselectiveboundbook
-        /// </summary>
-        private static bool _regUseselectiveboundbook;
         /// <summary>
         /// Gets or sets the default reg path.
         /// </summary>
@@ -184,267 +73,6 @@ namespace BurnSoft.Applications.MLL.Global
                 return _regPath;
             }
             set => _regPath = value;
-        }
-        /// <summary>
-        /// Gets or sets the reg successful.
-        /// </summary>
-        /// <value>The reg successful.</value>
-        private static string RegSuccessful
-        {
-            get
-            {
-                if (_regSuccessful == null)
-                {
-                    _regSuccessful = DateTime.Now.ToString(CultureInfo.InvariantCulture);
-                    return _regSuccessful;
-                }
-                if (_regSuccessful.Length == 0)
-                    _regSuccessful = DateTime.Now.ToString(CultureInfo.InvariantCulture);
-                return _regSuccessful;
-            }
-            set => _regSuccessful = value;
-        }
-        /// <summary>
-        /// Gets or sets the reg set hist listtb.
-        /// </summary>
-        /// <value>The reg set hist listtb.</value>
-        private static string RegSetHistListtb
-        {
-            get => _regSetHistListtb;
-            set => _regSetHistListtb = value;
-        }
-        /// <summary>
-        /// Gets or sets the reg set hist listdt.
-        /// </summary>
-        /// <value>The reg set hist listdt.</value>
-        private static string RegSetHistListdt
-        {
-            get => _regSetHistListdt;
-            set => _regSetHistListdt = value;
-        }
-        /// <summary>
-        /// Gets or sets a value indicating whether [reg alert on back up].
-        /// </summary>
-        /// <value><c>true</c> if [reg alert on back up]; otherwise, <c>false</c>.</value>
-        private static bool RegAlertOnBackUp
-        {
-            get => _regAlertOnBackUp;
-            set => _regAlertOnBackUp = value;
-        }
-        /// <summary>
-        /// Gets or sets the reg track history days.
-        /// </summary>
-        /// <value>The reg track history days.</value>
-        private static int RegTrackHistoryDays
-        {
-            get
-            {
-                if (_regTrackHistoryDays == 0)
-                    _regTrackHistoryDays = 15;
-                return _regTrackHistoryDays;
-            }
-            set => _regTrackHistoryDays = value;
-        }
-        /// <summary>
-        /// Gets or sets the reg last path.
-        /// </summary>
-        /// <value>The reg last path.</value>
-        private static string RegLastPath
-        {
-            get
-            {
-                if (_regLastPath == null)
-                {
-                    _regLastPath = @"C:\";
-                    return _regLastPath;
-                }
-                if (_regLastPath.Length == 0)
-                    _regLastPath = @"C:\";
-                return _regLastPath;
-            }
-            set => _regLastPath = value;
-        }
-        /// <summary>
-        /// Gets or sets the reg last file.
-        /// </summary>
-        /// <value>The reg last file.</value>
-        private static string RegLastFile
-        {
-            get
-            {
-                if (_regLastFile == null)
-                {
-                    _regLastFile = "MLL.MDB";
-                    return _regLastFile;
-                }
-                if (_regLastFile.Length == 0)
-                    _regLastFile = "MLL.MDB";
-                return _regLastFile;
-            }
-            set => _regLastFile = value;
-        }
-        /// <summary>
-        /// Gets or sets a value indicating whether [reg backup on exit].
-        /// </summary>
-        /// <value><c>true</c> if [reg backup on exit]; otherwise, <c>false</c>.</value>
-        private static bool RegBackupOnExit
-        {
-            get => _regBackupOnExit;
-            set => _regBackupOnExit = value;
-        }
-        /// <summary>
-        /// Gets or sets a value indicating whether [reg use org image].
-        /// </summary>
-        /// <value><c>true</c> if [reg use org image]; otherwise, <c>false</c>.</value>
-        private static bool RegUseOrgImage
-        {
-            get => _regUseOrgImage;
-            set => _regUseOrgImage = value;
-        }
-        /// <summary>
-        /// Gets or sets a value indicating whether [loadertype shotgun].
-        /// </summary>
-        /// <value><c>true</c> if [loadertype shotgun]; otherwise, <c>false</c>.</value>
-        private static bool LoadertypeShotgun
-        {
-            get => _loadertypeShotgun;
-            set => _loadertypeShotgun = value;
-        }
-        /// <summary>
-        /// Gets or sets a value indicating whether [loader type non shotgun].
-        /// </summary>
-        /// <value><c>true</c> if [loader type non shotgun]; otherwise, <c>false</c>.</value>
-        private static bool LoaderTypeNonShotgun
-        {
-            get => _loadertypeNonShotgun;
-            set => _loadertypeNonShotgun = value;
-        }
-        /// <summary>
-        /// Gets or sets a value indicating whether [view FPS].
-        /// </summary>
-        /// <value><c>true</c> if [view FPS]; otherwise, <c>false</c>.</value>
-        private static bool ViewFps
-        {
-            get => _viewFps;
-            set => _viewFps = value;
-        }
-        /// <summary>
-        /// Gets or sets a value indicating whether [view cups].
-        /// </summary>
-        /// <value><c>true</c> if [view cups]; otherwise, <c>false</c>.</value>
-        private static bool ViewCups
-        {
-            get => _viewCups;
-            set => _viewCups = value;
-        }
-        /// <summary>
-        /// Gets or sets the default list.
-        /// </summary>
-        /// <value>The default list.</value>
-        private static string DefaultList
-        {
-            get => _defaultList;
-            set => _defaultList = value;
-        }
-        /// <summary>
-        /// Gets or sets a value indicating whether [reg indv reports].
-        /// </summary>
-        /// <value><c>true</c> if [reg indv reports]; otherwise, <c>false</c>.</value>
-        private static bool RegIndvReports
-        {
-            get => _regIndvReports;
-            set => _regIndvReports = value;
-        }
-        /// <summary>
-        /// Gets or sets a value indicating whether [reg track history].
-        /// </summary>
-        /// <value><c>true</c> if [reg track history]; otherwise, <c>false</c>.</value>
-        private static bool RegTrackHistory
-        {
-            get => _regTrackHistory;
-            set => _regTrackHistory = value;
-        }
-        /// <summary>
-        /// Gets or sets the reg number format.
-        /// </summary>
-        /// <value>The reg number format.</value>
-        private static string RegNumberFormat
-        {
-            get
-            {
-                if (_regNumberFormat == null)
-                {
-                    _regNumberFormat = "0000";
-                    return _regNumberFormat;
-                }
-                if (_regNumberFormat.Length == 0)
-                    _regNumberFormat = "0000";
-                return _regNumberFormat;
-            }
-            set => _regNumberFormat = value;
-        }
-        /// <summary>
-        /// Gets or sets a value indicating whether [reg automatic update].
-        /// </summary>
-        /// <value><c>true</c> if [reg automatic update]; otherwise, <c>false</c>.</value>
-        private static bool RegAutoUpdate
-        {
-            get => _regAutoUpdate;
-            set => _regAutoUpdate = value;
-        }
-        /// <summary>
-        /// Gets or sets a value indicating whether [reg use proxy].
-        /// </summary>
-        /// <value><c>true</c> if [reg use proxy]; otherwise, <c>false</c>.</value>
-        private static bool RegUseProxy
-        {
-            get => _regUseProxy;
-            set => _regUseProxy = value;
-        }
-        /// <summary>
-        /// Gets or sets a value indicating whether [reg auditammo].
-        /// </summary>
-        /// <value><c>true</c> if [reg auditammo]; otherwise, <c>false</c>.</value>
-        private static bool RegAuditammo
-        {
-            get => _regAuditammo;
-            set => _regAuditammo = value;
-        }
-        /// <summary>
-        /// Gets or sets a value indicating whether [reg use number cat only].
-        /// </summary>
-        /// <value><c>true</c> if [reg use number cat only]; otherwise, <c>false</c>.</value>
-        private static bool RegUseNumberCatOnly
-        {
-            get => _regUseNumberCatOnly;
-            set => _regUseNumberCatOnly = value;
-        }
-        /// <summary>
-        /// Gets or sets a value indicating whether [reg useautoassign].
-        /// </summary>
-        /// <value><c>true</c> if [reg useautoassign]; otherwise, <c>false</c>.</value>
-        private static bool RegUseautoassign
-        {
-            get => _regUseautoassign;
-            set => _regUseautoassign = value;
-        }
-        /// <summary>
-        /// Gets or sets a value indicating whether [reg uniquecustcatid].
-        /// </summary>
-        /// <value><c>true</c> if [reg uniquecustcatid]; otherwise, <c>false</c>.</value>
-        private static bool RegUniquecustcatid
-        {
-            get => _regUniquecustcatid;
-            set => _regUniquecustcatid = value;
-        }
-        /// <summary>
-        /// Gets or sets a value indicating whether [reg useselectiveboundbook].
-        /// </summary>
-        /// <value><c>true</c> if [reg useselectiveboundbook]; otherwise, <c>false</c>.</value>
-        private static bool RegUseselectiveboundbook
-        {
-            get => _regUseselectiveboundbook;
-            set => _regUseselectiveboundbook = value;
         }
         /// <summary>
         /// Creates the sub key.
@@ -535,9 +163,6 @@ namespace BurnSoft.Applications.MLL.Global
         public static string GetRegSubKeyValue(string strKey, string strValue, string strDefault, out string errOut)
         {
             string sAns;
-#pragma warning disable 219
-            string strMsg = "";
-#pragma warning restore 219
             errOut = "";
             RegistryKey myReg;
             try
@@ -821,7 +446,8 @@ namespace BurnSoft.Applications.MLL.Global
         /// </summary>
         /// <param name="hotfixNumber">The hotfix number.</param>
         /// <param name="errOut">The error out.</param>
-        /// <param name="installNotice">The Date and Time it was installed, OnInstall will skip the reinstall since that is by current version.</param>
+        /// <param name="installNotice">The Date and Time it was installed, OnInstall will skip the 
+        /// reinstall since that is by current version.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool SetHotFix(int hotfixNumber, out string errOut, string installNotice = "OnInstall")
         {
@@ -848,7 +474,8 @@ namespace BurnSoft.Applications.MLL.Global
         /// <summary>
         /// Sets the setting value.
         /// </summary>
-        /// <param name="subKey">Name of the sub key with the default to the Main Application Path, if left blank it will insert in root </param>
+        /// <param name="subKey">Name of the sub key with the default to the Main Application Path, 
+        /// if left blank it will insert in root </param>
         /// <param name="name">name to store the value in the key</param>
         /// <param name="value">The value.</param>
         /// <param name="errOut">The error out.</param>
