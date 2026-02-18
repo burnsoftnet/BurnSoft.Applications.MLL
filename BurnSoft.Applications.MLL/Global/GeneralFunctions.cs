@@ -82,5 +82,33 @@ namespace BurnSoft.Applications.MLL.Global
             string sql = $"SELECT Name from List_SG_ShotCharge_Loads where ID={id}";
             return Database.GetName(databasePath, sql, "Name", out errOut);
         }
+        /// <summary>
+        /// Gets the caliber identifier.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <param name="AutoAdd">if set to <c>true</c> [automatic add].</param>
+        /// <returns>System.Int64.</returns>
+        public static long GetCaliberID(string databasePath, string name, out string errOut, bool AutoAdd = false)
+        {
+            if (AutoAdd)
+            {
+                Database.Execute(databasePath, $"INSERT INTO List_Calibers(Cal) VALUES('{name}')", out errOut);
+            }
+            string sql = $"SELECT ID from List_SG_ShotCharge_Loads where Name='{name}'";
+            return Database.GetId(databasePath, sql, out errOut);
+        }
+        /// <summary>
+        /// Totals the cost equipment.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int64.</returns>
+        public static long TotalCostEquipment(string databasePath, out string errOut)
+        {
+            string sql = "SELECT Sum(Cost) as Total from General_Equipment";
+            return Database.GetCount(databasePath, sql, out errOut);
+        }
     }
 }
