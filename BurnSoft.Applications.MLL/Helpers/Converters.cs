@@ -236,6 +236,149 @@ namespace BurnSoft.Applications.MLL.Helpers
             }
             return Convert.ToDouble(Strings.FormatNumber(dAns, 6));
         }
+
+        /// <summary>
+        /// Convs string to number and get rid of anything is is not a number.
+        /// </summary>
+        /// <param name="strValue">The string value.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Double.</returns>
+        public static double ConvToNum(string strValue, out string errOut)
+        {
+            double dAns = 0;
+            errOut = "";
+            try
+            {
+                int intChar = Strings.Len(strValue);
+                int i = 0;
+                string CurValue = "";
+                string NewValue = "";
+                string LastValue = "";
+                bool NeedDiv = false;
+                for (i = 1; i <= intChar; i++)
+                {
+                    CurValue = Strings.Mid(strValue, i, 1);
+                    if (CurValue == " ")
+                        break;
+                    if (Information.IsNumeric(CurValue))
+                    {
+                        if (Strings.Len(LastValue) != 0)
+                            LastValue = Strings.Mid(NewValue, Strings.Len(NewValue), 1);
+                        else
+                            LastValue = CurValue;
+                        if (!NeedDiv)
+                            NewValue += CurValue;
+                        else
+                            NewValue = Convert.ToString(Convert.ToDouble(CurValue) / Convert.ToDouble(LastValue));
+                        NeedDiv = false;
+                    }
+                    else
+                        switch (CurValue)
+                        {
+                            case ".":
+                                {
+                                    NewValue += CurValue;
+                                    NeedDiv = false;
+                                    break;
+                                }
+
+                            case "/":
+                                {
+                                    NeedDiv = true;
+                                    break;
+                                }
+                        }
+                }
+                dAns = Convert.ToDouble(NewValue);
+            }
+            catch (Exception ex)
+            {
+                errOut = ErrorMessage("ConvertToNum", ex);
+            }
+            return dAns;
+        }
+
+        /// <summary>
+        /// Converts the ounces to double.
+        /// </summary>
+        /// <param name="sValue">The string value.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Double.</returns>
+        public static double ConvertOzToDouble(string sValue, out string errOut)
+        {
+            double dAns = 0;
+            errOut = "";
+            try
+            {
+                int char_count = Strings.Len(sValue);
+                int i = 0;
+                string CurValue = "";
+                string NewValue = "";
+                string LastValue = "";
+                string EndValue = "0";
+                bool NeedDiv = false;
+                bool isFraction = false;
+                bool IsDec = false;
+                for (i = 1; i <= char_count; i++)
+                {
+                    CurValue = Strings.Mid(sValue, i, 1);
+                    isFraction = false;
+                    if (Information.IsNumeric(CurValue))
+                    {
+                        if (!NeedDiv)
+                        {
+                            NewValue = CurValue;
+                            IsDec = false;
+                        }
+                        else
+                        {
+                            NewValue = Convert.ToString(Convert.ToDouble(LastValue) / Convert.ToDouble(CurValue));
+                            IsDec = true;
+                        }
+                        NeedDiv = false;
+                        LastValue = CurValue;
+                    }
+                    else
+                        switch (CurValue)
+                        {
+                            case ".":
+                                {
+                                    NewValue += CurValue;
+                                    NeedDiv = false;
+                                    break;
+                                }
+
+                            case "/":
+                                {
+                                    NeedDiv = true;
+                                    break;
+                                }
+
+                            default:
+                                {
+                                    NewValue = "";
+                                    break;
+                                }
+                        }
+                    if (Strings.Mid(sValue, i + 1, 1) == "/")
+                        isFraction = true;
+                    if (!isFraction & !NeedDiv)
+                    {
+                        if (!IsDec)
+                            EndValue += NewValue;
+                        else
+                            EndValue = Convert.ToString(Convert.ToDouble(EndValue) + Convert.ToDouble(NewValue));
+                    }
+                }
+                dAns = Convert.ToDouble(EndValue);
+            }
+            catch (Exception ex)
+            {
+                errOut = ErrorMessage("ConvertOZToDouble", ex);
+            }
+            return dAns;
+        }
+
         /// <summary>
         /// Converts long double  to dollars format, at least with 3 decimal places on thr right.
         /// </summary>
@@ -247,6 +390,40 @@ namespace BurnSoft.Applications.MLL.Helpers
             return dAns;
         }
 
-
+        /// <summary>
+        /// Costs the of rounds of ammo metalic to sum up how much it will cost to make this load.
+        /// </summary>
+        /// <param name="primer">The primer.</param>
+        /// <param name="cases">The cases.</param>
+        /// <param name="bullets">The bullets.</param>
+        /// <param name="powder">The powder.</param>
+        /// <param name="midPowder">The mid powder.</param>
+        /// <returns>System.Double.</returns>
+        public static double CostOfRoundsOfAmmoMetalic(double primer, double cases, double bullets, 
+            double powder, double midPowder)
+        {
+            double dAns = 0;
+            dAns = (ConvertToDollars(powder * midPowder) + ConvertToDollars(cases) + 
+                ConvertToDollars(primer) + ConvertToDollars(bullets));
+            return ConvertToDollars(dAns);
+        }
+        /// <summary>
+        /// Costs the of rounds of ammo shot gunto sum up how much it will cost to make this load.
+        /// </summary>
+        /// <param name="primer">The primer.</param>
+        /// <param name="cases">The cases.</param>
+        /// <param name="bullets">The bullets.</param>
+        /// <param name="powder">The powder.</param>
+        /// <param name="midPowder">The mid powder.</param>
+        /// <param name="wad">The wad.</param>
+        /// <returns>System.Double.</returns>
+        public static double CostOfRoundsOfAmmoShotGun(double primer, double cases, double bullets,
+            double powder, double midPowder, double wad)
+        {
+            double dAns = 0;
+            dAns = (ConvertToDollars(powder * midPowder) + ConvertToDollars(cases) +
+                ConvertToDollars(primer) + ConvertToDollars(bullets) + ConvertToDollars(wad));
+            return ConvertToDollars(dAns);
+        }
     }
 }

@@ -7,7 +7,8 @@ The Main Library for the [My Loaders Log](https://github.com/burnsoftnet/MyLoade
 This application was seperated from the project to be added to the site nuget package so we can also use this in the [My Gun Collection](https://github.com/burnsoftnet/MyGunCollection)]
 and any other related program.
 
-For more Information you can view the [API Docs](docs/README/md)
+For more Information you can view the [API Docs](docs/README.md)
+There is also the [Developer Notes](docs/DeverloperNotes.md)
 
 ## Resources
 - [BurnSoft.Universal](https://github.com/burnsoftnet/BurnSoft.Universal)
