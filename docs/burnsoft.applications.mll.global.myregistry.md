@@ -55,12 +55,12 @@ The string value.
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
 The error out.
 
-### **UpDateAppDetails(String, String, String, String, String, String, String, String&)**
+### **UpdateAppDetails(String, String, String, String, String, String, String, String&)**
 
 Ups the date application details.
 
 ```csharp
-public static bool UpDateAppDetails(string productVersion, string productName, string executablePath, string appPath, string logFile, string databasePath, string appDataPath, String& errOut)
+public static bool UpdateAppDetails(string productVersion, string productName, string executablePath, string appPath, string logFile, string databasePath, string appDataPath, String& errOut)
 ```
 
 #### Parameters
@@ -174,99 +174,104 @@ public static bool SettingsExists(String& errOut)
 [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
 `true` if XXXX, `false` otherwise.
 
-### **GetSettings(String&, Boolean&, Int32&, Boolean&, Boolean&, Boolean&, Boolean&, Boolean&, Boolean&, Boolean&, Boolean&, Boolean&, Boolean&, String&)**
+### **GetSettings(String&)**
+
+Gets the settings.
 
 ```csharp
-public static void GetSettings(String& lastSucBackup, Boolean& alertOnBackUp, Int32& trackHistoryDays, Boolean& trackHistory, Boolean& autoBackup, Boolean& uoimg, Boolean& usePl, Boolean& useIPer, Boolean& useCcid, Boolean& useaa, Boolean& useAacid, Boolean& useUniqueCustId, Boolean& bUseselectiveboundbook, String& errOut)
+public static List<RegistrySettings> GetSettings(String& errOut)
 ```
 
 #### Parameters
 
-`lastSucBackup` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
-
-`alertOnBackUp` [Boolean&](https://docs.microsoft.com/en-us/dotnet/api/system.boolean&)<br>
-
-`trackHistoryDays` [Int32&](https://docs.microsoft.com/en-us/dotnet/api/system.int32&)<br>
-
-`trackHistory` [Boolean&](https://docs.microsoft.com/en-us/dotnet/api/system.boolean&)<br>
-
-`autoBackup` [Boolean&](https://docs.microsoft.com/en-us/dotnet/api/system.boolean&)<br>
-
-`uoimg` [Boolean&](https://docs.microsoft.com/en-us/dotnet/api/system.boolean&)<br>
-
-`usePl` [Boolean&](https://docs.microsoft.com/en-us/dotnet/api/system.boolean&)<br>
-
-`useIPer` [Boolean&](https://docs.microsoft.com/en-us/dotnet/api/system.boolean&)<br>
-
-`useCcid` [Boolean&](https://docs.microsoft.com/en-us/dotnet/api/system.boolean&)<br>
-
-`useaa` [Boolean&](https://docs.microsoft.com/en-us/dotnet/api/system.boolean&)<br>
-
-`useAacid` [Boolean&](https://docs.microsoft.com/en-us/dotnet/api/system.boolean&)<br>
-
-`useUniqueCustId` [Boolean&](https://docs.microsoft.com/en-us/dotnet/api/system.boolean&)<br>
-
-`bUseselectiveboundbook` [Boolean&](https://docs.microsoft.com/en-us/dotnet/api/system.boolean&)<br>
-
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
 
-### **SaveSettings(String, Boolean, Int32, Boolean, Boolean, Boolean, Boolean, Boolean, Boolean, Boolean, Boolean, Boolean, Boolean, Boolean, String&)**
+#### Returns
+
+[List&lt;RegistrySettings&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+List&lt;RegistrySettings&gt;.
+
+### **BuildRegistry(Boolean, Boolean, String, Boolean, Boolean, Boolean, Boolean, Boolean, Boolean, Boolean, Boolean, String, String, Int32, Boolean)**
+
+Builds the registry list string to use for saving
+
+```csharp
+public static List<RegistrySettings> BuildRegistry(bool AutoUpdate, bool UseProxy, string Successful, bool AlertOnBackUp, bool BackupOnExit, bool UseOrgImage, bool LOADERTYPE_SHOTGUN, bool LOADERTYPE_NONSHOTGUN, bool VIEW_FPS, bool IndvReports, bool VIEW_CUPS, string DefaultList, string ConfigSort, int TrackHistoryDays, bool TrackHistory)
+```
+
+#### Parameters
+
+`AutoUpdate` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+if set to `true` [automatic update].
+
+`UseProxy` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+if set to `true` [use proxy].
+
+`Successful` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The successful.
+
+`AlertOnBackUp` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+if set to `true` [alert on back up].
+
+`BackupOnExit` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+if set to `true` [backup on exit].
+
+`UseOrgImage` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+if set to `true` [use org image].
+
+`LOADERTYPE_SHOTGUN` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+if set to `true` [loadertype shotgun].
+
+`LOADERTYPE_NONSHOTGUN` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+if set to `true` [loadertype nonshotgun].
+
+`VIEW_FPS` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+if set to `true` [view FPS].
+
+`IndvReports` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+if set to `true` [indv reports].
+
+`VIEW_CUPS` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+if set to `true` [view cups].
+
+`DefaultList` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The default list.
+
+`ConfigSort` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The configuration sort.
+
+`TrackHistoryDays` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+The track history days.
+
+`TrackHistory` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+if set to `true` [track history].
+
+#### Returns
+
+[List&lt;RegistrySettings&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+List&lt;RegistrySettings&gt;.
+
+### **SaveSettings(List&lt;RegistrySettings&gt;, String&)**
 
 Saves the settings.
 
 ```csharp
-public static bool SaveSettings(string numberFormat, bool trackHistory, int trackHistoryDays, bool autoUpdate, bool alertOnBackUp, bool autoBackup, bool uoimg, bool usePl, bool useIPer, bool usenccid, bool useaa, bool useAacid, bool useUniqueCustId, bool bUseselectiveboundbook, String& errOut)
+public static bool SaveSettings(List<RegistrySettings> settings, String& errOut)
 ```
 
 #### Parameters
 
-`numberFormat` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
-The number format.
-
-`trackHistory` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
-if set to `true` [track history].
-
-`trackHistoryDays` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
-The track history days.
-
-`autoUpdate` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
-if set to `true` [automatic update].
-
-`alertOnBackUp` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
-if set to `true` [alert on back up].
-
-`autoBackup` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
-if set to `true` [automatic backup].
-
-`uoimg` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
-if set to `true` [uoimg].
-
-`usePl` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
-if set to `true` [use pl].
-
-`useIPer` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
-if set to `true` [use i per].
-
-`usenccid` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
-if set to `true` [usenccid].
-
-`useaa` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
-if set to `true` [useaa].
-
-`useAacid` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
-if set to `true` [use aacid].
-
-`useUniqueCustId` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
-if set to `true` [use unique customer identifier].
-
-`bUseselectiveboundbook` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
-if set to `true` [b useselectiveboundbook].
+`settings` [List&lt;RegistrySettings&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+The settings.
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
 
 #### Returns
 
 [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+`true` if XXXX, `false` otherwise.
 
 ### **SaveLastWorkingDir(String, String&)**
 
@@ -305,7 +310,8 @@ The hotfix number.
 The error out.
 
 `installNotice` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
-The Date and Time it was installed, OnInstall will skip the reinstall since that is by current version.
+The Date and Time it was installed, OnInstall will skip the 
+ reinstall since that is by current version.
 
 #### Returns
 
@@ -323,10 +329,56 @@ public static bool SetValue(string subKey, string name, string value, String& er
 #### Parameters
 
 `subKey` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
-Name of the sub key with the default to the Main Application Path, if left blank it will insert in root
+Name of the sub key with the default to the Main Application Path, 
+ if left blank it will insert in root
 
 `name` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 name to store the value in the key
+
+`value` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The value.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+`true` if XXXX, `false` otherwise.
+
+### **SaveViewSettings(String, String, String&)**
+
+Saves the view settings.
+
+```csharp
+public static bool SaveViewSettings(string key, string value, String& errOut)
+```
+
+#### Parameters
+
+`key` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The key.
+
+`value` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The value.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+`true` if XXXX, `false` otherwise.
+
+### **SaveConfigSort(String, String&)**
+
+Saves the configuration sort.
+
+```csharp
+public static bool SaveConfigSort(string value, String& errOut)
+```
+
+#### Parameters
 
 `value` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The value.
@@ -377,30 +429,6 @@ The error out.
 
 [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 System.String.
-
-### **SaveFirearmListSort(String, String&)**
-
-Saves the firearm list sort.
-
-```csharp
-public static bool SaveFirearmListSort(string configSort, String& errOut)
-```
-
-#### Parameters
-
-`configSort` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
-The configuration sort.
-
-`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
-The error out.
-
-#### Returns
-
-[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
-
-#### Exceptions
-
-[Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
 
 ### **GetViewSettings(String, String&, String)**
 
@@ -455,12 +483,12 @@ System.String.
 
 [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
 
-### **GetMgcExePath(String&, String)**
+### **GetExePath(String&, String)**
 
-Gets the MGC executable path.
+Gets the executable path.
 
 ```csharp
-public static string GetMgcExePath(String& errOut, string sDefault)
+public static string GetExePath(String& errOut, string sDefault)
 ```
 
 #### Parameters
@@ -482,7 +510,7 @@ System.String.
 
 ### **MyGunCollectionIsInstalled(String&)**
 
-Mies the gun collection is installed.
+Checks to see if the gun collection is installed.
 
 ```csharp
 public static bool MyGunCollectionIsInstalled(String& errOut)

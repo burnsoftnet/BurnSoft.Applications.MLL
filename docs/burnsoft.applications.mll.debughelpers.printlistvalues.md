@@ -1,0 +1,102 @@
+[`< Back`](./)
+
+---
+
+# PrintListValues
+
+Namespace: BurnSoft.Applications.MLL.DebugHelpers
+
+Get the data from the lists and put them in a format that can be 
+ printed or displated in abother windows for debugging and testing
+
+```csharp
+public class PrintListValues
+```
+
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [PrintListValues](./burnsoft.applications.mll.debughelpers.printlistvalues)
+
+## Constructors
+
+### **PrintListValues()**
+
+```csharp
+public PrintListValues()
+```
+
+## Methods
+
+### **PersonalInformationData(List&lt;PersonalInformation&gt;)**
+
+Personals the information data.
+
+```csharp
+public static string PersonalInformationData(List<PersonalInformation> value)
+```
+
+#### Parameters
+
+`value` [List&lt;PersonalInformation&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+The value.
+
+#### Returns
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+System.String.
+
+### **LoginInformationOnlyData(List&lt;LoginInformationOnly&gt;)**
+
+Logins the information only data.
+
+```csharp
+public static string LoginInformationOnlyData(List<LoginInformationOnly> value)
+```
+
+#### Parameters
+
+`value` [List&lt;LoginInformationOnly&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+The value.
+
+#### Returns
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+System.String.
+
+### **ConfigListDataMetalicData(List&lt;ConfigListDataMetalic&gt;)**
+
+Configurations the list data metalic data.
+
+```csharp
+public static string ConfigListDataMetalicData(List<ConfigListDataMetalic> value)
+```
+
+#### Parameters
+
+`value` [List&lt;ConfigListDataMetalic&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+The value.
+
+#### Returns
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+System.String.
+
+### **RegistrySettingsData(List&lt;RegistrySettings&gt;)**
+
+Registries the settings data.
+
+```csharp
+public static string RegistrySettingsData(List<RegistrySettings> value)
+```
+
+#### Parameters
+
+`value` [List&lt;RegistrySettings&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+The value.
+
+#### Returns
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+System.String.
+
+---
+
+[`< Back`](./)

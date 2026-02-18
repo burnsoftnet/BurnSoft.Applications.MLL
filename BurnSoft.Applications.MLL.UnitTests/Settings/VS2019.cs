@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 // ReSharper disable InconsistentNaming
 
@@ -33,8 +34,10 @@ namespace BurnSoft.Applications.MLL.UnitTests.Settings
         private static List<Tuple<string, string>> GeneralSettings()
         {
             string testCaliber = @"10mm gunny";
+            string AppPath = AppDomain.CurrentDomain.BaseDirectory;
             List<Tuple<string, string>> ls = new List<Tuple<string, string>>();
-            ls.Add(new Tuple<string, string>("DatabasePath", "data\\mgc.mdb"));
+            ls.Add(new Tuple<string, string>("DatabasePath", Path.Combine(AppPath, "data\\mll.mdb")));
+            ls.Add(new Tuple<string, string>("OwnerId", "1"));
             ls.Add(new Tuple<string, string>("ConverThisToNumber", "$234.56"));
             ls.Add(new Tuple<string, string>("ConverThisToNumberExpected", "234.56"));
             ls.Add(new Tuple<string, string>("ConvertOuncesToDouble", "7/8"));
@@ -66,54 +69,7 @@ namespace BurnSoft.Applications.MLL.UnitTests.Settings
             }
             return sAns;
         }
-        /// <summary>
-        /// Gets the settings.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <param name="con">The con.</param>
-        /// <returns>System.String.</returns>
-        private static string GetSettings(string value, TestContext con)
-        {
-            string sAns;
-
-            Vs2019 obj = new Vs2019(con);
-            if (obj.TestSettingsLoaded(value))
-            {
-                sAns = con.Properties[value].ToString();
-            }
-            else
-            {
-                sAns = GetSetting(value);
-            }
-
-            return sAns;
-        }
-        /// <summary>
-        /// Tests the settings loaded.
-        /// </summary>
-        /// <param name="property">The property.</param>
-        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        private bool TestSettingsLoaded(string property)
-        {
-            bool bAns = false;
-            try
-            {
-                if (TestContext != null)
-                {
-                    if (TestContext.Properties[property] != null)
-                    {
-                        string value = TestContext.Properties[property].ToString();
-                        bAns = value.Length > 0;
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-
-            return bAns;
-        }
+        
         /// <summary>
         /// Gets the setting.
         /// </summary>
@@ -138,33 +94,5 @@ namespace BurnSoft.Applications.MLL.UnitTests.Settings
         /// <param name="value">The value.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool BGetSetting(string value) => Convert.ToBoolean(GetSettings(value));
-        /// <summary>
-        /// Gets the setting.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <param name="con">The con.</param>
-        /// <returns>System.String.</returns>
-        public static string GetSetting(string value, TestContext con) => GetSettings(value, con);
-        /// <summary>
-        /// is the get setting.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <param name="con">The con.</param>
-        /// <returns>System.Int32.</returns>
-        public static int IGetSetting(string value, TestContext con) => Convert.ToInt32(GetSettings(value, con));
-        /// <summary>
-        /// ds the get setting.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <param name="con">The con.</param>
-        /// <returns>System.Double.</returns>
-        public static double DGetSetting(string value, TestContext con) => Convert.ToDouble(GetSettings(value, con));
-        /// <summary>
-        /// bs the get setting.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <param name="con">The con.</param>
-        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public static bool BGetSetting(string value, TestContext con) => Convert.ToBoolean(GetSettings(value, con));
     }
 }

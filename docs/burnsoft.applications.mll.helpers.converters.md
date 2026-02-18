@@ -92,6 +92,48 @@ The convert from.
 [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
 System.Double.
 
+### **ConvToNum(String, String&)**
+
+Convs string to number and get rid of anything is is not a number.
+
+```csharp
+public static double ConvToNum(string strValue, String& errOut)
+```
+
+#### Parameters
+
+`strValue` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The string value.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
+System.Double.
+
+### **ConvertOzToDouble(String, String&)**
+
+Converts the ounces to double.
+
+```csharp
+public static double ConvertOzToDouble(string sValue, String& errOut)
+```
+
+#### Parameters
+
+`sValue` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The string value.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
+System.Double.
+
 ### **ConvertToDollars(Double)**
 
 Converts long double to dollars format, at least with 3 decimal places on thr right.
@@ -104,6 +146,69 @@ public static double ConvertToDollars(double dValue)
 
 `dValue` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
 The d value.
+
+#### Returns
+
+[Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
+System.Double.
+
+### **CostOfRoundsOfAmmoMetalic(Double, Double, Double, Double, Double)**
+
+Costs the of rounds of ammo metalic to sum up how much it will cost to make this load.
+
+```csharp
+public static double CostOfRoundsOfAmmoMetalic(double primer, double cases, double bullets, double powder, double midPowder)
+```
+
+#### Parameters
+
+`primer` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
+The primer.
+
+`cases` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
+The cases.
+
+`bullets` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
+The bullets.
+
+`powder` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
+The powder.
+
+`midPowder` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
+The mid powder.
+
+#### Returns
+
+[Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
+System.Double.
+
+### **CostOfRoundsOfAmmoShotGun(Double, Double, Double, Double, Double, Double)**
+
+Costs the of rounds of ammo shot gunto sum up how much it will cost to make this load.
+
+```csharp
+public static double CostOfRoundsOfAmmoShotGun(double primer, double cases, double bullets, double powder, double midPowder, double wad)
+```
+
+#### Parameters
+
+`primer` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
+The primer.
+
+`cases` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
+The cases.
+
+`bullets` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
+The bullets.
+
+`powder` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
+The powder.
+
+`midPowder` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
+The mid powder.
+
+`wad` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
+The wad.
 
 #### Returns
 

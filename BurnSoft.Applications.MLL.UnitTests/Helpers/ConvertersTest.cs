@@ -46,9 +46,13 @@ namespace BurnSoft.Applications.MLL.UnitTests.Helpers
         /// The convert weight LBS to grams expected
         /// </summary>
         private double ConvertWeightLbsToGramsExpected;
-
+        /// <summary>
+        /// The convert to dollars
+        /// </summary>
         public double ConvertToDollars;
-
+        /// <summary>
+        /// The convert to dollars expected value
+        /// </summary>
         public double ConvertToDollarsExpectedValue;
         /// <summary>
         /// Initializes this instance.
@@ -58,15 +62,15 @@ namespace BurnSoft.Applications.MLL.UnitTests.Helpers
         {
             // Vs2019.GetSetting("", TestContext);
             _errOut = @"";
-            ConverThisToNumber = Vs2019.GetSetting("ConverThisToNumber", TestContext);
-            ConverThisToNumberExpected = Convert.ToDouble(Vs2019.GetSetting("ConverThisToNumberExpected", TestContext));
-            ConvertOuncesToDouble = Vs2019.GetSetting("ConvertOuncesToDouble", TestContext);
-            ConvertOuncesToDoubleExpected = Convert.ToDouble(Vs2019.GetSetting("ConvertOuncesToDoubleExpected", TestContext));
-            ConvertWeight = Convert.ToDouble(Vs2019.GetSetting("ConvertWeight", TestContext));
-            ConvertWeightLbsToGrainsExpected = Convert.ToDouble(Vs2019.GetSetting("ConvertWeightLbsToGrainsExpected", TestContext));
-            ConvertWeightLbsToGramsExpected = Convert.ToDouble(Vs2019.GetSetting("ConvertWeightLbsToGramsExpected", TestContext));
-            ConvertToDollars = Convert.ToDouble(Vs2019.GetSetting("ConvertToDollars", TestContext));
-            ConvertToDollarsExpectedValue = Convert.ToDouble(Vs2019.GetSetting("ConvertToDollarsExpectedValue", TestContext));
+            ConverThisToNumber = Vs2019.GetSetting("ConverThisToNumber");
+            ConverThisToNumberExpected = Convert.ToDouble(Vs2019.GetSetting("ConverThisToNumberExpected"));
+            ConvertOuncesToDouble = Vs2019.GetSetting("ConvertOuncesToDouble");
+            ConvertOuncesToDoubleExpected = Convert.ToDouble(Vs2019.GetSetting("ConvertOuncesToDoubleExpected"));
+            ConvertWeight = Convert.ToDouble(Vs2019.GetSetting("ConvertWeight"));
+            ConvertWeightLbsToGrainsExpected = Convert.ToDouble(Vs2019.GetSetting("ConvertWeightLbsToGrainsExpected"));
+            ConvertWeightLbsToGramsExpected = Convert.ToDouble(Vs2019.GetSetting("ConvertWeightLbsToGramsExpected"));
+            ConvertToDollars = Convert.ToDouble(Vs2019.GetSetting("ConvertToDollars"));
+            ConvertToDollarsExpectedValue = Convert.ToDouble(Vs2019.GetSetting("ConvertToDollarsExpectedValue"));
         }
         /// <summary>
         /// Defines the test method ConvertToNumberTest.
@@ -117,6 +121,42 @@ namespace BurnSoft.Applications.MLL.UnitTests.Helpers
             double value = MLL.Helpers.Converters.ConvertToDollars(ConvertToDollars);
             TestContext.WriteLine($"RETURNED VALUE: {value}, explected {ConvertToDollarsExpectedValue} from {ConvertToDollars}");
             General.HasTrueValue(value == ConvertToDollarsExpectedValue, _errOut);
+        }
+
+        [TestMethod, TestCategory("Helpers - Converters")]
+        public void ConvToNumTest()
+        {
+            string sValue = "$34.95";
+            double value = MLL.Helpers.Converters.ConvToNum(sValue, out _errOut);
+            TestContext.WriteLine($"RETURNED VALUE: {value}, from {sValue}");
+            General.HasTrueValue(value == 34.95, _errOut );
+        }
+
+        [TestMethod, TestCategory("Helpers - Converters")]
+        public void ConvertOzToDoubleTest()
+        {
+            string sValue = "2 3/4";
+            double value = MLL.Helpers.Converters.ConvertOzToDouble(sValue, out _errOut);
+            TestContext.WriteLine($"RETURNED VALUE: {value}, from {sValue}");
+            General.HasTrueValue(value == 2.75, _errOut);
+        }
+
+        [TestMethod, TestCategory("Helpers - Converters")]
+        public void CostOfRoundsOfAmmoMetalicTest()
+        {
+            double value = MLL.Helpers.Converters.CostOfRoundsOfAmmoMetalic(primer: 0.02799, cases: 0, 
+                bullets: 0.1699, powder: 0.00271286101837288, midPowder: 7);
+            TestContext.WriteLine($"RETURNED VALUE: {value}");
+            General.HasTrueValue(value == 0.22, _errOut);
+        }
+
+        [TestMethod, TestCategory("Helpers - Converters")]
+        public void CostOfRoundsOfAmmoShotGunTest()
+        {
+            double value = MLL.Helpers.Converters.CostOfRoundsOfAmmoShotGun(primer: 0.02799, cases: 0,
+                bullets: 0.1699, powder: 0.00271286101837288, midPowder: 7, wad: 0.80);
+            TestContext.WriteLine($"RETURNED VALUE: {value}");
+            General.HasTrueValue(value == 1.02, _errOut);
         }
     }
 }
