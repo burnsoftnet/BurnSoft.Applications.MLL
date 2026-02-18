@@ -35,10 +35,12 @@ public static string ConnectionString(string databasePath, string databaseName, 
 #### Parameters
 
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The Database Path
 
 `databaseName` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+If an exception occurs the message will be in this string
 
 `password` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 
@@ -88,6 +90,7 @@ The database path.
 Name of the database.
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+If an exception occurs the message will be in this string
 
 `password` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The password.
@@ -215,6 +218,30 @@ The error out.
 [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
 `true` if XXXX, `false` otherwise.
 
+### **RunSql(String, String, String&)**
+
+Runs the SQL.
+
+```csharp
+public static bool RunSql(string databasePath, string sql, String& errOut)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`sql` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The SQL.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+`true` if XXXX, `false` otherwise.
+
 ### **GetData(String, String, String&)**
 
 Gets the data.
@@ -248,18 +275,19 @@ DataTable.
 Get the Identity seed from the table base on your T SQl statement.
 
 ```csharp
-public static int GetIDFromTableBasedOnTSQL(string connection, string sql, string identitySeedColumnName, String& errOut)
+public static int GetIDFromTableBasedOnTSQL(string databasePath, string sql, string identitySeedColumnName, String& errOut)
 ```
 
 #### Parameters
 
-`connection` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 
 `sql` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 
 `identitySeedColumnName` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+If an exception occurs the message will be in this string
 
 #### Returns
 
@@ -361,40 +389,6 @@ The database path.
 
 `version` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The version.
-
-`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
-The error out.
-
-#### Returns
-
-[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
-`true` if XXXX, `false` otherwise.
-
-#### Exceptions
-
-[Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
-
-### **InsertNewContact(String, String, String, String, String&)**
-
-Inserts the new contact.
-
-```csharp
-public bool InsertNewContact(string databasePath, string sValue, string sTable, string sColumn, String& errOut)
-```
-
-#### Parameters
-
-`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
-The database path.
-
-`sValue` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
-The s value.
-
-`sTable` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
-The s table.
-
-`sColumn` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
-The s column.
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
 The error out.
