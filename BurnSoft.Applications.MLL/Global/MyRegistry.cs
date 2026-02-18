@@ -393,6 +393,7 @@ namespace BurnSoft.Applications.MLL.Global
                         myReg.SetValue("AutoUpdate", s.AutoUpdate);
                         myReg.SetValue("AlertOnBackUp", s.AlertOnBackUp);
                         myReg.SetValue("BackupOnExit", s.BackupOnExit);
+                        myReg.SetValue("ConfigSort", s.ConfigSort);
                         myReg.SetValue("UseOrgImage", s.UseOrgImage);
                         myReg.SetValue("LOADERTYPE_SHOTGUN", s.LoaderTypeShotGun);
                         myReg.SetValue("IndvReports", s.IndvReports);
