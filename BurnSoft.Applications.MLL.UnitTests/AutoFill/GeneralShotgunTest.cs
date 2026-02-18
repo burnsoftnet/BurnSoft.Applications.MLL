@@ -76,5 +76,104 @@ namespace BurnSoft.Applications.MLL.UnitTests.AutoFill
             }
             General.HasTrueValue(value.Count > 0, _errOut);
         }
+
+        [TestMethod, TestCategory("AutoFill - Shotgun General")]
+        public void LengthTest()
+        {
+            AutoCompleteStringCollection value = GeneralShotgun.Length(_databasePath, out _errOut);
+            foreach (var a in value)
+            {
+                TestContext.WriteLine(a.ToString());
+            }
+            General.HasTrueValue(value.Count > 0, _errOut);
+        }
+
+        [TestMethod, TestCategory("AutoFill - Shotgun General")]
+        public void PriceTest()
+        {
+            AutoCompleteStringCollection value = GeneralShotgun.Price(_databasePath, out _errOut);
+            foreach (var a in value)
+            {
+                TestContext.WriteLine(a.ToString());
+            }
+            General.HasTrueValue(value.Count > 0, _errOut);
+        }
+
+        [TestMethod, TestCategory("AutoFill - Shotgun General")]
+        public void TypeDetailsManufacturerTest()
+        {
+            AutoCompleteStringCollection value = GeneralShotgun.TypeDetailsManufacturer(_databasePath, out _errOut);
+            foreach (var a in value)
+            {
+                TestContext.WriteLine(a.ToString());
+            }
+            General.HasTrueValue(value.Count > 0, _errOut);
+        }
+
+        [TestMethod, TestCategory("AutoFill - Shotgun General")]
+        public void TypeDetailsNameTest()
+        {
+            AutoCompleteStringCollection value = GeneralShotgun.TypeDetailsName(_databasePath, out _errOut);
+            foreach (var a in value)
+            {
+                TestContext.WriteLine(a.ToString());
+            }
+            General.HasTrueValue(value.Count > 0, _errOut);
+        }
+
+        [TestMethod, TestCategory("AutoFill - Shotgun General")]
+        public void TypeDetailsMatTest()
+        {
+            AutoCompleteStringCollection value = GeneralShotgun.TypeDetailsMat(_databasePath, out _errOut);
+            foreach (var a in value)
+            {
+                TestContext.WriteLine(a.ToString());
+            }
+            General.HasTrueValue(value.Count > 0, _errOut);
+        }
+
+        [TestMethod, TestCategory("AutoFill - Shotgun General")]
+        public void TypeDetailsShotNoTest()
+        {
+            AutoCompleteStringCollection value = GeneralShotgun.TypeDetailsShotNo(_databasePath, out _errOut);
+            foreach (var a in value)
+            {
+                TestContext.WriteLine(a.ToString());
+            }
+            General.HasTrueValue(value.Count > 0, _errOut);
+        }
+
+        [TestMethod, TestCategory("AutoFill - Shotgun General")]
+        public void TypeDetailsCaliberTest()
+        {
+            AutoCompleteStringCollection value = GeneralShotgun.TypeDetailsCaliber(_databasePath, out _errOut);
+            foreach (var a in value)
+            {
+                TestContext.WriteLine(a.ToString());
+            }
+            General.HasTrueValue(value.Count > 0, _errOut);
+        }
+
+        [TestMethod, TestCategory("AutoFill - Shotgun General")]
+        public void TypeDetailsPriceTest()
+        {
+            AutoCompleteStringCollection value = GeneralShotgun.TypeDetailsPrice(_databasePath, out _errOut);
+            foreach (var a in value)
+            {
+                TestContext.WriteLine(a.ToString());
+            }
+            General.HasTrueValue(value.Count > 0, _errOut);
+        }
+
+        [TestMethod, TestCategory("AutoFill - Shotgun General")]
+        public void TypeDetailsWeightTest()
+        {
+            AutoCompleteStringCollection value = GeneralShotgun.TypeDetailsWeight(_databasePath, out _errOut);
+            foreach (var a in value)
+            {
+                TestContext.WriteLine(a.ToString());
+            }
+            General.HasTrueValue(value.Count > 0, _errOut);
+        }
     }
 }
