@@ -79,13 +79,16 @@ namespace BurnSoft.Applications.MLL
         /// <b>Results</b><br/>
         /// Driver={Microsoft Access Driver (*.mdb)};dbq=C:\test\test.mdb
         /// </example>
-        public static string ConnectionString(string databasePath, string databaseName, out string errOut, string password = DbPassword)
+        public static string ConnectionString(string databasePath, string databaseName, out string errOut, 
+            string password = DbPassword)
         {
             string sAns = "";
             errOut = @"";
             try
             {
-                sAns = password?.Length > 0 ? $"Driver={{Microsoft Access Driver (*.mdb)}};dbq={databasePath}\\{databaseName};Pwd={password}" : $"Driver={{Microsoft Access Driver (*.mdb)}};dbq={databasePath}\\{databaseName}";
+                sAns = password?.Length > 0 ? $"Driver={{Microsoft Access Driver (*.mdb)}};" +
+                    $"dbq={databasePath}\\{databaseName};Pwd={password}" : 
+                    $"Driver={{Microsoft Access Driver (*.mdb)}};dbq={databasePath}\\{databaseName}";
             }
             catch (Exception e)
             {
@@ -106,7 +109,8 @@ namespace BurnSoft.Applications.MLL
             errOut = @"";
             try
             {
-                sAns = password?.Length > 0 ? $"Driver={{Microsoft Access Driver (*.mdb)}};dbq={fullDatabasePath};Pwd={password}" : $"Driver={{Microsoft Access Driver (*.mdb)}};dbq={fullDatabasePath}";
+                sAns = password?.Length > 0 ? $"Driver={{Microsoft Access Driver (*.mdb)}};dbq={fullDatabasePath};" +
+                    $"Pwd={password}" : $"Driver={{Microsoft Access Driver (*.mdb)}};dbq={fullDatabasePath}";
             }
             catch (Exception e)
             {
@@ -131,13 +135,16 @@ namespace BurnSoft.Applications.MLL
         /// <b>Results</b><br/>
         /// Provider=Microsoft.Jet.OLEDB.4.0;Persist Security Info=False;Data Source="C:\test\test.mdb";
         /// </example>
-        public static string ConnectionStringOle(string databasePath, string databaseName, out string errOut, string password = DbPassword)
+        public static string ConnectionStringOle(string databasePath, string databaseName, out string errOut, 
+            string password = DbPassword)
         {
             string sAns = "";
             errOut = @"";
             try
             {
-                sAns = password?.Length > 0 ? $"Provider=Microsoft.Jet.OLEDB.4.0;Persist Security Info=False;Data Source=\"{databasePath}\\{databaseName}\";Jet OLEDB:Database Password={password};" : "Provider=Microsoft.Jet.OLEDB.4.0;Persist Security Info=False;";
+                sAns = password?.Length > 0 ? $"Provider=Microsoft.Jet.OLEDB.4.0;Persist Security Info=False;" +
+                    $"Data Source=\"{databasePath}\\{databaseName}\";Jet OLEDB:Database Password={password};" : 
+                    "Provider=Microsoft.Jet.OLEDB.4.0;Persist Security Info=False;";
             }
             catch (Exception e)
             {
@@ -152,13 +159,16 @@ namespace BurnSoft.Applications.MLL
         /// <param name="errOut">The error out.</param>
         /// <param name="password">The password.</param>
         /// <returns>System.String.</returns>
-        public static string ConnectionStringOle(string databasePathAndName, out string errOut, string password = DbPassword)
+        public static string ConnectionStringOle(string databasePathAndName, out string errOut, 
+            string password = DbPassword)
         {
             string sAns = "";
             errOut = @"";
             try
             {
-                sAns = password?.Length > 0 ? $"Provider=Microsoft.Jet.OLEDB.4.0;Persist Security Info=False;Data Source=\"{databasePathAndName}\";Jet OLEDB:Database Password={password};" : "Provider=Microsoft.Jet.OLEDB.4.0;Persist Security Info=False;";
+                sAns = password?.Length > 0 ? $"Provider=Microsoft.Jet.OLEDB.4.0;Persist Security Info=False;" +
+                    $"Data Source=\"{databasePathAndName}\";Jet OLEDB:Database Password={password};" : 
+                    "Provider=Microsoft.Jet.OLEDB.4.0;Persist Security Info=False;";
             }
             catch (Exception e)
             {
@@ -362,7 +372,8 @@ namespace BurnSoft.Applications.MLL
         /// int value = GetIDFromTableBasedOnTSQL(SomeConnectionString, sql, "id", out var errOut);
         /// 
         /// </example>
-        public static int GetIDFromTableBasedOnTSQL(string databasePath, string sql, string identitySeedColumnName, out string errOut)
+        public static int GetIDFromTableBasedOnTSQL(string databasePath, string sql, string identitySeedColumnName, 
+            out string errOut)
         {
             int iAns = 0;
             errOut = @"";
@@ -437,6 +448,126 @@ namespace BurnSoft.Applications.MLL
 
             return bAns;
         }
+        /// <summary>
+        /// Objects the exists in database.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="column">The column.</param>
+        /// <param name="table">The table.</param>
+        /// <param name="value">The value.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool ObjectExistsInDb(string databasePath, string column, string table, 
+            string value, out string errOut)
+        {
+            string sql = $"SELECT {column} FROM {table} where {column}='{value}'";
+            return DataExists(databasePath, sql, out errOut);
+        }
+        /// <summary>
+        /// Objects the exists in database.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="column">The column.</param>
+        /// <param name="table">The table.</param>
+        /// <param name="value">The value.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool ObjectExistsInDb(string databasePath, string column, string table, 
+            int value, out string errOut)
+        {
+            string sql = $"SELECT {column} FROM {table} where {column}={value}";
+            return DataExists(databasePath, sql, out errOut);
+        }
+        /// <summary>
+        /// Gets the identifier.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="sql">The SQL.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <param name="field">The field.</param>
+        /// <returns>System.Int64.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static long GetId(string databasePath, string sql, out string errOut, string field = "ID")
+        {
+            long dAns = 0;
+            errOut = "";
+            try
+            {
+                Database obj = new Database();
+                string con = ConnectionString(databasePath, out errOut);
+                DataTable dt = obj.GetData(con, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                foreach (DataRow dr in dt.Rows)
+                {
+                    dAns = Convert.ToInt64(dr[field]);
+                }
+
+                obj.Close(out _);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetId", e);
+            }
+            return dAns;
+        }
+
+        /// <summary>
+        /// Gets the name.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="sql">The SQL.</param>
+        /// <param name="field">The field.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.String.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static string GetName(string databasePath, string sql, string field, out string errOut)
+        {
+            string dAns = "";
+            errOut = "";
+            try
+            {
+                Database obj = new Database();
+                string con = ConnectionString(databasePath, out errOut);
+                DataTable dt = obj.GetData(con, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                foreach (DataRow dr in dt.Rows)
+                {
+                    dAns = dr[field].ToString();
+                }
+
+                obj.Close(out _);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetName", e);
+            }
+            return dAns;
+        }
+
+        public static int GetCount(string databasePath, string sql, out string errOut, string field = "Total")
+        {
+            int dAns = 0;
+            errOut = "";
+            try
+            {
+                Database obj = new Database();
+                string con = ConnectionString(databasePath, out errOut);
+                DataTable dt = obj.GetData(con, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                foreach (DataRow dr in dt.Rows)
+                {
+                    dAns = Convert.ToInt32(dr[field]);
+                }
+
+                obj.Close(out _);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetCount", e);
+            }
+            return dAns;
+        }
+
         #endregion
         #region "Sync and Database Version Related"        
         /// <summary>
@@ -494,6 +625,37 @@ namespace BurnSoft.Applications.MLL
                 errOut = ErrorMessage("SaveDatabaseVersion", e);
             }
             return bAns;
+        }
+        /// <summary>
+        /// Gets the database version.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Double.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static double GetDatabaseVersion(string databasePath, out string errOut)
+        {
+            double dAns = 0;
+            errOut = "";
+            try
+            {
+                string sql = "SELECT top 1 dbver from DB_Version order by ID Desc";
+                Database obj = new Database();
+                string con = ConnectionString(databasePath, out errOut);
+                DataTable dt = obj.GetData(con, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                foreach (DataRow dr in dt.Rows)
+                {
+                    dAns = Convert.ToDouble(dr["dbver"]);
+                }
+
+                obj.Close(out _);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetDatabaseVersion", e);
+            }
+            return dAns;
         }
 
         #endregion

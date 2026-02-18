@@ -1,7 +1,6 @@
 ﻿using BurnSoft.Applications.MLL.AutoFill;
 using BurnSoft.Applications.MLL.UnitTests.Settings;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Windows.Forms;
 
 namespace BurnSoft.Applications.MLL.UnitTests.AutoFill

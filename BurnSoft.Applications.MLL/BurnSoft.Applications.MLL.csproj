@@ -52,8 +52,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoFill\Bullets.cs" />
     <Compile Include="AutoFill\Calibers.cs" />
+    <Compile Include="AutoFill\Cases.cs" />
+    <Compile Include="AutoFill\ConfigMetalic.cs" />
     <Compile Include="AutoFill\ConfigShotgun.cs" />
+    <Compile Include="AutoFill\Equipment.cs" />
     <Compile Include="AutoFill\General.cs" />
     <Compile Include="AutoFill\GeneralShotgun.cs" />
     <Compile Include="AutoFill\Powder.cs" />
@@ -61,6 +65,7 @@
     <Compile Include="Database.cs" />
     <Compile Include="DebugHelpers\PrintListValues.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Global\GeneralFunctions.cs" />
     <Compile Include="Global\GeneralSettings.cs" />
     <Compile Include="Global\MyRegistry.cs" />
     <Compile Include="Global\WeightValues.cs" />
