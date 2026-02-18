@@ -201,6 +201,8 @@
     <Compile Include="AutoFill\PowderTest.cs" />
     <Compile Include="AutoFill\ConfigShotgunTest.cs" />
     <Compile Include="AutoFill\GeneralShotgunTest.cs" />
+    <Compile Include="AutoFill\CalibersTests.cs" />
+    <Compile Include="AutoFill\PrimersTests.cs" />
     <Compile Include="General.cs" />
     <Compile Include="Global\GeneralSettingsTest.cs" />
     <Compile Include="Global\MyRegistryTest.cs" />

@@ -52,10 +52,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoFill\Calibers.cs" />
     <Compile Include="AutoFill\ConfigShotgun.cs" />
     <Compile Include="AutoFill\General.cs" />
     <Compile Include="AutoFill\GeneralShotgun.cs" />
     <Compile Include="AutoFill\Powder.cs" />
+    <Compile Include="AutoFill\Primers.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="DebugHelpers\PrintListValues.cs" />
     <Compile Include="GlobalSuppressions.cs" />
