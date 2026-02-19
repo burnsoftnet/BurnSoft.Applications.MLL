@@ -543,7 +543,15 @@ namespace BurnSoft.Applications.MLL
             }
             return dAns;
         }
-
+        /// <summary>
+        /// Gets the count.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="sql">The SQL.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <param name="field">The field.</param>
+        /// <returns>System.Int32.</returns>
+        /// <exception cref="System.Exception"></exception>
         public static int GetCount(string databasePath, string sql, out string errOut, string field = "Total")
         {
             int dAns = 0;

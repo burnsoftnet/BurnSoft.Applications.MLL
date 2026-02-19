@@ -115,6 +115,24 @@ The value.
 [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 System.String.
 
+### **BulletListingsData(List&lt;BulletListings&gt;)**
+
+Bullets the listings data.
+
+```csharp
+public static string BulletListingsData(List<BulletListings> value)
+```
+
+#### Parameters
+
+`value` [List&lt;BulletListings&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+The value.
+
+#### Returns
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+System.String.
+
 ---
 
 [`< Back`](./)

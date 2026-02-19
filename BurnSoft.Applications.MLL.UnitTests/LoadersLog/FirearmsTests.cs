@@ -1,11 +1,9 @@
 ﻿using BurnSoft.Applications.MLL.LoadersLog;
-using BurnSoft.Applications.MLL.PeopleAndPlaces;
 using BurnSoft.Applications.MLL.Types;
 using BurnSoft.Applications.MLL.UnitTests.Settings;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 
 namespace BurnSoft.Applications.MLL.UnitTests.LoadersLog
 {

@@ -150,5 +150,35 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
             }
             return sAns;
         }
+        /// <summary>
+        /// Bullets the listings data.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string BulletListingsData(List<BulletListings> value)
+        {
+            string sAns = "";
+            if (value.Count > 0)
+            {
+                foreach (BulletListings v in value)
+                {
+                    sAns += $"id : {v.Id}{Environment.NewLine}";
+                    sAns += $"Manufacturer : {v.Manufacturer}{Environment.NewLine}";
+                    sAns += $"Name : {v.Name}{Environment.NewLine}";
+                    sAns += $"Diameter : {v.Diameter}{Environment.NewLine}";
+                    sAns += $"Weight : {v.Weight}{Environment.NewLine}";
+                    sAns += $"SectionDensity : {v.SectionDensity}{Environment.NewLine}";
+                    sAns += $"PartNumber : {v.PartNumber}{Environment.NewLine}";
+                    sAns += $"BallisticCoeffcient : {v.BallisticCoeffcient}{Environment.NewLine}";
+                    sAns += $"BullerType : {v.BullerType}{Environment.NewLine}";
+                    sAns += $"Qty : {v.Qty}{Environment.NewLine}";
+                    sAns += $"Price : {v.Price}{Environment.NewLine}";
+                    sAns += $"CaliberId : {v.CaliberId}{Environment.NewLine}";
+                    sAns += $"EsitmatedPricePerBullet : {v.EsitmatedPricePerBullet}{Environment.NewLine}";
+                    sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                }
+            }
+            return sAns;
+        }
     }
 }

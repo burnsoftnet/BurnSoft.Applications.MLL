@@ -470,6 +470,8 @@ System.String.
 
 ### **GetCount(String, String, String&, String)**
 
+Gets the count.
+
 ```csharp
 public static int GetCount(string databasePath, string sql, String& errOut, string field)
 ```
@@ -477,16 +479,25 @@ public static int GetCount(string databasePath, string sql, String& errOut, stri
 #### Parameters
 
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
 
 `sql` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The SQL.
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
 
 `field` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The field.
 
 #### Returns
 
 [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+System.Int32.
+
+#### Exceptions
+
+[Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
 
 ### **UpdateSyncDataTables(String, String, String&)**
 
