@@ -97,6 +97,24 @@ The value.
 [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 System.String.
 
+### **FirearmCollectionData(List&lt;FirearmCollection&gt;)**
+
+Firearms the collection data.
+
+```csharp
+public static string FirearmCollectionData(List<FirearmCollection> value)
+```
+
+#### Parameters
+
+`value` [List&lt;FirearmCollection&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+The value.
+
+#### Returns
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+System.String.
+
 ---
 
 [`< Back`](./)

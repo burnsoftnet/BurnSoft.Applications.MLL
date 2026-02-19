@@ -2,11 +2,21 @@
 
 ## BurnSoft.Applications.MLL
 
-[Database](./burnsoft.applications.mll.database.md)
+[Database](./burnsoft.applications.mll.database.md.md)
 
 ## BurnSoft.Applications.MLL.AutoFill
 
+[Bullets](./burnsoft.applications.mll.autofill.bullets.md)
+
+[Calibers](./burnsoft.applications.mll.autofill.calibers.md)
+
+[Cases](./burnsoft.applications.mll.autofill.cases.md)
+
+[ConfigMetalic](./burnsoft.applications.mll.autofill.configmetalic.md)
+
 [ConfigShotgun](./burnsoft.applications.mll.autofill.configshotgun.md)
+
+[Equipment](./burnsoft.applications.mll.autofill.equipment.md)
 
 [General](./burnsoft.applications.mll.autofill.general.md)
 
@@ -14,11 +24,15 @@
 
 [Powder](./burnsoft.applications.mll.autofill.powder.md)
 
+[Primers](./burnsoft.applications.mll.autofill.primers.md)
+
 ## BurnSoft.Applications.MLL.DebugHelpers
 
 [PrintListValues](./burnsoft.applications.mll.debughelpers.printlistvalues.md)
 
 ## BurnSoft.Applications.MLL.Global
+
+[GeneralFunctions](./burnsoft.applications.mll.global.generalfunctions.md)
 
 [GeneralSettings](./burnsoft.applications.mll.global.generalsettings.md)
 
@@ -36,6 +50,10 @@
 
 [HfDatabase](./burnsoft.applications.mll.hotixes.hfdatabase.md)
 
+## BurnSoft.Applications.MLL.LoadersLog
+
+[Firearms](./burnsoft.applications.mll.loaderslog.firearms.md)
+
 ## BurnSoft.Applications.MLL.PeopleAndPlaces
 
 [OwnerInformation](./burnsoft.applications.mll.peopleandplaces.ownerinformation.md)
@@ -43,6 +61,8 @@
 ## BurnSoft.Applications.MLL.Types
 
 [ConfigListDataMetalic](./burnsoft.applications.mll.types.configlistdatametalic.md)
+
+[FirearmCollection](./burnsoft.applications.mll.types.firearmcollection.md)
 
 [LoginInformationOnly](./burnsoft.applications.mll.types.logininformationonly.md)
 
