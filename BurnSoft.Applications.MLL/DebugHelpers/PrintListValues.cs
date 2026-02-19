@@ -123,5 +123,32 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
             }
             return sAns;
         }
+        /// <summary>
+        /// Firearms the collection data.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string FirearmCollectionData(List<FirearmCollection> value)
+        {
+            string sAns = "";
+            if (value.Count > 0)
+            {
+                foreach (FirearmCollection v in value)
+                {
+                    sAns += $"id : {v.Id}{Environment.NewLine}";
+                    sAns += $"MyGunCollectionId : {v.MyGunCollectionId}{Environment.NewLine}";
+                    sAns += $"FullName : {v.FullName}{Environment.NewLine}";
+                    sAns += $"Manufacturer : {v.Manufacturer}{Environment.NewLine}";
+                    sAns += $"Model : {v.Model}{Environment.NewLine}";
+                    sAns += $"Caliber : {v.Caliber}{Environment.NewLine}";
+                    sAns += $"Barrel : {v.Barrel}{Environment.NewLine}";
+                    sAns += $"SerialNo : {v.SerialNo}{Environment.NewLine}";
+                    sAns += $"GunType : {v.GunType}{Environment.NewLine}";
+                    sAns += $"Exclude : {v.Exclude}{Environment.NewLine}";
+                    sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                }
+            }
+            return sAns;
+        }
     }
 }
