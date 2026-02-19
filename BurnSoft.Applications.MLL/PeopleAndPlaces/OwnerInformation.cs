@@ -451,7 +451,5 @@ namespace BurnSoft.Applications.MLL.PeopleAndPlaces
             }
             return bAns;
         }
-
-
     }
 }

@@ -1,12 +1,8 @@
 ﻿using BurnSoft.Applications.MLL.Types;
-using BurnSoft.Security.RegularEncryption.SHA;
 using BurnSoft.Universal;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BurnSoft.Applications.MLL.LoadersLog
 {
@@ -121,6 +117,18 @@ namespace BurnSoft.Applications.MLL.LoadersLog
             return GetList(databasePath, sql, out errOut);
         }
         /// <summary>
+        /// Gets the details.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="fullName">The full name.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;FirearmCollection&gt;.</returns>
+        public static List<FirearmCollection> GetDetails(string databasePath, string fullName, out string errOut)
+        {
+            string sql = $"Select * from Loaders_Log_Firearms where fullname='{fullName}'";
+            return GetList(databasePath, sql, out errOut);
+        }
+        /// <summary>
         /// Gets all.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
@@ -186,6 +194,54 @@ namespace BurnSoft.Applications.MLL.LoadersLog
             }
             return lAns;
         }
+        /// <summary>
+        /// Datas the exists.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool DataExists(string databasePath, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                List<FirearmCollection> lst = GetAll(databasePath, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                bAns = lst.Count > 0;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("DataExists", e);
+            }
+            return bAns;
+        }
+        /// <summary>
+        /// Datas the exists.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="fullName">The full name.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool DataExists(string databasePath, string fullName, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+
+                List<FirearmCollection> lst = GetDetails(databasePath, fullName, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                bAns = lst.Count > 0;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("DataExists", e);
+            }
+            return bAns;
+        }
 
         /// <summary>
         /// Adds the firearm to the loaders log table to use for sample logging testing.
@@ -241,7 +297,7 @@ namespace BurnSoft.Applications.MLL.LoadersLog
         /// <param name="exclude">if set to <c>true</c> [exclude].</param>
         /// <param name="fullName">The full name.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public static bool Update(string databasePath, int id, string manufacturer, string model, string serial,
+        public static bool Update(string databasePath, long id, string manufacturer, string model, string serial,
             string caliber, string type, string barrel, out string errOut, int mgcId = 0,
             bool exclude = false, string fullName = "")
         {
