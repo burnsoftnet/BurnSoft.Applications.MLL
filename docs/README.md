@@ -50,9 +50,13 @@
 
 [HfDatabase](./burnsoft.applications.mll.hotixes.hfdatabase.md)
 
-## BurnSoft.Applications.MLL.Listings
+## BurnSoft.Applications.MLL.Inventory
 
-[Bullets](./burnsoft.applications.mll.listings.bullets.md)
+[BulletsInventory](./burnsoft.applications.mll.inventory.bulletsinventory.md)
+
+[CaliberInventory](./burnsoft.applications.mll.inventory.caliberinventory.md)
+
+[CaseInventory](./burnsoft.applications.mll.inventory.caseinventory.md)
 
 ## BurnSoft.Applications.MLL.LoadersLog
 
@@ -65,6 +69,16 @@
 ## BurnSoft.Applications.MLL.Types
 
 [BulletListings](./burnsoft.applications.mll.types.bulletlistings.md)
+
+[BulletPictures](./burnsoft.applications.mll.types.bulletpictures.md)
+
+[BulletsSingleUse](./burnsoft.applications.mll.types.bulletssingleuse.md)
+
+[BulletSupportingCaliber](./burnsoft.applications.mll.types.bulletsupportingcaliber.md)
+
+[CaliberLists](./burnsoft.applications.mll.types.caliberlists.md)
+
+[CaseListings](./burnsoft.applications.mll.types.caselistings.md)
 
 [ConfigListDataMetalic](./burnsoft.applications.mll.types.configlistdatametalic.md)
 

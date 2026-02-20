@@ -133,6 +133,42 @@ The value.
 [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 System.String.
 
+### **CaliberListsData(List&lt;CaliberLists&gt;)**
+
+Calibers the lists data.
+
+```csharp
+public static string CaliberListsData(List<CaliberLists> value)
+```
+
+#### Parameters
+
+`value` [List&lt;CaliberLists&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+The value.
+
+#### Returns
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+System.String.
+
+### **CaseListingsData(List&lt;CaseListings&gt;)**
+
+Cases the listings data.
+
+```csharp
+public static string CaseListingsData(List<CaseListings> value)
+```
+
+#### Parameters
+
+`value` [List&lt;CaseListings&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+The value.
+
+#### Returns
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+System.String.
+
 ---
 
 [`< Back`](./)
