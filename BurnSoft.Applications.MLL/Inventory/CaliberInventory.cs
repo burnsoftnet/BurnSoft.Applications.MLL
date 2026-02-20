@@ -81,7 +81,7 @@ namespace BurnSoft.Applications.MLL.Inventory
                     lst.Add(new CaliberLists()
                     {
                         Id = Convert.ToInt32(d["id"]),
-                        Caliber = d["Cal"] != DBNull.Value ? d["Manufacturer"].ToString().Trim() : "",
+                        Caliber = d["Cal"] != DBNull.Value ? d["Cal"].ToString().Trim() : "",
                         LastSync = d["sync_lastupdate"].ToString().Trim(),
                     });
                 }
@@ -243,7 +243,7 @@ namespace BurnSoft.Applications.MLL.Inventory
             try
             {
                 BSOtherObjects o = new BSOtherObjects();
-                string sql = $"INSERT INTO List_Calibers(Name) VALUES('{o.FC(name)}')";
+                string sql = $"INSERT INTO List_Calibers(Cal) VALUES('{o.FC(name)}')";
 
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
@@ -268,7 +268,7 @@ namespace BurnSoft.Applications.MLL.Inventory
             try
             {
                 BSOtherObjects o = new BSOtherObjects();
-                string sql = $"UPDATE List_Calibers set Name='{o.FC(name)}' where id={id}";
+                string sql = $"UPDATE List_Calibers set Cal='{o.FC(name)}' where id={id}";
 
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
