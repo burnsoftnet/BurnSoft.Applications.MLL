@@ -78,6 +78,8 @@
     <Compile Include="PeopleAndPlaces\OwnerInformation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Types\BulletListings.cs" />
+    <Compile Include="Types\BulletPictures.cs" />
+    <Compile Include="Types\BulletsSingleUse.cs" />
     <Compile Include="Types\ConfigListDataMetalic.cs" />
     <Compile Include="Types\FirearmCollection.cs" />
     <Compile Include="Types\LoginInformationOnly.cs" />
