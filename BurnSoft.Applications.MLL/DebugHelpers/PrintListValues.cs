@@ -180,5 +180,24 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
             }
             return sAns;
         }
+        /// <summary>
+        /// Calibers the lists data.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string CaliberListsData(List<CaliberLists> value)
+        {
+            string sAns = "";
+            if (value.Count > 0)
+            {
+                foreach (CaliberLists v in value)
+                {
+                    sAns += $"id : {v.Id}{Environment.NewLine}";
+                    sAns += $"Caliber : {v.Caliber}{Environment.NewLine}";
+                    sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                }
+            }
+            return sAns;
+        }
     }
 }

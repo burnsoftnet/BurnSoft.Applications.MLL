@@ -74,6 +74,7 @@
     <Compile Include="hotixes\AccessDatabaseHandler.cs" />
     <Compile Include="hotixes\HfDatabase.cs" />
     <Compile Include="Inventory\BulletsInventory.cs" />
+    <Compile Include="Inventory\CaliberInventory.cs" />
     <Compile Include="LoadersLog\Firearms.cs" />
     <Compile Include="PeopleAndPlaces\OwnerInformation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
