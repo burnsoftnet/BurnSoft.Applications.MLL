@@ -83,6 +83,7 @@
     <Compile Include="Types\BulletsSingleUse.cs" />
     <Compile Include="Types\BulletSupportingCaliber.cs" />
     <Compile Include="Types\CaliberLists.cs" />
+    <Compile Include="Types\CaseListings.cs" />
     <Compile Include="Types\ConfigListDataMetalic.cs" />
     <Compile Include="Types\FirearmCollection.cs" />
     <Compile Include="Types\LoginInformationOnly.cs" />
