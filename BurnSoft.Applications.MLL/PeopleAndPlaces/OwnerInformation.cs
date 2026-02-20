@@ -1,22 +1,10 @@
 ﻿using BurnSoft.Applications.MLL.Types;
 using BurnSoft.Security.RegularEncryption.SHA;
 using BurnSoft.Universal;
-using Microsoft.SqlServer.Server;
-using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Diagnostics.Eventing.Reader;
-using System.Linq;
-using System.Net;
-using System.Reflection.Emit;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
-using System.Security.Cryptography;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+
 
 namespace BurnSoft.Applications.MLL.PeopleAndPlaces
 {
