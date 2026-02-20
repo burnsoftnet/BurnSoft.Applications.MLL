@@ -201,14 +201,25 @@
     <Compile Include="AutoFill\PowderTest.cs" />
     <Compile Include="AutoFill\ConfigShotgunTest.cs" />
     <Compile Include="AutoFill\GeneralShotgunTest.cs" />
+    <Compile Include="AutoFill\CalibersTests.cs" />
+    <Compile Include="AutoFill\PrimersTests.cs" />
+    <Compile Include="AutoFill\BulletsTests.cs" />
+    <Compile Include="AutoFill\CasesTests.cs" />
+    <Compile Include="AutoFill\EquipmentTests.cs" />
+    <Compile Include="AutoFill\ConfigMetalicTests.cs" />
     <Compile Include="General.cs" />
     <Compile Include="Global\GeneralSettingsTest.cs" />
     <Compile Include="Global\MyRegistryTest.cs" />
     <Compile Include="Global\WeightValuesTest.cs" />
     <Compile Include="Helpers\ConvertersTest.cs" />
+    <Compile Include="Listings\BulletsTest.cs" />
+    <Compile Include="Listings\CaliberInventoryTests.cs" />
+    <Compile Include="Listings\CaseInventoryTests.cs" />
+    <Compile Include="LoadersLog\FirearmsTests.cs" />
     <Compile Include="PeopleAndPlaces\OwnerInformationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\VS2019.cs" />
+    <Compile Include="DatabaseTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BurnSoft.Applications.MLL\BurnSoft.Applications.MLL.csproj">

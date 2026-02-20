@@ -24,3 +24,5 @@ BurnSoft.Applications.MLL/obj
 *.cache
 *.cache
 .vs/BurnSoft.Applications.MLL/v16/.suo
+*.nupkg
+*.nupkg

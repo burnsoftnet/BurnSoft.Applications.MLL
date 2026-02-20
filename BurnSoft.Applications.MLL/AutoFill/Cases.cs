@@ -3,9 +3,9 @@
 namespace BurnSoft.Applications.MLL.AutoFill
 {
     /// <summary>
-    /// Class Powder.  Autofill for the Powder Table
+    /// Class Cases.Autofill for the Cases Table
     /// </summary>
-    public class Powder
+    public class Cases
     {
         /// <summary>
         /// Powders the name.
@@ -15,7 +15,7 @@ namespace BurnSoft.Applications.MLL.AutoFill
         /// <returns>AutoCompleteStringCollection.</returns>
         public static AutoCompleteStringCollection Name(string databasePath, out string errOut)
         {
-            return General.MainCollection(databasePath, "name", "General_Powder", out errOut);
+            return General.MainCollection(databasePath, "Name", "List_Case", out errOut);
         }
         /// <summary>
         /// Manufacturers the specified database path.
@@ -25,17 +25,7 @@ namespace BurnSoft.Applications.MLL.AutoFill
         /// <returns>AutoCompleteStringCollection.</returns>
         public static AutoCompleteStringCollection Manufacturer(string databasePath, out string errOut)
         {
-            return General.MainCollection(databasePath, "Manufacturer", "General_Powder", out errOut);
-        }
-        /// <summary>
-        /// Weightlbses the specified database path.
-        /// </summary>
-        /// <param name="databasePath">The database path.</param>
-        /// <param name="errOut">The error out.</param>
-        /// <returns>AutoCompleteStringCollection.</returns>
-        public static AutoCompleteStringCollection Weightlbs(string databasePath, out string errOut)
-        {
-            return General.MainCollection(databasePath, "weightlbs", "General_Powder", out errOut);
+            return General.MainCollection(databasePath, "Manufacturer", "List_Case", out errOut);
         }
         /// <summary>
         /// Prices the specified database path.
@@ -45,7 +35,17 @@ namespace BurnSoft.Applications.MLL.AutoFill
         /// <returns>AutoCompleteStringCollection.</returns>
         public static AutoCompleteStringCollection Price(string databasePath, out string errOut)
         {
-            return General.MainCollection(databasePath, "Price", "General_Powder", out errOut);
+            return General.MainCollection(databasePath, "Price", "List_Case", out errOut);
+        }
+        /// <summary>
+        /// Diameters the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>AutoCompleteStringCollection.</returns>
+        public static AutoCompleteStringCollection TrimToLength(string databasePath, out string errOut)
+        {
+            return General.MainCollection(databasePath, "ttl", "List_Case", out errOut);
         }
     }
 }

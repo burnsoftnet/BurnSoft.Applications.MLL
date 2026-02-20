@@ -6,7 +6,7 @@ using System.Windows.Forms;
 namespace BurnSoft.Applications.MLL.UnitTests.AutoFill
 {
     [TestClass]
-    public class PowderTest
+    public class PrimersTests
     {
         /// <summary>
         /// Gets or sets the test context.
@@ -34,10 +34,10 @@ namespace BurnSoft.Applications.MLL.UnitTests.AutoFill
         /// <summary>
         /// Defines the test method ModelTest.
         /// </summary>
-        [TestMethod, TestCategory("AutoFill - Powder")]
+        [TestMethod, TestCategory("AutoFill - Primers")]
         public void NameTest()
         {
-            AutoCompleteStringCollection value = Powder.Name(_databasePath, out _errOut);
+            AutoCompleteStringCollection value = Primers.Name(_databasePath, out _errOut);
             foreach (var a in value)
             {
                 TestContext.WriteLine(a.ToString());
@@ -45,10 +45,10 @@ namespace BurnSoft.Applications.MLL.UnitTests.AutoFill
             General.HasTrueValue(value.Count > 0, _errOut);
         }
 
-        [TestMethod, TestCategory("AutoFill - Powder")]
+        [TestMethod, TestCategory("AutoFill - Primers")]
         public void ManufacturerTest()
         {
-            AutoCompleteStringCollection value = Powder.Manufacturer(_databasePath, out _errOut);
+            AutoCompleteStringCollection value = Primers.Manufacturer(_databasePath, out _errOut);
             foreach (var a in value)
             {
                 TestContext.WriteLine(a.ToString());
@@ -56,21 +56,10 @@ namespace BurnSoft.Applications.MLL.UnitTests.AutoFill
             General.HasTrueValue(value.Count > 0, _errOut);
         }
 
-        [TestMethod, TestCategory("AutoFill - Powder")]
-        public void WeightlbsTest()
-        {
-            AutoCompleteStringCollection value = Powder.Weightlbs(_databasePath, out _errOut);
-            foreach (var a in value)
-            {
-                TestContext.WriteLine(a.ToString());
-            }
-            General.HasTrueValue(value.Count > 0, _errOut);
-        }
-
-        [TestMethod, TestCategory("AutoFill - Powder")]
+        [TestMethod, TestCategory("AutoFill - Primers")]
         public void PriceTest()
         {
-            AutoCompleteStringCollection value = Powder.Price(_databasePath, out _errOut);
+            AutoCompleteStringCollection value = Primers.Price(_databasePath, out _errOut);
             foreach (var a in value)
             {
                 TestContext.WriteLine(a.ToString());
