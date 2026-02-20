@@ -9,7 +9,7 @@ namespace BurnSoft.Applications.MLL.Helpers
     /// <summary>
     /// Class General functions that are used through out the program that have no general category
     /// </summary>
-    public class General
+    public class GeneralHelpers
     {
         /// <summary>
         /// Fluffs the content for database

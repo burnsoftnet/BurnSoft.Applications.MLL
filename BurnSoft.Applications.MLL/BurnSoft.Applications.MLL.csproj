@@ -70,7 +70,7 @@
     <Compile Include="Global\MyRegistry.cs" />
     <Compile Include="Global\WeightValues.cs" />
     <Compile Include="Helpers\Converters.cs" />
-    <Compile Include="Helpers\General.cs" />
+    <Compile Include="Helpers\GeneralHelpers.cs" />
     <Compile Include="hotixes\AccessDatabaseHandler.cs" />
     <Compile Include="hotixes\HfDatabase.cs" />
     <Compile Include="Inventory\BulletsInventory.cs" />
