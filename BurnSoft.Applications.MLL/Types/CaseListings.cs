@@ -22,7 +22,7 @@ namespace BurnSoft.Applications.MLL.Types
         /// <value>The name.</value>
         public string Name { get; set; }
         /// <summary>
-        /// Gets or sets the length of the trim to.
+        /// Gets or sets the length of the trim to. Using the TTL column
         /// </summary>
         /// <value>The length of the trim to.</value>
         public string TrimToLength { get; set; }

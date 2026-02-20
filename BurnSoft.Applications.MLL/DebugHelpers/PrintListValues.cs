@@ -199,5 +199,32 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
             }
             return sAns;
         }
+        /// <summary>
+        /// Cases the listings data.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string CaseListingsData(List<CaseListings> value)
+        {
+            string sAns = "";
+            if (value.Count > 0)
+            {
+                foreach (CaseListings v in value)
+                {
+                    sAns += $"id : {v.Id}{Environment.NewLine}";
+                    sAns += $"Manufacturer : {v.Manufacturer}{Environment.NewLine}";
+                    sAns += $"Name : {v.Name}{Environment.NewLine}";
+                    sAns += $"TrimToLength : {v.TrimToLength}{Environment.NewLine}";
+                    sAns += $"IsNew : {v.IsNew}{Environment.NewLine}";
+                    sAns += $"TimesUsed : {v.TimesUsed}{Environment.NewLine}";
+                    sAns += $"Qty : {v.Qty}{Environment.NewLine}";
+                    sAns += $"Price : {v.Price}{Environment.NewLine}";
+                    sAns += $"CaliberId : {v.CaliberId}{Environment.NewLine}";
+                    sAns += $"EstimatedPricePerCase : {v.EstimatedPricePerCase}{Environment.NewLine}";
+                    sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                }
+            }
+            return sAns;
+        }
     }
 }
