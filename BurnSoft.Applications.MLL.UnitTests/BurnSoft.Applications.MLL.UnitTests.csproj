@@ -214,6 +214,7 @@
     <Compile Include="Helpers\ConvertersTest.cs" />
     <Compile Include="Listings\BulletsTest.cs" />
     <Compile Include="Listings\CaliberInventoryTests.cs" />
+    <Compile Include="Listings\CaseInventoryTests.cs" />
     <Compile Include="LoadersLog\FirearmsTests.cs" />
     <Compile Include="PeopleAndPlaces\OwnerInformationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
