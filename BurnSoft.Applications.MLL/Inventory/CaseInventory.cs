@@ -3,9 +3,6 @@ using BurnSoft.Universal;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BurnSoft.Applications.MLL.Inventory
 {
@@ -66,8 +63,13 @@ namespace BurnSoft.Applications.MLL.Inventory
         private static string ErrorMessage(string functionName, ArgumentNullException e) =>
             $"{ClassLocation}.{functionName} - {e.Message}";
 
-        #endregion        
-
+        #endregion                
+        /// <summary>
+        /// Gets the data.
+        /// </summary>
+        /// <param name="dt">The dt.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;CaseListings&gt;.</returns>
         private static List<CaseListings> GetData(DataTable dt, out string errOut)
         {
             List<CaseListings> lst = new List<CaseListings>();
@@ -98,7 +100,14 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             return lst;
         }
-
+        /// <summary>
+        /// Gets the list.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="sql">The SQL.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;CaseListings&gt;.</returns>
+        /// <exception cref="System.Exception"></exception>
         private static List<CaseListings> GetList(string databasePath, string sql, out string errOut)
         {
             List<CaseListings> lst = new List<CaseListings>();
@@ -116,13 +125,26 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             return lst;
         }
-
+        /// <summary>
+        /// Gets all.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;CaseListings&gt;.</returns>
         public static List<CaseListings> GetAll(string databasePath, out string errOut)
         {
             string sql = $"Select * from List_Case order by Manufacturer,Name  ASC";
             return GetList(databasePath, sql, out errOut);
         }
-
+        /// <summary>
+        /// Gets the identifier.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="manufacturer">The manufacturer.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int64.</returns>
+        /// <exception cref="System.Exception"></exception>
         public static long GetId(string databasePath, string manufacturer, string name, out string errOut)
         {
             errOut = "";
@@ -144,19 +166,38 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             return lAns;
         }
-
+        /// <summary>
+        /// Gets the details.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="manufacturer">The manufacturer.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;CaseListings&gt;.</returns>
         public static List<CaseListings> GetDetails(string databasePath, string manufacturer, string name, out string errOut)
         {
             string sql = $"Select * from List_Case where manufacturer='{manufacturer}' and name='{name}'";
             return GetList(databasePath, sql, out errOut);
         }
-
+        /// <summary>
+        /// Gets the details.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;CaseListings&gt;.</returns>
         public static List<CaseListings> GetDetails(string databasePath, long id, out string errOut)
         {
             string sql = $"Select * from List_Case where id={id}";
             return GetList(databasePath, sql, out errOut);
         }
-
+        /// <summary>
+        /// Datas the exists.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
         public static bool DataExists(string databasePath, out string errOut)
         {
             bool bAns = false;
@@ -173,7 +214,15 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             return bAns;
         }
-
+        /// <summary>
+        /// Datas the exists.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="manufacturer">The manufacturer.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
         public static bool DataExists(string databasePath, string manufacturer, string name, out string errOut)
         {
             bool bAns = false;
@@ -191,7 +240,20 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             return bAns;
         }
-
+        /// <summary>
+        /// Adds the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="manufacturer">The manufacturer.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="ttl">The TTL.</param>
+        /// <param name="IsNew">if set to <c>true</c> [is new].</param>
+        /// <param name="TimesUsed">The times used.</param>
+        /// <param name="qty">The qty.</param>
+        /// <param name="price">The price.</param>
+        /// <param name="caliberId">The caliber identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool Add(string databasePath, string manufacturer, string name, string ttl,
             bool IsNew, int TimesUsed, int qty, double price, long caliberId, out string errOut)
         {
@@ -216,7 +278,21 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             return bAns;
         }
-
+        /// <summary>
+        /// Updates the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="manufacturer">The manufacturer.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="ttl">The TTL.</param>
+        /// <param name="IsNew">if set to <c>true</c> [is new].</param>
+        /// <param name="TimesUsed">The times used.</param>
+        /// <param name="qty">The qty.</param>
+        /// <param name="price">The price.</param>
+        /// <param name="caliberId">The caliber identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool Update(string databasePath, long id, string manufacturer, 
             string name, string ttl, bool IsNew, int TimesUsed, int qty, double price, 
             long caliberId, out string errOut)
@@ -241,7 +317,15 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             return bAns;
         }
-
+        /// <summary>
+        /// Updates the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="qty">The qty.</param>
+        /// <param name="price">The price.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool Update(string databasePath, long id, int qty, double price, out string errOut)
         {
             errOut = "";
@@ -261,7 +345,13 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             return bAns;
         }
-
+        /// <summary>
+        /// Deletes the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool Delete(string databasePath, long id, out string errOut)
         {
             errOut = "";
@@ -277,7 +367,15 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             return bAns;
         }
-
+        /// <summary>
+        /// Deletes the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="manufacturer">The manufacturer.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
         public static bool Delete(string databasePath, string manufacturer, string name, out string errOut)
         {
             errOut = "";
