@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace BurnSoft.Applications.MLL.Types
 {
@@ -37,5 +33,10 @@ namespace BurnSoft.Applications.MLL.Types
         /// </summary>
         /// <value>For powder.</value>
         public long ForPowder { get; set; }
+        /// <summary>
+        /// Gets or sets the last synchronize for the sync_lastupdate column
+        /// </summary>
+        /// <value>The last synchronize.</value>
+        public string LastSync { get; set; }
     }
 }
