@@ -65,8 +65,13 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
         private static string ErrorMessage(string functionName, ArgumentNullException e) =>
             $"{ClassLocation}.{functionName} - {e.Message}";
 
-        #endregion                        
-
+        #endregion                                
+        /// <summary>
+        /// Gets the data.
+        /// </summary>
+        /// <param name="dt">The dt.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;ConfigListDataMetalicData&gt;.</returns>
         private static List<ConfigListDataMetalicData> GetData(DataTable dt, out string errOut)
         {
             List<ConfigListDataMetalicData> lst = new List<ConfigListDataMetalicData>();
@@ -95,7 +100,14 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
             }
             return lst;
         }
-
+        /// <summary>
+        /// Gets the list.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="sql">The SQL.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;ConfigListDataMetalicData&gt;.</returns>
+        /// <exception cref="System.Exception"></exception>
         private static List<ConfigListDataMetalicData> GetList(string databasePath, string sql, out string errOut)
         {
             List<ConfigListDataMetalicData> lst = new List<ConfigListDataMetalicData>();
@@ -113,13 +125,25 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
             }
             return lst;
         }
-
+        /// <summary>
+        /// Gets all.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;ConfigListDataMetalicData&gt;.</returns>
         public static List<ConfigListDataMetalicData> GetAll(string databasePath, out string errOut)
         {
             string sql = $"Select * from Config_List_Data_NSG order by CLNID  ASC";
             return GetList(databasePath, sql, out errOut);
         }
-
+        /// <summary>
+        /// Gets the identifier.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="ConfigNameId">The configuration name identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int64.</returns>
+        /// <exception cref="System.Exception"></exception>
         public static long GetId(string databasePath, int ConfigNameId, out string errOut)
         {
             errOut = "";
@@ -142,19 +166,37 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
             return lAns;
         }
 
-
+        /// <summary>
+        /// Gets the details.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;ConfigListDataMetalicData&gt;.</returns>
         public static List<ConfigListDataMetalicData> GetDetails(string databasePath, int id, out string errOut)
         {
             string sql = $"Select * from Config_List_Data_NSG where id={id}";
             return GetList(databasePath, sql, out errOut);
         }
-
+        /// <summary>
+        /// Gets the details.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="Configid">The configid.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;ConfigListDataMetalicData&gt;.</returns>
         public static List<ConfigListDataMetalicData> GetDetails(string databasePath, long Configid, out string errOut)
         {
             string sql = $"Select * from Config_List_Data_NSG where CLNID={Configid}";
             return GetList(databasePath, sql, out errOut);
         }
-
+        /// <summary>
+        /// Datas the exists.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
         public static bool DataExists(string databasePath, out string errOut)
         {
             bool bAns = false;
@@ -171,7 +213,14 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
             }
             return bAns;
         }
-
+        /// <summary>
+        /// Datas the exists.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="Configid">The configid.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
         public static bool DataExists(string databasePath, long Configid, out string errOut)
         {
             bool bAns = false;
@@ -189,7 +238,19 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
             }
             return bAns;
         }
-
+        /// <summary>
+        /// Adds the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="ConfgNameId">The confg name identifier.</param>
+        /// <param name="AmmoTypeId">The ammo type identifier.</param>
+        /// <param name="CaliberId">The caliber identifier.</param>
+        /// <param name="BulletId">The bullet identifier.</param>
+        /// <param name="PrimerId">The primer identifier.</param>
+        /// <param name="CaseId">The case identifier.</param>
+        /// <param name="source">The source.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool Add(string databasePath, int ConfgNameId, int AmmoTypeId, int CaliberId, 
             int BulletId, int PrimerId, int CaseId, string source,  out string errOut)
         {
@@ -211,7 +272,20 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
             }
             return bAns;
         }
-
+        /// <summary>
+        /// Updates the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="ConfgNameId">The confg name identifier.</param>
+        /// <param name="AmmoTypeId">The ammo type identifier.</param>
+        /// <param name="CaliberId">The caliber identifier.</param>
+        /// <param name="BulletId">The bullet identifier.</param>
+        /// <param name="PrimerId">The primer identifier.</param>
+        /// <param name="CaseId">The case identifier.</param>
+        /// <param name="source">The source.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool Update(string databasePath, long id, int ConfgNameId, int AmmoTypeId, int CaliberId,
             int BulletId, int PrimerId, int CaseId, string source, out string errOut)
         {
@@ -233,7 +307,13 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
             }
             return bAns;
         }
-
+        /// <summary>
+        /// Deletes the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool Delete(string databasePath, long id, out string errOut)
         {
             errOut = "";
