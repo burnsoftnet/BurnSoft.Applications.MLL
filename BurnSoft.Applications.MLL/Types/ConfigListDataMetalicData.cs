@@ -6,7 +6,7 @@ namespace BurnSoft.Applications.MLL.Types
     /// Class ConfigListDataMetalic list type for the Metalic/Non-Shotgun 
     /// ( Pistol/Rifle ) Data from the Config_List_Data_NSG table
     /// </summary>
-    public class ConfigListDataMetalic
+    public class ConfigListDataMetalicData
     {
         /// <summary>
         /// Gets or sets the identifier.

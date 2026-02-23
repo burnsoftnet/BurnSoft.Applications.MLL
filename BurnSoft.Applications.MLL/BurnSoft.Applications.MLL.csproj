@@ -62,6 +62,7 @@
     <Compile Include="AutoFill\GeneralShotgun.cs" />
     <Compile Include="AutoFill\Powder.cs" />
     <Compile Include="AutoFill\Primers.cs" />
+    <Compile Include="ConfigSheets\ConfigListDataMetalic.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="DebugHelpers\PrintListValues.cs" />
     <Compile Include="GlobalSuppressions.cs" />
@@ -86,7 +87,7 @@
     <Compile Include="Types\BulletSupportingCaliber.cs" />
     <Compile Include="Types\CaliberLists.cs" />
     <Compile Include="Types\CaseListings.cs" />
-    <Compile Include="Types\ConfigListDataMetalic.cs" />
+    <Compile Include="Types\ConfigListDataMetalicData.cs" />
     <Compile Include="Types\FirearmCollection.cs" />
     <Compile Include="Types\LoginInformationOnly.cs" />
     <Compile Include="Types\PersonalInformation.cs" />

@@ -70,12 +70,12 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>System.String.</returns>
-        public static string ConfigListDataMetalicData(List<ConfigListDataMetalic> value)
+        public static string ConfigListDataMetalicData(List<ConfigListDataMetalicData> value)
         {
             string sAns = "";
             if (value.Count > 0)
             {
-                foreach (ConfigListDataMetalic v in value)
+                foreach (ConfigListDataMetalicData v in value)
                 {
                     sAns += $"id : {v.Id}{Environment.NewLine}";
                     sAns += $"ConfgId : {v.ConfgId}{Environment.NewLine}";
