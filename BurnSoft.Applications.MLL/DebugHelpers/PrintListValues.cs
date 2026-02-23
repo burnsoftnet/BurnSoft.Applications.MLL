@@ -78,7 +78,7 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
                 foreach (ConfigListDataMetalicData v in value)
                 {
                     sAns += $"id : {v.Id}{Environment.NewLine}";
-                    sAns += $"ConfgId : {v.ConfgId}{Environment.NewLine}";
+                    sAns += $"ConfgId : {v.ConfgNameId}{Environment.NewLine}";
                     sAns += $"AmmoTypeId : {v.AmmoTypeId}{Environment.NewLine}";
                     sAns += $"CaliberId : {v.CaliberId}{Environment.NewLine}";
                     sAns += $"BulletId : {v.BulletId}{Environment.NewLine}";

@@ -17,7 +17,7 @@ namespace BurnSoft.Applications.MLL.Types
         /// Gets or sets the clnid.  Config List Name ID
         /// </summary>
         /// <value>The clnid.</value>
-        public int ConfgId { get; set; }
+        public int ConfgNameId { get; set; }
         /// <summary>
         /// Gets or sets the atid. Ammunition Type ID
         /// </summary>
