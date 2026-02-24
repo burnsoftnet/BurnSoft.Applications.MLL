@@ -116,6 +116,43 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
             return sAns;
         }
         /// <summary>
+        /// Configurations the list powder data data.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string ConfigListPowderDataData(List<ConfigListPowderData> value)
+        {
+            string sAns = "";
+            if (value.Count > 0)
+            {
+                foreach (ConfigListPowderData v in value)
+                {
+                    sAns += $"id : {v.Id}{Environment.NewLine}";
+                    sAns += $"ConfigId : {v.ConfigId}{Environment.NewLine}";
+                    sAns += $"PowderId : {v.PowderId}{Environment.NewLine}";
+                    sAns += $"LoadMin : {v.LoadMin}{Environment.NewLine}";
+                    sAns += $"LoadMid : {v.LoadMid}{Environment.NewLine}";
+                    sAns += $"LoadMax : {v.LoadMax}{Environment.NewLine}";
+                    if (v.FpsMin != null) sAns += $"FpsMin : {v.FpsMin}{Environment.NewLine}";
+                    if (v.FpsMid != null) sAns += $"FpsMid : {v.FpsMid}{Environment.NewLine}";
+                    if (v.FpsMax != null) sAns += $"FpsMax : {v.FpsMax}{Environment.NewLine}";
+                    if (v.CupsMin != null) sAns += $"CupsMin : {v.CupsMin}{Environment.NewLine}";
+                    if (v.CupsMid != null) sAns += $"CupsMid : {v.CupsMid}{Environment.NewLine}";
+                    if (v.CupsMax != null) sAns += $"CupsMax : {v.CupsMax}{Environment.NewLine}";
+                    if (v.PsiMin != null) sAns += $"PsiMin : {v.PsiMin}{Environment.NewLine}";
+                    if (v.PsiMid != null) sAns += $"PsiMid : {v.PsiMid}{Environment.NewLine}";
+                    if (v.PsiMax != null) sAns += $"PsiMax : {v.PsiMax}{Environment.NewLine}";
+                    if (v.LupMin != null) sAns += $"LupMin : {v.LupMin}{Environment.NewLine}";
+                    if (v.LupMid != null) sAns += $"LupMid : {v.LupMid}{Environment.NewLine}";
+                    if (v.LupMax != null) sAns += $"LupMax : {v.LupMax}{Environment.NewLine}";
+                    sAns += $"IsDefault : {v.IsDefault}{Environment.NewLine}";
+                    sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                }
+            }
+            return sAns;
+        }
+
+        /// <summary>
         /// Registries the settings data.
         /// </summary>
         /// <param name="value">The value.</param>
