@@ -1,4 +1,4 @@
-﻿using BurnSoft.Applications.MLL.Inventory;
+﻿using BurnSoft.Applications.MLL.ConfigSheets;
 using BurnSoft.Applications.MLL.Types;
 using BurnSoft.Applications.MLL.UnitTests.Settings;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -23,25 +23,45 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
         /// The database path
         /// </summary>
         private string _databasePath;
-
+        /// <summary>
+        /// The existing configuration identifier
+        /// </summary>
         private int _existingConfigId;
-
+        /// <summary>
+        /// The existing identifier
+        /// </summary>
         private int _existingId;
-
+        /// <summary>
+        /// The configuration name
+        /// </summary>
         private string _ConfigName;
-
+        /// <summary>
+        /// The configuration identifier
+        /// </summary>
         private int _configId;
-
+        /// <summary>
+        /// The ammo type
+        /// </summary>
         private int _ammoType;
-
+        /// <summary>
+        /// The caliber identifier
+        /// </summary>
         private int _caliberId;
-
+        /// <summary>
+        /// The bullet identifier
+        /// </summary>
         private int _bulletId;
-
+        /// <summary>
+        /// The primer identifier
+        /// </summary>
         private int _primerId;
-
+        /// <summary>
+        /// The case identifier
+        /// </summary>
         private int _caseId;
-
+        /// <summary>
+        /// The source
+        /// </summary>
         private string _source;
 
         /// <summary>
@@ -76,9 +96,9 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
 
         private void DeleteTestCasesExists()
         {
-            if (ConfigListDataMetalic.DataExists(_databasePath, _ConfigName, _configId, out _))
+            if (ConfigListDataMetalic.DataExists(_databasePath, _configId, out _))
             {
-                long id = ConfigListDataMetalic.GetId(_databasePath, _ConfigName, _configId, out _);
+                long id = ConfigListDataMetalic.GetId(_databasePath, _configId, out _);
                 ConfigListDataMetalic.Delete(_databasePath, id, out _);
             }
         }
@@ -87,8 +107,8 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
         {
             TestContext.WriteLine($"===========${BeforeAfter}===========");
             TestContext.WriteLine($"");
-            List<ConfigListDataMetalicData> value = ConfigListDataMetalic.GetDetails(_databasePath, _ConfigName, _configId, out _errOut);
-            TestContext.WriteLine(DebugHelpers.PrintListValues.ConfigListDataMetalicDataData(value));
+            List<ConfigListDataMetalicData> value = ConfigListDataMetalic.GetDetails(_databasePath, (long)_configId, out _errOut);
+            TestContext.WriteLine(DebugHelpers.PrintListValues.ConfigListDataMetalicDataLst(value));
             TestContext.WriteLine($"");
         }
 
@@ -100,7 +120,7 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
             {
                 List<ConfigListDataMetalicData> value = ConfigListDataMetalic.GetAll(_databasePath, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
-                TestContext.WriteLine(DebugHelpers.PrintListValues.ConfigListDataMetalicDataData(value));
+                TestContext.WriteLine(DebugHelpers.PrintListValues.ConfigListDataMetalicDataLst(value));
                 bAns = true;
             }
             catch (Exception ex)
@@ -117,12 +137,12 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
             try
             {
                 DeleteTestCasesExists();
-                bool value = ConfigListDataMetalic.Add(_databasePath, _ConfigName, _configId,
-                    _ammoType, _caliberId, _bulletId, out _errOut);
+                bool value = ConfigListDataMetalic.Add(_databasePath, _configId,
+                    _ammoType, _caliberId, _bulletId, _primerId, _caseId, _source, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine($"VALUE: {value}");
-                long id = ConfigListDataMetalic.GetId(_databasePath, _ConfigName, _configId, out _errOut);
-                TestContext.WriteLine(DebugHelpers.PrintListValues.ConfigListDataMetalicDataData(ConfigListDataMetalic.GetDetails(_databasePath, id, out _errOut)));
+                long id = ConfigListDataMetalic.GetId(_databasePath, _configId, out _errOut);
+                TestContext.WriteLine(DebugHelpers.PrintListValues.ConfigListDataMetalicDataLst(ConfigListDataMetalic.GetDetails(_databasePath, id, out _errOut)));
                 bAns = true;
             }
             catch (Exception ex)
@@ -140,9 +160,9 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
             {
                 AddTestCasesExists();
                 PrintTestCases();
-                long id = ConfigListDataMetalic.GetId(_databasePath, _ConfigName, _configId, out _);
-                bool value = ConfigListDataMetalic.Update(_databasePath, id, _ConfigName, _configId,
-                    _ammoType, _caliberId, _bulletId + 1, out _errOut);
+                long id = ConfigListDataMetalic.GetId(_databasePath, _configId, out _);
+                bool value = ConfigListDataMetalic.Update(_databasePath, id, _configId,
+                    _ammoType, _caliberId, _bulletId, _primerId, _caseId, "", out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine($"VALUE: {value}");
                 PrintTestCases("AFTER");
@@ -162,7 +182,7 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
             try
             {
                 AddTestCasesExists();
-                long id = ConfigListDataMetalic.GetId(_databasePath, _ConfigName, _configId, out _);
+                long id = ConfigListDataMetalic.GetId(_databasePath, _configId, out _);
                 bool value = ConfigListDataMetalic.Delete(_databasePath, id, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine($"VALUE: {value}");
@@ -182,7 +202,8 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
             try
             {
                 AddTestCasesExists();
-                bool value = ConfigListDataMetalic.Delete(_databasePath, _ConfigName, _configId, out _errOut);
+                long id = ConfigListDataMetalic.GetId(_databasePath, _configId, out _);
+                bool value = ConfigListDataMetalic.Delete(_databasePath, id, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine($"VALUE: {value}");
                 bAns = true;
@@ -200,7 +221,7 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
             bool bAns = false;
             try
             {
-                long value = ConfigListDataMetalic.GetId(_databasePath, _existingConfigId, _existingName, out _errOut);
+                long value = ConfigListDataMetalic.GetId(_databasePath, _existingConfigId, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine($"ID RETURNED {value}, expected {_existingId}");
                 bAns = (value == _existingId);
@@ -218,9 +239,9 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
             bool bAns = false;
             try
             {
-                List<ConfigListDataMetalicData> value = ConfigListDataMetalic.GetDetails(_databasePath, _existingConfigId, _existingName, out _errOut);
+                List<ConfigListDataMetalicData> value = ConfigListDataMetalic.GetDetails(_databasePath, (long)_existingConfigId, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
-                TestContext.WriteLine(DebugHelpers.PrintListValues.ConfigListDataMetalicDataData(value));
+                TestContext.WriteLine(DebugHelpers.PrintListValues.ConfigListDataMetalicDataLst(value));
                 bAns = true;
             }
             catch (Exception ex)
@@ -238,7 +259,7 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
             {
                 List<ConfigListDataMetalicData> value = ConfigListDataMetalic.GetDetails(_databasePath, _existingId, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
-                TestContext.WriteLine(DebugHelpers.PrintListValues.ConfigListDataMetalicDataData(value));
+                TestContext.WriteLine(DebugHelpers.PrintListValues.ConfigListDataMetalicDataLst(value));
                 bAns = true;
             }
             catch (Exception ex)
@@ -272,7 +293,7 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
             bool bAns = false;
             try
             {
-                bool value = ConfigListDataMetalic.DataExists(_databasePath, _existingConfigId, _existingName, out _errOut);
+                bool value = ConfigListDataMetalic.DataExists(_databasePath, _existingConfigId, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine($"VALUE: {value}");
                 bAns = true;

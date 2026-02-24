@@ -70,7 +70,7 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>System.String.</returns>
-        public static string ConfigListDataMetalicData(List<ConfigListDataMetalicData> value)
+        public static string ConfigListDataMetalicDataLst(List<ConfigListDataMetalicData> value)
         {
             string sAns = "";
             if (value.Count > 0)
@@ -85,6 +85,31 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
                     sAns += $"PrimerId : {v.PrimerId}{Environment.NewLine}";
                     sAns += $"CaseId : {v.CaseId}{Environment.NewLine}";
                     sAns += $"Source : {v.Source}{Environment.NewLine}";
+                    sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                }
+            }
+            return sAns;
+        }
+
+        /// <summary>
+        /// Configurations the name list data.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string ConfigNameListData(List<ConfigNameList> value)
+        {
+            string sAns = "";
+            if (value.Count > 0)
+            {
+                foreach (ConfigNameList v in value)
+                {
+                    sAns += $"id : {v.Id}{Environment.NewLine}";
+                    sAns += $"Name : {v.Name}{Environment.NewLine}";
+                    sAns += $"IsPersonal : {v.IsPersonal}{Environment.NewLine}";
+                    sAns += $"IsShotGun : {v.IsShotGun}{Environment.NewLine}";
+                    sAns += $"Notes : {v.Notes}{Environment.NewLine}";
+                    sAns += $"IsActive : {v.IsActive}{Environment.NewLine}";
+                    sAns += $"IsFavorite : {v.IsFavorite}{Environment.NewLine}";
                     sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
                 }
             }

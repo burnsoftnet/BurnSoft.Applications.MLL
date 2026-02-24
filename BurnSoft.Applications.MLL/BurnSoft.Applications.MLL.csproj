@@ -88,6 +88,7 @@
     <Compile Include="Types\CaliberLists.cs" />
     <Compile Include="Types\CaseListings.cs" />
     <Compile Include="Types\ConfigListDataMetalicData.cs" />
+    <Compile Include="Types\ConfigNameList.cs" />
     <Compile Include="Types\FirearmCollection.cs" />
     <Compile Include="Types\LoginInformationOnly.cs" />
     <Compile Include="Types\PersonalInformation.cs" />
