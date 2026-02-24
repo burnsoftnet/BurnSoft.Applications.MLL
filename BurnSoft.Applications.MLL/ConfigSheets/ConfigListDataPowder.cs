@@ -254,11 +254,14 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
         /// <param name="FpsMin">The FPS minimum.</param>
         /// <param name="FpsMid">The FPS mid.</param>
         /// <param name="FpsMax">The FPS maximum.</param>
+        /// <param name="CupsMin">The cups minimum.</param>
+        /// <param name="CupsMid">The cups mid.</param>
+        /// <param name="CupsMax">The cups maximum.</param>
         /// <param name="isDefault">if set to <c>true</c> [is default].</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool Add(string databasePath, long ConfgNameId, long PowderId, double LoadMin,
-            double LoadMid, double LoadMax, double FpsMin, double FpsMid, double FpsMax, 
+            double LoadMid, double LoadMax, double FpsMin, double FpsMid, double FpsMax, double CupsMin, double CupsMid, double CupsMax,
             bool isDefault, out string errOut)
         {
             errOut = "";
@@ -268,9 +271,9 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
                 BSOtherObjects o = new BSOtherObjects();
                 int IsPref = isDefault ? 0 : 1;
                 string sql = $"INSERT INTO Config_List_Powder_Data_NSG(CLNID,PID,Load_Min," +
-                    $"Load_Mid,Load_Max,FPS_Min,FPS_Mid,FPS_Max,IsPref) VALUES(" +
+                    $"Load_Mid,Load_Max,FPS_Min,FPS_Mid,FPS_Max,CUPS_Min,CUPS_Mid,CUPS_Max,IsPref) VALUES(" +
                     $"{ConfgNameId}, {PowderId}, {LoadMin}, " +
-                    $"{LoadMid}, {LoadMax}, {FpsMin}, {FpsMid}, {FpsMax}, {IsPref})";
+                    $"{LoadMid}, {LoadMax}, {FpsMin}, {FpsMid}, {FpsMax}, {CupsMin}, {CupsMid}, {CupsMax}, {IsPref})";
 
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
@@ -293,11 +296,14 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
         /// <param name="FpsMin">The FPS minimum.</param>
         /// <param name="FpsMid">The FPS mid.</param>
         /// <param name="FpsMax">The FPS maximum.</param>
+        /// <param name="CupsMin">The cups minimum.</param>
+        /// <param name="CupsMid">The cups mid.</param>
+        /// <param name="CupsMax">The cups maximum.</param>
         /// <param name="isDefault">if set to <c>true</c> [is default].</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool Update(string databasePath, long id, long ConfgNameId, long PowderId, double LoadMin,
-            double LoadMid, double LoadMax, double FpsMin, double FpsMid, double FpsMax,
+            double LoadMid, double LoadMax, double FpsMin, double FpsMid, double FpsMax, double CupsMin, double CupsMid, double CupsMax,
             bool isDefault, out string errOut)
         {
             errOut = "";
@@ -309,7 +315,8 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
                 int IsPref = isDefault ? 0 : 1;
                 string sql = $"UPDATE Config_List_Powder_Data_NSG set CLNID={ConfgNameId}," +
                     $"PID={PowderId},Load_Min={LoadMin},Load_Mid={LoadMid}, Load_Max={LoadMax}, " +
-                    $"FPS_Min={FpsMin}, FPS_Mid={FpsMid}, FPS_Max={FpsMax},IsPref={IsPref}  where id={id}";
+                    $"FPS_Min={FpsMin}, FPS_Mid={FpsMid}, FPS_Max={FpsMax},CUPS_Min={CupsMin},CUPS_Mid={CupsMid}, " +
+                    $"CUPS_Max={CupsMax},IsPref={IsPref} where id={id}";
 
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
