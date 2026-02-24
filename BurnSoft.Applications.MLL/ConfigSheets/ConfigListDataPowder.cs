@@ -4,21 +4,20 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 
-
 namespace BurnSoft.Applications.MLL.ConfigSheets
 {
     /// <summary>
-    /// Class ConfigListDataMetalic helps manahe the data on 
-    /// the Config_List_Data_NSG table
+    /// Class ConfigListDataPowder to work with the Config_List_Powder_Data_NSG ( Metalic ) 
+    /// table for shotgun see ConfigListDataPowderShotGun
     /// </summary>
-    public class ConfigListDataMetalic
+    public class ConfigListDataPowder
     {
         #region "Exception Error Handling"
 
         /// <summary>
         /// The class location
         /// </summary>
-        private static string ClassLocation = "BurnSoft.Applications.MLL.ConfigSheets.ConfigListDataMetalic";
+        private static string ClassLocation = "BurnSoft.Applications.MLL.ConfigSheets.ConfigListDataPowder";
 
         /// <summary>
         /// Errors the message for regular Exceptions
@@ -65,31 +64,36 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
         private static string ErrorMessage(string functionName, ArgumentNullException e) =>
             $"{ClassLocation}.{functionName} - {e.Message}";
 
-        #endregion                                
+        #endregion                                        
         /// <summary>
         /// Gets the data.
         /// </summary>
         /// <param name="dt">The dt.</param>
         /// <param name="errOut">The error out.</param>
-        /// <returns>List&lt;ConfigListDataMetalicData&gt;.</returns>
-        private static List<ConfigListDataMetalicData> GetData(DataTable dt, out string errOut)
+        /// <returns>List&lt;ConfigListPowderData&gt;.</returns>
+        private static List<ConfigListPowderData> GetData(DataTable dt, out string errOut)
         {
-            List<ConfigListDataMetalicData> lst = new List<ConfigListDataMetalicData>();
+            List<ConfigListPowderData> lst = new List<ConfigListPowderData>();
             errOut = "";
             try
             {
                 foreach (DataRow d in dt.Rows)
                 {
-                    lst.Add(new ConfigListDataMetalicData()
+                    lst.Add(new ConfigListPowderData()
                     {
                         Id = Convert.ToInt32(d["id"]),
-                        ConfgNameId = Convert.ToInt32(d["CLNID"]),
-                        AmmoTypeId = Convert.ToInt32(d["ATID"]),
-                        CaliberId = Convert.ToInt32(d["CALID"]),
-                        BulletId = Convert.ToInt32(d["BID"]),
-                        PrimerId = Convert.ToInt32(d["PRID"]),
-                        CaseId = Convert.ToInt32(d["CAID"]),
-                        Source = d["Source"] != DBNull.Value ? d["Source"].ToString().Trim() : "",
+                        ConfigId = Convert.ToInt32(d["CLNID"]),
+                        PowderId = Convert.ToInt32(d["PID"]),
+                        LoadMin = Convert.ToDouble(d["Load_Min"]),
+                        LoadMid = Convert.ToDouble(d["Load_Mid"]),
+                        LoadMax = Convert.ToDouble(d["Load_Max"]),
+                        FpsMin = Convert.ToDouble(d["FPS_Min"]),
+                        FpsMid = Convert.ToDouble(d["FPS_Mid"]),
+                        FpsMax = Convert.ToDouble(d["FPS_Max"]),
+                        CupsMin = Convert.ToDouble(d["CUPS_Min"]),
+                        CupsMid = Convert.ToDouble(d["CUPS_Mid"]),
+                        CupsMax = Convert.ToDouble(d["CUPS_Max"]),
+                        IsDefault = Convert.ToInt32(d["IsPref"]) == 1 ? true : false,
                         LastSync = d["sync_lastupdate"].ToString().Trim(),
                     });
                 }
@@ -106,11 +110,11 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
         /// <param name="databasePath">The database path.</param>
         /// <param name="sql">The SQL.</param>
         /// <param name="errOut">The error out.</param>
-        /// <returns>List&lt;ConfigListDataMetalicData&gt;.</returns>
+        /// <returns>List&lt;ConfigListPowderData&gt;.</returns>
         /// <exception cref="System.Exception"></exception>
-        private static List<ConfigListDataMetalicData> GetList(string databasePath, string sql, out string errOut)
+        private static List<ConfigListPowderData> GetList(string databasePath, string sql, out string errOut)
         {
-            List<ConfigListDataMetalicData> lst = new List<ConfigListDataMetalicData>();
+            List<ConfigListPowderData> lst = new List<ConfigListPowderData>();
             errOut = "";
             try
             {
@@ -130,10 +134,10 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="errOut">The error out.</param>
-        /// <returns>List&lt;ConfigListDataMetalicData&gt;.</returns>
-        public static List<ConfigListDataMetalicData> GetAll(string databasePath, out string errOut)
+        /// <returns>List&lt;ConfigListPowderData&gt;.</returns>
+        public static List<ConfigListPowderData> GetAll(string databasePath, out string errOut)
         {
-            string sql = $"Select * from Config_List_Data_NSG order by CLNID  ASC";
+            string sql = $"Select * from Config_List_Powder_Data_NSG order by CLNID ASC";
             return GetList(databasePath, sql, out errOut);
         }
         /// <summary>
@@ -150,10 +154,10 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
             long lAns = 0;
             try
             {
-                string sql = $"Select * from Config_List_Data_NSG where CLNID={ConfigNameId}";
-                List<ConfigListDataMetalicData> lst = GetList(databasePath, sql, out errOut);
+                string sql = $"Select * from Config_List_Powder_Data_NSG where CLNID={ConfigNameId}";
+                List<ConfigListPowderData> lst = GetList(databasePath, sql, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
-                foreach (ConfigListDataMetalicData i in lst)
+                foreach (ConfigListPowderData i in lst)
                 {
                     lAns = i.Id;
                     break;
@@ -172,10 +176,10 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
         /// <param name="databasePath">The database path.</param>
         /// <param name="id">The identifier.</param>
         /// <param name="errOut">The error out.</param>
-        /// <returns>List&lt;ConfigListDataMetalicData&gt;.</returns>
-        public static List<ConfigListDataMetalicData> GetDetails(string databasePath, int id, out string errOut)
+        /// <returns>List&lt;ConfigListPowderData&gt;.</returns>
+        public static List<ConfigListPowderData> GetDetails(string databasePath, int id, out string errOut)
         {
-            string sql = $"Select * from Config_List_Data_NSG where id={id}";
+            string sql = $"Select * from Config_List_Powder_Data_NSG where id={id}";
             return GetList(databasePath, sql, out errOut);
         }
         /// <summary>
@@ -184,10 +188,10 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
         /// <param name="databasePath">The database path.</param>
         /// <param name="Configid">The configid.</param>
         /// <param name="errOut">The error out.</param>
-        /// <returns>List&lt;ConfigListDataMetalicData&gt;.</returns>
-        public static List<ConfigListDataMetalicData> GetDetails(string databasePath, long Configid, out string errOut)
+        /// <returns>List&lt;ConfigListPowderData&gt;.</returns>
+        public static List<ConfigListPowderData> GetDetails(string databasePath, long Configid, out string errOut)
         {
-            string sql = $"Select * from Config_List_Data_NSG where CLNID={Configid}";
+            string sql = $"Select * from Config_List_Powder_Data_NSG where CLNID={Configid}";
             return GetList(databasePath, sql, out errOut);
         }
         /// <summary>
@@ -203,7 +207,7 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
             errOut = @"";
             try
             {
-                List<ConfigListDataMetalicData> lst = GetAll(databasePath, out errOut);
+                List<ConfigListPowderData> lst = GetAll(databasePath, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 bAns = lst.Count > 0;
             }
@@ -228,7 +232,7 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
             try
             {
 
-                List<ConfigListDataMetalicData> lst = GetDetails(databasePath, Configid, out errOut);
+                List<ConfigListPowderData> lst = GetDetails(databasePath, Configid, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 bAns = lst.Count > 0;
             }
@@ -243,26 +247,30 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="ConfgNameId">The confg name identifier.</param>
-        /// <param name="AmmoTypeId">The ammo type identifier.</param>
-        /// <param name="CaliberId">The caliber identifier.</param>
-        /// <param name="BulletId">The bullet identifier.</param>
-        /// <param name="PrimerId">The primer identifier.</param>
-        /// <param name="CaseId">The case identifier.</param>
-        /// <param name="source">The source.</param>
+        /// <param name="PowderId">The powder identifier.</param>
+        /// <param name="LoadMin">The load minimum.</param>
+        /// <param name="LoadMid">The load mid.</param>
+        /// <param name="LoadMax">The load maximum.</param>
+        /// <param name="FpsMin">The FPS minimum.</param>
+        /// <param name="FpsMid">The FPS mid.</param>
+        /// <param name="FpsMax">The FPS maximum.</param>
+        /// <param name="isDefault">if set to <c>true</c> [is default].</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public static bool Add(string databasePath, int ConfgNameId, int AmmoTypeId, int CaliberId, 
-            int BulletId, int PrimerId, int CaseId, string source,  out string errOut)
+        public static bool Add(string databasePath, long ConfgNameId, long PowderId, double LoadMin,
+            double LoadMid, double LoadMax, double FpsMin, double FpsMid, double FpsMax, 
+            bool isDefault, out string errOut)
         {
             errOut = "";
             bool bAns = false;
             try
             {
                 BSOtherObjects o = new BSOtherObjects();
-                string sql = $"INSERT INTO Config_List_Data_NSG(CLNID,ATID,CALID," +
-                    $"BID,PRID,CAID,Source) VALUES(" +
-                    $"{ConfgNameId}, {AmmoTypeId}, {CaliberId}, " +
-                    $"{BulletId}, {PrimerId}, {CaseId}, '{o.FC(source)}')";
+                int IsPref = isDefault ? 0 : 1;
+                string sql = $"INSERT INTO Config_List_Powder_Data_NSG(CLNID,PID,Load_Min," +
+                    $"Load_Mid,Load_Max,FPS_Min,FPS_Mid,FPS_Max,IsPref) VALUES(" +
+                    $"{ConfgNameId}, {PowderId}, {LoadMin}, " +
+                    $"{LoadMid}, {LoadMax}, {FpsMin}, {FpsMid}, {FpsMax}, {IsPref})";
 
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
@@ -278,16 +286,19 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
         /// <param name="databasePath">The database path.</param>
         /// <param name="id">The identifier.</param>
         /// <param name="ConfgNameId">The confg name identifier.</param>
-        /// <param name="AmmoTypeId">The ammo type identifier.</param>
-        /// <param name="CaliberId">The caliber identifier.</param>
-        /// <param name="BulletId">The bullet identifier.</param>
-        /// <param name="PrimerId">The primer identifier.</param>
-        /// <param name="CaseId">The case identifier.</param>
-        /// <param name="source">The source.</param>
+        /// <param name="PowderId">The powder identifier.</param>
+        /// <param name="LoadMin">The load minimum.</param>
+        /// <param name="LoadMid">The load mid.</param>
+        /// <param name="LoadMax">The load maximum.</param>
+        /// <param name="FpsMin">The FPS minimum.</param>
+        /// <param name="FpsMid">The FPS mid.</param>
+        /// <param name="FpsMax">The FPS maximum.</param>
+        /// <param name="isDefault">if set to <c>true</c> [is default].</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public static bool Update(string databasePath, long id, int ConfgNameId, int AmmoTypeId, int CaliberId,
-            int BulletId, int PrimerId, int CaseId, string source, out string errOut)
+        public static bool Update(string databasePath, long id, long ConfgNameId, long PowderId, double LoadMin,
+            double LoadMid, double LoadMax, double FpsMin, double FpsMid, double FpsMax,
+            bool isDefault, out string errOut)
         {
             errOut = "";
             bool bAns = false;
@@ -295,9 +306,10 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
             {
 
                 BSOtherObjects o = new BSOtherObjects();
-                string sql = $"UPDATE Config_List_Data_NSG set CLNID={ConfgNameId}," +
-                    $"ATID={AmmoTypeId},CALID={CaliberId},BID={BulletId}, PRID={PrimerId}, " +
-                    $"CAID={CaseId}, source='{o.FC(source)}' where id={id}";
+                int IsPref = isDefault ? 0 : 1;
+                string sql = $"UPDATE Config_List_Powder_Data_NSG set CLNID={ConfgNameId}," +
+                    $"PID={PowderId},Load_Min={LoadMin},Load_Mid={LoadMid}, Load_Max={LoadMax}, " +
+                    $"FPS_Min={FpsMin}, FPS_Mid={FpsMid}, FPS_Max={FpsMax},IsPref={IsPref}  where id={id}";
 
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
@@ -320,7 +332,7 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
             bool bAns = false;
             try
             {
-                string sql = $"DELETE from Config_List_Data_NSG where id={id}";
+                string sql = $"DELETE from Config_List_Powder_Data_NSG where id={id}";
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
             catch (Exception e)
