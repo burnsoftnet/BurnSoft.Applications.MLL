@@ -207,6 +207,7 @@
     <Compile Include="AutoFill\CasesTests.cs" />
     <Compile Include="AutoFill\EquipmentTests.cs" />
     <Compile Include="AutoFill\ConfigMetalicTests.cs" />
+    <Compile Include="ConfigSheetsTests\ConfigListDataMetalicTests.cs" />
     <Compile Include="General.cs" />
     <Compile Include="Global\GeneralSettingsTest.cs" />
     <Compile Include="Global\MyRegistryTest.cs" />
