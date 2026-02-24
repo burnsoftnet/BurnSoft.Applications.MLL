@@ -91,6 +91,7 @@
     <Compile Include="Types\CaliberLists.cs" />
     <Compile Include="Types\CaseListings.cs" />
     <Compile Include="Types\ConfigListDataMetalicData.cs" />
+    <Compile Include="Types\ConfigListDataShotgunData.cs" />
     <Compile Include="Types\ConfigListPowderData.cs" />
     <Compile Include="Types\ConfigNameList.cs" />
     <Compile Include="Types\FirearmCollection.cs" />
