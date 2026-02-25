@@ -221,6 +221,7 @@
     <Compile Include="Listings\CaliberInventoryTests.cs" />
     <Compile Include="Listings\CaseInventoryTests.cs" />
     <Compile Include="Listings\ShotgunBushingInventoryTests.cs" />
+    <Compile Include="Listings\AmmuntionTypeTests.cs" />
     <Compile Include="LoadersLog\FirearmsTests.cs" />
     <Compile Include="PeopleAndPlaces\OwnerInformationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

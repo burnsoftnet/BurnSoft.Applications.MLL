@@ -296,6 +296,25 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
             return sAns;
         }
         /// <summary>
+        /// Ammuntions the type listings data.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string AmmuntionTypeListingsData(List<AmmuntionTypeListings> value)
+        {
+            string sAns = "";
+            if (value.Count > 0)
+            {
+                foreach (AmmuntionTypeListings v in value)
+                {
+                    sAns += $"id : {v.Id}{Environment.NewLine}";
+                    sAns += $"FirearmType : {v.FirearmType}{Environment.NewLine}";
+                    sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                }
+            }
+            return sAns;
+        }
+        /// <summary>
         /// Cases the listings data.
         /// </summary>
         /// <param name="value">The value.</param>
