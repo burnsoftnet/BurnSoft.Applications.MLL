@@ -94,11 +94,11 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
                         Bushing = Convert.ToInt32(d["Bushing"]),
                         Wad = Convert.ToInt32(d["Wad"]),
                         ShotChargeLoad = Convert.ToInt32(d["SCL"]),
-                        GunId = Convert.ToInt32(d["GunId"]),
+                        GunId = Convert.ToInt32(d["gid"]),
                         IsPersonal = Convert.ToInt32(d["IsPersonal"]) == 1 ? true : false,
                         ListTypeId = Convert.ToInt32(d["LTID"]),
-                        BushingId = Convert.ToInt32(d["BushingId"]),
-                        ChargeBarId = Convert.ToInt32(d["ChargeBarId"]),
+                        BushingId = d["BushingId"] != DBNull.Value ? Convert.ToInt32(d["BushingId"]) : 0,
+                        ChargeBarId = d["ChargeBarId"] != DBNull.Value ?  Convert.ToInt32(d["ChargeBarId"]) : 0,
                         LastSync = d["sync_lastupdate"].ToString().Trim(),
                     });
                 }
