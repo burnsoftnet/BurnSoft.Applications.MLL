@@ -88,5 +88,43 @@ namespace BurnSoft.Applications.MLL.AutoFill
 
             return acscAns;
         }
+        /// <summary>
+        /// Mains the collection for non distinct values
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="strColumn">The string column.</param>
+        /// <param name="strTable">The string table.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <param name="sql">The SQL.</param>
+        /// <returns>AutoCompleteStringCollection.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static AutoCompleteStringCollection MainCollectionND(string databasePath, string strColumn, string strTable, out string errOut, string sql = "")
+        {
+            AutoCompleteStringCollection acscAns = new AutoCompleteStringCollection();
+            errOut = @"";
+            try
+            {
+                if (sql.Length == 0) sql = $"SELECT {strColumn} from {strTable} order by {strColumn} ASC";
+
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+
+                foreach (DataRow d in dt.Rows)
+                {
+                    if (d[strColumn].ToString() != null)
+                    {
+                        acscAns.Add(d[strColumn].ToString());
+                    }
+                }
+
+                if (acscAns.Count == 0) acscAns.Add("N/A");
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("MainCollection", e);
+            }
+
+            return acscAns;
+        }
     }
 }

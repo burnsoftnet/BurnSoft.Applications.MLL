@@ -6,7 +6,7 @@ namespace BurnSoft.Applications.MLL.Types
     /// Class ConfigListDataMetalic list type for the Metalic/Non-Shotgun 
     /// ( Pistol/Rifle ) Data from the Config_List_Data_NSG table
     /// </summary>
-    public class ConfigListDataMetalic
+    public class ConfigListDataMetalicData
     {
         /// <summary>
         /// Gets or sets the identifier.
@@ -17,7 +17,7 @@ namespace BurnSoft.Applications.MLL.Types
         /// Gets or sets the clnid.  Config List Name ID
         /// </summary>
         /// <value>The clnid.</value>
-        public int ConfgId { get; set; }
+        public int ConfgNameId { get; set; }
         /// <summary>
         /// Gets or sets the atid. Ammunition Type ID
         /// </summary>

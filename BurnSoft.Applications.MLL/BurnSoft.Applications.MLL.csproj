@@ -52,26 +52,54 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoFill\Bullets.cs" />
+    <Compile Include="AutoFill\Calibers.cs" />
+    <Compile Include="AutoFill\Cases.cs" />
+    <Compile Include="AutoFill\ConfigMetalic.cs" />
     <Compile Include="AutoFill\ConfigShotgun.cs" />
+    <Compile Include="AutoFill\Equipment.cs" />
     <Compile Include="AutoFill\General.cs" />
     <Compile Include="AutoFill\GeneralShotgun.cs" />
     <Compile Include="AutoFill\Powder.cs" />
+    <Compile Include="AutoFill\Primers.cs" />
+    <Compile Include="ConfigSheets\ConfigListDataMetalic.cs" />
+    <Compile Include="ConfigSheets\ConfigListDataName.cs" />
+    <Compile Include="ConfigSheets\ConfigListDataPowder.cs" />
+    <Compile Include="ConfigSheets\ConfigListDataPowderShotGun.cs" />
+    <Compile Include="ConfigSheets\ConfigListDataShotgun.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="DebugHelpers\PrintListValues.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Global\GeneralFunctions.cs" />
     <Compile Include="Global\GeneralSettings.cs" />
     <Compile Include="Global\MyRegistry.cs" />
     <Compile Include="Global\WeightValues.cs" />
     <Compile Include="Helpers\Converters.cs" />
-    <Compile Include="Helpers\General.cs" />
+    <Compile Include="Helpers\GeneralHelpers.cs" />
     <Compile Include="hotixes\AccessDatabaseHandler.cs" />
     <Compile Include="hotixes\HfDatabase.cs" />
+    <Compile Include="Inventory\BulletsInventory.cs" />
+    <Compile Include="Inventory\CaliberInventory.cs" />
+    <Compile Include="Inventory\CaseInventory.cs" />
+    <Compile Include="Inventory\ShotgunBushingInventory.cs" />
+    <Compile Include="LoadersLog\Firearms.cs" />
     <Compile Include="PeopleAndPlaces\OwnerInformation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Types\ConfigListDataMetalic.cs" />
+    <Compile Include="Types\BulletListings.cs" />
+    <Compile Include="Types\BulletPictures.cs" />
+    <Compile Include="Types\BulletsSingleUse.cs" />
+    <Compile Include="Types\BulletSupportingCaliber.cs" />
+    <Compile Include="Types\CaliberLists.cs" />
+    <Compile Include="Types\CaseListings.cs" />
+    <Compile Include="Types\ConfigListDataMetalicData.cs" />
+    <Compile Include="Types\ConfigListDataShotgunData.cs" />
+    <Compile Include="Types\ConfigListPowderData.cs" />
+    <Compile Include="Types\ConfigNameList.cs" />
+    <Compile Include="Types\FirearmCollection.cs" />
     <Compile Include="Types\LoginInformationOnly.cs" />
     <Compile Include="Types\PersonalInformation.cs" />
     <Compile Include="Types\RegistrySettings.cs" />
+    <Compile Include="Types\ShotgunBushingListings.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bswtsicon.png" />
@@ -86,6 +114,6 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>rem $(SolutionDir)postbuild.bat $(SolutionDir) $(ProjectDir) $(ConfigurationName) $(ProjectName)</PostBuildEvent>
+    <PostBuildEvent>$(SolutionDir)postbuild.bat $(SolutionDir) $(ProjectDir) $(ConfigurationName) $(ProjectName)</PostBuildEvent>
   </PropertyGroup>
 </Project>

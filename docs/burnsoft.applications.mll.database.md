@@ -346,6 +346,159 @@ The error out.
 
 [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
 
+### **ObjectExistsInDb(String, String, String, String, String&)**
+
+Objects the exists in database.
+
+```csharp
+public static bool ObjectExistsInDb(string databasePath, string column, string table, string value, String& errOut)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`column` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The column.
+
+`table` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The table.
+
+`value` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The value.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+`true` if XXXX, `false` otherwise.
+
+### **ObjectExistsInDb(String, String, String, Int32, String&)**
+
+Objects the exists in database.
+
+```csharp
+public static bool ObjectExistsInDb(string databasePath, string column, string table, int value, String& errOut)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`column` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The column.
+
+`table` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The table.
+
+`value` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+The value.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+`true` if XXXX, `false` otherwise.
+
+### **GetId(String, String, String&, String)**
+
+Gets the identifier.
+
+```csharp
+public static long GetId(string databasePath, string sql, String& errOut, string field)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`sql` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The SQL.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+`field` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The field.
+
+#### Returns
+
+[Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
+System.Int64.
+
+#### Exceptions
+
+[Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
+
+### **GetName(String, String, String, String&)**
+
+Gets the name.
+
+```csharp
+public static string GetName(string databasePath, string sql, string field, String& errOut)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`sql` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The SQL.
+
+`field` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The field.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+System.String.
+
+#### Exceptions
+
+[Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
+
+### **GetCount(String, String, String&, String)**
+
+Gets the count.
+
+```csharp
+public static int GetCount(string databasePath, string sql, String& errOut, string field)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`sql` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The SQL.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+`field` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The field.
+
+#### Returns
+
+[Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+System.Int32.
+
+#### Exceptions
+
+[Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
+
 ### **UpdateSyncDataTables(String, String, String&)**
 
 Updates the synchronize data tables.
@@ -397,6 +550,31 @@ The error out.
 
 [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
 `true` if XXXX, `false` otherwise.
+
+#### Exceptions
+
+[Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
+
+### **GetDatabaseVersion(String, String&)**
+
+Gets the database version.
+
+```csharp
+public static double GetDatabaseVersion(string databasePath, String& errOut)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
+System.Double.
 
 #### Exceptions
 
