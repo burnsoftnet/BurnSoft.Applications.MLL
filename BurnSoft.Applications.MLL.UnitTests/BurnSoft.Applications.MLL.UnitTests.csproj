@@ -222,6 +222,7 @@
     <Compile Include="Listings\CaseInventoryTests.cs" />
     <Compile Include="Listings\ShotgunBushingInventoryTests.cs" />
     <Compile Include="Listings\AmmuntionTypeTests.cs" />
+    <Compile Include="Listings\EquipmentInventoryTests.cs" />
     <Compile Include="LoadersLog\FirearmsTests.cs" />
     <Compile Include="PeopleAndPlaces\OwnerInformationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

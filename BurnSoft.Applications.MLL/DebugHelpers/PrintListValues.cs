@@ -342,6 +342,29 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
             return sAns;
         }
         /// <summary>
+        /// Equipments the lists data.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string EquipmentListsData(List<EquipmentLists> value)
+        {
+            string sAns = "";
+            if (value.Count > 0)
+            {
+                foreach (EquipmentLists v in value)
+                {
+                    sAns += $"id : {v.Id}{Environment.NewLine}";
+                    sAns += $"Manufacturer : {v.Manufacturer}{Environment.NewLine}";
+                    sAns += $"Name : {v.Name}{Environment.NewLine}";
+                    sAns += $"Use : {v.Use}{Environment.NewLine}";
+                    sAns += $"Cost : {v.Cost}{Environment.NewLine}";
+                    sAns += $"Notes : {v.Notes}{Environment.NewLine}";
+                    sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                }
+            }
+            return sAns;
+        }
+        /// <summary>
         /// Shotguns the bushing listings data.
         /// </summary>
         /// <param name="value">The value.</param>
