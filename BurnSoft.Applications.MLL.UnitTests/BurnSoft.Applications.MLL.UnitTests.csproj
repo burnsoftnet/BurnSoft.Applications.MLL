@@ -207,6 +207,11 @@
     <Compile Include="AutoFill\CasesTests.cs" />
     <Compile Include="AutoFill\EquipmentTests.cs" />
     <Compile Include="AutoFill\ConfigMetalicTests.cs" />
+    <Compile Include="ConfigSheetsTests\ConfigListDataMetalicTests.cs" />
+    <Compile Include="ConfigSheetsTests\ConfigListDataNameTests.cs" />
+    <Compile Include="ConfigSheetsTests\ConfigListDataPowderTests.cs" />
+    <Compile Include="ConfigSheetsTests\ConfigListDataPowderShotGunTests.cs" />
+    <Compile Include="ConfigSheetsTests\ConfigListDataShotgunTest.cs" />
     <Compile Include="General.cs" />
     <Compile Include="Global\GeneralSettingsTest.cs" />
     <Compile Include="Global\MyRegistryTest.cs" />
@@ -215,6 +220,7 @@
     <Compile Include="Listings\BulletsTest.cs" />
     <Compile Include="Listings\CaliberInventoryTests.cs" />
     <Compile Include="Listings\CaseInventoryTests.cs" />
+    <Compile Include="Listings\ShotgunBushingInventoryTests.cs" />
     <Compile Include="LoadersLog\FirearmsTests.cs" />
     <Compile Include="PeopleAndPlaces\OwnerInformationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

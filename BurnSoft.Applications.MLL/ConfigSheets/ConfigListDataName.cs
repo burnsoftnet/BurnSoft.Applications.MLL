@@ -4,19 +4,20 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 
-namespace BurnSoft.Applications.MLL.Inventory
+namespace BurnSoft.Applications.MLL.ConfigSheets
 {
     /// <summary>
-    /// Class Bullets handles the ability to interact with the List_Bullets Table
+    /// Class ConfigListDataName contains the functions to use to 
+    /// interact with the data in the Config_List_Name table
     /// </summary>
-    public class BulletsInventory
+    public class ConfigListDataName
     {
         #region "Exception Error Handling"
 
         /// <summary>
         /// The class location
         /// </summary>
-        private static string ClassLocation = "BurnSoft.Applications.MLL.Inventory.Bullets";
+        private static string ClassLocation = "BurnSoft.Applications.MLL.ConfigSheets.ConfigListDataName";
 
         /// <summary>
         /// Errors the message for regular Exceptions
@@ -63,36 +64,30 @@ namespace BurnSoft.Applications.MLL.Inventory
         private static string ErrorMessage(string functionName, ArgumentNullException e) =>
             $"{ClassLocation}.{functionName} - {e.Message}";
 
-        #endregion        
+        #endregion                
         /// <summary>
         /// Gets the data.
         /// </summary>
         /// <param name="dt">The dt.</param>
         /// <param name="errOut">The error out.</param>
-        /// <returns>List&lt;BulletListings&gt;.</returns>
-        private static List<BulletListings> GetData(DataTable dt, out string errOut)
+        /// <returns>List&lt;ConfigNameList&gt;.</returns>
+        private static List<ConfigNameList> GetData(DataTable dt, out string errOut)
         {
-            List<BulletListings> lst = new List<BulletListings>();
+            List<ConfigNameList> lst = new List<ConfigNameList>();
             errOut = "";
             try
             {
                 foreach (DataRow d in dt.Rows)
                 {
-                    lst.Add(new BulletListings()
+                    lst.Add(new ConfigNameList()
                     {
                         Id = Convert.ToInt32(d["id"]),
-                        Manufacturer = d["Manufacturer"] != DBNull.Value ? d["Manufacturer"].ToString().Trim() : "",
-                        Name = d["Name"] != DBNull.Value ? d["Name"].ToString().Trim() : "",
-                        Diameter = d["Diameter"] != DBNull.Value ? d["Diameter"].ToString().Trim() : "",
-                        Weight = d["Weight"] != DBNull.Value ? d["Weight"].ToString().Trim() : "",
-                        SectionDensity = d["Sec_Den"] != DBNull.Value ? d["Sec_Den"].ToString().Trim() : "",
-                        PartNumber = d["Part_number"] != DBNull.Value ? d["Part_number"].ToString().Trim() : "",
-                        BallisticCoeffcient = d["Ballistic_Coefficient"] != DBNull.Value ? d["Ballistic_Coefficient"].ToString().Trim() : "",
-                        BullerType = Convert.ToInt32(d["Bullet_Type"]),
-                        Qty = Convert.ToInt32(d["Qty"]),
-                        Price = Convert.ToDouble(d["Price"]),
-                        CaliberId = Convert.ToInt32(d["CID"]),
-                        EsitmatedPricePerBullet = Convert.ToDouble(d["ePPB"]),
+                        Name = d["ConfigName"] != DBNull.Value ? d["ConfigName"].ToString().Trim() : "",
+                        Notes = d["Notes"] != DBNull.Value ? d["Notes"].ToString().Trim() : "",
+                        IsPersonal = Convert.ToInt32(d["IsPersonal"]) == 1 ? true : false,
+                        IsShotGun = Convert.ToInt32(d["IsShotGun"]) == 1 ? true : false,
+                        IsActive = Convert.ToInt32(d["IsActive"]) == 1 ? true : false,
+                        IsFavorite = Convert.ToInt32(d["IsFav"]) == 1 ? true : false,
                         LastSync = d["sync_lastupdate"].ToString().Trim(),
                     });
                 }
@@ -109,11 +104,11 @@ namespace BurnSoft.Applications.MLL.Inventory
         /// <param name="databasePath">The database path.</param>
         /// <param name="sql">The SQL.</param>
         /// <param name="errOut">The error out.</param>
-        /// <returns>List&lt;BulletListings&gt;.</returns>
+        /// <returns>List&lt;ConfigNameList&gt;.</returns>
         /// <exception cref="System.Exception"></exception>
-        private static List<BulletListings> GetList(string databasePath, string sql, out string errOut)
+        private static List<ConfigNameList> GetList(string databasePath, string sql, out string errOut)
         {
-            List<BulletListings> lst = new List<BulletListings>();
+            List<ConfigNameList> lst = new List<ConfigNameList>();
             errOut = "";
             try
             {
@@ -133,31 +128,30 @@ namespace BurnSoft.Applications.MLL.Inventory
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="errOut">The error out.</param>
-        /// <returns>List&lt;BulletListings&gt;.</returns>
-        public static List<BulletListings> GetAll(string databasePath, out string errOut)
+        /// <returns>List&lt;ConfigNameList&gt;.</returns>
+        public static List<ConfigNameList> GetAll(string databasePath, out string errOut)
         {
-            string sql = $"Select * from List_Bullets order by Manufacturer,Name  ASC";
+            string sql = $"Select * from Config_List_Name order by ConfigName ASC";
             return GetList(databasePath, sql, out errOut);
         }
         /// <summary>
         /// Gets the identifier.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
-        /// <param name="manufacturer">The manufacturer.</param>
         /// <param name="name">The name.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns>System.Int64.</returns>
         /// <exception cref="System.Exception"></exception>
-        public static long GetId(string databasePath, string manufacturer, string name, out string errOut)
+        public static long GetId(string databasePath, string name, out string errOut)
         {
             errOut = "";
             long lAns = 0;
             try
             {
-                string sql = $"Select * from List_Bullets where manufacturer='{manufacturer}' and name='{name}'";
-                List<BulletListings> lst = GetList(databasePath, sql, out errOut);
+                string sql = $"Select * from Config_List_Name where ConfigName='{name}'";
+                List<ConfigNameList> lst = GetList(databasePath, sql, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
-                foreach (BulletListings i in lst)
+                foreach (ConfigNameList i in lst)
                 {
                     lAns = i.Id;
                     break;
@@ -173,13 +167,12 @@ namespace BurnSoft.Applications.MLL.Inventory
         /// Gets the details.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
-        /// <param name="manufacturer">The manufacturer.</param>
         /// <param name="name">The name.</param>
         /// <param name="errOut">The error out.</param>
-        /// <returns>List&lt;BulletListings&gt;.</returns>
-        public static List<BulletListings> GetDetails(string databasePath, string manufacturer, string name, out string errOut)
+        /// <returns>List&lt;ConfigNameList&gt;.</returns>
+        public static List<ConfigNameList> GetDetails(string databasePath, string name, out string errOut)
         {
-            string sql = $"Select * from List_Bullets where manufacturer='{manufacturer}' and name='{name}'";
+            string sql = $"Select * from Config_List_Name where ConfigName='{name}'";
             return GetList(databasePath, sql, out errOut);
         }
         /// <summary>
@@ -188,10 +181,10 @@ namespace BurnSoft.Applications.MLL.Inventory
         /// <param name="databasePath">The database path.</param>
         /// <param name="id">The identifier.</param>
         /// <param name="errOut">The error out.</param>
-        /// <returns>List&lt;BulletListings&gt;.</returns>
-        public static List<BulletListings> GetDetails(string databasePath, long id, out string errOut)
+        /// <returns>List&lt;ConfigNameList&gt;.</returns>
+        public static List<ConfigNameList> GetDetails(string databasePath, long id, out string errOut)
         {
-            string sql = $"Select * from List_Bullets where id={id}";
+            string sql = $"Select * from Config_List_Name where id={id}";
             return GetList(databasePath, sql, out errOut);
         }
         /// <summary>
@@ -207,7 +200,7 @@ namespace BurnSoft.Applications.MLL.Inventory
             errOut = @"";
             try
             {
-                List<BulletListings> lst = GetAll(databasePath, out errOut);
+                List<ConfigNameList> lst = GetAll(databasePath, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 bAns = lst.Count > 0;
             }
@@ -221,19 +214,18 @@ namespace BurnSoft.Applications.MLL.Inventory
         /// Datas the exists.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
-        /// <param name="manufacturer">The manufacturer.</param>
         /// <param name="name">The name.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="System.Exception"></exception>
-        public static bool DataExists(string databasePath, string manufacturer, string name, out string errOut)
+        public static bool DataExists(string databasePath, string name, out string errOut)
         {
             bool bAns = false;
             errOut = @"";
             try
             {
 
-                List<BulletListings> lst = GetDetails(databasePath, manufacturer, name, out errOut);
+                List<ConfigNameList> lst = GetDetails(databasePath, name, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 bAns = lst.Count > 0;
             }
@@ -245,38 +237,33 @@ namespace BurnSoft.Applications.MLL.Inventory
         }
 
         /// <summary>
-        /// Adds The new bullet information to the database
+        /// Adds the specified database path.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
-        /// <param name="manufacturer">The manufacturer.</param>
         /// <param name="name">The name.</param>
-        /// <param name="diameter">The diameter.</param>
-        /// <param name="weight">The weight.</param>
-        /// <param name="sectionalDensity">The sectional density.</param>
-        /// <param name="partNumber">The part number.</param>
-        /// <param name="bc">The bc.</param>
-        /// <param name="bulletType">Type of the bullet.</param>
-        /// <param name="qty">The qty.</param>
-        /// <param name="price">The price.</param>
-        /// <param name="caliberId">The caliber identifier.</param>
+        /// <param name="isPersonal">if set to <c>true</c> [is personal].</param>
+        /// <param name="isShotgun">if set to <c>true</c> [is shotgun].</param>
+        /// <param name="notes">The notes.</param>
+        /// <param name="isActive">if set to <c>true</c> [is active].</param>
+        /// <param name="isFavorite">if set to <c>true</c> [is favorite].</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public static bool Add(string databasePath, string manufacturer, string name, string diameter,
-            string weight, string sectionalDensity, string partNumber, string bc, int bulletType, 
-            int qty, double price, long caliberId,  out string errOut)
+        public static bool Add(string databasePath, string name, bool isPersonal, bool isShotgun,
+            string notes, bool isActive, bool isFavorite, out string errOut)
         {
             errOut = "";
             bool bAns = false;
             try
             {
-                double estCostPerBullet = (price == 0) ? 0 : (price/qty);
+                int iPersonal = isPersonal ? 1 : 0;
+                int iShotgun = isShotgun ? 1 : 0;
+                int iActive = isActive ? 1 : 0;
+                int iFavorite = isFavorite ? 1 : 0;
                 BSOtherObjects o = new BSOtherObjects();
-                string sql = $"INSERT INTO List_Bullets(Manufacturer,Name,Diameter," +
-                    $"Weight,Sec_Den,Part_number,Ballistic_Coefficient,Bullet_Type,Qty," +
-                    $"Price,CID,eppb) VALUES('{o.FC(manufacturer)}', '{o.FC(name)}', " +
-                    $"'{o.FC(diameter)}', '{o.FC(weight)}', '{o.FC(sectionalDensity)}', " +
-                    $"'{o.FC(partNumber)}', '{o.FC(bc)}', {bulletType}, {qty}, " +
-                    $"{price}, {caliberId}, {estCostPerBullet})";
+                string sql = $"INSERT INTO Config_List_Name(ConfigName,IsPersonal,IsShotGun," +
+                    $"Notes,IsActive,IsFav) VALUES('{o.FC(name)}', {iPersonal}, " +
+                    $"{iShotgun}, '{o.FC(notes)}', {iActive}, " +
+                    $"{iFavorite})";
 
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
@@ -291,63 +278,29 @@ namespace BurnSoft.Applications.MLL.Inventory
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="id">The identifier.</param>
-        /// <param name="manufacturer">The manufacturer.</param>
         /// <param name="name">The name.</param>
-        /// <param name="diameter">The diameter.</param>
-        /// <param name="weight">The weight.</param>
-        /// <param name="sectionalDensity">The sectional density.</param>
-        /// <param name="partNumber">The part number.</param>
-        /// <param name="bc">The bc.</param>
-        /// <param name="bulletType">Type of the bullet.</param>
-        /// <param name="qty">The qty.</param>
-        /// <param name="price">The price.</param>
-        /// <param name="caliberId">The caliber identifier.</param>
+        /// <param name="isPersonal">if set to <c>true</c> [is personal].</param>
+        /// <param name="isShotgun">if set to <c>true</c> [is shotgun].</param>
+        /// <param name="notes">The notes.</param>
+        /// <param name="isActive">if set to <c>true</c> [is active].</param>
+        /// <param name="isFavorite">if set to <c>true</c> [is favorite].</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public static bool Update(string databasePath,long id, string manufacturer, string name, string diameter,
-            string weight, string sectionalDensity, string partNumber, string bc, int bulletType,
-            int qty, double price, long caliberId, out string errOut)
+        public static bool Update(string databasePath, long id, string name, bool isPersonal, bool isShotgun,
+            string notes, bool isActive, bool isFavorite, out string errOut)
         {
             errOut = "";
             bool bAns = false;
             try
             {
-                double estCostPerBullet = (price == 0) ? 0 : (price / qty);
+                int iPersonal = isPersonal ? 1 : 0;
+                int iShotgun = isShotgun ? 1 : 0;
+                int iActive = isActive ? 1 : 0;
+                int iFavorite = isFavorite ? 1 : 0;
                 BSOtherObjects o = new BSOtherObjects();
-                string sql = $"UPDATE List_Bullets set Manufacturer='{o.FC(manufacturer)}'," +
-                    $"Name='{o.FC(name)}',Diameter='{o.FC(diameter)}',Weight='{o.FC(weight)}'," +
-                    $"Sec_Den='{o.FC(sectionalDensity)}',Part_number='{o.FC(partNumber)}'," +
-                    $"Ballistic_Coefficient='{o.FC(bc)}',Bullet_Type={bulletType},Qty={qty}," +
-                    $"Price={price},CID={caliberId},eppb={estCostPerBullet} where id={id}";
-
-                bAns = Database.Execute(databasePath, sql, out errOut);
-            }
-            catch (Exception e)
-            {
-                errOut = ErrorMessage("Update", e);
-            }
-            return bAns;
-        }
-        /// <summary>
-        /// Updates the BUllet information when you just jabe to update the price and qty which 
-        /// will adjust the estimated price per bullet.
-        /// </summary>
-        /// <param name="databasePath">The database path.</param>
-        /// <param name="id">The identifier.</param>
-        /// <param name="qty">The qty.</param>
-        /// <param name="price">The price.</param>
-        /// <param name="errOut">The error out.</param>
-        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public static bool Update(string databasePath, long id, int qty, double price, out string errOut)
-        {
-            errOut = "";
-            bool bAns = false;
-            try
-            {
-                double estCostPerBullet = (price == 0) ? 0 : (price / qty);
-                BSOtherObjects o = new BSOtherObjects();
-                string sql = $"UPDATE List_Bullets set Qty={qty}," +
-                    $"Price={price}, eppb={estCostPerBullet} where id={id}";
+                string sql = $"UPDATE Config_List_Name set ConfigName='{o.FC(name)}'," +
+                    $"IsPersonal={iPersonal},IsShotGun={iShotgun},Notes='{o.FC(notes)}'," +
+                    $"IsActive={iActive},IsFav={iFavorite} where id={id}";
 
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
@@ -370,7 +323,7 @@ namespace BurnSoft.Applications.MLL.Inventory
             bool bAns = false;
             try
             {
-                string sql = $"DELETE from List_Bullets where id={id}";
+                string sql = $"DELETE from Config_List_Name where id={id}";
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
             catch (Exception e)
@@ -383,18 +336,17 @@ namespace BurnSoft.Applications.MLL.Inventory
         /// Deletes the specified database path.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
-        /// <param name="manufacturer">The manufacturer.</param>
         /// <param name="name">The name.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="System.Exception"></exception>
-        public static bool Delete(string databasePath, string manufacturer, string name, out string errOut)
+        public static bool Delete(string databasePath, string name, out string errOut)
         {
             errOut = "";
             bool bAns = false;
             try
             {
-                long id = GetId(databasePath, manufacturer, name, out errOut);
+                long id = GetId(databasePath, name, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 bAns = Delete(databasePath, id, out errOut);
             }
