@@ -66,6 +66,7 @@
     <Compile Include="ConfigSheets\ConfigListDataName.cs" />
     <Compile Include="ConfigSheets\ConfigListDataPowder.cs" />
     <Compile Include="ConfigSheets\ConfigListDataPowderShotGun.cs" />
+    <Compile Include="ConfigSheets\ConfigListDataShotgun.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="DebugHelpers\PrintListValues.cs" />
     <Compile Include="GlobalSuppressions.cs" />
