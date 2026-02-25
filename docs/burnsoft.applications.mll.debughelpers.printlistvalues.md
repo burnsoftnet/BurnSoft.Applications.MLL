@@ -61,17 +61,71 @@ The value.
 [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 System.String.
 
-### **ConfigListDataMetalicData(List&lt;ConfigListDataMetalic&gt;)**
+### **ConfigListDataMetalicDataLst(List&lt;ConfigListDataMetalicData&gt;)**
 
 Configurations the list data metalic data.
 
 ```csharp
-public static string ConfigListDataMetalicData(List<ConfigListDataMetalic> value)
+public static string ConfigListDataMetalicDataLst(List<ConfigListDataMetalicData> value)
 ```
 
 #### Parameters
 
-`value` [List&lt;ConfigListDataMetalic&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+`value` [List&lt;ConfigListDataMetalicData&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+The value.
+
+#### Returns
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+System.String.
+
+### **ConfigListDataShotgunDataData(List&lt;ConfigListDataShotgunData&gt;)**
+
+Configurations the list data shotgun data data.
+
+```csharp
+public static string ConfigListDataShotgunDataData(List<ConfigListDataShotgunData> value)
+```
+
+#### Parameters
+
+`value` [List&lt;ConfigListDataShotgunData&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+The value.
+
+#### Returns
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+System.String.
+
+### **ConfigNameListData(List&lt;ConfigNameList&gt;)**
+
+Configurations the name list data.
+
+```csharp
+public static string ConfigNameListData(List<ConfigNameList> value)
+```
+
+#### Parameters
+
+`value` [List&lt;ConfigNameList&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+The value.
+
+#### Returns
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+System.String.
+
+### **ConfigListPowderDataData(List&lt;ConfigListPowderData&gt;)**
+
+Configurations the list powder data data.
+
+```csharp
+public static string ConfigListPowderDataData(List<ConfigListPowderData> value)
+```
+
+#### Parameters
+
+`value` [List&lt;ConfigListPowderData&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
 The value.
 
 #### Returns
@@ -151,6 +205,24 @@ The value.
 [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 System.String.
 
+### **AmmuntionTypeListingsData(List&lt;AmmuntionTypeListings&gt;)**
+
+Ammuntions the type listings data.
+
+```csharp
+public static string AmmuntionTypeListingsData(List<AmmuntionTypeListings> value)
+```
+
+#### Parameters
+
+`value` [List&lt;AmmuntionTypeListings&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+The value.
+
+#### Returns
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+System.String.
+
 ### **CaseListingsData(List&lt;CaseListings&gt;)**
 
 Cases the listings data.
@@ -162,6 +234,24 @@ public static string CaseListingsData(List<CaseListings> value)
 #### Parameters
 
 `value` [List&lt;CaseListings&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+The value.
+
+#### Returns
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+System.String.
+
+### **ShotgunBushingListingsData(List&lt;ShotgunBushingListings&gt;)**
+
+Shotguns the bushing listings data.
+
+```csharp
+public static string ShotgunBushingListingsData(List<ShotgunBushingListings> value)
+```
+
+#### Parameters
+
+`value` [List&lt;ShotgunBushingListings&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
 The value.
 
 #### Returns
