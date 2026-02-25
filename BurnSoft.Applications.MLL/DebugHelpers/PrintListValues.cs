@@ -90,6 +90,40 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
             }
             return sAns;
         }
+        /// <summary>
+        /// Configurations the list data shotgun data data.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string ConfigListDataShotgunDataData(List<ConfigListDataShotgunData> value)
+        {
+            string sAns = "";
+            if (value.Count > 0)
+            {
+                foreach (ConfigListDataShotgunData v in value)
+                {
+                    sAns += $"id : {v.Id}{Environment.NewLine}";
+                    sAns += $"ConfgId : {v.ConfgNameId}{Environment.NewLine}";
+                    sAns += $"AmmoTypeId : {v.AmmoTypeId}{Environment.NewLine}";
+                    sAns += $"CaliberId : {v.CaliberId}{Environment.NewLine}";
+                    sAns += $"ShotWeight : {v.ShotWeight}{Environment.NewLine}";
+                    sAns += $"PrimerId : {v.PrimerId}{Environment.NewLine}";
+                    sAns += $"CaseId : {v.CaseId}{Environment.NewLine}";
+                    sAns += $"ShotWeightText : {v.ShotWeightText}{Environment.NewLine}";
+                    sAns += $"Bushing : {v.Bushing}{Environment.NewLine}";
+                    sAns += $"Wad : {v.Wad}{Environment.NewLine}";
+                    sAns += $"ShotChargeLoad : {v.ShotChargeLoad}{Environment.NewLine}";
+                    sAns += $"Source : {v.Source}{Environment.NewLine}";
+                    sAns += $"GunId : {v.GunId}{Environment.NewLine}";
+                    sAns += $"IsPersonal : {v.IsPersonal}{Environment.NewLine}";
+                    sAns += $"ListTypeId : {v.ListTypeId}{Environment.NewLine}";
+                    sAns += $"BushingId : {v.BushingId}{Environment.NewLine}";
+                    sAns += $"ChargeBarId : {v.ChargeBarId}{Environment.NewLine}";
+                    sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                }
+            }
+            return sAns;
+        }
 
         /// <summary>
         /// Configurations the name list data.
