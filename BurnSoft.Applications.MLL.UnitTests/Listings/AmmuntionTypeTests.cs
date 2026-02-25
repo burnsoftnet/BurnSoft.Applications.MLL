@@ -74,7 +74,7 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
         {
             TestContext.WriteLine($"===========${BeforeAfter}===========");
             TestContext.WriteLine($"");
-            List<AmmuntionTypeListings> value = AmmuntionType.GetDetails(_databasePath, _name, out _errOut);
+            List<AmmuntionTypeListings> value = AmmuntionType.GetAll(_databasePath, out _errOut);
             TestContext.WriteLine(DebugHelpers.PrintListValues.AmmuntionTypeListingsData(value));
             TestContext.WriteLine($"");
         }
