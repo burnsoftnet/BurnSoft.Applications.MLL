@@ -269,7 +269,7 @@ namespace BurnSoft.Applications.MLL.Inventory
                 string sql = $"INSERT INTO General_Powder(Manufacturer,Name,weightlbs," +
                     $"weightgn,Price,Notes,ePPP, sync_lastupdate) VALUES(" +
                     $"'{o.FC(manufacturer)}', '{o.FC(name)}', {weightInPounds}, " +
-                    $"{weightInGrains}, {price}, '{o.FC(notes)}', {PricePerGrain},Now())";
+                    $"{weightInGrains}, {price}, '{o.FC(notes, "  ")}', {PricePerGrain},Now())";
 
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
@@ -306,7 +306,7 @@ namespace BurnSoft.Applications.MLL.Inventory
                 double PricePerGrain = (price / weightInGrains);
                 string sql = $"UPDATE General_Powder set Manufacturer='{o.FC(manufacturer)}'," +
                     $"Name='{o.FC(name)}',weightlbs={weightInPounds},weightgn={weightInGrains},Price={price}," +
-                    $"Notes='{o.FC(notes)}',ePPP={PricePerGrain}, sync_lastupdate=Now() where id={id}";
+                    $"Notes='{o.FC(notes, "  ")}',ePPP={PricePerGrain}, sync_lastupdate=Now() where id={id}";
 
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
