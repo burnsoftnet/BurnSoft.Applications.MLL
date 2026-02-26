@@ -364,6 +364,28 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
             }
             return sAns;
         }
+
+        public static string PowderListingData(List<PowderListing> value)
+        {
+            string sAns = "";
+            if (value.Count > 0)
+            {
+                foreach (PowderListing v in value)
+                {
+                    sAns += $"id : {v.Id}{Environment.NewLine}";
+                    sAns += $"Manufacturer : {v.Manufacturer}{Environment.NewLine}";
+                    sAns += $"Name : {v.Name}{Environment.NewLine}";
+                    sAns += $"WeightInPounds : {v.WeightInPounds}{Environment.NewLine}";
+                    sAns += $"WeightInGrains : {v.WeightInGrains}{Environment.NewLine}";
+                    sAns += $"Price : {v.Price}{Environment.NewLine}";
+                    sAns += $"Notes : {v.Notes}{Environment.NewLine}";
+                    sAns += $"PricePerGrain : {v.PricePerGrain}{Environment.NewLine}";
+                    sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                }
+            }
+            return sAns;
+        }
+
         /// <summary>
         /// Shotguns the bushing listings data.
         /// </summary>
