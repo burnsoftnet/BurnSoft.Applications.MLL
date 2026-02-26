@@ -83,6 +83,7 @@
     <Compile Include="Inventory\CaliberInventory.cs" />
     <Compile Include="Inventory\CaseInventory.cs" />
     <Compile Include="Inventory\EquipmentInventory.cs" />
+    <Compile Include="Inventory\PowderInventory.cs" />
     <Compile Include="Inventory\ShotgunBushingInventory.cs" />
     <Compile Include="LoadersLog\Firearms.cs" />
     <Compile Include="PeopleAndPlaces\OwnerInformation.cs" />

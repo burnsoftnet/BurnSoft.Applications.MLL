@@ -364,7 +364,11 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
             }
             return sAns;
         }
-
+        /// <summary>
+        /// Powders the listing data.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
         public static string PowderListingData(List<PowderListing> value)
         {
             string sAns = "";
