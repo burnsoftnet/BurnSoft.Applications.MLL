@@ -102,6 +102,7 @@
     <Compile Include="Types\FirearmCollection.cs" />
     <Compile Include="Types\LoginInformationOnly.cs" />
     <Compile Include="Types\PersonalInformation.cs" />
+    <Compile Include="Types\PowderListing.cs" />
     <Compile Include="Types\RegistrySettings.cs" />
     <Compile Include="Types\ShotgunBushingListings.cs" />
   </ItemGroup>
