@@ -392,5 +392,21 @@ namespace BurnSoft.Applications.MLL.Inventory
             return Converters.ConvertToDollars(dAns);
         }
 
+        public bool UpdateQty(string databasePath, double currentQy, double currentGrains, double currentPrice, 
+            double currentPricePerItem, double newQty, double newPrice, string VolumeType, out string errOut)
+        {
+            errOut = "";
+            bool bAns = false;
+            try
+            {
+                if
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("UpdateQty", e);
+            }
+            return bAns;
+        }
+
     }
 }
