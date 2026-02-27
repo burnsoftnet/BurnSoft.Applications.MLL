@@ -361,5 +361,36 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             return bAns;
         }
+        /// <summary>
+        /// Calculates the price per item.
+        /// </summary>
+        /// <param name="weightValue">The weight value.</param>
+        /// <param name="dPrice">The  price.</param>
+        /// <param name="sType">Type of the of weight: Grains (grs) , Pounds (lbs).</param>
+        /// <returns>System.Double.</returns>
+        public double CalculatePricePerItem(long weightValue, double dPrice, string sType)
+        {
+            double dAns = 0;
+            double lNewValue = 0;
+            switch (sType)
+            {
+                case "Grains (grs)":
+                    {
+                        lNewValue = weightValue;
+                        break;
+                    }
+
+                case "Pounds (lbs)":
+                    {
+                        lNewValue = weightValue * WeightValues.WEIGHT_GRAINS_1LBS;
+                        break;
+                    }
+            }
+            if (weightValue > 0)
+                dAns = dPrice / lNewValue;
+
+            return Converters.ConvertToDollars(dAns);
+        }
+
     }
 }
