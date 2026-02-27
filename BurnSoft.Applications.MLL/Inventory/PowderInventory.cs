@@ -1,10 +1,12 @@
-﻿using BurnSoft.Applications.MLL.Global;
+﻿using BurnSoft.Applications.MLL.Enums;
+using BurnSoft.Applications.MLL.Global;
 using BurnSoft.Applications.MLL.Helpers;
 using BurnSoft.Applications.MLL.Types;
 using BurnSoft.Universal;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Security.Cryptography;
 
 namespace BurnSoft.Applications.MLL.Inventory
 {
@@ -368,19 +370,19 @@ namespace BurnSoft.Applications.MLL.Inventory
         /// <param name="dPrice">The  price.</param>
         /// <param name="sType">Type of the of weight: Grains (grs) , Pounds (lbs).</param>
         /// <returns>System.Double.</returns>
-        public double CalculatePricePerItem(long weightValue, double dPrice, string sType)
+        public double CalculatePricePerItem(double weightValue, double dPrice, PowderWeightType VolumeType)
         {
             double dAns = 0;
             double lNewValue = 0;
-            switch (sType)
+            switch (VolumeType)
             {
-                case "Grains (grs)":
+                case PowderWeightType.Grains:
                     {
                         lNewValue = weightValue;
                         break;
                     }
 
-                case "Pounds (lbs)":
+                case PowderWeightType.Pounds:
                     {
                         lNewValue = weightValue * WeightValues.WEIGHT_GRAINS_1LBS;
                         break;
@@ -392,14 +394,39 @@ namespace BurnSoft.Applications.MLL.Inventory
             return Converters.ConvertToDollars(dAns);
         }
 
-        public bool UpdateQty(string databasePath, double currentQy, double currentGrains, double currentPrice, 
-            double currentPricePerItem, double newQty, double newPrice, string VolumeType, out string errOut)
+        public bool UpdateQty(string databasePath, long id, double currentQy, double currentGrains, double currentPrice, 
+            double currentPricePerItem, double newQty, double newPrice, PowderWeightType VolumeType, out string errOut)
         {
             errOut = "";
             bool bAns = false;
             try
             {
-                if
+                double updatedPricePerItem = CalculatePricePerItem(newQty, newPrice, VolumeType);
+                double updatedGrains = 0;
+                double updatedPounds = 0;
+                switch (VolumeType)
+                {
+                    case PowderWeightType.Pounds:
+                        updatedPounds = newQty;
+                        updatedGrains = Converters.ConvertWeight(newQty, WeightValues.WeightType.Grains, WeightValues.WeightType.Pounds, out errOut);
+                        if (errOut.Length > 0) throw new Exception(errOut);
+                        break;
+                    case PowderWeightType.Grains:
+                        updatedGrains = newQty;
+                        updatedPounds = Converters.ConvertWeight(newQty, WeightValues.WeightType.Pounds, WeightValues.WeightType.Grains, out errOut);
+                        if (errOut.Length > 0) throw new Exception(errOut);
+                        break;
+                }
+                double newGrains = currentGrains + updatedGrains;
+                double newPounds = currentQy + updatedPounds;
+                double UpdatedPrice = (currentGrains * currentPricePerItem) + newPrice;
+                double newPricePerItem = UpdatedPrice / newGrains;
+                string sql = "";
+                if (currentPricePerItem = updatedPricePerItem)
+                {
+                    SQL = "UPDATE General_Powder set weightlbs=" & NPounds & ", weightgn=" & NGrains & ", Price=" & NPrice & " where ID=" & PID
+                }
+
             }
             catch (Exception e)
             {
