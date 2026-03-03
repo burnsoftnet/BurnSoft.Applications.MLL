@@ -411,7 +411,7 @@ namespace BurnSoft.Applications.MLL.Inventory
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="id">The identifier.</param>
-        /// <param name="currentQy">The current qy.</param>
+        /// <param name="currentQty">The current qy.</param>
         /// <param name="currentGrains">The current grains.</param>
         /// <param name="currentPrice">The current price.</param>
         /// <param name="currentPricePerItem">The current price per item.</param>
@@ -421,7 +421,7 @@ namespace BurnSoft.Applications.MLL.Inventory
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="System.Exception"></exception>
-        public static bool UpdateQty(string databasePath, long id, double currentQy, double currentGrains, double currentPrice, 
+        public static bool UpdateQty(string databasePath, long id, double currentQty, double currentGrains, double currentPrice, 
             double currentPricePerItem, double newQty, double newPrice, PowderWeightType VolumeType, out string errOut)
         {
             errOut = "";
@@ -447,7 +447,7 @@ namespace BurnSoft.Applications.MLL.Inventory
                         break;
                 }
                 double newGrains = currentGrains + updatedGrains;
-                double newPounds = currentQy + updatedPounds;
+                double newPounds = currentQty + updatedPounds;
                 double UpdatedPrice = (currentGrains * currentPricePerItem) + newPrice;
                 double newPricePerItem = UpdatedPrice / newGrains;
                 string sql = "";
@@ -455,13 +455,13 @@ namespace BurnSoft.Applications.MLL.Inventory
                 {
                     sql = $"UPDATE General_Powder set weightlbs={newPounds}, weightgn={newGrains}, " +
                         $"Price={newPrice} where ID={id}";
-                } else if ((UpdatedPrice == 0) && (currentQy == 0))
+                } else if ((UpdatedPrice == 0) && (currentQty == 0))
                 {
                     sql = $"UPDATE General_Powder set weightlbs=0,weightgn=0, Price=0, eppp=0 where ID={id}";
                 }
                 else
                 {
-                    sql = $"UPDATE General_Powder set wweightlbs={newPounds}, weightgn={newGrains}, Price={newPrice}," +
+                    sql = $"UPDATE General_Powder set weightlbs={newPounds}, weightgn={newGrains}, Price={newPrice}," +
                         $"eppp={newPricePerItem} where ID={id}";
                 }
                 bAns = Database.Execute(databasePath, sql, out errOut);
