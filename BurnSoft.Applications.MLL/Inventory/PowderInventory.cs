@@ -367,10 +367,13 @@ namespace BurnSoft.Applications.MLL.Inventory
         /// Calculates the price per item.
         /// </summary>
         /// <param name="weightValue">The weight value.</param>
-        /// <param name="dPrice">The  price.</param>
-        /// <param name="sType">Type of the of weight: Grains (grs) , Pounds (lbs).</param>
+        /// <param name="price">The  price.</param>
+        /// <param name="VolumeType">Type of the of weight: Grains (grs) , Pounds (lbs).</param>
+        /// <param name="useDollar"> Use the Dollar amount to get the doube with 2 decimal places, 
+        /// when set to false it will give you the full double.</param>
         /// <returns>System.Double.</returns>
-        public double CalculatePricePerItem(double weightValue, double dPrice, PowderWeightType VolumeType)
+        public static double CalculatePricePerItem(double weightValue, double price, PowderWeightType VolumeType, 
+            bool useDollar = false)
         {
             double dAns = 0;
             double lNewValue = 0;
@@ -389,9 +392,15 @@ namespace BurnSoft.Applications.MLL.Inventory
                     }
             }
             if (weightValue > 0)
-                dAns = dPrice / lNewValue;
+                dAns = price / lNewValue;
 
-            return Converters.ConvertToDollars(dAns);
+            if (useDollar)
+            {
+                return Converters.ConvertToDollars(dAns);
+            } else
+            {
+                return dAns;
+            }
         }
         /// <summary>
         /// Updates the qty and price per item using the current qty in inventory and adding the new item details in stock
@@ -408,7 +417,7 @@ namespace BurnSoft.Applications.MLL.Inventory
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="System.Exception"></exception>
-        public bool UpdateQty(string databasePath, long id, double currentQy, double currentGrains, double currentPrice, 
+        public static bool UpdateQty(string databasePath, long id, double currentQy, double currentGrains, double currentPrice, 
             double currentPricePerItem, double newQty, double newPrice, PowderWeightType VolumeType, out string errOut)
         {
             errOut = "";
