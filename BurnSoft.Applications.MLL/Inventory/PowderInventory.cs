@@ -262,14 +262,18 @@ namespace BurnSoft.Applications.MLL.Inventory
             try
             {
                 BSOtherObjects o = new BSOtherObjects();
+                manufacturer = o.FC(manufacturer);
+                name = o.FC(name);
+                notes = o.FC(notes);
+
                 double weightInGrains = Converters.ConvertWeight(weightInPounds, WeightValues.WeightType.Grains, 
                     WeightValues.WeightType.Pounds, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 double PricePerGrain = (price/weightInGrains);
                 string sql = $"INSERT INTO General_Powder(Manufacturer,Name,weightlbs," +
                     $"weightgn,Price,Notes,ePPP, sync_lastupdate) VALUES(" +
-                    $"'{o.FC(manufacturer)}', '{o.FC(name)}', {weightInPounds}, " +
-                    $"{weightInGrains}, {price}, '{o.FC(notes, "  ")}', {PricePerGrain},Now())";
+                    $"'{manufacturer}', '{name}', {weightInPounds}, " +
+                    $"{weightInGrains}, {price}, '{notes}', {PricePerGrain},Now())";
 
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }

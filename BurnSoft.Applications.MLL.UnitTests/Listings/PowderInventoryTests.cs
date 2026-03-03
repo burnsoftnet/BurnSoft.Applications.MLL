@@ -67,7 +67,7 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             _manufacturer = "Vihtavuori";
             _name = "Viht N320";
             _weightInPounds = 1;
-            _notes = "";
+            _notes = " ";
             _price = 20.95;
         }
 
