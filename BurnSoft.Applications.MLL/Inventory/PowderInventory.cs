@@ -393,7 +393,21 @@ namespace BurnSoft.Applications.MLL.Inventory
 
             return Converters.ConvertToDollars(dAns);
         }
-
+        /// <summary>
+        /// Updates the qty and price per item using the current qty in inventory and adding the new item details in stock
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="currentQy">The current qy.</param>
+        /// <param name="currentGrains">The current grains.</param>
+        /// <param name="currentPrice">The current price.</param>
+        /// <param name="currentPricePerItem">The current price per item.</param>
+        /// <param name="newQty">The new qty.</param>
+        /// <param name="newPrice">The new price.</param>
+        /// <param name="VolumeType">Type of the volume.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
         public bool UpdateQty(string databasePath, long id, double currentQy, double currentGrains, double currentPrice, 
             double currentPricePerItem, double newQty, double newPrice, PowderWeightType VolumeType, out string errOut)
         {
@@ -408,12 +422,14 @@ namespace BurnSoft.Applications.MLL.Inventory
                 {
                     case PowderWeightType.Pounds:
                         updatedPounds = newQty;
-                        updatedGrains = Converters.ConvertWeight(newQty, WeightValues.WeightType.Grains, WeightValues.WeightType.Pounds, out errOut);
+                        updatedGrains = Converters.ConvertWeight(newQty, WeightValues.WeightType.Grains, 
+                            WeightValues.WeightType.Pounds, out errOut);
                         if (errOut.Length > 0) throw new Exception(errOut);
                         break;
                     case PowderWeightType.Grains:
                         updatedGrains = newQty;
-                        updatedPounds = Converters.ConvertWeight(newQty, WeightValues.WeightType.Pounds, WeightValues.WeightType.Grains, out errOut);
+                        updatedPounds = Converters.ConvertWeight(newQty, WeightValues.WeightType.Pounds, 
+                            WeightValues.WeightType.Grains, out errOut);
                         if (errOut.Length > 0) throw new Exception(errOut);
                         break;
                 }
@@ -422,11 +438,20 @@ namespace BurnSoft.Applications.MLL.Inventory
                 double UpdatedPrice = (currentGrains * currentPricePerItem) + newPrice;
                 double newPricePerItem = UpdatedPrice / newGrains;
                 string sql = "";
-                if (currentPricePerItem = updatedPricePerItem)
+                if (currentPricePerItem == updatedPricePerItem)
                 {
-                    SQL = "UPDATE General_Powder set weightlbs=" & NPounds & ", weightgn=" & NGrains & ", Price=" & NPrice & " where ID=" & PID
+                    sql = $"UPDATE General_Powder set weightlbs={newPounds}, weightgn={newGrains}, " +
+                        $"Price={newPrice} where ID={id}";
+                } else if ((UpdatedPrice == 0) && (currentQy == 0))
+                {
+                    sql = $"UPDATE General_Powder set weightlbs=0,weightgn=0, Price=0, eppp=0 where ID={id}";
                 }
-
+                else
+                {
+                    sql = $"UPDATE General_Powder set wweightlbs={newPounds}, weightgn={newGrains}, Price={newPrice}," +
+                        $"eppp={newPricePerItem} where ID={id}";
+                }
+                bAns = Database.Execute(databasePath, sql, out errOut);
             }
             catch (Exception e)
             {
