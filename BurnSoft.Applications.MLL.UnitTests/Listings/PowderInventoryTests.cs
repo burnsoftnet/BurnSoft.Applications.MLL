@@ -4,6 +4,7 @@ using BurnSoft.Applications.MLL.UnitTests.Settings;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace BurnSoft.Applications.MLL.UnitTests.Listings
 {
@@ -287,6 +288,25 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
                 TestContext.WriteLine(ex.Message);
             }
             General.HasTrueValue(bAns, _errOut);
+        }
+
+        [TestMethod, TestCategory("Inventory Listings - Powder")]
+        public void CalculatePricePerItemTestPoundsRaw()
+        {
+            double value = PowderInventory.CalculatePricePerItem(weightValue: 1, price: 20.95,
+                VolumeType: Enums.PowderWeightType.Pounds);
+            TestContext.WriteLine($"VALUE: {value}");
+            bool bAns = (value == 0.0029928614183734547);
+            General.HasTrueValue(bAns);
+        }
+
+        [TestMethod, TestCategory("Inventory Listings - Powder")]
+        public void CalculatePricePerItemTestGrainsRaw()
+        {
+            double value = PowderInventory.CalculatePricePerItem(weightValue: 6999.99, price: 20.95,
+                VolumeType: Enums.PowderWeightType.Grains);
+            TestContext.WriteLine($"VALUE: {value}");
+            General.HasTrueValue((value == 0.0029928614183734547));
         }
     }
 }
