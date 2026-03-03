@@ -71,7 +71,7 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             _price = 20.95;
         }
 
-        private void AddTestCasesExists()
+        private void AddTestPowderExists()
         {
             if (!PowderInventory.DataExists(_databasePath, _manufacturer, _name, out _))
             {
@@ -80,7 +80,7 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             }
         }
 
-        private void DeleteTestCasesExists()
+        private void DeleteTestPowderExists()
         {
             if (PowderInventory.DataExists(_databasePath, _manufacturer, _name, out _))
             {
@@ -89,7 +89,7 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             }
         }
 
-        private void PrintTestCases(string BeforeAfter = "BEFORE")
+        private void PrintTestPowder(string BeforeAfter = "BEFORE")
         {
             TestContext.WriteLine($"===========${BeforeAfter}===========");
             TestContext.WriteLine($"");
@@ -122,7 +122,7 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             bool bAns = false;
             try
             {
-                DeleteTestCasesExists();
+                DeleteTestPowderExists();
                 bool value = PowderInventory.Add(_databasePath, _manufacturer, _name,
                     _weightInPounds, _price, _notes, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
@@ -144,14 +144,50 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             bool bAns = false;
             try
             {
-                AddTestCasesExists();
-                PrintTestCases();
+                AddTestPowderExists();
+                PrintTestPowder();
                 long id = PowderInventory.GetId(_databasePath, _manufacturer, _name, out _);
                 bool value = PowderInventory.Update(_databasePath, id, _manufacturer, _name,
                     _weightInPounds, _price, "Great For Pistols", out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine($"VALUE: {value}");
-                PrintTestCases("AFTER");
+                PrintTestPowder("AFTER");
+                bAns = true;
+            }
+            catch (Exception ex)
+            {
+                TestContext.WriteLine(ex.Message);
+            }
+            General.HasTrueValue(bAns, _errOut);
+        }
+
+        [TestMethod, TestCategory("Inventory Listings - Powder")]
+        public void UpdateQtyTest()
+        {
+            bool bAns = false;
+            try
+            {
+                AddTestPowderExists();
+                PrintTestPowder();
+                long id = PowderInventory.GetId(_databasePath, _manufacturer, _name, out _);
+                List<PowderListing> currentData = PowderInventory.GetDetails(_databasePath, id, out _errOut);
+                double currentQty = 0;
+                double currentGrains = 0;
+                double currentPrice = 0;
+                double currentPricePerItem = 0;
+                foreach (PowderListing item in currentData)
+                {
+                    currentQty = item.WeightInPounds;
+                    currentGrains = item.WeightInGrains;
+                    currentPrice = item.Price;
+                    currentPricePerItem = item.PricePerGrain;
+                }
+
+                bool value = PowderInventory.UpdateQty(_databasePath, id, currentQty, currentGrains, currentPrice, 
+                    currentPricePerItem,8, 249.99, Enums.PowderWeightType.Pounds, out _errOut);
+                if (_errOut.Length > 0) throw new Exception(_errOut);
+                TestContext.WriteLine($"VALUE: {value}");
+                PrintTestPowder("AFTER");
                 bAns = true;
             }
             catch (Exception ex)
@@ -167,7 +203,7 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             bool bAns = false;
             try
             {
-                AddTestCasesExists();
+                AddTestPowderExists();
                 long id = PowderInventory.GetId(_databasePath, _manufacturer, _name, out _);
                 bool value = PowderInventory.Delete(_databasePath, id, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
@@ -187,7 +223,7 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             bool bAns = false;
             try
             {
-                AddTestCasesExists();
+                AddTestPowderExists();
                 bool value = PowderInventory.Delete(_databasePath, _manufacturer, _name, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine($"VALUE: {value}");
@@ -307,6 +343,25 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
                 VolumeType: Enums.PowderWeightType.Grains);
             TestContext.WriteLine($"VALUE: {value}");
             General.HasTrueValue((value == 0.0029928614183734547));
+        }
+
+        [TestMethod, TestCategory("Inventory Listings - Powder")]
+        public void CalculatePricePerItemTestPoundsDollar()
+        {
+            double value = PowderInventory.CalculatePricePerItem(weightValue: 1, price: 20.95,
+                VolumeType: Enums.PowderWeightType.Pounds, useDollar: true);
+            TestContext.WriteLine($"VALUE: {value}");
+            bool bAns = (value == 0.00);
+            General.HasTrueValue(bAns);
+        }
+
+        [TestMethod, TestCategory("Inventory Listings - Powder")]
+        public void CalculatePricePerItemTestGrainsDollar()
+        {
+            double value = PowderInventory.CalculatePricePerItem(weightValue: 6999.99, price: 20.95,
+                VolumeType: Enums.PowderWeightType.Grains, useDollar: true);
+            TestContext.WriteLine($"VALUE: {value}");
+            General.HasTrueValue((value == 0.00));
         }
     }
 }
