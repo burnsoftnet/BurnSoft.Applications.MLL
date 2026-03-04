@@ -245,20 +245,9 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             return bAns;
         }
-        /// <summary>
-        /// Adds the specified database path.
-        /// </summary>
-        /// <param name="databasePath">The database path.</param>
-        /// <param name="manufacturer">The manufacturer.</param>
-        /// <param name="name">The name.</param>
-        /// <param name="weightInPounds">The weight in pounds.</param>
-        /// <param name="price">The price.</param>
-        /// <param name="notes">The notes.</param>
-        /// <param name="errOut">The error out.</param>
-        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        /// <exception cref="System.Exception"></exception>
-        public static bool Add(string databasePath, string manufacturer, string name, double weightInPounds,
-            double price, string notes, out string errOut)
+        
+        public static bool Add(string databasePath, string manufacturer, string name, int primerType,
+            double price, long qty, out string errOut)
         {
             errOut = "";
             bool bAns = false;
@@ -267,16 +256,13 @@ namespace BurnSoft.Applications.MLL.Inventory
                 BSOtherObjects o = new BSOtherObjects();
                 manufacturer = o.FC(manufacturer);
                 name = o.FC(name);
-                notes = o.FC(notes);
 
-                double weightInGrains = Converters.ConvertWeight(weightInPounds, WeightValues.WeightType.Grains,
-                    WeightValues.WeightType.Pounds, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
-                double PricePerGrain = (price / weightInGrains);
-                string sql = $"INSERT INTO General_Primer(Manufacturer,Name,weightlbs," +
-                    $"weightgn,Price,Notes,ePPP, sync_lastupdate) VALUES(" +
-                    $"'{manufacturer}', '{name}', {weightInPounds}, " +
-                    $"{weightInGrains}, {price}, '{notes}', {PricePerGrain},Now())";
+                double PricePerPrimer = CalculatePricePerItem(qty, price);
+                string sql = $"INSERT INTO General_Primer(Manufacturer,Name,Primer_Type," +
+                    $"Qty,Price,ePPP, sync_lastupdate) VALUES(" +
+                    $"'{manufacturer}', '{name}', {primerType}, " +
+                    $"{price}, {qty}, {PricePerPrimer},Now())";
 
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
@@ -286,34 +272,20 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             return bAns;
         }
-        /// <summary>
-        /// Updates the specified database path.
-        /// </summary>
-        /// <param name="databasePath">The database path.</param>
-        /// <param name="id">The identifier.</param>
-        /// <param name="manufacturer">The manufacturer.</param>
-        /// <param name="name">The name.</param>
-        /// <param name="weightInPounds">The weight in pounds.</param>
-        /// <param name="price">The price.</param>
-        /// <param name="notes">The notes.</param>
-        /// <param name="errOut">The error out.</param>
-        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        /// <exception cref="System.Exception"></exception>
-        public static bool Update(string databasePath, long id, string manufacturer, string name,
-            double weightInPounds, double price, string notes, out string errOut)
+        
+        public static bool Update(string databasePath, long id, string manufacturer, string name, int primerType,
+            double price, long qty, out string errOut)
         {
             errOut = "";
             bool bAns = false;
             try
             {
                 BSOtherObjects o = new BSOtherObjects();
-                double weightInGrains = Converters.ConvertWeight(weightInPounds, WeightValues.WeightType.Grains,
-                    WeightValues.WeightType.Pounds, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
-                double PricePerGrain = (price / weightInGrains);
+                double PricePerGrain = (price / qty);
                 string sql = $"UPDATE General_Primer set Manufacturer='{o.FC(manufacturer)}'," +
-                    $"Name='{o.FC(name)}',weightlbs={weightInPounds},weightgn={weightInGrains},Price={price}," +
-                    $"Notes='{o.FC(notes, "  ")}',ePPP={PricePerGrain}, sync_lastupdate=Now() where id={id}";
+                    $"Name='{o.FC(name)}',Primer_Type={primerType},qty={qty},Price={price}," +
+                    $"ePPP={PricePerGrain}, sync_lastupdate=Now() where id={id}";
 
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
@@ -370,28 +342,20 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             return bAns;
         }
-
-        public static double CalculatePricePerItem(double weightValue, double price, PowderWeightType VolumeType,
-            bool useDollar = false)
+        /// <summary>
+        /// Calculates the price per item.
+        /// </summary>
+        /// <param name="qty">The qty.</param>
+        /// <param name="price">The price.</param>
+        /// <param name="useDollar">if set to <c>true</c> [use dollar].</param>
+        /// <returns>System.Double.</returns>
+        public static double CalculatePricePerItem(long qty, double price, bool useDollar = false)
         {
             double dAns = 0;
-            double lNewValue = 0;
-            switch (VolumeType)
+            if (qty > 0)
             {
-                case PowderWeightType.Grains:
-                    {
-                        lNewValue = weightValue;
-                        break;
-                    }
-
-                case PowderWeightType.Pounds:
-                    {
-                        lNewValue = weightValue * WeightValues.WEIGHT_GRAINS_1LBS;
-                        break;
-                    }
+                dAns = price / qty;
             }
-            if (weightValue > 0)
-                dAns = price / lNewValue;
 
             if (useDollar)
             {
@@ -402,49 +366,41 @@ namespace BurnSoft.Applications.MLL.Inventory
                 return dAns;
             }
         }
-        
-        public static bool UpdateQty(string databasePath, long id, double currentQty, double currentGrains, double currentPrice,
-            double currentPricePerItem, double newQty, double newPrice, PowderWeightType VolumeType, out string errOut)
+        /// <summary>
+        /// Updates the qty.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="currentQty">The current qty.</param>
+        /// <param name="currentPrice">The current price.</param>
+        /// <param name="currentPricePerItem">The current price per item.</param>
+        /// <param name="newQty">The new qty.</param>
+        /// <param name="newPrice">The new price.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool UpdateQty(string databasePath, long id, long currentQty, double currentPrice,
+            double currentPricePerItem, long newQty, double newPrice, out string errOut)
         {
             errOut = "";
             bool bAns = false;
             try
             {
-                double updatedPricePerItem = CalculatePricePerItem(newQty, newPrice, VolumeType);
-                double updatedGrains = 0;
-                double updatedPounds = 0;
-                switch (VolumeType)
-                {
-                    case PowderWeightType.Pounds:
-                        updatedPounds = newQty;
-                        updatedGrains = Converters.ConvertWeight(newQty, WeightValues.WeightType.Grains,
-                            WeightValues.WeightType.Pounds, out errOut);
-                        if (errOut.Length > 0) throw new Exception(errOut);
-                        break;
-                    case PowderWeightType.Grains:
-                        updatedGrains = newQty;
-                        updatedPounds = Converters.ConvertWeight(newQty, WeightValues.WeightType.Pounds,
-                            WeightValues.WeightType.Grains, out errOut);
-                        if (errOut.Length > 0) throw new Exception(errOut);
-                        break;
-                }
-                double newGrains = currentGrains + updatedGrains;
-                double newPounds = currentQty + updatedPounds;
-                double UpdatedPrice = (currentGrains * currentPricePerItem) + newPrice;
-                double newPricePerItem = UpdatedPrice / newGrains;
+                double updatedPricePerItem = CalculatePricePerItem(newQty, newPrice);
+                long updatedQty = (currentQty + newQty);
+                double UpdatedPrice = (currentQty * currentPricePerItem) + newPrice;
+                double newPricePerItem = CalculatePricePerItem(updatedQty, UpdatedPrice);
                 string sql = "";
                 if (currentPricePerItem == updatedPricePerItem)
                 {
-                    sql = $"UPDATE General_Primer set weightlbs={newPounds}, weightgn={newGrains}, " +
-                        $"Price={newPrice} where ID={id}";
+                    sql = $"UPDATE General_Primer set QTY={updatedQty}, Price={UpdatedPrice} where ID={id}";
                 }
                 else if ((UpdatedPrice == 0) && (currentQty == 0))
                 {
-                    sql = $"UPDATE General_Primer set weightlbs=0,weightgn=0, Price=0, eppp=0 where ID={id}";
+                    sql = $"UPDATE General_Primer set QTY=0, Price=0, eppp=0 where ID={id}";
                 }
                 else
                 {
-                    sql = $"UPDATE General_Primer set weightlbs={newPounds}, weightgn={newGrains}, Price={newPrice}," +
+                    sql = $"UPDATE General_Primer set QTY={updatedQty}, Price={UpdatedPrice}," +
                         $"eppp={newPricePerItem} where ID={id}";
                 }
                 bAns = Database.Execute(databasePath, sql, out errOut);
