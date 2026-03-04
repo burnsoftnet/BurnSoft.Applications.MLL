@@ -42,6 +42,10 @@
 
 [PrintListValues](./burnsoft.applications.mll.debughelpers.printlistvalues.md)
 
+## BurnSoft.Applications.MLL.Enums
+
+[PowderWeightType](./burnsoft.applications.mll.enums.powderweighttype.md)
+
 ## BurnSoft.Applications.MLL.Global
 
 [GeneralFunctions](./burnsoft.applications.mll.global.generalfunctions.md)
@@ -71,6 +75,14 @@
 [CaliberInventory](./burnsoft.applications.mll.inventory.caliberinventory.md)
 
 [CaseInventory](./burnsoft.applications.mll.inventory.caseinventory.md)
+
+[EquipmentInventory](./burnsoft.applications.mll.inventory.equipmentinventory.md)
+
+[PowderInventory](./burnsoft.applications.mll.inventory.powderinventory.md)
+
+[PrimerInventory](./burnsoft.applications.mll.inventory.primerinventory.md)
+
+[PrimerTypes](./burnsoft.applications.mll.inventory.primertypes.md)
 
 [ShotgunBushingInventory](./burnsoft.applications.mll.inventory.shotgunbushinginventory.md)
 
@@ -106,11 +118,19 @@
 
 [ConfigNameList](./burnsoft.applications.mll.types.confignamelist.md)
 
+[EquipmentLists](./burnsoft.applications.mll.types.equipmentlists.md)
+
 [FirearmCollection](./burnsoft.applications.mll.types.firearmcollection.md)
 
 [LoginInformationOnly](./burnsoft.applications.mll.types.logininformationonly.md)
 
 [PersonalInformation](./burnsoft.applications.mll.types.personalinformation.md)
+
+[PowderListing](./burnsoft.applications.mll.types.powderlisting.md)
+
+[PrimerListings](./burnsoft.applications.mll.types.primerlistings.md)
+
+[PrimerTypeListings](./burnsoft.applications.mll.types.primertypelistings.md)
 
 [RegistrySettings](./burnsoft.applications.mll.types.registrysettings.md)
 

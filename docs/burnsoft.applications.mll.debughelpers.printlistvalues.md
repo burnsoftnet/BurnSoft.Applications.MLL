@@ -223,6 +223,24 @@ The value.
 [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 System.String.
 
+### **PrimerTypeListingsData(List&lt;PrimerTypeListings&gt;)**
+
+Primers the type listings data.
+
+```csharp
+public static string PrimerTypeListingsData(List<PrimerTypeListings> value)
+```
+
+#### Parameters
+
+`value` [List&lt;PrimerTypeListings&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+The value.
+
+#### Returns
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+System.String.
+
 ### **CaseListingsData(List&lt;CaseListings&gt;)**
 
 Cases the listings data.
@@ -234,6 +252,60 @@ public static string CaseListingsData(List<CaseListings> value)
 #### Parameters
 
 `value` [List&lt;CaseListings&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+The value.
+
+#### Returns
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+System.String.
+
+### **PrimerListingsData(List&lt;PrimerListings&gt;)**
+
+Primers the listings data.
+
+```csharp
+public static string PrimerListingsData(List<PrimerListings> value)
+```
+
+#### Parameters
+
+`value` [List&lt;PrimerListings&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+The value.
+
+#### Returns
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+System.String.
+
+### **EquipmentListsData(List&lt;EquipmentLists&gt;)**
+
+Equipments the lists data.
+
+```csharp
+public static string EquipmentListsData(List<EquipmentLists> value)
+```
+
+#### Parameters
+
+`value` [List&lt;EquipmentLists&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+The value.
+
+#### Returns
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+System.String.
+
+### **PowderListingData(List&lt;PowderListing&gt;)**
+
+Powders the listing data.
+
+```csharp
+public static string PowderListingData(List<PowderListing> value)
+```
+
+#### Parameters
+
+`value` [List&lt;PowderListing&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
 The value.
 
 #### Returns

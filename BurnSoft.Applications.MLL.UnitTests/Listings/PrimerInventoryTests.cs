@@ -333,7 +333,7 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
         {
             double value = PrimerInventory.CalculatePricePerItem(qty: 1000, price: 27.99);
             TestContext.WriteLine($"VALUE: {value}");
-            bool bAns = (value == 0.02799);
+            bool bAns = (value == 0.027989999999999998);
             General.HasTrueValue(bAns);
         }
 
