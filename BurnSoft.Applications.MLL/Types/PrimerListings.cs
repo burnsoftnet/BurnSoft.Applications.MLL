@@ -2,6 +2,9 @@
 
 namespace BurnSoft.Applications.MLL.Types
 {
+    /// <summary>
+    /// Class PrimerListings list container for the General_Primer table
+    /// </summary>
     public class PrimerListings
     {
         /// <summary>
