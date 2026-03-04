@@ -108,7 +108,7 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine($"VALUE: {value}");
                 long id = PrimerTypes.GetId(_databasePath, _name, out _errOut);
-                TestContext.WriteLine(DebugHelpers.PrintListValues.PrimerTypesListingsData(PrimerTypes.GetDetails(_databasePath, id, out _errOut)));
+                TestContext.WriteLine(DebugHelpers.PrintListValues.PrimerTypeListingsData(PrimerTypes.GetDetails(_databasePath, id, out _errOut)));
                 bAns = true;
             }
             catch (Exception ex)
@@ -203,9 +203,9 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             bool bAns = false;
             try
             {
-                List<PrimerTypesListings> value = PrimerTypes.GetDetails(_databasePath, _existingName, out _errOut);
+                List<PrimerTypeListings> value = PrimerTypes.GetDetails(_databasePath, _existingName, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
-                TestContext.WriteLine(DebugHelpers.PrintListValues.PrimerTypesListingsData(value));
+                TestContext.WriteLine(DebugHelpers.PrintListValues.PrimerTypeListingsData(value));
                 bAns = true;
             }
             catch (Exception ex)
@@ -221,9 +221,9 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             bool bAns = false;
             try
             {
-                List<PrimerTypesListings> value = PrimerTypes.GetDetails(_databasePath, _existingId, out _errOut);
+                List<PrimerTypeListings> value = PrimerTypes.GetDetails(_databasePath, _existingId, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
-                TestContext.WriteLine(DebugHelpers.PrintListValues.PrimerTypesListingsData(value));
+                TestContext.WriteLine(DebugHelpers.PrintListValues.PrimerTypeListingsData(value));
                 bAns = true;
             }
             catch (Exception ex)
