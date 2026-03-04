@@ -19,3 +19,13 @@ This section is misc developer notes.  Things that might be needed for the proje
 '''cmd
 xmldoc2md BurnSoft.Applications.MLL.dll --output docs --github-pages --back-button --index-page-name README
 '''
+
+## Questionable Tables
+
+Some of these tables where created and started in the database but nothingn in code, it will take a while after the project
+is updated to see if it is still needed or not.  The Following tables in question are:
+
+* General_Suggested_Use
+* List_Bullets_Picture
+* List_Bullets_SU
+* List_Bullets_SupportingCaliber
