@@ -104,7 +104,7 @@
     <Compile Include="Types\ConfigNameList.cs" />
     <Compile Include="Types\EquipmentLists.cs" />
     <Compile Include="Types\FirearmCollection.cs" />
-    <Compile Include="Types\GunCollectionAmmo.cs" />
+    <Compile Include="Types\GunCollectionAmmoData.cs" />
     <Compile Include="Types\LoginInformationOnly.cs" />
     <Compile Include="Types\PersonalInformation.cs" />
     <Compile Include="Types\PowderListing.cs" />

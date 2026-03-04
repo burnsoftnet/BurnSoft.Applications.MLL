@@ -7,7 +7,7 @@ namespace BurnSoft.Applications.MLL.Types
     /// that was created and store that qty in this table.  Then you have the 
     /// option to move it to the Gun Collection Application Ammo Inventory Table.
     /// </summary>
-    public class GunCollectionAmmo
+    public class GunCollectionAmmoData
     {
         /// <summary>
         /// Gets or sets the identifier.
