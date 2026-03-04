@@ -243,7 +243,18 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             return bAns;
         }
-        
+        /// <summary>
+        /// Adds the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="manufacturer">The manufacturer.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="primerType">Type of the primer.</param>
+        /// <param name="price">The price.</param>
+        /// <param name="qty">The qty.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
         public static bool Add(string databasePath, string manufacturer, string name, int primerType,
             double price, long qty, out string errOut)
         {
@@ -270,7 +281,19 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             return bAns;
         }
-        
+        /// <summary>
+        /// Updates the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="manufacturer">The manufacturer.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="primerType">Type of the primer.</param>
+        /// <param name="price">The price.</param>
+        /// <param name="qty">The qty.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
         public static bool Update(string databasePath, long id, string manufacturer, string name, int primerType,
             double price, long qty, out string errOut)
         {

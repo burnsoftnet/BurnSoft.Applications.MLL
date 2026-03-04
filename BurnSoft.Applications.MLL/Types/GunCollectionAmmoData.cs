@@ -50,10 +50,10 @@ namespace BurnSoft.Applications.MLL.Types
         /// <value>The price.</value>
         public double Price { get; set; }
         /// <summary>
-        /// Gets or sets the price per item.
+        /// Gets or sets the weight double.
         /// </summary>
-        /// <value>The price per item.</value>
-        public double PricePerItem { get; set; }
+        /// <value>The weight double.</value>
+        public double WeightDouble { get; set; }
         // <summary>
         /// Gets or sets the last synchronize for the sync_lastupdate column
         /// </summary>
