@@ -217,6 +217,37 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
             return lAns;
         }
         /// <summary>
+        /// Gets the default powder identifier.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="configId">The configuration identifier.</param>
+        /// <param name="powderLoad">The powder load.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int64.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static long GetDefaultPowderId(string databasePath, int configId, out double powderLoad, out string errOut)
+        {
+            long lAns = 0;
+            errOut = "";
+            powderLoad = 0;
+            try
+            {
+                string sql = $"SELECT * from Config_List_Powder_Data_NSG where IsPref=1 and CLNID={configId}";
+                List<ConfigListPowderData> lst = GetList(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                foreach (ConfigListPowderData l in lst)
+                {
+                    lAns = l.Id;
+                    powderLoad = l.LoadMid;
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetDefaultPowder", e);
+            }
+            return lAns;
+        }
+        /// <summary>
         /// Gets the details.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
