@@ -257,6 +257,24 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
         }
 
         [TestMethod, TestCategory("Inventory Listings - Primers")]
+        public void GetPrimerTypeTest()
+        {
+            bool bAns = false;
+            try
+            {
+                string value = PrimerInventory.GetPrimerType(_databasePath, _existingId, out _errOut);
+                if (_errOut.Length > 0) throw new Exception(_errOut);
+                TestContext.WriteLine($"VALUE RETURNED {value}");
+                bAns = (value.Length > 0);
+            }
+            catch (Exception ex)
+            {
+                TestContext.WriteLine(ex.Message);
+            }
+            General.HasTrueValue(bAns, _errOut);
+        }
+
+        [TestMethod, TestCategory("Inventory Listings - Primers")]
         public void GetDetailsTest()
         {
             bool bAns = false;
