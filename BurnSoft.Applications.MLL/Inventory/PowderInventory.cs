@@ -6,7 +6,6 @@ using BurnSoft.Universal;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Security.Cryptography;
 
 namespace BurnSoft.Applications.MLL.Inventory
 {
@@ -167,6 +166,35 @@ namespace BurnSoft.Applications.MLL.Inventory
                 errOut = ErrorMessage("GetId", e);
             }
             return lAns;
+        }
+        /// <summary>
+        /// Gets the qty per powder using the weight in grains
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Double.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static double GetQtyPerPowder(string databasePath, long id, out string errOut)
+        {
+            errOut = "";
+            double dAns = 0;
+            try
+            {
+                string sql = $"Select * from General_Powder where id={id}";
+                List<PowderListing> lst = GetList(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                foreach (PowderListing i in lst)
+                {
+                    dAns = i.WeightInGrains;
+                    break;
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetId", e);
+            }
+            return dAns;
         }
         /// <summary>
         /// Gets the details.
