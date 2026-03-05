@@ -200,7 +200,7 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
             fps = 0;
             try
             {
-                string sql = $"SELECT * from Config_List_Powder_Data_SG where IsPref=1 and CLNID={configId}";
+                string sql = $"SELECT * from Config_List_Powder_Data_NSG where IsPref=1 and CLNID={configId}";
                 List<ConfigListPowderData> lst = GetList(databasePath, sql, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 foreach (ConfigListPowderData l in lst)

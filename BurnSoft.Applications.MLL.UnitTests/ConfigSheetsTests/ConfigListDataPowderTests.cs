@@ -294,7 +294,7 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
         }
 
         [TestMethod, TestCategory("Config Sheets - Metalic Powder Data")]
-        public void GetDetailsIdTest()
+        public void GetDetailsListTest()
         {
             bool bAns = false;
             try
