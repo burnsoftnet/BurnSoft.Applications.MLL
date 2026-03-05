@@ -183,6 +183,35 @@ namespace BurnSoft.Applications.MLL.Inventory
             return GetList(databasePath, sql, out errOut);
         }
         /// <summary>
+        /// Gets the type of the ammo.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.String.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static string GetAmmoType(string databasePath, long id, out string errOut)
+        {
+            string sAns = "";
+            errOut = "";
+            try
+            {
+                string sql = $"Select * from General_Ammunition_Type where id={id}";
+                List<AmmuntionTypeListings> lst = GetList(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                foreach(AmmuntionTypeListings i in lst)
+                {
+                    sAns = i.FirearmType;
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetAmmoType", e);
+            }
+            return sAns;
+        }
+
+        /// <summary>
         /// Datas the exists.
         /// </summary>
         /// <param name="databasePath">The database path.</param>

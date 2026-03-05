@@ -272,6 +272,24 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
         }
 
         [TestMethod, TestCategory("Inventory Listings - Powder")]
+        public void GetPricePerPowderTest()
+        {
+            bool bAns = false;
+            try
+            {
+                double value = PowderInventory.GetPricePerPowder(_databasePath, _existingId, out _errOut);
+                if (_errOut.Length > 0) throw new Exception(_errOut);
+                TestContext.WriteLine($"VALUE RETURNED {value}");
+                bAns = (value > 0);
+            }
+            catch (Exception ex)
+            {
+                TestContext.WriteLine(ex.Message);
+            }
+            General.HasTrueValue(bAns, _errOut);
+        }
+
+        [TestMethod, TestCategory("Inventory Listings - Powder")]
         public void GetDetailsTest()
         {
             bool bAns = false;

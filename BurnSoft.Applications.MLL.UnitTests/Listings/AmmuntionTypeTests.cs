@@ -252,6 +252,24 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
         }
 
         [TestMethod, TestCategory("General Listings - Ammo Type")]
+        public void GetAmmoTypeTest()
+        {
+            bool bAns = false;
+            try
+            {
+                string value = AmmuntionType.GetAmmoType(_databasePath, _existingId, out _errOut);
+                if (_errOut.Length > 0) throw new Exception(_errOut);
+                TestContext.WriteLine($"VALUE: {value}");
+                bAns = value.Length > 0;
+            }
+            catch (Exception ex)
+            {
+                TestContext.WriteLine(ex.Message);
+            }
+            General.HasTrueValue(bAns, _errOut);
+        }
+
+        [TestMethod, TestCategory("General Listings - Ammo Type")]
         public void DataExistsByManuNameTest()
         {
             bool bAns = false;

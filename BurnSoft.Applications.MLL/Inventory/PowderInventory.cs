@@ -192,7 +192,36 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage("GetId", e);
+                errOut = ErrorMessage("GetQtyPerPowder", e);
+            }
+            return dAns;
+        }
+        /// <summary>
+        /// Gets the price per powder.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Double.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static double GetPricePerPowder(string databasePath, long id, out string errOut)
+        {
+            errOut = "";
+            double dAns = 0;
+            try
+            {
+                string sql = $"Select * from General_Powder where id={id}";
+                List<PowderListing> lst = GetList(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                foreach (PowderListing i in lst)
+                {
+                    dAns = i.PricePerGrain;
+                    break;
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetPricePerPowder", e);
             }
             return dAns;
         }
