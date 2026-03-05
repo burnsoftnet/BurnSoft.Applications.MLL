@@ -63,8 +63,13 @@ namespace BurnSoft.Applications.MLL.Inventory
         private static string ErrorMessage(string functionName, ArgumentNullException e) =>
             $"{ClassLocation}.{functionName} - {e.Message}";
 
-        #endregion                        
-
+        #endregion                                
+        /// <summary>
+        /// Gets the data.
+        /// </summary>
+        /// <param name="dt">The dt.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;ShotgunPowderListings&gt;.</returns>
         private static List<ShotgunPowderListings> GetData(DataTable dt, out string errOut)
         {
             List<ShotgunPowderListings> lst = new List<ShotgunPowderListings>();
@@ -91,7 +96,14 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             return lst;
         }
-
+        /// <summary>
+        /// Gets the list.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="sql">The SQL.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;ShotgunPowderListings&gt;.</returns>
+        /// <exception cref="System.Exception"></exception>
         private static List<ShotgunPowderListings> GetList(string databasePath, string sql, out string errOut)
         {
             List<ShotgunPowderListings> lst = new List<ShotgunPowderListings>();
@@ -109,13 +121,26 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             return lst;
         }
-
+        /// <summary>
+        /// Gets all.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;ShotgunPowderListings&gt;.</returns>
         public static List<ShotgunPowderListings> GetAll(string databasePath, out string errOut)
         {
             string sql = $"Select * from List_SG_Bushing_Powder order by Manufacturer,sName  ASC";
             return GetList(databasePath, sql, out errOut);
         }
-
+        /// <summary>
+        /// Gets the identifier.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="manufacturer">The manufacturer.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int64.</returns>
+        /// <exception cref="System.Exception"></exception>
         public static long GetId(string databasePath, string manufacturer, string name, out string errOut)
         {
             errOut = "";
@@ -137,19 +162,38 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             return lAns;
         }
-
+        /// <summary>
+        /// Gets the details.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="manufacturer">The manufacturer.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;ShotgunPowderListings&gt;.</returns>
         public static List<ShotgunPowderListings> GetDetails(string databasePath, string manufacturer, string name, out string errOut)
         {
             string sql = $"Select * from List_SG_Bushing_Powder where manufacturer='{manufacturer}' and sname='{name}'";
             return GetList(databasePath, sql, out errOut);
         }
-
+        /// <summary>
+        /// Gets the details.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;ShotgunPowderListings&gt;.</returns>
         public static List<ShotgunPowderListings> GetDetails(string databasePath, long id, out string errOut)
         {
             string sql = $"Select * from List_SG_Bushing_Powder where id={id}";
             return GetList(databasePath, sql, out errOut);
         }
-
+        /// <summary>
+        /// Datas the exists.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
         public static bool DataExists(string databasePath, out string errOut)
         {
             bool bAns = false;
@@ -166,7 +210,15 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             return bAns;
         }
-
+        /// <summary>
+        /// Datas the exists.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="manufacturer">The manufacturer.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
         public static bool DataExists(string databasePath, string manufacturer, string name, out string errOut)
         {
             bool bAns = false;
@@ -184,7 +236,17 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             return bAns;
         }
-        
+        /// <summary>
+        /// Adds the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="manufacturer">The manufacturer.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="charge">The charge.</param>
+        /// <param name="type">The type.</param>
+        /// <param name="powderName">Name of the powder.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool Add(string databasePath, string manufacturer, string name, string charge,
             string type, string powderName, out string errOut)
         {
@@ -206,7 +268,18 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             return bAns;
         }
-        
+        /// <summary>
+        /// Updates the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="manufacturer">The manufacturer.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="charge">The charge.</param>
+        /// <param name="type">The type.</param>
+        /// <param name="powderName">Name of the powder.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool Update(string databasePath, long id, string manufacturer,
             string name, string charge, string type, string powderName, out string errOut)
         {
@@ -228,7 +301,13 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             return bAns;
         }
-        
+        /// <summary>
+        /// Deletes the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool Delete(string databasePath, long id, out string errOut)
         {
             errOut = "";
@@ -244,7 +323,15 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             return bAns;
         }
-       
+        /// <summary>
+        /// Deletes the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="manufacturer">The manufacturer.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
         public static bool Delete(string databasePath, string manufacturer, string name, out string errOut)
         {
             errOut = "";
