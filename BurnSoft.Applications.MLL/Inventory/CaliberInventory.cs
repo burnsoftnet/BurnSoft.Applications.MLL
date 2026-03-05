@@ -158,6 +158,35 @@ namespace BurnSoft.Applications.MLL.Inventory
             return lAns;
         }
         /// <summary>
+        /// Gets the name.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.String.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static string GetName(string databasePath, long id, out string errOut)
+        {
+            errOut = "";
+            string sAns = "";
+            try
+            {
+                string sql = $"Select * from List_Calibers where id={id}";
+                List<CaliberLists> lst = GetList(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                foreach (CaliberLists i in lst)
+                {
+                    sAns = i.Caliber;
+                    break;
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetName", e);
+            }
+            return sAns;
+        }
+        /// <summary>
         /// Gets the details.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
