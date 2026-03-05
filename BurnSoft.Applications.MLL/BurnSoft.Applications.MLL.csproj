@@ -112,6 +112,7 @@
     <Compile Include="Types\PrimerTypeListings.cs" />
     <Compile Include="Types\RegistrySettings.cs" />
     <Compile Include="Types\ShotgunBushingListings.cs" />
+    <Compile Include="Types\ShotgunPowderListings.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bswtsicon.png" />
