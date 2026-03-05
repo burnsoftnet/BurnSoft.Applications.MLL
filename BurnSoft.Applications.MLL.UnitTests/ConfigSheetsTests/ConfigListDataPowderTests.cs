@@ -235,12 +235,53 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
         }
 
         [TestMethod, TestCategory("Config Sheets - Metalic Powder Data")]
+        public void GetDefaultPowderIdTest()
+        {
+            bool bAns = false;
+            try
+            {
+                double powderLoad = 0;
+                double? fps = 0;
+                long value = ConfigListDataPowder.GetDefaultPowderId(_databasePath, _existingConfigId, 
+                    out powderLoad, out fps, out _errOut);
+                if (_errOut.Length > 0) throw new Exception(_errOut);
+                TestContext.WriteLine($"POWDER ID RETURNED {value}");
+                TestContext.WriteLine($"Preffered Powder Load {powderLoad}");
+                TestContext.WriteLine($"Preffered Powder FPS {fps}");
+                bAns = (value > 0);
+            }
+            catch (Exception ex)
+            {
+                TestContext.WriteLine(ex.Message);
+            }
+            General.HasTrueValue(bAns, _errOut);
+        }
+
+        [TestMethod, TestCategory("Config Sheets - Metalic Powder Data")]
         public void GetDetailsTest()
         {
             bool bAns = false;
             try
             {
                 List<ConfigListPowderData> value = ConfigListDataPowder.GetDetails(_databasePath, (long)_existingConfigId, out _errOut);
+                if (_errOut.Length > 0) throw new Exception(_errOut);
+                TestContext.WriteLine(DebugHelpers.PrintListValues.ConfigListPowderDataData(value));
+                bAns = true;
+            }
+            catch (Exception ex)
+            {
+                TestContext.WriteLine(ex.Message);
+            }
+            General.HasTrueValue(bAns, _errOut);
+        }
+
+        [TestMethod, TestCategory("Config Sheets - Metalic Powder Data")]
+        public void GetDetailsIdTest()
+        {
+            bool bAns = false;
+            try
+            {
+                List<ConfigListPowderData> value = ConfigListDataPowder.GetDetails(_databasePath, _existingId, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine(DebugHelpers.PrintListValues.ConfigListPowderDataData(value));
                 bAns = true;
