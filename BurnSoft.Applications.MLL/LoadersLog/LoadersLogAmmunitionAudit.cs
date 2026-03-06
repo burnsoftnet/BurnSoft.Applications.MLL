@@ -236,6 +236,31 @@ namespace BurnSoft.Applications.MLL.LoadersLog
             return bAns;
         }
         /// <summary>
+        /// Datas the exists.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="configId">The configuration identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool DataExists(string databasePath, int configId, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+
+                List<LoadersLogAmmunitionAuditData> lst = GetDetails(databasePath, configId, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                bAns = lst.Count > 0;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("DataExists", e);
+            }
+            return bAns;
+        }
+        /// <summary>
         /// Adds the specified database path.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
