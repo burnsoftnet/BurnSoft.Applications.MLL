@@ -5,7 +5,7 @@ namespace BurnSoft.Applications.MLL.Types
 {
     /// <summary>
     /// Class LoadersLogAmmunitionData is the list container 
-    /// for the Loader_Log_Ammunition Table
+    /// for the Loaders_Log_Ammunition Table
     /// </summary>
     public class LoadersLogAmmunitionData
     {
