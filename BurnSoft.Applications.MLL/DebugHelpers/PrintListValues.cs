@@ -410,6 +410,33 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
             return sAns;
         }
         /// <summary>
+        /// Loaderses the log ammunition data data.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string LoadersLogAmmunitionDataData(List<LoadersLogAmmunitionData> value)
+        {
+            string sAns = "";
+            if (value.Count > 0)
+            {
+                foreach (LoadersLogAmmunitionData v in value)
+                {
+                    sAns += $"id : {v.Id}{Environment.NewLine}";
+                    sAns += $"Manufacturer : {v.Manufacturer}{Environment.NewLine}";
+                    sAns += $"Name : {v.Name}{Environment.NewLine}";
+                    sAns += $"Caliber : {v.Caliber}{Environment.NewLine}";
+                    sAns += $"Grain : {v.Grain}{Environment.NewLine}";
+                    sAns += $"Jacket : {v.Jacket}{Environment.NewLine}";
+                    sAns += $"Qty : {v.Qty}{Environment.NewLine}";
+                    sAns += $"GrainDouble : {v.GrainDouble}{Environment.NewLine}";
+                    sAns += $"Velocity : {v.Velocity}{Environment.NewLine}";
+                    sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                }
+            }
+            return sAns;
+        }
+
+        /// <summary>
         /// Powders the listing data.
         /// </summary>
         /// <param name="value">The value.</param>
