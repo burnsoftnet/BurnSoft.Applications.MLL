@@ -122,6 +122,71 @@ The error out.
 [List&lt;ConfigListPowderData&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
 List&lt;ConfigListPowderData&gt;.
 
+### **GetDefaultPowderId(String, Int32, Double&, Nullable`1&, String&)**
+
+Gets the default powder identifier.
+
+```csharp
+public static long GetDefaultPowderId(string databasePath, int configId, Double& powderLoad, Nullable`1& fps, String& errOut)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`configId` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+The configuration identifier.
+
+`powderLoad` [Double&](https://docs.microsoft.com/en-us/dotnet/api/system.double&)<br>
+The powder load.
+
+`fps` [Nullable`1&](https://docs.microsoft.com/en-us/dotnet/api/system.nullable-1&)<br>
+The FPS.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
+System.Int64.
+
+#### Exceptions
+
+[Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
+
+### **GetDefaultPowderId(String, Int32, Double&, String&)**
+
+Gets the default powder identifier.
+
+```csharp
+public static long GetDefaultPowderId(string databasePath, int configId, Double& powderLoad, String& errOut)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`configId` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+The configuration identifier.
+
+`powderLoad` [Double&](https://docs.microsoft.com/en-us/dotnet/api/system.double&)<br>
+The powder load.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
+System.Int64.
+
+#### Exceptions
+
+[Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
+
 ### **DataExists(String, String&)**
 
 Datas the exists.

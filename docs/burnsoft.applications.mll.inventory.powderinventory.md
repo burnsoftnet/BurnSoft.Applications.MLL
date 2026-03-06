@@ -76,6 +76,62 @@ System.Int64.
 
 [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
 
+### **GetQtyPerPowder(String, Int64, String&)**
+
+Gets the qty per powder using the weight in grains
+
+```csharp
+public static double GetQtyPerPowder(string databasePath, long id, String& errOut)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`id` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
+The identifier.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
+System.Double.
+
+#### Exceptions
+
+[Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
+
+### **GetPricePerPowder(String, Int64, String&)**
+
+Gets the price per powder.
+
+```csharp
+public static double GetPricePerPowder(string databasePath, long id, String& errOut)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`id` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
+The identifier.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
+System.Double.
+
+#### Exceptions
+
+[Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
+
 ### **GetDetails(String, String, String, String&)**
 
 Gets the details.

@@ -86,9 +86,13 @@
 
 [ShotgunBushingInventory](./burnsoft.applications.mll.inventory.shotgunbushinginventory.md)
 
+[ShotgunPowderInventory](./burnsoft.applications.mll.inventory.shotgunpowderinventory.md)
+
 ## BurnSoft.Applications.MLL.LoadersLog
 
 [Firearms](./burnsoft.applications.mll.loaderslog.firearms.md)
+
+[LoadersLogAmmunition](./burnsoft.applications.mll.loaderslog.loaderslogammunition.md)
 
 ## BurnSoft.Applications.MLL.PeopleAndPlaces
 
@@ -122,6 +126,10 @@
 
 [FirearmCollection](./burnsoft.applications.mll.types.firearmcollection.md)
 
+[GunCollectionAmmoData](./burnsoft.applications.mll.types.guncollectionammodata.md)
+
+[LoadersLogAmmunitionData](./burnsoft.applications.mll.types.loaderslogammunitiondata.md)
+
 [LoginInformationOnly](./burnsoft.applications.mll.types.logininformationonly.md)
 
 [PersonalInformation](./burnsoft.applications.mll.types.personalinformation.md)
@@ -135,3 +143,5 @@
 [RegistrySettings](./burnsoft.applications.mll.types.registrysettings.md)
 
 [ShotgunBushingListings](./burnsoft.applications.mll.types.shotgunbushinglistings.md)
+
+[ShotgunPowderListings](./burnsoft.applications.mll.types.shotgunpowderlistings.md)

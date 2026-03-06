@@ -2,24 +2,28 @@
 
 ---
 
-# PrimerInventory
+# LoadersLogAmmunition
 
-Namespace: BurnSoft.Applications.MLL.Inventory
+Namespace: BurnSoft.Applications.MLL.LoadersLog
 
-Class PrimerInventory handles working with the data in the General_Primer Table.
+Class LoadersLogAmmunition handles the data in the 
+ Loaders_Log_Ammunition Table which is where the 
+ Make Ammunition function stores the ammo to ether 
+ track on your own or export to the My Gun 
+ Collection application
 
 ```csharp
-public class PrimerInventory
+public class LoadersLogAmmunition
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [PrimerInventory](./burnsoft.applications.mll.inventory.primerinventory)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [LoadersLogAmmunition](./burnsoft.applications.mll.loaderslog.loaderslogammunition)
 
 ## Constructors
 
-### **PrimerInventory()**
+### **LoadersLogAmmunition()**
 
 ```csharp
-public PrimerInventory()
+public LoadersLogAmmunition()
 ```
 
 ## Methods
@@ -29,7 +33,7 @@ public PrimerInventory()
 Gets all.
 
 ```csharp
-public static List<PrimerListings> GetAll(string databasePath, String& errOut)
+public static List<LoadersLogAmmunitionData> GetAll(string databasePath, String& errOut)
 ```
 
 #### Parameters
@@ -42,8 +46,8 @@ The error out.
 
 #### Returns
 
-[List&lt;PrimerListings&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
-List&lt;PrimerListings&gt;.
+[List&lt;LoadersLogAmmunitionData&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+List&lt;LoadersLogAmmunitionData&gt;.
 
 ### **GetId(String, String, String, String&)**
 
@@ -76,40 +80,12 @@ System.Int64.
 
 [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
 
-### **GetPrimerType(String, Int64, String&)**
-
-Gets the type of the primer.
-
-```csharp
-public static string GetPrimerType(string databasePath, long id, String& errOut)
-```
-
-#### Parameters
-
-`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
-The database path.
-
-`id` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
-The identifier.
-
-`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
-The error out.
-
-#### Returns
-
-[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
-System.String.
-
-#### Exceptions
-
-[Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
-
 ### **GetDetails(String, String, String, String&)**
 
 Gets the details.
 
 ```csharp
-public static List<PrimerListings> GetDetails(string databasePath, string manufacturer, string name, String& errOut)
+public static List<LoadersLogAmmunitionData> GetDetails(string databasePath, string manufacturer, string name, String& errOut)
 ```
 
 #### Parameters
@@ -128,15 +104,15 @@ The error out.
 
 #### Returns
 
-[List&lt;PrimerListings&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
-List&lt;PrimerListings&gt;.
+[List&lt;LoadersLogAmmunitionData&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+List&lt;LoadersLogAmmunitionData&gt;.
 
 ### **GetDetails(String, Int64, String&)**
 
 Gets the details.
 
 ```csharp
-public static List<PrimerListings> GetDetails(string databasePath, long id, String& errOut)
+public static List<LoadersLogAmmunitionData> GetDetails(string databasePath, long id, String& errOut)
 ```
 
 #### Parameters
@@ -152,8 +128,8 @@ The error out.
 
 #### Returns
 
-[List&lt;PrimerListings&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
-List&lt;PrimerListings&gt;.
+[List&lt;LoadersLogAmmunitionData&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+List&lt;LoadersLogAmmunitionData&gt;.
 
 ### **DataExists(String, String&)**
 
@@ -211,12 +187,12 @@ The error out.
 
 [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
 
-### **Add(String, String, String, Int32, Double, Int64, String&)**
+### **Add(String, String, String, String, String, String, Int64, Int32, String&)**
 
 Adds the specified database path.
 
 ```csharp
-public static bool Add(string databasePath, string manufacturer, string name, int primerType, double price, long qty, String& errOut)
+public static bool Add(string databasePath, string manufacturer, string name, string caliber, string grain, string jacket, long qty, int velocity, String& errOut)
 ```
 
 #### Parameters
@@ -230,14 +206,20 @@ The manufacturer.
 `name` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The name.
 
-`primerType` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
-Type of the primer.
+`caliber` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The caliber.
 
-`price` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
-The price.
+`grain` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The grain.
+
+`jacket` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The jacket.
 
 `qty` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
 The qty.
+
+`velocity` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+The velocity.
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
 The error out.
@@ -251,12 +233,12 @@ The error out.
 
 [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
 
-### **Update(String, Int64, String, String, Int32, Double, Int64, String&)**
+### **Update(String, Int64, String, String, String, String, String, Int64, Int32, String&)**
 
 Updates the specified database path.
 
 ```csharp
-public static bool Update(string databasePath, long id, string manufacturer, string name, int primerType, double price, long qty, String& errOut)
+public static bool Update(string databasePath, long id, string manufacturer, string name, string caliber, string grain, string jacket, long qty, int velocity, String& errOut)
 ```
 
 #### Parameters
@@ -273,14 +255,20 @@ The manufacturer.
 `name` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The name.
 
-`primerType` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
-Type of the primer.
+`caliber` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The caliber.
 
-`price` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
-The price.
+`grain` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The grain.
+
+`jacket` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The jacket.
 
 `qty` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
 The qty.
+
+`velocity` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+The velocity.
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
 The error out.
@@ -348,69 +336,6 @@ The error out.
 #### Exceptions
 
 [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
-
-### **CalculatePricePerItem(Int64, Double, Boolean)**
-
-Calculates the price per item.
-
-```csharp
-public static double CalculatePricePerItem(long qty, double price, bool useDollar)
-```
-
-#### Parameters
-
-`qty` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
-The qty.
-
-`price` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
-The price.
-
-`useDollar` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
-if set to `true` [use dollar].
-
-#### Returns
-
-[Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
-System.Double.
-
-### **UpdateQty(String, Int64, Int64, Double, Double, Int64, Double, String&)**
-
-Updates the qty.
-
-```csharp
-public static bool UpdateQty(string databasePath, long id, long currentQty, double currentPrice, double currentPricePerItem, long newQty, double newPrice, String& errOut)
-```
-
-#### Parameters
-
-`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
-The database path.
-
-`id` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
-The identifier.
-
-`currentQty` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
-The current qty.
-
-`currentPrice` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
-The current price.
-
-`currentPricePerItem` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
-The current price per item.
-
-`newQty` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
-The new qty.
-
-`newPrice` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
-The new price.
-
-`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
-The error out.
-
-#### Returns
-
-[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
-`true` if XXXX, `false` otherwise.
 
 ---
 

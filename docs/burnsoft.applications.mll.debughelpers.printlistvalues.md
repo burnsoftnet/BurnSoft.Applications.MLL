@@ -295,6 +295,24 @@ The value.
 [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 System.String.
 
+### **LoadersLogAmmunitionDataData(List&lt;LoadersLogAmmunitionData&gt;)**
+
+Loaderses the log ammunition data data.
+
+```csharp
+public static string LoadersLogAmmunitionDataData(List<LoadersLogAmmunitionData> value)
+```
+
+#### Parameters
+
+`value` [List&lt;LoadersLogAmmunitionData&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+The value.
+
+#### Returns
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+System.String.
+
 ### **PowderListingData(List&lt;PowderListing&gt;)**
 
 Powders the listing data.
@@ -324,6 +342,24 @@ public static string ShotgunBushingListingsData(List<ShotgunBushingListings> val
 #### Parameters
 
 `value` [List&lt;ShotgunBushingListings&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+The value.
+
+#### Returns
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+System.String.
+
+### **ShotgunPowderListingsData(List&lt;ShotgunPowderListings&gt;)**
+
+Shotguns the powder listings data.
+
+```csharp
+public static string ShotgunPowderListingsData(List<ShotgunPowderListings> value)
+```
+
+#### Parameters
+
+`value` [List&lt;ShotgunPowderListings&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
 The value.
 
 #### Returns

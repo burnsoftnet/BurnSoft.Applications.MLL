@@ -122,6 +122,34 @@ The error out.
 [List&lt;AmmuntionTypeListings&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
 List&lt;AmmuntionTypeListings&gt;.
 
+### **GetAmmoType(String, Int64, String&)**
+
+Gets the type of the ammo.
+
+```csharp
+public static string GetAmmoType(string databasePath, long id, String& errOut)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`id` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
+The identifier.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+System.String.
+
+#### Exceptions
+
+[Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
+
 ### **DataExists(String, String&)**
 
 Datas the exists.
