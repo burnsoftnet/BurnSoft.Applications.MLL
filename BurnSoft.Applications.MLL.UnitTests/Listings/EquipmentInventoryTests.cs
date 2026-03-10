@@ -8,7 +8,7 @@ using System.Collections.Generic;
 namespace BurnSoft.Applications.MLL.UnitTests.Listings
 {
     [TestClass]
-    public class CaliberInventoryTests
+    public class EquipmentInventoryTests
     {
         /// <summary>
         /// Gets or sets the test context.
@@ -24,6 +24,10 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
         /// </summary>
         private string _databasePath;
         /// <summary>
+        /// The existing manu
+        /// </summary>
+        private string _existingManu;
+        /// <summary>
         /// The existing name
         /// </summary>
         private string _existingName;
@@ -32,12 +36,25 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
         /// </summary>
         private int _existingId;
         /// <summary>
-        /// The existing identifier
+        /// The manufacturer
         /// </summary>
+        private string _manufacturer;
         /// <summary>
         /// The name
         /// </summary>
         private string _name;
+        /// <summary>
+        /// The use
+        /// </summary>
+        private string _use;
+        /// <summary>
+        /// The cost
+        /// </summary>
+        private double _cost;
+        /// <summary>
+        /// The notes
+        /// </summary>
+        private string _notes;
 
         /// <summary>
         /// Initializes this instance.
@@ -48,46 +65,53 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             // Vs2019.GetSetting("");
             _errOut = @"";
             _databasePath = Vs2019.GetSetting("DatabasePath");
-            _existingName = "9mm Luger";
+            _existingManu = "RCBS";
+            _existingName = "3 Piece 9mm Carb Die Set";
             _existingId = 2;
-            _name = "6.5 ARC";
+            _manufacturer = "RCBS";
+            _name = "4 Piece 9mm Carb Die Competition Set";
+            _use = "9mm Dies Set";
+            _cost = 59.99;
+            _notes = "Geared for performance in competition";
+
         }
 
-        private void AddTestCaliberExists()
+        private void AddTestEquipmentExists()
         {
-            if (!CaliberInventory.DataExists(_databasePath, _name, out _))
+            if (!EquipmentInventory.DataExists(_databasePath, _manufacturer, _name, out _))
             {
-                CaliberInventory.Add(_databasePath, _name, out _);
+                EquipmentInventory.Add(_databasePath, _manufacturer, _name,
+                    _use, _cost, _notes, out _);
             }
         }
 
-        private void DeleteTestCaliberExists()
+        private void DeleteTestEquipmentExists()
         {
-            if (CaliberInventory.DataExists(_databasePath, _name, out _))
+            if (EquipmentInventory.DataExists(_databasePath, _manufacturer, _name, out _))
             {
-                long id = CaliberInventory.GetId(_databasePath, _name, out _);
-                CaliberInventory.Delete(_databasePath, id, out _);
+                long id = EquipmentInventory.GetId(_databasePath, _manufacturer, _name, out _);
+                EquipmentInventory.Delete(_databasePath, id, out _);
             }
         }
 
-        private void PrintTestCalibers(string BeforeAfter = "BEFORE")
+        private void PrintTestEquipment(string BeforeAfter = "BEFORE")
         {
             TestContext.WriteLine($"===========${BeforeAfter}===========");
             TestContext.WriteLine($"");
-            List<CaliberLists> value = CaliberInventory.GetDetails(_databasePath, _name, out _errOut);
-            TestContext.WriteLine(DebugHelpers.PrintListValues.CaliberListsData(value));
+            List<EquipmentLists> value = EquipmentInventory.GetDetails(_databasePath, _manufacturer, _name, out _errOut);
+            TestContext.WriteLine(DebugHelpers.PrintListValues.EquipmentListsData(value));
             TestContext.WriteLine($"");
         }
 
-        [TestMethod, TestCategory("Inventory Listings - Calibers")]
+        [TestMethod, TestCategory("Inventory Listings - Equipment")]
         public void GetAllTest()
         {
             bool bAns = false;
             try
             {
-                List<CaliberLists> value = CaliberInventory.GetAll(_databasePath, out _errOut);
+                List<EquipmentLists> value = EquipmentInventory.GetAll(_databasePath, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
-                TestContext.WriteLine(DebugHelpers.PrintListValues.CaliberListsData(value));
+                TestContext.WriteLine(DebugHelpers.PrintListValues.EquipmentListsData(value));
                 bAns = true;
             }
             catch (Exception ex)
@@ -97,18 +121,19 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             General.HasTrueValue(bAns, _errOut);
         }
 
-        [TestMethod, TestCategory("Inventory Listings - Calibers")]
+        [TestMethod, TestCategory("Inventory Listings - Equipment")]
         public void AddTest()
         {
             bool bAns = false;
             try
             {
-                DeleteTestCaliberExists();
-                bool value = CaliberInventory.Add(_databasePath, _name, out _errOut);
+                DeleteTestEquipmentExists();
+                bool value = EquipmentInventory.Add(_databasePath, _manufacturer, _name,
+                    _use, _cost, _notes, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine($"VALUE: {value}");
-                long id = CaliberInventory.GetId(_databasePath, _name, out _errOut);
-                TestContext.WriteLine(DebugHelpers.PrintListValues.CaliberListsData(CaliberInventory.GetDetails(_databasePath, id, out _errOut)));
+                long id = EquipmentInventory.GetId(_databasePath, _manufacturer, _name, out _errOut);
+                TestContext.WriteLine(DebugHelpers.PrintListValues.EquipmentListsData(EquipmentInventory.GetDetails(_databasePath, id, out _errOut)));
                 bAns = true;
             }
             catch (Exception ex)
@@ -118,19 +143,20 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             General.HasTrueValue(bAns, _errOut);
         }
 
-        [TestMethod, TestCategory("Inventory Listings - Calibers")]
+        [TestMethod, TestCategory("Inventory Listings - Equipment")]
         public void UpdateTest()
         {
             bool bAns = false;
             try
             {
-                AddTestCaliberExists();
-                PrintTestCalibers();
-                long id = CaliberInventory.GetId(_databasePath, _name, out _);
-                bool value = CaliberInventory.Update(_databasePath, id, _name, out _errOut);
+                AddTestEquipmentExists();
+                PrintTestEquipment();
+                long id = EquipmentInventory.GetId(_databasePath, _manufacturer, _name, out _);
+                bool value = EquipmentInventory.Update(_databasePath, id, _manufacturer, _name,
+                    _use, (_cost * 2), _notes, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine($"VALUE: {value}");
-                PrintTestCalibers("AFTER");
+                PrintTestEquipment("AFTER");
                 bAns = true;
             }
             catch (Exception ex)
@@ -140,15 +166,15 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             General.HasTrueValue(bAns, _errOut);
         }
 
-        [TestMethod, TestCategory("Inventory Listings - Calibers")]
+        [TestMethod, TestCategory("Inventory Listings - Equipment")]
         public void DeleteTest()
         {
             bool bAns = false;
             try
             {
-                AddTestCaliberExists();
-                long id = CaliberInventory.GetId(_databasePath, _name, out _);
-                bool value = CaliberInventory.Delete(_databasePath, id, out _errOut);
+                AddTestEquipmentExists();
+                long id = EquipmentInventory.GetId(_databasePath, _manufacturer, _name, out _);
+                bool value = EquipmentInventory.Delete(_databasePath, id, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine($"VALUE: {value}");
                 bAns = true;
@@ -160,14 +186,14 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             General.HasTrueValue(bAns, _errOut);
         }
 
-        [TestMethod, TestCategory("Inventory Listings - Calibers")]
+        [TestMethod, TestCategory("Inventory Listings - Equipment")]
         public void DeleteByFullNameTest()
         {
             bool bAns = false;
             try
             {
-                AddTestCaliberExists();
-                bool value = CaliberInventory.Delete(_databasePath, _name, out _errOut);
+                AddTestEquipmentExists();
+                bool value = EquipmentInventory.Delete(_databasePath, _manufacturer, _name, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine($"VALUE: {value}");
                 bAns = true;
@@ -179,13 +205,13 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             General.HasTrueValue(bAns, _errOut);
         }
 
-        [TestMethod, TestCategory("Inventory Listings - Calibers")]
+        [TestMethod, TestCategory("Inventory Listings - Equipment")]
         public void GetIdTest()
         {
             bool bAns = false;
             try
             {
-                long value = CaliberInventory.GetId(_databasePath, _existingName, out _errOut);
+                long value = EquipmentInventory.GetId(_databasePath, _existingManu, _existingName, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine($"ID RETURNED {value}, expected {_existingId}");
                 bAns = (value == _existingId);
@@ -197,33 +223,15 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             General.HasTrueValue(bAns, _errOut);
         }
 
-        [TestMethod, TestCategory("Inventory Listings - Calibers")]
-        public void GetNameTest()
-        {
-            bool bAns = false;
-            try
-            {
-                string value = CaliberInventory.GetName(_databasePath, _existingId, out _errOut);
-                if (_errOut.Length > 0) throw new Exception(_errOut);
-                TestContext.WriteLine($"VALUE RETURNED {value}");
-                bAns = (value.Length > 0);
-            }
-            catch (Exception ex)
-            {
-                TestContext.WriteLine(ex.Message);
-            }
-            General.HasTrueValue(bAns, _errOut);
-        }
-
-        [TestMethod, TestCategory("Inventory Listings - Calibers")]
+        [TestMethod, TestCategory("Inventory Listings - Equipment")]
         public void GetDetailsTest()
         {
             bool bAns = false;
             try
             {
-                List<CaliberLists> value = CaliberInventory.GetDetails(_databasePath, _existingName, out _errOut);
+                List<EquipmentLists> value = EquipmentInventory.GetDetails(_databasePath, _existingManu, _existingName, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
-                TestContext.WriteLine(DebugHelpers.PrintListValues.CaliberListsData(value));
+                TestContext.WriteLine(DebugHelpers.PrintListValues.EquipmentListsData(value));
                 bAns = true;
             }
             catch (Exception ex)
@@ -233,15 +241,15 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             General.HasTrueValue(bAns, _errOut);
         }
 
-        [TestMethod, TestCategory("Inventory Listings - Calibers")]
+        [TestMethod, TestCategory("Inventory Listings - Equipment")]
         public void GetDetailsIdTest()
         {
             bool bAns = false;
             try
             {
-                List<CaliberLists> value = CaliberInventory.GetDetails(_databasePath, _existingId, out _errOut);
+                List<EquipmentLists> value = EquipmentInventory.GetDetails(_databasePath, _existingId, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
-                TestContext.WriteLine(DebugHelpers.PrintListValues.CaliberListsData(value));
+                TestContext.WriteLine(DebugHelpers.PrintListValues.EquipmentListsData(value));
                 bAns = true;
             }
             catch (Exception ex)
@@ -251,13 +259,13 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             General.HasTrueValue(bAns, _errOut);
         }
 
-        [TestMethod, TestCategory("Inventory Listings - Calibers")]
+        [TestMethod, TestCategory("Inventory Listings - Equipment")]
         public void DataExistsTest()
         {
             bool bAns = false;
             try
             {
-                bool value = CaliberInventory.DataExists(_databasePath, out _errOut);
+                bool value = EquipmentInventory.DataExists(_databasePath, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine($"VALUE: {value}");
                 bAns = true;
@@ -269,13 +277,13 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             General.HasTrueValue(bAns, _errOut);
         }
 
-        [TestMethod, TestCategory("Inventory Listings - Calibers")]
+        [TestMethod, TestCategory("Inventory Listings - Equipment")]
         public void DataExistsByManuNameTest()
         {
             bool bAns = false;
             try
             {
-                bool value = CaliberInventory.DataExists(_databasePath, _existingName, out _errOut);
+                bool value = EquipmentInventory.DataExists(_databasePath, _existingManu, _existingName, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine($"VALUE: {value}");
                 bAns = true;

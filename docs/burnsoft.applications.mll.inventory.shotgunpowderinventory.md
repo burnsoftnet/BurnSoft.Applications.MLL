@@ -2,24 +2,24 @@
 
 ---
 
-# CaliberInventory
+# ShotgunPowderInventory
 
 Namespace: BurnSoft.Applications.MLL.Inventory
 
-Class CaliberInventory handles working with data for the Caliber Table
+Class ShotgunPowderInventory works with the data in the List_SG_Bushing_Powder_Powder table.
 
 ```csharp
-public class CaliberInventory
+public class ShotgunPowderInventory
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [CaliberInventory](./burnsoft.applications.mll.inventory.caliberinventory)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [ShotgunPowderInventory](./burnsoft.applications.mll.inventory.shotgunpowderinventory)
 
 ## Constructors
 
-### **CaliberInventory()**
+### **ShotgunPowderInventory()**
 
 ```csharp
-public CaliberInventory()
+public ShotgunPowderInventory()
 ```
 
 ## Methods
@@ -29,7 +29,7 @@ public CaliberInventory()
 Gets all.
 
 ```csharp
-public static List<CaliberLists> GetAll(string databasePath, String& errOut)
+public static List<ShotgunPowderListings> GetAll(string databasePath, String& errOut)
 ```
 
 #### Parameters
@@ -42,21 +42,24 @@ The error out.
 
 #### Returns
 
-[List&lt;CaliberLists&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
-List&lt;CaliberLists&gt;.
+[List&lt;ShotgunPowderListings&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+List&lt;ShotgunPowderListings&gt;.
 
-### **GetId(String, String, String&)**
+### **GetId(String, String, String, String&)**
 
 Gets the identifier.
 
 ```csharp
-public static long GetId(string databasePath, string name, String& errOut)
+public static long GetId(string databasePath, string manufacturer, string name, String& errOut)
 ```
 
 #### Parameters
 
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The database path.
+
+`manufacturer` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The manufacturer.
 
 `name` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The name.
@@ -73,46 +76,21 @@ System.Int64.
 
 [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
 
-### **GetName(String, Int64, String&)**
-
-Gets the name.
-
-```csharp
-public static string GetName(string databasePath, long id, String& errOut)
-```
-
-#### Parameters
-
-`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
-The database path.
-
-`id` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
-The identifier.
-
-`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
-The error out.
-
-#### Returns
-
-[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
-System.String.
-
-#### Exceptions
-
-[Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
-
-### **GetDetails(String, String, String&)**
+### **GetDetails(String, String, String, String&)**
 
 Gets the details.
 
 ```csharp
-public static List<CaliberLists> GetDetails(string databasePath, string name, String& errOut)
+public static List<ShotgunPowderListings> GetDetails(string databasePath, string manufacturer, string name, String& errOut)
 ```
 
 #### Parameters
 
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The database path.
+
+`manufacturer` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The manufacturer.
 
 `name` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The name.
@@ -122,15 +100,15 @@ The error out.
 
 #### Returns
 
-[List&lt;CaliberLists&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
-List&lt;CaliberLists&gt;.
+[List&lt;ShotgunPowderListings&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+List&lt;ShotgunPowderListings&gt;.
 
 ### **GetDetails(String, Int64, String&)**
 
 Gets the details.
 
 ```csharp
-public static List<CaliberLists> GetDetails(string databasePath, long id, String& errOut)
+public static List<ShotgunPowderListings> GetDetails(string databasePath, long id, String& errOut)
 ```
 
 #### Parameters
@@ -146,8 +124,8 @@ The error out.
 
 #### Returns
 
-[List&lt;CaliberLists&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
-List&lt;CaliberLists&gt;.
+[List&lt;ShotgunPowderListings&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+List&lt;ShotgunPowderListings&gt;.
 
 ### **DataExists(String, String&)**
 
@@ -174,18 +152,21 @@ The error out.
 
 [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
 
-### **DataExists(String, String, String&)**
+### **DataExists(String, String, String, String&)**
 
 Datas the exists.
 
 ```csharp
-public static bool DataExists(string databasePath, string name, String& errOut)
+public static bool DataExists(string databasePath, string manufacturer, string name, String& errOut)
 ```
 
 #### Parameters
 
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The database path.
+
+`manufacturer` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The manufacturer.
 
 `name` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The name.
@@ -202,12 +183,12 @@ The error out.
 
 [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
 
-### **Add(String, String, String&)**
+### **Add(String, String, String, String, String, String, String&)**
 
 Adds the specified database path.
 
 ```csharp
-public static bool Add(string databasePath, string name, String& errOut)
+public static bool Add(string databasePath, string manufacturer, string name, string charge, string type, string powderName, String& errOut)
 ```
 
 #### Parameters
@@ -215,8 +196,20 @@ public static bool Add(string databasePath, string name, String& errOut)
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The database path.
 
+`manufacturer` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The manufacturer.
+
 `name` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The name.
+
+`charge` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The charge.
+
+`type` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The type.
+
+`powderName` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+Name of the powder.
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
 The error out.
@@ -226,12 +219,12 @@ The error out.
 [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
 `true` if XXXX, `false` otherwise.
 
-### **Update(String, Int64, String, String&)**
+### **Update(String, Int64, String, String, String, String, String, String&)**
 
 Updates the specified database path.
 
 ```csharp
-public static bool Update(string databasePath, long id, string name, String& errOut)
+public static bool Update(string databasePath, long id, string manufacturer, string name, string charge, string type, string powderName, String& errOut)
 ```
 
 #### Parameters
@@ -242,8 +235,20 @@ The database path.
 `id` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
 The identifier.
 
+`manufacturer` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The manufacturer.
+
 `name` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The name.
+
+`charge` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The charge.
+
+`type` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The type.
+
+`powderName` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+Name of the powder.
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
 The error out.
@@ -277,18 +282,21 @@ The error out.
 [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
 `true` if XXXX, `false` otherwise.
 
-### **Delete(String, String, String&)**
+### **Delete(String, String, String, String&)**
 
 Deletes the specified database path.
 
 ```csharp
-public static bool Delete(string databasePath, string name, String& errOut)
+public static bool Delete(string databasePath, string manufacturer, string name, String& errOut)
 ```
 
 #### Parameters
 
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The database path.
+
+`manufacturer` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The manufacturer.
 
 `name` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The name.

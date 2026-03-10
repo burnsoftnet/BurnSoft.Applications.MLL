@@ -296,6 +296,45 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
             return sAns;
         }
         /// <summary>
+        /// Ammuntions the type listings data.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string AmmuntionTypeListingsData(List<AmmuntionTypeListings> value)
+        {
+            string sAns = "";
+            if (value.Count > 0)
+            {
+                foreach (AmmuntionTypeListings v in value)
+                {
+                    sAns += $"id : {v.Id}{Environment.NewLine}";
+                    sAns += $"FirearmType : {v.FirearmType}{Environment.NewLine}";
+                    sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                }
+            }
+            return sAns;
+        }
+        /// <summary>
+        /// Primers the type listings data.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string PrimerTypeListingsData(List<PrimerTypeListings> value)
+        {
+            string sAns = "";
+            if (value.Count > 0)
+            {
+                foreach (PrimerTypeListings v in value)
+                {
+                    sAns += $"id : {v.Id}{Environment.NewLine}";
+                    sAns += $"Name : {v.Name}{Environment.NewLine}";
+                    sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                }
+            }
+            return sAns;
+        }
+
+        /// <summary>
         /// Cases the listings data.
         /// </summary>
         /// <param name="value">The value.</param>
@@ -323,6 +362,130 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
             return sAns;
         }
         /// <summary>
+        /// Primers the listings data.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string PrimerListingsData(List<PrimerListings> value)
+        {
+            string sAns = "";
+            if (value.Count > 0)
+            {
+                foreach (PrimerListings v in value)
+                {
+                    sAns += $"id : {v.Id}{Environment.NewLine}";
+                    sAns += $"Manufacturer : {v.Manufacturer}{Environment.NewLine}";
+                    sAns += $"Name : {v.Name}{Environment.NewLine}";
+                    sAns += $"PrimerTypeId : {v.PrimerTypeId}{Environment.NewLine}";
+                    sAns += $"PrimerType : {v.PrimerType}{Environment.NewLine}";
+                    sAns += $"Qty : {v.Qty}{Environment.NewLine}";
+                    sAns += $"Price : {v.Price}{Environment.NewLine}";
+                    sAns += $"PricePerPrimer : {v.PricePerPrimer}{Environment.NewLine}";
+                    sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                }
+            }
+            return sAns;
+        }
+        /// <summary>
+        /// Equipments the lists data.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string EquipmentListsData(List<EquipmentLists> value)
+        {
+            string sAns = "";
+            if (value.Count > 0)
+            {
+                foreach (EquipmentLists v in value)
+                {
+                    sAns += $"id : {v.Id}{Environment.NewLine}";
+                    sAns += $"Manufacturer : {v.Manufacturer}{Environment.NewLine}";
+                    sAns += $"Name : {v.Name}{Environment.NewLine}";
+                    sAns += $"Use : {v.Use}{Environment.NewLine}";
+                    sAns += $"Cost : {v.Cost}{Environment.NewLine}";
+                    sAns += $"Notes : {v.Notes}{Environment.NewLine}";
+                    sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                }
+            }
+            return sAns;
+        }
+        /// <summary>
+        /// Loaderses the log ammunition data data.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string LoadersLogAmmunitionDataData(List<LoadersLogAmmunitionData> value)
+        {
+            string sAns = "";
+            if (value.Count > 0)
+            {
+                foreach (LoadersLogAmmunitionData v in value)
+                {
+                    sAns += $"id : {v.Id}{Environment.NewLine}";
+                    sAns += $"Manufacturer : {v.Manufacturer}{Environment.NewLine}";
+                    sAns += $"Name : {v.Name}{Environment.NewLine}";
+                    sAns += $"Caliber : {v.Caliber}{Environment.NewLine}";
+                    sAns += $"Grain : {v.Grain}{Environment.NewLine}";
+                    sAns += $"Jacket : {v.Jacket}{Environment.NewLine}";
+                    sAns += $"Qty : {v.Qty}{Environment.NewLine}";
+                    sAns += $"GrainDouble : {v.GrainDouble}{Environment.NewLine}";
+                    sAns += $"Velocity : {v.Velocity}{Environment.NewLine}";
+                    sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                }
+            }
+            return sAns;
+        }
+        /// <summary>
+        /// Loaderses the log ammunition audit data data.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string LoadersLogAmmunitionAuditDataData(List<LoadersLogAmmunitionAuditData> value)
+        {
+            string sAns = "";
+            if (value.Count > 0)
+            {
+                foreach (LoadersLogAmmunitionAuditData v in value)
+                {
+                    sAns += $"id : {v.Id}{Environment.NewLine}";
+                    sAns += $"ConfigId : {v.ConfigId}{Environment.NewLine}";
+                    sAns += $"DateCreated : {v.DateCreated}{Environment.NewLine}";
+                    sAns += $"Qty : {v.Qty}{Environment.NewLine}";
+                    sAns += $"EstimatedCostToMakeTotal : {v.EstimatedCostToMakeTotal}{Environment.NewLine}";
+                    sAns += $"EstimatedCostToMalePerRound : {v.EstimatedCostToMalePerRound}{Environment.NewLine}";
+                    sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                }
+            }
+            return sAns;
+        }
+
+        /// <summary>
+        /// Powders the listing data.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string PowderListingData(List<PowderListing> value)
+        {
+            string sAns = "";
+            if (value.Count > 0)
+            {
+                foreach (PowderListing v in value)
+                {
+                    sAns += $"id : {v.Id}{Environment.NewLine}";
+                    sAns += $"Manufacturer : {v.Manufacturer}{Environment.NewLine}";
+                    sAns += $"Name : {v.Name}{Environment.NewLine}";
+                    sAns += $"WeightInPounds : {v.WeightInPounds}{Environment.NewLine}";
+                    sAns += $"WeightInGrains : {v.WeightInGrains}{Environment.NewLine}";
+                    sAns += $"Price : {v.Price}{Environment.NewLine}";
+                    sAns += $"Notes : {v.Notes}{Environment.NewLine}";
+                    sAns += $"PricePerGrain : {v.PricePerGrain}{Environment.NewLine}";
+                    sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                }
+            }
+            return sAns;
+        }
+
+        /// <summary>
         /// Shotguns the bushing listings data.
         /// </summary>
         /// <param name="value">The value.</param>
@@ -340,6 +503,29 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
                     sAns += $"TrimToLength : {v.Charge}{Environment.NewLine}";
                     sAns += $"ForPowder : {v.ForPowder}{Environment.NewLine}";
                     sAns += $"ForShot : {v.ForShot}{Environment.NewLine}";
+                    sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                }
+            }
+            return sAns;
+        }
+        /// <summary>
+        /// Shotguns the powder listings data.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string ShotgunPowderListingsData(List<ShotgunPowderListings> value)
+        {
+            string sAns = "";
+            if (value.Count > 0)
+            {
+                foreach (ShotgunPowderListings v in value)
+                {
+                    sAns += $"id : {v.Id}{Environment.NewLine}";
+                    sAns += $"Manufacturer : {v.Manufacturer}{Environment.NewLine}";
+                    sAns += $"Name : {v.Name}{Environment.NewLine}";
+                    sAns += $"TrimToLength : {v.Charge}{Environment.NewLine}";
+                    sAns += $"Type : {v.Type}{Environment.NewLine}";
+                    sAns += $"PowderName : {v.PowderName}{Environment.NewLine}";
                     sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
                 }
             }

@@ -2,24 +2,24 @@
 
 ---
 
-# CaliberInventory
+# PrimerTypes
 
 Namespace: BurnSoft.Applications.MLL.Inventory
 
-Class CaliberInventory handles working with data for the Caliber Table
+Class PrimerTypes handles the data for primers types
 
 ```csharp
-public class CaliberInventory
+public class PrimerTypes
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [CaliberInventory](./burnsoft.applications.mll.inventory.caliberinventory)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [PrimerTypes](./burnsoft.applications.mll.inventory.primertypes)
 
 ## Constructors
 
-### **CaliberInventory()**
+### **PrimerTypes()**
 
 ```csharp
-public CaliberInventory()
+public PrimerTypes()
 ```
 
 ## Methods
@@ -29,7 +29,7 @@ public CaliberInventory()
 Gets all.
 
 ```csharp
-public static List<CaliberLists> GetAll(string databasePath, String& errOut)
+public static List<PrimerTypeListings> GetAll(string databasePath, String& errOut)
 ```
 
 #### Parameters
@@ -42,8 +42,8 @@ The error out.
 
 #### Returns
 
-[List&lt;CaliberLists&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
-List&lt;CaliberLists&gt;.
+[List&lt;PrimerTypeListings&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+List&lt;PrimerTypeListings&gt;.
 
 ### **GetId(String, String, String&)**
 
@@ -73,12 +73,12 @@ System.Int64.
 
 [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
 
-### **GetName(String, Int64, String&)**
+### **GetName(String, Int32, String&)**
 
 Gets the name.
 
 ```csharp
-public static string GetName(string databasePath, long id, String& errOut)
+public static string GetName(string databasePath, int id, String& errOut)
 ```
 
 #### Parameters
@@ -86,7 +86,7 @@ public static string GetName(string databasePath, long id, String& errOut)
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The database path.
 
-`id` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
+`id` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
 The identifier.
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
@@ -106,7 +106,7 @@ System.String.
 Gets the details.
 
 ```csharp
-public static List<CaliberLists> GetDetails(string databasePath, string name, String& errOut)
+public static List<PrimerTypeListings> GetDetails(string databasePath, string name, String& errOut)
 ```
 
 #### Parameters
@@ -122,15 +122,15 @@ The error out.
 
 #### Returns
 
-[List&lt;CaliberLists&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
-List&lt;CaliberLists&gt;.
+[List&lt;PrimerTypeListings&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+List&lt;PrimerTypeListings&gt;.
 
 ### **GetDetails(String, Int64, String&)**
 
 Gets the details.
 
 ```csharp
-public static List<CaliberLists> GetDetails(string databasePath, long id, String& errOut)
+public static List<PrimerTypeListings> GetDetails(string databasePath, long id, String& errOut)
 ```
 
 #### Parameters
@@ -146,8 +146,8 @@ The error out.
 
 #### Returns
 
-[List&lt;CaliberLists&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
-List&lt;CaliberLists&gt;.
+[List&lt;PrimerTypeListings&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+List&lt;PrimerTypeListings&gt;.
 
 ### **DataExists(String, String&)**
 

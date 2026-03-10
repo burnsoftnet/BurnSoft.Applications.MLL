@@ -221,7 +221,15 @@
     <Compile Include="Listings\CaliberInventoryTests.cs" />
     <Compile Include="Listings\CaseInventoryTests.cs" />
     <Compile Include="Listings\ShotgunBushingInventoryTests.cs" />
+    <Compile Include="Listings\AmmuntionTypeTests.cs" />
+    <Compile Include="Listings\EquipmentInventoryTests.cs" />
+    <Compile Include="Listings\PowderInventoryTests.cs" />
+    <Compile Include="Listings\PrimerTypesTests.cs" />
+    <Compile Include="Listings\PrimerInventoryTests.cs" />
+    <Compile Include="Listings\ShotgunPowderInventoryTests.cs" />
     <Compile Include="LoadersLog\FirearmsTests.cs" />
+    <Compile Include="LoadersLog\LoadersLogAmmunitionTests.cs" />
+    <Compile Include="LoadersLog\LoadersLogAmmunitionAuditTests.cs" />
     <Compile Include="PeopleAndPlaces\OwnerInformationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\VS2019.cs" />

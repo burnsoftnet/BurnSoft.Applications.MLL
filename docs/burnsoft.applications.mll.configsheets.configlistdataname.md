@@ -2,24 +2,25 @@
 
 ---
 
-# CaliberInventory
+# ConfigListDataName
 
-Namespace: BurnSoft.Applications.MLL.Inventory
+Namespace: BurnSoft.Applications.MLL.ConfigSheets
 
-Class CaliberInventory handles working with data for the Caliber Table
+Class ConfigListDataName contains the functions to use to 
+ interact with the data in the Config_List_Name table
 
 ```csharp
-public class CaliberInventory
+public class ConfigListDataName
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [CaliberInventory](./burnsoft.applications.mll.inventory.caliberinventory)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [ConfigListDataName](./burnsoft.applications.mll.configsheets.configlistdataname)
 
 ## Constructors
 
-### **CaliberInventory()**
+### **ConfigListDataName()**
 
 ```csharp
-public CaliberInventory()
+public ConfigListDataName()
 ```
 
 ## Methods
@@ -29,7 +30,7 @@ public CaliberInventory()
 Gets all.
 
 ```csharp
-public static List<CaliberLists> GetAll(string databasePath, String& errOut)
+public static List<ConfigNameList> GetAll(string databasePath, String& errOut)
 ```
 
 #### Parameters
@@ -42,8 +43,8 @@ The error out.
 
 #### Returns
 
-[List&lt;CaliberLists&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
-List&lt;CaliberLists&gt;.
+[List&lt;ConfigNameList&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+List&lt;ConfigNameList&gt;.
 
 ### **GetId(String, String, String&)**
 
@@ -73,40 +74,12 @@ System.Int64.
 
 [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
 
-### **GetName(String, Int64, String&)**
-
-Gets the name.
-
-```csharp
-public static string GetName(string databasePath, long id, String& errOut)
-```
-
-#### Parameters
-
-`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
-The database path.
-
-`id` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
-The identifier.
-
-`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
-The error out.
-
-#### Returns
-
-[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
-System.String.
-
-#### Exceptions
-
-[Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
-
 ### **GetDetails(String, String, String&)**
 
 Gets the details.
 
 ```csharp
-public static List<CaliberLists> GetDetails(string databasePath, string name, String& errOut)
+public static List<ConfigNameList> GetDetails(string databasePath, string name, String& errOut)
 ```
 
 #### Parameters
@@ -122,15 +95,15 @@ The error out.
 
 #### Returns
 
-[List&lt;CaliberLists&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
-List&lt;CaliberLists&gt;.
+[List&lt;ConfigNameList&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+List&lt;ConfigNameList&gt;.
 
 ### **GetDetails(String, Int64, String&)**
 
 Gets the details.
 
 ```csharp
-public static List<CaliberLists> GetDetails(string databasePath, long id, String& errOut)
+public static List<ConfigNameList> GetDetails(string databasePath, long id, String& errOut)
 ```
 
 #### Parameters
@@ -146,8 +119,8 @@ The error out.
 
 #### Returns
 
-[List&lt;CaliberLists&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
-List&lt;CaliberLists&gt;.
+[List&lt;ConfigNameList&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+List&lt;ConfigNameList&gt;.
 
 ### **DataExists(String, String&)**
 
@@ -202,12 +175,12 @@ The error out.
 
 [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
 
-### **Add(String, String, String&)**
+### **Add(String, String, Boolean, Boolean, String, Boolean, Boolean, String&)**
 
 Adds the specified database path.
 
 ```csharp
-public static bool Add(string databasePath, string name, String& errOut)
+public static bool Add(string databasePath, string name, bool isPersonal, bool isShotgun, string notes, bool isActive, bool isFavorite, String& errOut)
 ```
 
 #### Parameters
@@ -218,6 +191,21 @@ The database path.
 `name` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The name.
 
+`isPersonal` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+if set to `true` [is personal].
+
+`isShotgun` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+if set to `true` [is shotgun].
+
+`notes` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The notes.
+
+`isActive` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+if set to `true` [is active].
+
+`isFavorite` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+if set to `true` [is favorite].
+
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
 The error out.
 
@@ -226,12 +214,12 @@ The error out.
 [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
 `true` if XXXX, `false` otherwise.
 
-### **Update(String, Int64, String, String&)**
+### **Update(String, Int64, String, Boolean, Boolean, String, Boolean, Boolean, String&)**
 
 Updates the specified database path.
 
 ```csharp
-public static bool Update(string databasePath, long id, string name, String& errOut)
+public static bool Update(string databasePath, long id, string name, bool isPersonal, bool isShotgun, string notes, bool isActive, bool isFavorite, String& errOut)
 ```
 
 #### Parameters
@@ -244,6 +232,21 @@ The identifier.
 
 `name` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The name.
+
+`isPersonal` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+if set to `true` [is personal].
+
+`isShotgun` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+if set to `true` [is shotgun].
+
+`notes` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The notes.
+
+`isActive` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+if set to `true` [is active].
+
+`isFavorite` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+if set to `true` [is favorite].
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
 The error out.

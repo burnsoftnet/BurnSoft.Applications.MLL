@@ -8,7 +8,7 @@ using System.Collections.Generic;
 namespace BurnSoft.Applications.MLL.UnitTests.Listings
 {
     [TestClass]
-    public class CaliberInventoryTests
+    public class PrimerTypesTests
     {
         /// <summary>
         /// Gets or sets the test context.
@@ -48,46 +48,46 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             // Vs2019.GetSetting("");
             _errOut = @"";
             _databasePath = Vs2019.GetSetting("DatabasePath");
-            _existingName = "9mm Luger";
-            _existingId = 2;
-            _name = "6.5 ARC";
+            _existingName = "Large Rifle";
+            _existingId = 1;
+            _name = "Extra Large Rifle";
         }
 
-        private void AddTestCaliberExists()
+        private void AddTestPrimerExists()
         {
-            if (!CaliberInventory.DataExists(_databasePath, _name, out _))
+            if (!PrimerTypes.DataExists(_databasePath, _name, out _))
             {
-                CaliberInventory.Add(_databasePath, _name, out _);
+                PrimerTypes.Add(_databasePath, _name, out _);
             }
         }
 
-        private void DeleteTestCaliberExists()
+        private void DeleteTestPrimerExists()
         {
-            if (CaliberInventory.DataExists(_databasePath, _name, out _))
+            if (PrimerTypes.DataExists(_databasePath, _name, out _))
             {
-                long id = CaliberInventory.GetId(_databasePath, _name, out _);
-                CaliberInventory.Delete(_databasePath, id, out _);
+                long id = PrimerTypes.GetId(_databasePath, _name, out _);
+                PrimerTypes.Delete(_databasePath, id, out _);
             }
         }
 
-        private void PrintTestCalibers(string BeforeAfter = "BEFORE")
+        private void PrintAllData(string BeforeAfter = "BEFORE")
         {
             TestContext.WriteLine($"===========${BeforeAfter}===========");
             TestContext.WriteLine($"");
-            List<CaliberLists> value = CaliberInventory.GetDetails(_databasePath, _name, out _errOut);
-            TestContext.WriteLine(DebugHelpers.PrintListValues.CaliberListsData(value));
+            List<PrimerTypeListings> value = PrimerTypes.GetAll(_databasePath, out _errOut);
+            TestContext.WriteLine(DebugHelpers.PrintListValues.PrimerTypeListingsData(value));
             TestContext.WriteLine($"");
         }
 
-        [TestMethod, TestCategory("Inventory Listings - Calibers")]
+        [TestMethod, TestCategory("General Listings - Primer Types")]
         public void GetAllTest()
         {
             bool bAns = false;
             try
             {
-                List<CaliberLists> value = CaliberInventory.GetAll(_databasePath, out _errOut);
+                List<PrimerTypeListings> value = PrimerTypes.GetAll(_databasePath, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
-                TestContext.WriteLine(DebugHelpers.PrintListValues.CaliberListsData(value));
+                TestContext.WriteLine(DebugHelpers.PrintListValues.PrimerTypeListingsData(value));
                 bAns = true;
             }
             catch (Exception ex)
@@ -97,18 +97,18 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             General.HasTrueValue(bAns, _errOut);
         }
 
-        [TestMethod, TestCategory("Inventory Listings - Calibers")]
+        [TestMethod, TestCategory("General Listings - Primer Types")]
         public void AddTest()
         {
             bool bAns = false;
             try
             {
-                DeleteTestCaliberExists();
-                bool value = CaliberInventory.Add(_databasePath, _name, out _errOut);
+                DeleteTestPrimerExists();
+                bool value = PrimerTypes.Add(_databasePath, _name, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine($"VALUE: {value}");
-                long id = CaliberInventory.GetId(_databasePath, _name, out _errOut);
-                TestContext.WriteLine(DebugHelpers.PrintListValues.CaliberListsData(CaliberInventory.GetDetails(_databasePath, id, out _errOut)));
+                long id = PrimerTypes.GetId(_databasePath, _name, out _errOut);
+                TestContext.WriteLine(DebugHelpers.PrintListValues.PrimerTypeListingsData(PrimerTypes.GetDetails(_databasePath, id, out _errOut)));
                 bAns = true;
             }
             catch (Exception ex)
@@ -118,19 +118,19 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             General.HasTrueValue(bAns, _errOut);
         }
 
-        [TestMethod, TestCategory("Inventory Listings - Calibers")]
+        [TestMethod, TestCategory("General Listings - Primer Types")]
         public void UpdateTest()
         {
             bool bAns = false;
             try
             {
-                AddTestCaliberExists();
-                PrintTestCalibers();
-                long id = CaliberInventory.GetId(_databasePath, _name, out _);
-                bool value = CaliberInventory.Update(_databasePath, id, _name, out _errOut);
+                AddTestPrimerExists();
+                PrintAllData();
+                long id = PrimerTypes.GetId(_databasePath, _name, out _);
+                bool value = PrimerTypes.Update(_databasePath, id, $"{_name} hybrid", out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine($"VALUE: {value}");
-                PrintTestCalibers("AFTER");
+                PrintAllData("AFTER");
                 bAns = true;
             }
             catch (Exception ex)
@@ -140,15 +140,15 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             General.HasTrueValue(bAns, _errOut);
         }
 
-        [TestMethod, TestCategory("Inventory Listings - Calibers")]
+        [TestMethod, TestCategory("General Listings - Primer Types")]
         public void DeleteTest()
         {
             bool bAns = false;
             try
             {
-                AddTestCaliberExists();
-                long id = CaliberInventory.GetId(_databasePath, _name, out _);
-                bool value = CaliberInventory.Delete(_databasePath, id, out _errOut);
+                AddTestPrimerExists();
+                long id = PrimerTypes.GetId(_databasePath, _name, out _);
+                bool value = PrimerTypes.Delete(_databasePath, id, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine($"VALUE: {value}");
                 bAns = true;
@@ -160,14 +160,14 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             General.HasTrueValue(bAns, _errOut);
         }
 
-        [TestMethod, TestCategory("Inventory Listings - Calibers")]
+        [TestMethod, TestCategory("General Listings - Primer Types")]
         public void DeleteByFullNameTest()
         {
             bool bAns = false;
             try
             {
-                AddTestCaliberExists();
-                bool value = CaliberInventory.Delete(_databasePath, _name, out _errOut);
+                AddTestPrimerExists();
+                bool value = PrimerTypes.Delete(_databasePath, _name, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine($"VALUE: {value}");
                 bAns = true;
@@ -179,13 +179,13 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             General.HasTrueValue(bAns, _errOut);
         }
 
-        [TestMethod, TestCategory("Inventory Listings - Calibers")]
+        [TestMethod, TestCategory("General Listings - Primer Types")]
         public void GetIdTest()
         {
             bool bAns = false;
             try
             {
-                long value = CaliberInventory.GetId(_databasePath, _existingName, out _errOut);
+                long value = PrimerTypes.GetId(_databasePath, _existingName, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine($"ID RETURNED {value}, expected {_existingId}");
                 bAns = (value == _existingId);
@@ -197,16 +197,16 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             General.HasTrueValue(bAns, _errOut);
         }
 
-        [TestMethod, TestCategory("Inventory Listings - Calibers")]
+        [TestMethod, TestCategory("General Listings - Primer Types")]
         public void GetNameTest()
         {
             bool bAns = false;
             try
             {
-                string value = CaliberInventory.GetName(_databasePath, _existingId, out _errOut);
+                string value = PrimerTypes.GetName(_databasePath, _existingId, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
-                TestContext.WriteLine($"VALUE RETURNED {value}");
-                bAns = (value.Length > 0);
+                TestContext.WriteLine($"VALUE RETURNED {value}, expected {_existingName}");
+                bAns = (value == _existingName);
             }
             catch (Exception ex)
             {
@@ -215,15 +215,15 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             General.HasTrueValue(bAns, _errOut);
         }
 
-        [TestMethod, TestCategory("Inventory Listings - Calibers")]
+        [TestMethod, TestCategory("General Listings - Primer Types")]
         public void GetDetailsTest()
         {
             bool bAns = false;
             try
             {
-                List<CaliberLists> value = CaliberInventory.GetDetails(_databasePath, _existingName, out _errOut);
+                List<PrimerTypeListings> value = PrimerTypes.GetDetails(_databasePath, _existingName, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
-                TestContext.WriteLine(DebugHelpers.PrintListValues.CaliberListsData(value));
+                TestContext.WriteLine(DebugHelpers.PrintListValues.PrimerTypeListingsData(value));
                 bAns = true;
             }
             catch (Exception ex)
@@ -233,15 +233,15 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             General.HasTrueValue(bAns, _errOut);
         }
 
-        [TestMethod, TestCategory("Inventory Listings - Calibers")]
+        [TestMethod, TestCategory("General Listings - Primer Types")]
         public void GetDetailsIdTest()
         {
             bool bAns = false;
             try
             {
-                List<CaliberLists> value = CaliberInventory.GetDetails(_databasePath, _existingId, out _errOut);
+                List<PrimerTypeListings> value = PrimerTypes.GetDetails(_databasePath, _existingId, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
-                TestContext.WriteLine(DebugHelpers.PrintListValues.CaliberListsData(value));
+                TestContext.WriteLine(DebugHelpers.PrintListValues.PrimerTypeListingsData(value));
                 bAns = true;
             }
             catch (Exception ex)
@@ -251,13 +251,13 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             General.HasTrueValue(bAns, _errOut);
         }
 
-        [TestMethod, TestCategory("Inventory Listings - Calibers")]
+        [TestMethod, TestCategory("General Listings - Primer Types")]
         public void DataExistsTest()
         {
             bool bAns = false;
             try
             {
-                bool value = CaliberInventory.DataExists(_databasePath, out _errOut);
+                bool value = PrimerTypes.DataExists(_databasePath, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine($"VALUE: {value}");
                 bAns = true;
@@ -269,13 +269,13 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             General.HasTrueValue(bAns, _errOut);
         }
 
-        [TestMethod, TestCategory("Inventory Listings - Calibers")]
+        [TestMethod, TestCategory("General Listings - Primer Types")]
         public void DataExistsByManuNameTest()
         {
             bool bAns = false;
             try
             {
-                bool value = CaliberInventory.DataExists(_databasePath, _existingName, out _errOut);
+                bool value = PrimerTypes.DataExists(_databasePath, _existingName, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine($"VALUE: {value}");
                 bAns = true;

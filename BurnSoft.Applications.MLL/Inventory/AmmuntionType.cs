@@ -7,16 +7,17 @@ using System.Data;
 namespace BurnSoft.Applications.MLL.Inventory
 {
     /// <summary>
-    /// Class CaliberInventory handles working with data for the Caliber Table
+    /// Class AmmuntionType handles the ability to work with the 
+    /// data in the General_Ammunition_Type table.
     /// </summary>
-    public class CaliberInventory
+    public class AmmuntionType
     {
         #region "Exception Error Handling"
 
         /// <summary>
         /// The class location
         /// </summary>
-        private static string ClassLocation = "BurnSoft.Applications.MLL.Inventory.CaliberInventory";
+        private static string ClassLocation = "BurnSoft.Applications.MLL.Inventory.AmmuntionType";
 
         /// <summary>
         /// Errors the message for regular Exceptions
@@ -63,25 +64,25 @@ namespace BurnSoft.Applications.MLL.Inventory
         private static string ErrorMessage(string functionName, ArgumentNullException e) =>
             $"{ClassLocation}.{functionName} - {e.Message}";
 
-        #endregion                
+        #endregion                        
         /// <summary>
         /// Gets the data.
         /// </summary>
         /// <param name="dt">The dt.</param>
         /// <param name="errOut">The error out.</param>
-        /// <returns>List&lt;CaliberLists&gt;.</returns>
-        private static List<CaliberLists> GetData(DataTable dt, out string errOut)
+        /// <returns>List&lt;AmmuntionTypeListings&gt;.</returns>
+        private static List<AmmuntionTypeListings> GetData(DataTable dt, out string errOut)
         {
-            List<CaliberLists> lst = new List<CaliberLists>();
+            List<AmmuntionTypeListings> lst = new List<AmmuntionTypeListings>();
             errOut = "";
             try
             {
                 foreach (DataRow d in dt.Rows)
                 {
-                    lst.Add(new CaliberLists()
+                    lst.Add(new AmmuntionTypeListings()
                     {
                         Id = Convert.ToInt32(d["id"]),
-                        Caliber = d["Cal"] != DBNull.Value ? d["Cal"].ToString().Trim() : "",
+                        FirearmType = d["FType"] != DBNull.Value ? d["FType"].ToString().Trim() : "",
                         LastSync = d["sync_lastupdate"].ToString().Trim(),
                     });
                 }
@@ -98,11 +99,11 @@ namespace BurnSoft.Applications.MLL.Inventory
         /// <param name="databasePath">The database path.</param>
         /// <param name="sql">The SQL.</param>
         /// <param name="errOut">The error out.</param>
-        /// <returns>List&lt;CaliberLists&gt;.</returns>
+        /// <returns>List&lt;AmmuntionTypeListings&gt;.</returns>
         /// <exception cref="System.Exception"></exception>
-        private static List<CaliberLists> GetList(string databasePath, string sql, out string errOut)
+        private static List<AmmuntionTypeListings> GetList(string databasePath, string sql, out string errOut)
         {
-            List<CaliberLists> lst = new List<CaliberLists>();
+            List<AmmuntionTypeListings> lst = new List<AmmuntionTypeListings>();
             errOut = "";
             try
             {
@@ -122,10 +123,10 @@ namespace BurnSoft.Applications.MLL.Inventory
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="errOut">The error out.</param>
-        /// <returns>List&lt;CaliberLists&gt;.</returns>
-        public static List<CaliberLists> GetAll(string databasePath, out string errOut)
+        /// <returns>List&lt;AmmuntionTypeListings&gt;.</returns>
+        public static List<AmmuntionTypeListings> GetAll(string databasePath, out string errOut)
         {
-            string sql = $"Select * from List_Calibers order by Cal ASC";
+            string sql = $"Select * from General_Ammunition_Type order by FType ASC";
             return GetList(databasePath, sql, out errOut);
         }
         /// <summary>
@@ -142,10 +143,10 @@ namespace BurnSoft.Applications.MLL.Inventory
             long lAns = 0;
             try
             {
-                string sql = $"Select * from List_Calibers where Cal='{name}'";
-                List<CaliberLists> lst = GetList(databasePath, sql, out errOut);
+                string sql = $"Select * from General_Ammunition_Type where FType='{name}'";
+                List<AmmuntionTypeListings> lst = GetList(databasePath, sql, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
-                foreach (CaliberLists i in lst)
+                foreach (AmmuntionTypeListings i in lst)
                 {
                     lAns = i.Id;
                     break;
@@ -158,58 +159,58 @@ namespace BurnSoft.Applications.MLL.Inventory
             return lAns;
         }
         /// <summary>
-        /// Gets the name.
+        /// Gets the details.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;AmmuntionTypeListings&gt;.</returns>
+        public static List<AmmuntionTypeListings> GetDetails(string databasePath, string name, out string errOut)
+        {
+            string sql = $"Select * from General_Ammunition_Type where FType='{name}'";
+            return GetList(databasePath, sql, out errOut);
+        }
+        /// <summary>
+        /// Gets the details.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;AmmuntionTypeListings&gt;.</returns>
+        public static List<AmmuntionTypeListings> GetDetails(string databasePath, long id, out string errOut)
+        {
+            string sql = $"Select * from General_Ammunition_Type where id={id}";
+            return GetList(databasePath, sql, out errOut);
+        }
+        /// <summary>
+        /// Gets the type of the ammo.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="id">The identifier.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns>System.String.</returns>
         /// <exception cref="System.Exception"></exception>
-        public static string GetName(string databasePath, long id, out string errOut)
+        public static string GetAmmoType(string databasePath, long id, out string errOut)
         {
-            errOut = "";
             string sAns = "";
+            errOut = "";
             try
             {
-                string sql = $"Select * from List_Calibers where id={id}";
-                List<CaliberLists> lst = GetList(databasePath, sql, out errOut);
+                string sql = $"Select * from General_Ammunition_Type where id={id}";
+                List<AmmuntionTypeListings> lst = GetList(databasePath, sql, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
-                foreach (CaliberLists i in lst)
+                foreach(AmmuntionTypeListings i in lst)
                 {
-                    sAns = i.Caliber;
-                    break;
+                    sAns = i.FirearmType;
                 }
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage("GetName", e);
+                errOut = ErrorMessage("GetAmmoType", e);
             }
             return sAns;
         }
-        /// <summary>
-        /// Gets the details.
-        /// </summary>
-        /// <param name="databasePath">The database path.</param>
-        /// <param name="name">The name.</param>
-        /// <param name="errOut">The error out.</param>
-        /// <returns>List&lt;CaliberLists&gt;.</returns>
-        public static List<CaliberLists> GetDetails(string databasePath, string name, out string errOut)
-        {
-            string sql = $"Select * from List_Calibers where Cal='{name}'";
-            return GetList(databasePath, sql, out errOut);
-        }
-        /// <summary>
-        /// Gets the details.
-        /// </summary>
-        /// <param name="databasePath">The database path.</param>
-        /// <param name="id">The identifier.</param>
-        /// <param name="errOut">The error out.</param>
-        /// <returns>List&lt;CaliberLists&gt;.</returns>
-        public static List<CaliberLists> GetDetails(string databasePath, long id, out string errOut)
-        {
-            string sql = $"Select * from List_Calibers where id={id}";
-            return GetList(databasePath, sql, out errOut);
-        }
+
         /// <summary>
         /// Datas the exists.
         /// </summary>
@@ -223,7 +224,7 @@ namespace BurnSoft.Applications.MLL.Inventory
             errOut = @"";
             try
             {
-                List<CaliberLists> lst = GetAll(databasePath, out errOut);
+                List<AmmuntionTypeListings> lst = GetAll(databasePath, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 bAns = lst.Count > 0;
             }
@@ -248,7 +249,7 @@ namespace BurnSoft.Applications.MLL.Inventory
             try
             {
 
-                List<CaliberLists> lst = GetDetails(databasePath, name, out errOut);
+                List<AmmuntionTypeListings> lst = GetDetails(databasePath, name, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 bAns = lst.Count > 0;
             }
@@ -272,7 +273,7 @@ namespace BurnSoft.Applications.MLL.Inventory
             try
             {
                 BSOtherObjects o = new BSOtherObjects();
-                string sql = $"INSERT INTO List_Calibers(Cal) VALUES('{o.FC(name)}')";
+                string sql = $"INSERT INTO General_Ammunition_Type(FType) VALUES('{o.FC(name)}')";
 
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
@@ -297,7 +298,7 @@ namespace BurnSoft.Applications.MLL.Inventory
             try
             {
                 BSOtherObjects o = new BSOtherObjects();
-                string sql = $"UPDATE List_Calibers set Cal='{o.FC(name)}' where id={id}";
+                string sql = $"UPDATE General_Ammunition_Type set FType='{o.FC(name)}' where id={id}";
 
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
@@ -320,7 +321,7 @@ namespace BurnSoft.Applications.MLL.Inventory
             bool bAns = false;
             try
             {
-                string sql = $"DELETE from List_Calibers where id={id}";
+                string sql = $"DELETE from General_Ammunition_Type where id={id}";
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
             catch (Exception e)

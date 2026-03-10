@@ -2,24 +2,25 @@
 
 ---
 
-# CaliberInventory
+# AmmuntionType
 
 Namespace: BurnSoft.Applications.MLL.Inventory
 
-Class CaliberInventory handles working with data for the Caliber Table
+Class AmmuntionType handles the ability to work with the 
+ data in the General_Ammunition_Type table.
 
 ```csharp
-public class CaliberInventory
+public class AmmuntionType
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [CaliberInventory](./burnsoft.applications.mll.inventory.caliberinventory)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [AmmuntionType](./burnsoft.applications.mll.inventory.ammuntiontype)
 
 ## Constructors
 
-### **CaliberInventory()**
+### **AmmuntionType()**
 
 ```csharp
-public CaliberInventory()
+public AmmuntionType()
 ```
 
 ## Methods
@@ -29,7 +30,7 @@ public CaliberInventory()
 Gets all.
 
 ```csharp
-public static List<CaliberLists> GetAll(string databasePath, String& errOut)
+public static List<AmmuntionTypeListings> GetAll(string databasePath, String& errOut)
 ```
 
 #### Parameters
@@ -42,8 +43,8 @@ The error out.
 
 #### Returns
 
-[List&lt;CaliberLists&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
-List&lt;CaliberLists&gt;.
+[List&lt;AmmuntionTypeListings&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+List&lt;AmmuntionTypeListings&gt;.
 
 ### **GetId(String, String, String&)**
 
@@ -73,12 +74,60 @@ System.Int64.
 
 [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
 
-### **GetName(String, Int64, String&)**
+### **GetDetails(String, String, String&)**
 
-Gets the name.
+Gets the details.
 
 ```csharp
-public static string GetName(string databasePath, long id, String& errOut)
+public static List<AmmuntionTypeListings> GetDetails(string databasePath, string name, String& errOut)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`name` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The name.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[List&lt;AmmuntionTypeListings&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+List&lt;AmmuntionTypeListings&gt;.
+
+### **GetDetails(String, Int64, String&)**
+
+Gets the details.
+
+```csharp
+public static List<AmmuntionTypeListings> GetDetails(string databasePath, long id, String& errOut)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`id` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
+The identifier.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[List&lt;AmmuntionTypeListings&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+List&lt;AmmuntionTypeListings&gt;.
+
+### **GetAmmoType(String, Int64, String&)**
+
+Gets the type of the ammo.
+
+```csharp
+public static string GetAmmoType(string databasePath, long id, String& errOut)
 ```
 
 #### Parameters
@@ -100,54 +149,6 @@ System.String.
 #### Exceptions
 
 [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
-
-### **GetDetails(String, String, String&)**
-
-Gets the details.
-
-```csharp
-public static List<CaliberLists> GetDetails(string databasePath, string name, String& errOut)
-```
-
-#### Parameters
-
-`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
-The database path.
-
-`name` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
-The name.
-
-`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
-The error out.
-
-#### Returns
-
-[List&lt;CaliberLists&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
-List&lt;CaliberLists&gt;.
-
-### **GetDetails(String, Int64, String&)**
-
-Gets the details.
-
-```csharp
-public static List<CaliberLists> GetDetails(string databasePath, long id, String& errOut)
-```
-
-#### Parameters
-
-`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
-The database path.
-
-`id` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
-The identifier.
-
-`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
-The error out.
-
-#### Returns
-
-[List&lt;CaliberLists&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
-List&lt;CaliberLists&gt;.
 
 ### **DataExists(String, String&)**
 
