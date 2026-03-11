@@ -255,7 +255,7 @@ namespace BurnSoft.Applications.MLL.UnitTests.LoadersLog
             {
                 AddTestDataExists();
                 PrintTestData();
-                long id = LoadersLogMetallic.GetId(_databasePath, _configName, out _);
+                long id = LoadersLogMetallic.GetId(_databasePath, _configName, _dateCreated, out _);
                 bool value = LoadersLogMetallic.Update(_databasePath, id, _firearmId, _dateCreated,
                     _yards, _groupSize, _numberOfShots, _powderDetails,
                     _bulletDetails, _primerDetails, _caseDetails, _condition + " and snowy",

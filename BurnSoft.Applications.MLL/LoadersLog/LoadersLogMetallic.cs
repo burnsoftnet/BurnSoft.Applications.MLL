@@ -128,7 +128,7 @@ namespace BurnSoft.Applications.MLL.LoadersLog
         /// <returns>List&lt;LoadersLogMetallicData&gt;.</returns>
         public static List<LoadersLogMetallicData> GetDetails(string databasePath, string configName, string dateCreated, out string errOut)
         {
-            string sql = $"Select * from Loaders_Log_NSG where ConfigName='{configName}' and dt='{dateCreated}'";
+            string sql = $"Select * from Loaders_Log_NSG where ConfigName='{configName}' and dt=cDate('{dateCreated}')";
             return GetList(databasePath, sql, out errOut);
         }
         /// <summary>
@@ -139,7 +139,7 @@ namespace BurnSoft.Applications.MLL.LoadersLog
         /// <returns>List&lt;LoadersLogMetallicData&gt;.</returns>
         public static List<LoadersLogMetallicData> GetAll(string databasePath, out string errOut)
         {
-            string sql = $"Select * from Loaders_Log_NSG order by FullName ASC";
+            string sql = $"Select * from Loaders_Log_NSG order by ConfigName ASC";
             return GetList(databasePath, sql, out errOut);
         }
         /// <summary>
@@ -164,6 +164,7 @@ namespace BurnSoft.Applications.MLL.LoadersLog
             catch (Exception e)
             {
                 errOut = ErrorMessage("GetList", e);
+                errOut = $"{errOut}{Environment.NewLine}SQL: {sql}";
             }
             return lst;
         }
@@ -182,7 +183,7 @@ namespace BurnSoft.Applications.MLL.LoadersLog
             long lAns = 0;
             try
             {
-                string sql = $"Select * from Loaders_Log_NSG where configName='{configName}' and dt='{dateCreated}'";
+                string sql = $"Select * from Loaders_Log_NSG where configName='{configName}' and dt=cDate('{dateCreated}')";
                 List<LoadersLogMetallicData> lst = GetList(databasePath, sql, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 foreach (LoadersLogMetallicData i in lst)
@@ -326,11 +327,11 @@ namespace BurnSoft.Applications.MLL.LoadersLog
             {
                 string sql = $"UPDATE Loaders_Log_NSG set fid={firearmId}," +
                     $"dt='{dateCreated}',yds={yards}," +
-                    $"gs='{groupSize}',ns='{numberOfShots}',pwm='{powderDetails}'," +
+                    $"gs='{groupSize}',ns={numberOfShots},pwm='{powderDetails}'," +
                     $"bullet='{bulletDetails}',primer='{primerDetails}'," +
                     $"case='{caseDetails}',conditions='{condition}',tl='{oal}'," +
                     $"notes='{notes}',ConfigName='{configName}',FirearmName='{FirearmName}'," +
-                    $"Caliber='{caliber}',BarrelLen='{BarrelLenght}', sync_lastupdate=Noq() where id={id}";
+                    $"Caliber='{caliber}',BarrelLen='{BarrelLenght}', sync_lastupdate=Now() where id={id}";
 
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
