@@ -125,6 +125,40 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
             return sAns;
         }
         /// <summary>
+        /// Loaderses the log shotgun data data.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string LoadersLogShotgunDataData(List<LoadersLogShotgunData> value)
+        {
+            string sAns = "";
+            if (value.Count > 0)
+            {
+                foreach (LoadersLogShotgunData v in value)
+                {
+                    sAns += $"id : {v.Id}{Environment.NewLine}";
+                    sAns += $"FirearmId : {v.FirearmId}{Environment.NewLine}";
+                    sAns += $"DateCreated : {v.DateCreated}{Environment.NewLine}";
+                    sAns += $"Yards : {v.Yards}{Environment.NewLine}";
+                    sAns += $"Caliber : {v.Caliber}{Environment.NewLine}";
+                    sAns += $"FirearmName : {v.FirearmName}{Environment.NewLine}";
+                    sAns += $"PowderDetails : {v.PowderDetails}{Environment.NewLine}";
+                    sAns += $"BarrelLength : {v.BarrelLength}{Environment.NewLine}";
+                    sAns += $"DateCreated : {v.DateCreated}{Environment.NewLine}";
+                    sAns += $"ShotWeight : {v.ShotWeight}{Environment.NewLine}";
+                    sAns += $"ShotSize : {v.ShotSize}{Environment.NewLine}";
+                    sAns += $"WadDetails : {v.WadDetails}{Environment.NewLine}";
+                    sAns += $"PowderDetails : {v.PowderDetails}{Environment.NewLine}";
+                    sAns += $"CaseDetails : {v.CaseDetails}{Environment.NewLine}";
+                    sAns += $"PrimerDetails : {v.PrimerDetails}{Environment.NewLine}";
+                    sAns += $"PatternDensity : {v.PatternDensity}{Environment.NewLine}";
+                    sAns += $"Notes : {v.Notes}{Environment.NewLine}";
+                    sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                }
+            }
+            return sAns;
+        }
+        /// <summary>
         /// Configurations the list data shotgun data data.
         /// </summary>
         /// <param name="value">The value.</param>

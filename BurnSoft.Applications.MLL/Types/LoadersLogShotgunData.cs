@@ -84,6 +84,11 @@ namespace BurnSoft.Applications.MLL.Types
         /// <value>The pattern density.</value>
         public string PatternDensity { get; set; }
         /// <summary>
+        /// Gets or sets the notes.
+        /// </summary>
+        /// <value>The notes.</value>
+        public string Notes { get; set; }
+        /// <summary>
         /// Gets or sets the last synchronize for the sync_lastupdate column
         /// </summary>
         /// <value>The last synchronize.</value>
