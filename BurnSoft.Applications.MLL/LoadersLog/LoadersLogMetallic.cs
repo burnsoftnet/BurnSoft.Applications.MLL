@@ -123,11 +123,12 @@ namespace BurnSoft.Applications.MLL.LoadersLog
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="configName">Name of the configuration.</param>
+        /// <param name="dateCreated">The date created.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns>List&lt;LoadersLogMetallicData&gt;.</returns>
-        public static List<LoadersLogMetallicData> GetDetails(string databasePath, string configName, out string errOut)
+        public static List<LoadersLogMetallicData> GetDetails(string databasePath, string configName, string dateCreated, out string errOut)
         {
-            string sql = $"Select * from Loaders_Log_NSG where ConfigName='{configName}'";
+            string sql = $"Select * from Loaders_Log_NSG where ConfigName='{configName}' and dt='{dateCreated}'";
             return GetList(databasePath, sql, out errOut);
         }
         /// <summary>
@@ -166,22 +167,22 @@ namespace BurnSoft.Applications.MLL.LoadersLog
             }
             return lst;
         }
-
         /// <summary>
         /// Gets the identifier.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="configName">Name of the configuration.</param>
+        /// <param name="dateCreated">The date created.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns>System.Int64.</returns>
         /// <exception cref="System.Exception"></exception>
-        public static long GetId(string databasePath, string configName, out string errOut)
+        public static long GetId(string databasePath, string configName, string dateCreated, out string errOut)
         {
             errOut = "";
             long lAns = 0;
             try
             {
-                string sql = $"Select * from Loaders_Log_NSG where configName='{configName}'";
+                string sql = $"Select * from Loaders_Log_NSG where configName='{configName}' and dt='{dateCreated}'";
                 List<LoadersLogMetallicData> lst = GetList(databasePath, sql, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 foreach (LoadersLogMetallicData i in lst)
@@ -224,17 +225,18 @@ namespace BurnSoft.Applications.MLL.LoadersLog
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="configName">Name of the configuration.</param>
+        /// <param name="dateCreated">The date created.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="System.Exception"></exception>
-        public static bool DataExists(string databasePath, string configName, out string errOut)
+        public static bool DataExists(string databasePath, string configName, string dateCreated, out string errOut)
         {
             bool bAns = false;
             errOut = @"";
             try
             {
 
-                List<LoadersLogMetallicData> lst = GetDetails(databasePath, configName, out errOut);
+                List<LoadersLogMetallicData> lst = GetDetails(databasePath, configName, dateCreated, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 bAns = lst.Count > 0;
             }
@@ -364,17 +366,18 @@ namespace BurnSoft.Applications.MLL.LoadersLog
         /// Deletes the specified database path.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
-        /// <param name="fullName">The full name.</param>
+        /// <param name="configName">Name of the configuration.</param>
+        /// <param name="dateCreated">The date created.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="System.Exception"></exception>
-        public static bool Delete(string databasePath, string fullName, out string errOut)
+        public static bool Delete(string databasePath, string configName, string dateCreated, out string errOut)
         {
             errOut = "";
             bool bAns = false;
             try
             {
-                long id = GetId(databasePath, fullName, out errOut);
+                long id = GetId(databasePath, configName, dateCreated, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 bAns = Delete(databasePath, id, out errOut);
             }
