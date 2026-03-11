@@ -161,6 +161,7 @@ namespace BurnSoft.Applications.MLL.LoadersLog
             catch (Exception e)
             {
                 errOut = ErrorMessage("GetList", e);
+                errOut = $"{errOut}{Environment.NewLine}SQL: {sql}";
             }
             return lst;
         }
