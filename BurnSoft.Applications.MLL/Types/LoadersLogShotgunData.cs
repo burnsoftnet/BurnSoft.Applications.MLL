@@ -48,29 +48,41 @@ namespace BurnSoft.Applications.MLL.Types
         /// </summary>
         /// <value>The yards.</value>
         public int Yards { get; set; }
-
-        public string GroupSize { get; set; }
-
-        public int NumberOfShots { get; set; }
         /// <summary>
-        /// Gets or sets the powder details, powder - wt. - mfg for the pwn column
+        /// Gets or sets the shot weight. for the Shotwt column
+        /// </summary>
+        /// <value>The shot weight.</value>
+        public string ShotWeight { get; set; }
+        /// <summary>
+        /// Gets or sets the size of the shot. for the ShotSize column
+        /// </summary>
+        /// <value>The size of the shot.</value>
+        public string ShotSize { get; set; }
+        /// <summary>
+        /// Gets or sets the wad details. for the wad column
+        /// </summary>
+        /// <value>The wad details.</value>
+        public string WadDetails { get; set; }
+        /// <summary>
+        /// Gets or sets the powder details, powder - wt. - mfg for the pbm column
         /// </summary>
         /// <value>The powder details.</value>
         public string PowderDetails { get; set; }
-
-        public string BulletDetails { get; set; }
+        /// <summary>
+        /// Gets or sets the case details. for the case column
+        /// </summary>
+        /// <value>The case details.</value>
+        public string CaseDetails { get; set; }
         /// <summary>
         /// Gets or sets the primer details. for the primer column
         /// </summary>
         /// <value>The primer details.</value>
         public string PrimerDetails { get; set; }
-
-        public string CaseDetails { get; set; }
-
-        public string TotalLenght { get; set; }
-
-        public string Conditions { get; set; }
-        
+        /// <summary>
+        /// Gets or sets the pattern density. for the pd column
+        /// </summary>
+        /// <value>The pattern density.</value>
+        public string PatternDensity { get; set; }
         /// <summary>
         /// Gets or sets the last synchronize for the sync_lastupdate column
         /// </summary>
