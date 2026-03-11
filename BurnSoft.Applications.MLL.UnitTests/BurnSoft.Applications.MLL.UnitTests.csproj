@@ -230,6 +230,7 @@
     <Compile Include="LoadersLog\FirearmsTests.cs" />
     <Compile Include="LoadersLog\LoadersLogAmmunitionTests.cs" />
     <Compile Include="LoadersLog\LoadersLogAmmunitionAuditTests.cs" />
+    <Compile Include="LoadersLog\LoadersLogMetallicTests.cs" />
     <Compile Include="PeopleAndPlaces\OwnerInformationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\VS2019.cs" />
