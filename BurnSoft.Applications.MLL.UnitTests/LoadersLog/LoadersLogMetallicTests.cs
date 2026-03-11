@@ -39,23 +39,57 @@ namespace BurnSoft.Applications.MLL.UnitTests.LoadersLog
         /// The yards
         /// </summary>
         private int _yards;
-
+        /// <summary>
+        /// The group size
+        /// </summary>
         private string _groupSize;
-
+        /// <summary>
+        /// The number of shots
+        /// </summary>
         private int _numberOfShots;
-
+        /// <summary>
+        /// The powder details
+        /// </summary>
         private string _powderDetails;
-
+        /// <summary>
+        /// The bullet details
+        /// </summary>
         private string _bulletDetails;
-
+        /// <summary>
+        /// The primer details
+        /// </summary>
         private string _primerDetails;
+        /// <summary>
+        /// The case details
+        /// </summary>
         private string _caseDetails;
+        /// <summary>
+        /// The condition
+        /// </summary>
         private string _condition;
+        /// <summary>
+        /// The oal
+        /// </summary>
         private string _oal;
+        /// <summary>
+        /// The notes
+        /// </summary>
         private string _notes;
+        /// <summary>
+        /// The configuration name
+        /// </summary>
         private string _configName;
+        /// <summary>
+        /// The firearm name
+        /// </summary>
         private string _FirearmName;
+        /// <summary>
+        /// The caliber
+        /// </summary>
         private string _caliber;
+        /// <summary>
+        /// The barrel lenght
+        /// </summary>
         private string _BarrelLenght;
         /// <summary>
         /// Initializes this instance.
@@ -142,7 +176,7 @@ namespace BurnSoft.Applications.MLL.UnitTests.LoadersLog
         }
 
         [TestMethod, TestCategory("Loaders Log - Metalic Log")]
-        public void GetDetailsFulleNameTest()
+        public void GetDetailsConfigDateCreatedTest()
         {
             bool bAns = false;
             try
@@ -198,7 +232,7 @@ namespace BurnSoft.Applications.MLL.UnitTests.LoadersLog
         }
 
         [TestMethod, TestCategory("Loaders Log - Metalic Log")]
-        public void DataExistsFullNameTest()
+        public void DataExistsConfigDateCreatedTest()
         {
             bool bAns = false;
             try
@@ -294,7 +328,7 @@ namespace BurnSoft.Applications.MLL.UnitTests.LoadersLog
         }
 
         [TestMethod, TestCategory("Loaders Log - Metalic Log")]
-        public void DeleteByFullNameTest()
+        public void DeleteByConfigDateCreatedTest()
         {
             bool bAns = false;
             try
