@@ -118,6 +118,7 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
                     sAns += $"Caliber : {v.Caliber}{Environment.NewLine}";
                     sAns += $"FirearmName : {v.FirearmName}{Environment.NewLine}";
                     sAns += $"BarrelLength : {v.BarrelLength}{Environment.NewLine}";
+                    sAns += $"Notes : {v.Notes}{Environment.NewLine}";
                     sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
                 }
             }

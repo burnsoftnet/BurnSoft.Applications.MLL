@@ -112,6 +112,7 @@
     <Compile Include="Types\LoadersLogAmmunitionAuditData.cs" />
     <Compile Include="Types\LoadersLogAmmunitionData.cs" />
     <Compile Include="Types\LoadersLogMetallicData.cs" />
+    <Compile Include="Types\LoadersLogShotgunData.cs" />
     <Compile Include="Types\LoginInformationOnly.cs" />
     <Compile Include="Types\PersonalInformation.cs" />
     <Compile Include="Types\PowderListing.cs" />

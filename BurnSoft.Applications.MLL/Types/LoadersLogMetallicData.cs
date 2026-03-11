@@ -8,7 +8,7 @@ namespace BurnSoft.Applications.MLL.Types
     /// </summary>
     public class LoadersLogMetallicData
     {
-        // <summary>
+        /// <summary>
         /// Gets or sets the identifier.
         /// </summary>
         /// <value>The identifier.</value>
@@ -88,6 +88,11 @@ namespace BurnSoft.Applications.MLL.Types
         /// </summary>
         /// <value>The length of the barrel.</value>
         public string BarrelLength { get; set; }
+        /// <summary>
+        /// Gets or sets the notes.
+        /// </summary>
+        /// <value>The notes.</value>
+        public string Notes { get; set; }
         /// <summary>
         /// Gets or sets the last synchronize for the sync_lastupdate column
         /// </summary>

@@ -96,6 +96,7 @@ namespace BurnSoft.Applications.MLL.LoadersLog
                         FirearmName = d["FirearmName"] != DBNull.Value ? d["FirearmName"].ToString().Trim() : "",
                         BarrelLength = d["BarrelLen"] != DBNull.Value ? d["BarrelLen"].ToString().Trim() : "",
                         ConfigName = d["ConfigName"] != DBNull.Value ? d["ConfigName"].ToString().Trim() : "",
+                        Notes = d["notes"] != DBNull.Value ? d["notes"].ToString().Trim() : "",
                         LastSync = d["sync_lastupdate"].ToString().Trim(),
                     });
                 }
