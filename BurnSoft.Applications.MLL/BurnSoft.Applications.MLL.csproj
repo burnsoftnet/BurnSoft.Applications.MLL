@@ -93,6 +93,7 @@
     <Compile Include="LoadersLog\LoadersLogAmmunition.cs" />
     <Compile Include="LoadersLog\LoadersLogAmmunitionAudit.cs" />
     <Compile Include="LoadersLog\LoadersLogMetallic.cs" />
+    <Compile Include="LoadersLog\LoadersLogShotgun.cs" />
     <Compile Include="PeopleAndPlaces\OwnerInformation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Types\AmmuntionTypeListings.cs" />
