@@ -120,6 +120,7 @@
     <Compile Include="Types\PrimerListings.cs" />
     <Compile Include="Types\PrimerTypeListings.cs" />
     <Compile Include="Types\RegistrySettings.cs" />
+    <Compile Include="Types\SearchFieldsData.cs" />
     <Compile Include="Types\ShotgunBushingListings.cs" />
     <Compile Include="Types\ShotgunPowderListings.cs" />
   </ItemGroup>
