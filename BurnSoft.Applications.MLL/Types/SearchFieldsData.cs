@@ -2,7 +2,7 @@
 namespace BurnSoft.Applications.MLL.Types
 {
     /// <summary>
-    /// Class SearchFieldsData list container for the Search_Fields table
+    /// Class SearchFieldsData list container for the Search_Fields and Search_Fields_SG tables
     /// </summary>
     public class SearchFieldsData
     {
