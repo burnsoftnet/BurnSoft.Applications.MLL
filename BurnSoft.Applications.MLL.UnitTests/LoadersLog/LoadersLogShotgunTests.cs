@@ -4,6 +4,7 @@ using BurnSoft.Applications.MLL.UnitTests.Settings;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace BurnSoft.Applications.MLL.UnitTests.LoadersLog
 {
@@ -40,37 +41,17 @@ namespace BurnSoft.Applications.MLL.UnitTests.LoadersLog
         /// </summary>
         private int _yards;
         /// <summary>
-        /// The group size
-        /// </summary>
-        private string _groupSize;
-        /// <summary>
-        /// The number of shots
-        /// </summary>
-        private int _numberOfShots;
-        /// <summary>
         /// The powder details
         /// </summary>
         private string _powderDetails;
         /// <summary>
-        /// The bullet details
-        /// </summary>
-        private string _bulletDetails;
-        /// <summary>
         /// The primer details
         /// </summary>
-        private string _primerDetails;
+        private string _patterDensity;
         /// <summary>
         /// The case details
         /// </summary>
         private string _caseDetails;
-        /// <summary>
-        /// The condition
-        /// </summary>
-        private string _condition;
-        /// <summary>
-        /// The oal
-        /// </summary>
-        private string _oal;
         /// <summary>
         /// The notes
         /// </summary>
@@ -92,31 +73,49 @@ namespace BurnSoft.Applications.MLL.UnitTests.LoadersLog
         /// </summary>
         private string _BarrelLenght;
         /// <summary>
+        /// The primer details
+        /// </summary>
+        private string _primerDetails;
+        /// <summary>
+        /// The shot weight
+        /// </summary>
+        private string _shotWeight;
+        /// <summary>
+        /// The shot size
+        /// </summary>
+        private string _shotSize;
+        /// <summary>
+        /// The wad details
+        /// </summary>
+        private string _wadDetails;
+
+
+        /// <summary>
         /// Initializes this instance.
         /// </summary>
         [TestInitialize]
         public void Init()
         {
+
             // Vs2019.GetSetting("");
             _errOut = @"";
             _databasePath = Vs2019.GetSetting("DatabasePath");
-            _existingConfigId = 9;
+            _existingConfigId = 21;
             _firearmId = 13;
             _dateCreated = DateTime.Now.ToString();
-            _bulletDetails = "TheBlueBullets - 147g";
+            _wadDetails = "Winchester - WAA12F114 (yellow)";
             _yards = 15;
-            _groupSize = "1.5 MOA";
-            _numberOfShots = 10;
+            _shotWeight = "1⅛ oz.";
+            _shotSize = "No. 7";
             _powderDetails = "HS 6 - 6.7 - Hodgdon";
-            _primerDetails = "CCI 200";
-            _caseDetails = "Mixed Win 9mm, Fed 9mm, CCI 9mm, S&B 9mm (NEW)";
-            _condition = "Cold";
-            _oal = "1.10\"";
-            _notes = "Power Factor of 128";
-            _configName = "HL8003U";
-            _FirearmName = "Glock G17";
-            _caliber = "9mm Luger";
-            _BarrelLenght = "5\"";
+            _primerDetails = "Federal 150";
+            _caseDetails = "Winchester - Plastic Shells with Plastic Basewad";
+            _notes = "Sport Shot";
+            _configName = "SG12.0001U";
+            _FirearmName = "Puma Over Under";
+            _caliber = "12 GA";
+            _BarrelLenght = "22\"";
+            _patterDensity = "6 inches";
         }
 
         [TestMethod, TestCategory("Loaders Log - Shotgun Log")]
@@ -143,6 +142,7 @@ namespace BurnSoft.Applications.MLL.UnitTests.LoadersLog
             bool bAns = false;
             try
             {
+            
                 List<LoadersLogShotgunData> value = LoadersLogShotgun.GetAll(_databasePath, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine(DebugHelpers.PrintListValues.LoadersLogShotgunDataData(value));
@@ -159,10 +159,9 @@ namespace BurnSoft.Applications.MLL.UnitTests.LoadersLog
         {
             if (!LoadersLogShotgun.DataExists(_databasePath, _configName, _dateCreated, out _))
             {
-                LoadersLogShotgun.Add(_databasePath, _firearmId, _dateCreated,
-                    _yards, _groupSize, _numberOfShots, _powderDetails,
-                    _bulletDetails, _primerDetails, _caseDetails, _condition,
-                    _oal, _notes, _configName, _FirearmName, _caliber, _BarrelLenght, out _);
+                LoadersLogShotgun.Add(_databasePath, _firearmId, _FirearmName, _caliber, _BarrelLenght, 
+                    _configName, _dateCreated, _shotWeight, _shotSize, _caseDetails, _powderDetails,
+                    _wadDetails, _primerDetails, _patterDensity, _yards, _notes, out _);
             }
         }
 
@@ -266,10 +265,9 @@ namespace BurnSoft.Applications.MLL.UnitTests.LoadersLog
             try
             {
                 DeleteTestDataExists();
-                bool value = LoadersLogShotgun.Add(_databasePath, _firearmId, _dateCreated,
-                    _yards, _groupSize, _numberOfShots, _powderDetails,
-                    _bulletDetails, _primerDetails, _caseDetails, _condition,
-                    _oal, _notes, _configName, _FirearmName, _caliber, _BarrelLenght, out _errOut);
+                bool value = LoadersLogShotgun.Add(_databasePath, _firearmId, _FirearmName, _caliber, _BarrelLenght,
+                    _configName, _dateCreated, _shotWeight, _shotSize, _caseDetails, _powderDetails,
+                    _wadDetails, _primerDetails, _patterDensity, _yards, _notes, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine($"VALUE: {value}");
                 bAns = true;
@@ -290,10 +288,9 @@ namespace BurnSoft.Applications.MLL.UnitTests.LoadersLog
                 AddTestDataExists();
                 PrintTestData();
                 long id = LoadersLogShotgun.GetId(_databasePath, _configName, _dateCreated, out _);
-                bool value = LoadersLogShotgun.Update(_databasePath, id, _firearmId, _dateCreated,
-                    _yards, _groupSize, _numberOfShots, _powderDetails,
-                    _bulletDetails, _primerDetails, _caseDetails, _condition + " and snowy",
-                    _oal, _notes, _configName, _FirearmName, _caliber, _BarrelLenght,
+                bool value = LoadersLogShotgun.Update(_databasePath, id, _firearmId, _FirearmName, _caliber, _BarrelLenght,
+                    _configName, _dateCreated, _shotWeight, _shotSize, _caseDetails, _powderDetails,
+                    _wadDetails, _primerDetails, _patterDensity, _yards, _notes + " and Hunting",
                     out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine($"VALUE: {value}");
