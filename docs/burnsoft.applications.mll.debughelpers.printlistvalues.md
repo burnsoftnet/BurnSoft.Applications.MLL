@@ -61,6 +61,42 @@ The value.
 [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 System.String.
 
+### **SyncTablesDataData(List&lt;SyncTablesData&gt;)**
+
+Synchronizes the tables data data.
+
+```csharp
+public static string SyncTablesDataData(List<SyncTablesData> value)
+```
+
+#### Parameters
+
+`value` [List&lt;SyncTablesData&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+The value.
+
+#### Returns
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+System.String.
+
+### **WishlistDataData(List&lt;WishlistData&gt;)**
+
+Wishlists the data data.
+
+```csharp
+public static string WishlistDataData(List<WishlistData> value)
+```
+
+#### Parameters
+
+`value` [List&lt;WishlistData&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+The value.
+
+#### Returns
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+System.String.
+
 ### **ConfigListDataMetalicDataLst(List&lt;ConfigListDataMetalicData&gt;)**
 
 Configurations the list data metalic data.
@@ -72,6 +108,60 @@ public static string ConfigListDataMetalicDataLst(List<ConfigListDataMetalicData
 #### Parameters
 
 `value` [List&lt;ConfigListDataMetalicData&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+The value.
+
+#### Returns
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+System.String.
+
+### **LoadersLogMetallicDataData(List&lt;LoadersLogMetallicData&gt;)**
+
+Loaderses the log metallic data data.
+
+```csharp
+public static string LoadersLogMetallicDataData(List<LoadersLogMetallicData> value)
+```
+
+#### Parameters
+
+`value` [List&lt;LoadersLogMetallicData&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+The value.
+
+#### Returns
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+System.String.
+
+### **LoadersLogShotgunDataData(List&lt;LoadersLogShotgunData&gt;)**
+
+Loaderses the log shotgun data data.
+
+```csharp
+public static string LoadersLogShotgunDataData(List<LoadersLogShotgunData> value)
+```
+
+#### Parameters
+
+`value` [List&lt;LoadersLogShotgunData&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+The value.
+
+#### Returns
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+System.String.
+
+### **SearchFieldsDataData(List&lt;SearchFieldsData&gt;)**
+
+Searches the fields data data.
+
+```csharp
+public static string SearchFieldsDataData(List<SearchFieldsData> value)
+```
+
+#### Parameters
+
+`value` [List&lt;SearchFieldsData&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
 The value.
 
 #### Returns
@@ -306,6 +396,24 @@ public static string LoadersLogAmmunitionDataData(List<LoadersLogAmmunitionData>
 #### Parameters
 
 `value` [List&lt;LoadersLogAmmunitionData&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+The value.
+
+#### Returns
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+System.String.
+
+### **LoadersLogAmmunitionAuditDataData(List&lt;LoadersLogAmmunitionAuditData&gt;)**
+
+Loaderses the log ammunition audit data data.
+
+```csharp
+public static string LoadersLogAmmunitionAuditDataData(List<LoadersLogAmmunitionAuditData> value)
+```
+
+#### Parameters
+
+`value` [List&lt;LoadersLogAmmunitionAuditData&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
 The value.
 
 #### Returns

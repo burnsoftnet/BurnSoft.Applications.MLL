@@ -56,6 +56,8 @@
 
 [WeightValues](./burnsoft.applications.mll.global.weightvalues.md)
 
+[Wishlists](./burnsoft.applications.mll.global.wishlists.md)
+
 ## BurnSoft.Applications.MLL.Helpers
 
 [Converters](./burnsoft.applications.mll.helpers.converters.md)
@@ -94,9 +96,23 @@
 
 [LoadersLogAmmunition](./burnsoft.applications.mll.loaderslog.loaderslogammunition.md)
 
+[LoadersLogAmmunitionAudit](./burnsoft.applications.mll.loaderslog.loaderslogammunitionaudit.md)
+
+[LoadersLogMetallic](./burnsoft.applications.mll.loaderslog.loaderslogmetallic.md)
+
+[LoadersLogShotgun](./burnsoft.applications.mll.loaderslog.loaderslogshotgun.md)
+
 ## BurnSoft.Applications.MLL.PeopleAndPlaces
 
 [OwnerInformation](./burnsoft.applications.mll.peopleandplaces.ownerinformation.md)
+
+## BurnSoft.Applications.MLL.Search
+
+[MetalicData](./burnsoft.applications.mll.search.metalicdata.md)
+
+[ShotgunData](./burnsoft.applications.mll.search.shotgundata.md)
+
+[SyncTables](./burnsoft.applications.mll.search.synctables.md)
 
 ## BurnSoft.Applications.MLL.Types
 
@@ -128,7 +144,13 @@
 
 [GunCollectionAmmoData](./burnsoft.applications.mll.types.guncollectionammodata.md)
 
+[LoadersLogAmmunitionAuditData](./burnsoft.applications.mll.types.loaderslogammunitionauditdata.md)
+
 [LoadersLogAmmunitionData](./burnsoft.applications.mll.types.loaderslogammunitiondata.md)
+
+[LoadersLogMetallicData](./burnsoft.applications.mll.types.loaderslogmetallicdata.md)
+
+[LoadersLogShotgunData](./burnsoft.applications.mll.types.loaderslogshotgundata.md)
 
 [LoginInformationOnly](./burnsoft.applications.mll.types.logininformationonly.md)
 
@@ -142,6 +164,12 @@
 
 [RegistrySettings](./burnsoft.applications.mll.types.registrysettings.md)
 
+[SearchFieldsData](./burnsoft.applications.mll.types.searchfieldsdata.md)
+
 [ShotgunBushingListings](./burnsoft.applications.mll.types.shotgunbushinglistings.md)
 
 [ShotgunPowderListings](./burnsoft.applications.mll.types.shotgunpowderlistings.md)
+
+[SyncTablesData](./burnsoft.applications.mll.types.synctablesdata.md)
+
+[WishlistData](./burnsoft.applications.mll.types.wishlistdata.md)
