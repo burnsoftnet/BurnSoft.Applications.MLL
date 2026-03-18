@@ -234,6 +234,7 @@
     <Compile Include="LoadersLog\LoadersLogShotgunTests.cs" />
     <Compile Include="PeopleAndPlaces\OwnerInformationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Searches\MetalicDataTests.cs" />
     <Compile Include="Settings\VS2019.cs" />
     <Compile Include="DatabaseTests.cs" />
   </ItemGroup>
