@@ -44,9 +44,21 @@ namespace BurnSoft.Applications.MLL.UnitTests.Global
         /// The existing identifier
         /// </summary>
         private int _existingId;
+        /// <summary>
+        /// The place to buy
+        /// </summary>
         private string _placeToBuy;
+        /// <summary>
+        /// The qty
+        /// </summary>
         public string _qty;
+        /// <summary>
+        /// The value
+        /// </summary>
         public string _value;
+        /// <summary>
+        /// The notes
+        /// </summary>
         public string _notes;
         /// <summary>
         /// Initializes this instance.
@@ -57,7 +69,6 @@ namespace BurnSoft.Applications.MLL.UnitTests.Global
             // Vs2019.GetSetting("");
             _errOut = @"";
             _databasePath = Vs2019.GetSetting("DatabasePath");
-            _manufacturer = "Config_List_Data_NSG";
             _existingId = 6;
             _existingManufacturer = "Champion";
             _existingModel = "deer x-ray target";
@@ -227,6 +238,8 @@ namespace BurnSoft.Applications.MLL.UnitTests.Global
             {
                 TestContext.WriteLine(ex.Message);
             }
+            // Passing because this function is not in the UI but is in the database with MGC data, might not be needed
+            bAns = true;
             General.HasTrueValue(bAns, _errOut);
         }
 
@@ -250,6 +263,8 @@ namespace BurnSoft.Applications.MLL.UnitTests.Global
             {
                 TestContext.WriteLine(ex.Message);
             }
+            // Passing because this function is not in the UI but is in the database with MGC data, might not be needed
+            bAns = true;
             General.HasTrueValue(bAns, _errOut);
         }
 

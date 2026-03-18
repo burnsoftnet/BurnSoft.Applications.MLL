@@ -129,7 +129,7 @@ namespace BurnSoft.Applications.MLL.Global
         /// <returns>List&lt;WishlistData&gt;.</returns>
         public static List<WishlistData> GetAll(string databasePath, out string errOut)
         {
-            string sql = $"Select * from wishlist order by tblname ASC";
+            string sql = $"Select * from wishlist order by Manufacturer ASC";
             return GetList(databasePath, sql, out errOut);
         }
         /// <summary>
@@ -256,8 +256,8 @@ namespace BurnSoft.Applications.MLL.Global
             bool bAns = false;
             try
             {
-                string sql = $"INSERT INTO wishlist (Manufacturer, Model, PlaceToBuy, Qty, Value, Notes) " +
-                    $"VALUES('{manufacturer}', '{model}', '{placeToBuy}', '{qty}', '{value}', '{notes}')";
+                string sql = $"INSERT INTO Wishlist (Manufacturer, Model, PlacetoBuy, Qty, Value, Notes, sync_lastupdate) " +
+                    $"VALUES('{manufacturer}', '{model}', '{placeToBuy}', '{qty}', '{value}', '{notes}', Now())";
 
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
@@ -288,7 +288,8 @@ namespace BurnSoft.Applications.MLL.Global
             try
             {
                 string sql = $"UPDATE wishlist set Manufacturer='{manufacturer}', model='{model}', " +
-                    $"placeToBuy='{placeToBuy}', qty='{qty}', value='{value}', notes='{notes}'  where id={id}";
+                    $"placeToBuy='{placeToBuy}', qty='{qty}', value='{value}', notes='{notes}', " +
+                    $"sync_lastupdate=Now() where id={id}";
 
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
