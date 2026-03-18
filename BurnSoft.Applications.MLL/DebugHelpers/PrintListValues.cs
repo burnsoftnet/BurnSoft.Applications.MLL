@@ -64,6 +64,24 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
             }
             return sAns;
         }
+        /// <summary>
+        /// Synchronizes the tables data data.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string SyncTablesDataData(List<SyncTablesData> value)
+        {
+            string sAns = "";
+            if (value.Count > 0)
+            {
+                foreach (SyncTablesData p in value)
+                {
+                    sAns += $"Id : {p.Id}{Environment.NewLine}";
+                    sAns += $"TableName : {p.TableName}{Environment.NewLine}";
+                }
+            }
+            return sAns;
+        }
 
         /// <summary>
         /// Configurations the list data metalic data.
