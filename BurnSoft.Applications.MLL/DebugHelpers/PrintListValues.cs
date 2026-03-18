@@ -159,6 +159,27 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
             return sAns;
         }
         /// <summary>
+        /// Searches the fields data data.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string SearchFieldsDataData(List<SearchFieldsData> value)
+        {
+            string sAns = "";
+            if (value.Count > 0)
+            {
+                foreach (SearchFieldsData v in value)
+                {
+                    sAns += $"id : {v.Id}{Environment.NewLine}";
+                    sAns += $"Description : {v.Description}{Environment.NewLine}";
+                    sAns += $"ColumnName : {v.ColumnName}{Environment.NewLine}";
+                    sAns += $"ColumnType : {v.ColumnType}{Environment.NewLine}";
+                    sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                }
+            }
+            return sAns;
+        }
+        /// <summary>
         /// Configurations the list data shotgun data data.
         /// </summary>
         /// <param name="value">The value.</param>
