@@ -74,6 +74,7 @@
     <Compile Include="Global\GeneralFunctions.cs" />
     <Compile Include="Global\GeneralSettings.cs" />
     <Compile Include="Global\MyRegistry.cs" />
+    <Compile Include="Search\SyncTables.cs" />
     <Compile Include="Global\WeightValues.cs" />
     <Compile Include="Helpers\Converters.cs" />
     <Compile Include="Helpers\GeneralHelpers.cs" />
