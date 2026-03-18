@@ -82,6 +82,29 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
             }
             return sAns;
         }
+        /// <summary>
+        /// Wishlists the data data.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string WishlistDataData(List<WishlistData> value)
+        {
+            string sAns = "";
+            if (value.Count > 0)
+            {
+                foreach (WishlistData v in value)
+                {
+                    sAns += $"id : {v.Id}{Environment.NewLine}";
+                    sAns += $"Manufacturer : {v.Manufacturer}{Environment.NewLine}";
+                    sAns += $"Model : {v.Model}{Environment.NewLine}";
+                    sAns += $"PlaceToBuy : {v.PlaceToBuy}{Environment.NewLine}";
+                    sAns += $"Qty : {v.Qty}{Environment.NewLine}";
+                    sAns += $"Value : {v.Value}{Environment.NewLine}";
+                    sAns += $"Notes : {v.Notes}{Environment.NewLine}";
+                }
+            }
+            return sAns;
+        }
 
         /// <summary>
         /// Configurations the list data metalic data.
