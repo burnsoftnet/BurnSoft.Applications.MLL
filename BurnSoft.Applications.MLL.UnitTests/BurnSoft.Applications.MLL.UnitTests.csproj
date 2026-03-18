@@ -215,6 +215,7 @@
     <Compile Include="General.cs" />
     <Compile Include="Global\GeneralSettingsTest.cs" />
     <Compile Include="Global\MyRegistryTest.cs" />
+    <Compile Include="Global\WishlistsTests.cs" />
     <Compile Include="Global\WeightValuesTest.cs" />
     <Compile Include="Helpers\ConvertersTest.cs" />
     <Compile Include="Listings\BulletsTest.cs" />
