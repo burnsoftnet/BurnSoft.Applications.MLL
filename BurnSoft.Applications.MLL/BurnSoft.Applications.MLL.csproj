@@ -75,6 +75,7 @@
     <Compile Include="Global\GeneralSettings.cs" />
     <Compile Include="Global\MyRegistry.cs" />
     <Compile Include="Global\Wishlists.cs" />
+    <Compile Include="Inventory\ShotgunShotInventory.cs" />
     <Compile Include="Search\SyncTables.cs" />
     <Compile Include="Global\WeightValues.cs" />
     <Compile Include="Helpers\Converters.cs" />
@@ -127,6 +128,7 @@
     <Compile Include="Types\SearchFieldsData.cs" />
     <Compile Include="Types\ShotgunBushingListings.cs" />
     <Compile Include="Types\ShotgunPowderListings.cs" />
+    <Compile Include="Types\ShotgunShotListings.cs" />
     <Compile Include="Types\SyncTablesData.cs" />
     <Compile Include="Types\WishlistData.cs" />
   </ItemGroup>

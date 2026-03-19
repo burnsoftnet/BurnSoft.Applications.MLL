@@ -2,9 +2,9 @@
 namespace BurnSoft.Applications.MLL.Types
 {
     /// <summary>
-    /// Class ShotgunPowderListings list container for the List_SG_Bushing_Powder table.
+    /// Class ShotgunShotListings list container to handle the List_SG_Bushing_Shot table data
     /// </summary>
-    public class ShotgunPowderListings
+    public class ShotgunShotListings
     {
         /// <summary>
         /// Gets or sets the identifier.
@@ -31,11 +31,6 @@ namespace BurnSoft.Applications.MLL.Types
         /// </summary>
         /// <value>The type.</value>
         public string Type { get; set; }
-        /// <summary>
-        /// Gets or sets the name of the powder.
-        /// </summary>
-        /// <value>The name of the powder.</value>
-        public string PowderName { get; set; }
         /// <summary>
         /// Gets or sets the last synchronize for the sync_lastupdate column
         /// </summary>
