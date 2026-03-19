@@ -8,7 +8,7 @@ using System.Collections.Generic;
 namespace BurnSoft.Applications.MLL.UnitTests.Listings
 {
     [TestClass]
-    public class ShotgunPowderInventoryTests
+    public class ShotgunShotInventoryTests
     {
         /// <summary>
         /// Gets or sets the test context.
@@ -23,18 +23,6 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
         /// The database path
         /// </summary>
         private string _databasePath;
-        /// <summary>
-        /// The existing manu
-        /// </summary>
-        private string _existingManu;
-        /// <summary>
-        /// The existing name
-        /// </summary>
-        private string _existingName;
-        /// <summary>
-        /// The existing identifier
-        /// </summary>
-        private int _existingId;
         /// <summary>
         /// The manufacturer
         /// </summary>
@@ -51,10 +39,6 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
         /// The type
         /// </summary>
         private string _type;
-        /// <summary>
-        /// The powder name
-        /// </summary>
-        private string _powderName;
 
         /// <summary>
         /// Initializes this instance.
@@ -65,31 +49,27 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             // Vs2019.GetSetting("");
             _errOut = @"";
             _databasePath = Vs2019.GetSetting("DatabasePath");
-            _existingManu = "Lee";
-            _existingName = ".15";
-            _existingId = 1;
             _manufacturer = "Lee";
             _name = "0.50";
             _charge = ".75 oz";
             _type = "Lee .15";
-            _powderName = "Alliant Unique";
         }
 
         private void AddTestDataExists()
         {
-            if (!ShotgunPowderInventory.DataExists(_databasePath, _manufacturer, _name, out _))
+            if (!ShotgunShotInventory.DataExists(_databasePath, _manufacturer, _name, _charge, out _))
             {
-                ShotgunPowderInventory.Add(_databasePath, _manufacturer, _name,
-                    _charge, _type, _powderName, out _);
+                ShotgunShotInventory.Add(_databasePath, _manufacturer, _name,
+                    _charge, _type, out _);
             }
         }
 
         private void DeleteTestDataExists()
         {
-            if (ShotgunPowderInventory.DataExists(_databasePath, _manufacturer, _name, out _))
+            if (ShotgunShotInventory.DataExists(_databasePath, _manufacturer, _name, _charge, out _))
             {
-                long id = ShotgunPowderInventory.GetId(_databasePath, _manufacturer, _name, out _);
-                ShotgunPowderInventory.Delete(_databasePath, id, out _);
+                long id = ShotgunShotInventory.GetId(_databasePath, _manufacturer, _name, _charge, out _);
+                ShotgunShotInventory.Delete(_databasePath, id, out _);
             }
         }
 
@@ -97,20 +77,21 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
         {
             TestContext.WriteLine($"===========${BeforeAfter}===========");
             TestContext.WriteLine($"");
-            List<ShotgunPowderListings> value = ShotgunPowderInventory.GetDetails(_databasePath, _manufacturer, _name, out _errOut);
-            TestContext.WriteLine(DebugHelpers.PrintListValues.ShotgunPowderListingsData(value));
+            List<ShotgunShotListings> value = ShotgunShotInventory.GetDetails(_databasePath, _manufacturer, _name, _charge, out _errOut);
+            TestContext.WriteLine(DebugHelpers.PrintListValues.ShotgunShotListingsData(value));
             TestContext.WriteLine($"");
         }
 
-        [TestMethod, TestCategory("Inventory Listings - Shotgun Powder")]
+        [TestMethod, TestCategory("Inventory Listings - Shotgun Shot")]
         public void GetAllTest()
         {
             bool bAns = false;
             try
             {
-                List<ShotgunPowderListings> value = ShotgunPowderInventory.GetAll(_databasePath, out _errOut);
+                AddTestDataExists();
+                List<ShotgunShotListings> value = ShotgunShotInventory.GetAll(_databasePath, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
-                TestContext.WriteLine(DebugHelpers.PrintListValues.ShotgunPowderListingsData(value));
+                TestContext.WriteLine(DebugHelpers.PrintListValues.ShotgunShotListingsData(value));
                 bAns = true;
             }
             catch (Exception ex)
@@ -120,19 +101,20 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             General.HasTrueValue(bAns, _errOut);
         }
 
-        [TestMethod, TestCategory("Inventory Listings - Shotgun Powder")]
+        [TestMethod, TestCategory("Inventory Listings - Shotgun Shot")]
         public void AddTest()
         {
             bool bAns = false;
             try
             {
                 DeleteTestDataExists();
-                bool value = ShotgunPowderInventory.Add(_databasePath, _manufacturer, _name,
-                    _charge, _type, _powderName, out _errOut);
+                bool value = ShotgunShotInventory.Add(_databasePath, _manufacturer, _name,
+                    _charge, _type, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine($"VALUE: {value}");
-                long id = ShotgunPowderInventory.GetId(_databasePath, _manufacturer, _name, out _errOut);
-                TestContext.WriteLine(DebugHelpers.PrintListValues.ShotgunPowderListingsData(ShotgunPowderInventory.GetDetails(_databasePath, id, out _errOut)));
+                long id = ShotgunShotInventory.GetId(_databasePath, _manufacturer, _name, _charge, out _errOut);
+                TestContext.WriteLine(DebugHelpers.PrintListValues.ShotgunShotListingsData(
+                    ShotgunShotInventory.GetDetails(_databasePath, id, out _errOut)));
                 bAns = true;
             }
             catch (Exception ex)
@@ -142,7 +124,7 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             General.HasTrueValue(bAns, _errOut);
         }
 
-        [TestMethod, TestCategory("Inventory Listings - Shotgun Powder")]
+        [TestMethod, TestCategory("Inventory Listings - Shotgun Shot")]
         public void UpdateTest()
         {
             bool bAns = false;
@@ -150,9 +132,9 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             {
                 AddTestDataExists();
                 PrintTestCases();
-                long id = ShotgunPowderInventory.GetId(_databasePath, _manufacturer, _name, out _);
-                bool value = ShotgunPowderInventory.Update(_databasePath, id, _manufacturer, _name,
-                    _charge, _type, _powderName + 1, out _errOut);
+                long id = ShotgunShotInventory.GetId(_databasePath, _manufacturer, _name, _charge, out _);
+                bool value = ShotgunShotInventory.Update(_databasePath, id, _manufacturer, _name,
+                    _charge, _type + " super", out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine($"VALUE: {value}");
                 PrintTestCases("AFTER");
@@ -165,15 +147,15 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             General.HasTrueValue(bAns, _errOut);
         }
 
-        [TestMethod, TestCategory("Inventory Listings - Shotgun Powder")]
+        [TestMethod, TestCategory("Inventory Listings - Shotgun Shot")]
         public void DeleteTest()
         {
             bool bAns = false;
             try
             {
                 AddTestDataExists();
-                long id = ShotgunPowderInventory.GetId(_databasePath, _manufacturer, _name, out _);
-                bool value = ShotgunPowderInventory.Delete(_databasePath, id, out _errOut);
+                long id = ShotgunShotInventory.GetId(_databasePath, _manufacturer, _name, _charge, out _);
+                bool value = ShotgunShotInventory.Delete(_databasePath, id, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine($"VALUE: {value}");
                 bAns = true;
@@ -185,14 +167,14 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             General.HasTrueValue(bAns, _errOut);
         }
 
-        [TestMethod, TestCategory("Inventory Listings - Shotgun Powder")]
+        [TestMethod, TestCategory("Inventory Listings - Shotgun Shot")]
         public void DeleteByFullNameTest()
         {
             bool bAns = false;
             try
             {
                 AddTestDataExists();
-                bool value = ShotgunPowderInventory.Delete(_databasePath, _manufacturer, _name, out _errOut);
+                bool value = ShotgunShotInventory.Delete(_databasePath, _manufacturer, _name, _charge, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine($"VALUE: {value}");
                 bAns = true;
@@ -204,14 +186,14 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             General.HasTrueValue(bAns, _errOut);
         }
 
-        [TestMethod, TestCategory("Inventory Listings - Shotgun Powder")]
+        [TestMethod, TestCategory("Inventory Listings - Shotgun Shot")]
         public void GetIdTest()
         {
             bool bAns = false;
             try
             {
                 AddTestDataExists();
-                long value = ShotgunPowderInventory.GetId(_databasePath, _manufacturer, _name, out _errOut);
+                long value = ShotgunShotInventory.GetId(_databasePath, _manufacturer, _name, _charge, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine($"ID RETURNED {value}");
                 bAns = (value > 0);
@@ -223,17 +205,17 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             General.HasTrueValue(bAns, _errOut);
         }
 
-        [TestMethod, TestCategory("Inventory Listings - Shotgun Powder")]
+        [TestMethod, TestCategory("Inventory Listings - Shotgun Shot")]
         public void GetDetailsTest()
         {
             bool bAns = false;
             try
             {
                 AddTestDataExists();
-                List<ShotgunPowderListings> value = ShotgunPowderInventory.GetDetails(_databasePath, 
-                    _manufacturer, _name, out _errOut);
+                List<ShotgunShotListings> value = ShotgunShotInventory.GetDetails(_databasePath,
+                    _manufacturer, _name, _charge, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
-                TestContext.WriteLine(DebugHelpers.PrintListValues.ShotgunPowderListingsData(value));
+                TestContext.WriteLine(DebugHelpers.PrintListValues.ShotgunShotListingsData(value));
                 bAns = true;
             }
             catch (Exception ex)
@@ -243,17 +225,17 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             General.HasTrueValue(bAns, _errOut);
         }
 
-        [TestMethod, TestCategory("Inventory Listings - Shotgun Powder")]
+        [TestMethod, TestCategory("Inventory Listings - Shotgun Shot")]
         public void GetDetailsIdTest()
         {
             bool bAns = false;
             try
             {
                 AddTestDataExists();
-                long _existingId = ShotgunPowderInventory.GetId(_databasePath, _manufacturer, _name, out _errOut);
-                List<ShotgunPowderListings> value = ShotgunPowderInventory.GetDetails(_databasePath, _existingId, out _errOut);
+                long _existingId = ShotgunShotInventory.GetId(_databasePath, _manufacturer, _name, _charge, out _errOut);
+                List<ShotgunShotListings> value = ShotgunShotInventory.GetDetails(_databasePath, _existingId, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
-                TestContext.WriteLine(DebugHelpers.PrintListValues.ShotgunPowderListingsData(value));
+                TestContext.WriteLine(DebugHelpers.PrintListValues.ShotgunShotListingsData(value));
                 bAns = true;
             }
             catch (Exception ex)
@@ -263,13 +245,14 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             General.HasTrueValue(bAns, _errOut);
         }
 
-        [TestMethod, TestCategory("Inventory Listings - Shotgun Powder")]
+        [TestMethod, TestCategory("Inventory Listings - Shotgun Shot")]
         public void DataExistsTest()
         {
             bool bAns = false;
             try
             {
-                bool value = ShotgunPowderInventory.DataExists(_databasePath, out _errOut);
+                AddTestDataExists();
+                bool value = ShotgunShotInventory.DataExists(_databasePath, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine($"VALUE: {value}");
                 bAns = true;
@@ -281,14 +264,14 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             General.HasTrueValue(bAns, _errOut);
         }
 
-        [TestMethod, TestCategory("Inventory Listings - Shotgun Powder")]
+        [TestMethod, TestCategory("Inventory Listings - Shotgun Shot")]
         public void DataExistsByManuNameTest()
         {
             bool bAns = false;
             try
             {
                 AddTestDataExists();
-                bool value = ShotgunPowderInventory.DataExists(_databasePath, _manufacturer, _name, out _errOut);
+                bool value = ShotgunShotInventory.DataExists(_databasePath, _manufacturer, _name, _charge, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine($"VALUE: {value}");
                 bAns = true;
