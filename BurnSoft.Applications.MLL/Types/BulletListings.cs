@@ -50,7 +50,7 @@ namespace BurnSoft.Applications.MLL.Types
         /// Gets or sets the type of the buller. Using the Bullet_Type column
         /// </summary>
         /// <value>The type of the buller.</value>
-        public int BullerType { get; set; }
+        public int BulletType { get; set; }
         /// <summary>
         /// Gets or sets the qty.
         /// </summary>

@@ -88,7 +88,7 @@ namespace BurnSoft.Applications.MLL.Inventory
                         SectionDensity = d["Sec_Den"] != DBNull.Value ? d["Sec_Den"].ToString().Trim() : "",
                         PartNumber = d["Part_number"] != DBNull.Value ? d["Part_number"].ToString().Trim() : "",
                         BallisticCoeffcient = d["Ballistic_Coefficient"] != DBNull.Value ? d["Ballistic_Coefficient"].ToString().Trim() : "",
-                        BullerType = Convert.ToInt32(d["Bullet_Type"]),
+                        BulletType = Convert.ToInt32(d["Bullet_Type"]),
                         Qty = Convert.ToInt32(d["Qty"]),
                         Price = Convert.ToDouble(d["Price"]),
                         CaliberId = Convert.ToInt32(d["CID"]),

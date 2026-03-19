@@ -396,7 +396,7 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
                     sAns += $"SectionDensity : {v.SectionDensity}{Environment.NewLine}";
                     sAns += $"PartNumber : {v.PartNumber}{Environment.NewLine}";
                     sAns += $"BallisticCoeffcient : {v.BallisticCoeffcient}{Environment.NewLine}";
-                    sAns += $"BullerType : {v.BullerType}{Environment.NewLine}";
+                    sAns += $"BullerType : {v.BulletType}{Environment.NewLine}";
                     sAns += $"Qty : {v.Qty}{Environment.NewLine}";
                     sAns += $"Price : {v.Price}{Environment.NewLine}";
                     sAns += $"CaliberId : {v.CaliberId}{Environment.NewLine}";
