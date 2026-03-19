@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using BurnSoft.Applications.MLL.Inventory;
 
 namespace BurnSoft.Applications.MLL.Global
 {
@@ -94,10 +91,12 @@ namespace BurnSoft.Applications.MLL.Global
         {
             if (AutoAdd)
             {
-                Database.Execute(databasePath, $"INSERT INTO List_Calibers(Cal) VALUES('{name}')", out errOut);
+                if (!CaliberInventory.DataExists(databasePath, name, out errOut))
+                {
+                    CaliberInventory.Add(databasePath, name, out errOut);
+                }
             }
-            string sql = $"SELECT ID from List_SG_ShotCharge_Loads where Name='{name}'";
-            return Database.GetId(databasePath, sql, out errOut);
+            return CaliberInventory.GetId(databasePath, name, out errOut);
         }
         /// <summary>
         /// Totals the cost equipment.
