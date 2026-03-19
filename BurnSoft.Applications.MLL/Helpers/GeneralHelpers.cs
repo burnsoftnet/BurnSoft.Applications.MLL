@@ -28,10 +28,10 @@ namespace BurnSoft.Applications.MLL.Helpers
         /// <param name="value">The value.</param>
         /// <param name="defaultValue">The default value.</param>
         /// <returns>System.Double.</returns>
-        public static double FluffContent(string value, double defaultValue =0)
+        public static double FluffContent(double value, double defaultValue =0)
         {
             BSOtherObjects obj = new BSOtherObjects();
-            double dAns = Convert.ToDouble(obj.FC(value, $"{defaultValue}"));
+            double dAns = Convert.ToDouble(obj.FC(value.ToString(), $"{defaultValue}"));
             return dAns;
         }
         /// <summary>
