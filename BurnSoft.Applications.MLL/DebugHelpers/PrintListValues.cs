@@ -661,5 +661,27 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
             }
             return sAns;
         }
+        /// <summary>
+        /// Shotguns the shot listings data.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string ShotgunShotListingsData(List<ShotgunShotListings> value)
+        {
+            string sAns = "";
+            if (value.Count > 0)
+            {
+                foreach (ShotgunShotListings v in value)
+                {
+                    sAns += $"id : {v.Id}{Environment.NewLine}";
+                    sAns += $"Manufacturer : {v.Manufacturer}{Environment.NewLine}";
+                    sAns += $"Name : {v.Name}{Environment.NewLine}";
+                    sAns += $"TrimToLength : {v.Charge}{Environment.NewLine}";
+                    sAns += $"Type : {v.Type}{Environment.NewLine}";
+                    sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                }
+            }
+            return sAns;
+        }
     }
 }
