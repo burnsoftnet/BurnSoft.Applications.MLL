@@ -1,5 +1,4 @@
 ﻿using BurnSoft.Applications.MLL.Types;
-using BurnSoft.Universal;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -7,17 +6,16 @@ using System.Data;
 namespace BurnSoft.Applications.MLL.LoadersLog
 {
     /// <summary>
-    /// Class Firearms which handles the local collection for 
-    /// the loaders log firearms that is used
+    /// Class LoadersLogShotgun handles the data in the Loaders_Log_SG table..
     /// </summary>
-    public class Firearms
+    public class LoadersLogShotgun
     {
         #region "Exception Error Handling"
 
         /// <summary>
         /// The class location
         /// </summary>
-        private static string ClassLocation = "BurnSoft.Applications.MLL.LoadersLog.Firearms";
+        private static string ClassLocation = "BurnSoft.Applications.MLL.LoadersLog.LoadersLogShotgun";
 
         /// <summary>
         /// Errors the message for regular Exceptions
@@ -67,32 +65,37 @@ namespace BurnSoft.Applications.MLL.LoadersLog
         #endregion
 
         /// <summary>
-        /// Gets the data from the data table and puts it in for the 
-        /// FirearmCollection list container
+        /// Gets the data.
         /// </summary>
         /// <param name="dt">The dt.</param>
         /// <param name="errOut">The error out.</param>
-        /// <returns>List&lt;FirearmCollection&gt;.</returns>
-        private static List<FirearmCollection> GetData(DataTable dt, out string errOut)
+        /// <returns>List&lt;LoadersLogShotgunData&gt;.</returns>
+        private static List<LoadersLogShotgunData> GetData(DataTable dt, out string errOut)
         {
-            List<FirearmCollection> lst = new List<FirearmCollection>();
+            List<LoadersLogShotgunData> lst = new List<LoadersLogShotgunData>();
             errOut = "";
             try
             {
                 foreach (DataRow d in dt.Rows)
                 {
-                    lst.Add(new FirearmCollection()
+                    lst.Add(new LoadersLogShotgunData()
                     {
                         Id = Convert.ToInt32(d["id"]),
-                        MyGunCollectionId = Convert.ToInt32(d["MGCID"]),
-                        FullName = d["FullName"] != DBNull.Value ? d["FullName"].ToString().Trim() : "",
-                        Manufacturer = d["Manu"] != DBNull.Value ? d["Manu"].ToString().Trim() : "",
-                        Model = d["Model"] != DBNull.Value ? d["Model"].ToString().Trim() : "",
-                        Caliber = d["Cal"] != DBNull.Value ? d["Cal"].ToString().Trim() : "",
-                        Barrel = d["Barrel"] != DBNull.Value ? d["Barrel"].ToString().Trim() : "",
-                        SerialNo = d["SerialNo"] != DBNull.Value ? d["SerialNo"].ToString().Trim() : "",
-                        GunType = d["GType"] != DBNull.Value ? d["GType"].ToString().Trim() : "",
-                        Exclude = Convert.ToInt32(d["Exclude"]) == 1,
+                        FirearmId = Convert.ToInt32(d["fid"]),
+                        FirearmName = d["FirearmName"] != DBNull.Value ? d["FirearmName"].ToString().Trim() : "",
+                        Caliber = d["Caliber"] != DBNull.Value ? d["Caliber"].ToString().Trim() : "",
+                        BarrelLength = d["BarrelLen"] != DBNull.Value ? d["BarrelLen"].ToString().Trim() : "",
+                        ConfigName = d["ConfigName"] != DBNull.Value ? d["ConfigName"].ToString().Trim() : "",
+                        DateCreated = d["dt"] != DBNull.Value ? Convert.ToDateTime(d["dt"].ToString().Trim()) : DateTime.Now,
+                        ShotWeight = d["Shotwt"] != DBNull.Value ? d["Shotwt"].ToString().Trim() : "",
+                        ShotSize = d["ShotSize"] != DBNull.Value ? d["ShotSize"].ToString().Trim() : "",
+                        CaseDetails = d["case"] != DBNull.Value ? d["case"].ToString().Trim() : "",
+                        PowderDetails = d["pbm"] != DBNull.Value ? d["pbm"].ToString().Trim() : "",
+                        WadDetails = d["wad"] != DBNull.Value ? d["wad"].ToString().Trim() : "",
+                        PrimerDetails = d["primer"] != DBNull.Value ? d["primer"].ToString().Trim() : "",
+                        PatternDensity = d["pd"] != DBNull.Value ? d["pd"].ToString().Trim() : "",
+                        Yards = Convert.ToInt32(d["yds"]),
+                        Notes = d["notes"] != DBNull.Value ? d["notes"].ToString().Trim() : "",
                         LastSync = d["sync_lastupdate"].ToString().Trim(),
                     });
                 }
@@ -104,28 +107,28 @@ namespace BurnSoft.Applications.MLL.LoadersLog
             return lst;
         }
         /// <summary>
-        /// Gets the details of the selected firearm
+        /// Gets the details.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="id">The identifier.</param>
         /// <param name="errOut">The error out.</param>
-        /// <returns>List&lt;FirearmCollection&gt;.</returns>
-        /// <exception cref="System.Exception"></exception>
-        public static List<FirearmCollection> GetDetails(string databasePath, int id, out string errOut)
+        /// <returns>List&lt;LoadersLogShotgunData&gt;.</returns>
+        public static List<LoadersLogShotgunData> GetDetails(string databasePath, int id, out string errOut)
         {
-            string sql = $"Select * from Loaders_Log_Firearms where ID={id}";
+            string sql = $"Select * from Loaders_Log_SG where ID={id}";
             return GetList(databasePath, sql, out errOut);
         }
         /// <summary>
         /// Gets the details.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
-        /// <param name="fullName">The full name.</param>
+        /// <param name="configName">Name of the configuration.</param>
+        /// <param name="dateCreated">The date created.</param>
         /// <param name="errOut">The error out.</param>
-        /// <returns>List&lt;FirearmCollection&gt;.</returns>
-        public static List<FirearmCollection> GetDetails(string databasePath, string fullName, out string errOut)
+        /// <returns>List&lt;LoadersLogShotgunData&gt;.</returns>
+        public static List<LoadersLogShotgunData> GetDetails(string databasePath, string configName, string dateCreated, out string errOut)
         {
-            string sql = $"Select * from Loaders_Log_Firearms where fullname='{fullName}'";
+            string sql = $"Select * from Loaders_Log_SG where ConfigName='{configName}' and dt=cDate('{dateCreated}')";
             return GetList(databasePath, sql, out errOut);
         }
         /// <summary>
@@ -133,10 +136,10 @@ namespace BurnSoft.Applications.MLL.LoadersLog
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="errOut">The error out.</param>
-        /// <returns>List&lt;FirearmCollection&gt;.</returns>
-        public static List<FirearmCollection> GetAll(string databasePath, out string errOut)
+        /// <returns>List&lt;LoadersLogShotgunData&gt;.</returns>
+        public static List<LoadersLogShotgunData> GetAll(string databasePath, out string errOut)
         {
-            string sql = $"Select * from Loaders_Log_Firearms order by FullName ASC";
+            string sql = $"Select * from Loaders_Log_SG order by ConfigName ASC";
             return GetList(databasePath, sql, out errOut);
         }
         /// <summary>
@@ -145,11 +148,11 @@ namespace BurnSoft.Applications.MLL.LoadersLog
         /// <param name="databasePath">The database path.</param>
         /// <param name="sql">The SQL.</param>
         /// <param name="errOut">The error out.</param>
-        /// <returns>List&lt;FirearmCollection&gt;.</returns>
+        /// <returns>List&lt;LoadersLogShotgunData&gt;.</returns>
         /// <exception cref="System.Exception"></exception>
-        private static List<FirearmCollection> GetList(string databasePath, string sql, out string errOut)
+        private static List<LoadersLogShotgunData> GetList(string databasePath, string sql, out string errOut)
         {
-            List<FirearmCollection> lst = new List<FirearmCollection>();
+            List<LoadersLogShotgunData> lst = new List<LoadersLogShotgunData>();
             errOut = "";
             try
             {
@@ -165,25 +168,25 @@ namespace BurnSoft.Applications.MLL.LoadersLog
             }
             return lst;
         }
-
         /// <summary>
-        /// Gets the firearm identifier.
+        /// Gets the identifier.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
-        /// <param name="fullName">The full name.</param>
+        /// <param name="configName">Name of the configuration.</param>
+        /// <param name="dateCreated">The date created.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns>System.Int64.</returns>
         /// <exception cref="System.Exception"></exception>
-        public static long GetId(string databasePath, string fullName, out string errOut)
+        public static long GetId(string databasePath, string configName, string dateCreated, out string errOut)
         {
             errOut = "";
             long lAns = 0;
             try
             {
-                string sql = $"Select * from Loaders_Log_Firearms where fullname='{fullName}'";
-                List<FirearmCollection> lst = GetList(databasePath, sql, out errOut);
+                string sql = $"Select * from Loaders_Log_SG where configName='{configName}' and dt=cDate('{dateCreated}')";
+                List<LoadersLogShotgunData> lst = GetList(databasePath, sql, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
-                foreach (FirearmCollection i in lst)
+                foreach (LoadersLogShotgunData i in lst)
                 {
                     lAns = i.Id;
                     break;
@@ -208,7 +211,7 @@ namespace BurnSoft.Applications.MLL.LoadersLog
             errOut = @"";
             try
             {
-                List<FirearmCollection> lst = GetAll(databasePath, out errOut);
+                List<LoadersLogShotgunData> lst = GetAll(databasePath, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 bAns = lst.Count > 0;
             }
@@ -222,18 +225,19 @@ namespace BurnSoft.Applications.MLL.LoadersLog
         /// Datas the exists.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
-        /// <param name="fullName">The full name.</param>
+        /// <param name="configName">Name of the configuration.</param>
+        /// <param name="dateCreated">The date created.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="System.Exception"></exception>
-        public static bool DataExists(string databasePath, string fullName, out string errOut)
+        public static bool DataExists(string databasePath, string configName, string dateCreated, out string errOut)
         {
             bool bAns = false;
             errOut = @"";
             try
             {
 
-                List<FirearmCollection> lst = GetDetails(databasePath, fullName, out errOut);
+                List<LoadersLogShotgunData> lst = GetDetails(databasePath, configName, dateCreated, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 bAns = lst.Count > 0;
             }
@@ -243,36 +247,42 @@ namespace BurnSoft.Applications.MLL.LoadersLog
             }
             return bAns;
         }
-
         /// <summary>
-        /// Adds the firearm to the loaders log table to use for sample logging testing.
+        /// Adds the specified database path.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
-        /// <param name="manufacturer">The manufacturer.</param>
-        /// <param name="model">The model.</param>
-        /// <param name="serial">The serial.</param>
+        /// <param name="firearmId">The firearm identifier.</param>
+        /// <param name="fireArmName">Name of the fire arm.</param>
         /// <param name="caliber">The caliber.</param>
-        /// <param name="type">The type.</param>
-        /// <param name="barrel">The barrel.</param>
+        /// <param name="BarrelLenght">The barrel lenght.</param>
+        /// <param name="ConfigName">Name of the configuration.</param>
+        /// <param name="dateCreated">The date created.</param>
+        /// <param name="shotWeight">The shot weight.</param>
+        /// <param name="shotSize">Size of the shot.</param>
+        /// <param name="caseDetails">The case details.</param>
+        /// <param name="powderDetails">The powder details.</param>
+        /// <param name="wadDetails">The wad details.</param>
+        /// <param name="primerDetails">The primer details.</param>
+        /// <param name="patterDensity">The patter density.</param>
+        /// <param name="yards">The yards.</param>
+        /// <param name="notes">The notes.</param>
         /// <param name="errOut">The error out.</param>
-        /// <param name="mgcId">The MGC identifier.</param>
-        /// <param name="exclude">if set to <c>true</c> [exclude].</param>
-        /// <param name="fullName">The full name.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public static bool Add(string databasePath, string manufacturer, string model, string serial, 
-            string caliber, string type, string barrel,  out string errOut, int mgcId = 0, 
-            bool exclude = false, string fullName = "")
+        public static bool Add(string databasePath, long firearmId, string fireArmName, string caliber,
+            string BarrelLenght, string ConfigName, string dateCreated, string shotWeight,
+            string shotSize, string caseDetails, string powderDetails, string wadDetails, string primerDetails,
+            string patterDensity, int yards, string notes, out string errOut)
         {
             errOut = "";
             bool bAns = false;
             try
             {
-                BSOtherObjects o = new BSOtherObjects();
-                fullName = fullName.Length == 0 ? $"{manufacturer} {model}" : fullName;
-                int iExclude = exclude ? 0 : 1;
-                string sql = $"INSERT INTO Loaders_Log_Firearms (MGCID,FullName,Manu,Model,Cal,Barrel,SerialNo," +
-                    $"GType,exclude) VALUES({mgcId},'{o.FC(fullName)}', '{o.FC(manufacturer)}', '{o.FC(model)}', " +
-                    $"'{o.FC(caliber)}', '{o.FC(barrel)}', '{o.FC(serial)}', '{o.FC(type)}', {iExclude})";
+                string sql = $"INSERT INTO Loaders_Log_SG (fid,FirearmName,Caliber,BarrelLen,ConfigName,dt," +
+                    $"Shotwt,ShotSize,case,pbm,wad,primer,pd,yds,notes, sync_lastupdate) " +
+                    $"VALUES({firearmId},'{fireArmName}', '{caliber}', '{BarrelLenght}', " +
+                    $"'{ConfigName}', '{dateCreated}', '{shotWeight}', '{shotSize}', '{caseDetails}', " +
+                    $"'{powderDetails}', '{wadDetails}', '{primerDetails}', '{patterDensity}', {yards}, " +
+                    $"'{notes}', Now())";
 
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
@@ -287,32 +297,37 @@ namespace BurnSoft.Applications.MLL.LoadersLog
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="id">The identifier.</param>
-        /// <param name="manufacturer">The manufacturer.</param>
-        /// <param name="model">The model.</param>
-        /// <param name="serial">The serial.</param>
+        /// <param name="firearmId">The firearm identifier.</param>
+        /// <param name="fireArmName">Name of the fire arm.</param>
         /// <param name="caliber">The caliber.</param>
-        /// <param name="type">The type.</param>
-        /// <param name="barrel">The barrel.</param>
+        /// <param name="BarrelLenght">The barrel lenght.</param>
+        /// <param name="ConfigName">Name of the configuration.</param>
+        /// <param name="dateCreated">The date created.</param>
+        /// <param name="shotWeight">The shot weight.</param>
+        /// <param name="shotSize">Size of the shot.</param>
+        /// <param name="caseDetails">The case details.</param>
+        /// <param name="powderDetails">The powder details.</param>
+        /// <param name="wadDetails">The wad details.</param>
+        /// <param name="primerDetails">The primer details.</param>
+        /// <param name="patterDensity">The patter density.</param>
+        /// <param name="yards">The yards.</param>
+        /// <param name="notes">The notes.</param>
         /// <param name="errOut">The error out.</param>
-        /// <param name="mgcId">The MGC identifier.</param>
-        /// <param name="exclude">if set to <c>true</c> [exclude].</param>
-        /// <param name="fullName">The full name.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public static bool Update(string databasePath, long id, string manufacturer, string model, string serial,
-            string caliber, string type, string barrel, out string errOut, int mgcId = 0,
-            bool exclude = false, string fullName = "")
+        public static bool Update(string databasePath, long id, long firearmId, string fireArmName, string caliber,
+            string BarrelLenght, string ConfigName, string dateCreated, string shotWeight,
+            string shotSize, string caseDetails, string powderDetails, string wadDetails, string primerDetails,
+            string patterDensity, int yards, string notes, out string errOut)
         {
             errOut = "";
             bool bAns = false;
             try
             {
-                BSOtherObjects o = new BSOtherObjects();
-                fullName = fullName.Length == 0 ? $"{manufacturer} {model}" : fullName;
-                int iExclude = exclude ? 0 : 1;
-                string sql = $"UPDATE Loaders_Log_Firearms set MGCID={mgcId}," +
-                    $"FullName='{o.FC(fullName)}',Manu='{o.FC(manufacturer)}'," +
-                    $"Model='{o.FC(model)}',Cal='{o.FC(caliber)}',Barrel='{o.FC(barrel)}'," +
-                    $"SerialNo='{o.FC(serial)}',GType='{o.FC(type)}',exclude={iExclude} where id={id}";
+                string sql = $"UPDATE Loaders_Log_SG set fid={firearmId},FirearmName='{fireArmName}'," +
+                    $"Caliber='{caliber}',BarrelLen='{BarrelLenght}',ConfigName='{ConfigName}',dt=CDate('{dateCreated}')," +
+                    $"Shotwt='{shotWeight}',ShotSize='{shotSize}',case='{caseDetails}',pbm='{powderDetails}'," +
+                    $"wad='{wadDetails}',primer='{primerDetails}',pd='{patterDensity}',yds={yards},notes='{notes}', " +
+                    $"sync_lastupdate=Now() where id={id}";
 
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
@@ -335,7 +350,7 @@ namespace BurnSoft.Applications.MLL.LoadersLog
             bool bAns = false;
             try
             {
-                string sql = $"DELETE from Loaders_Log_Firearms where id={id}";
+                string sql = $"DELETE from Loaders_Log_SG where id={id}";
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
             catch (Exception e)
@@ -348,17 +363,18 @@ namespace BurnSoft.Applications.MLL.LoadersLog
         /// Deletes the specified database path.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
-        /// <param name="fullName">The full name.</param>
+        /// <param name="configName">Name of the configuration.</param>
+        /// <param name="dateCreated">The date created.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="System.Exception"></exception>
-        public static bool Delete(string databasePath, string fullName, out string errOut)
+        public static bool Delete(string databasePath, string configName, string dateCreated, out string errOut)
         {
             errOut = "";
             bool bAns = false;
             try
             {
-                long id = GetId(databasePath, fullName, out errOut);
+                long id = GetId(databasePath, configName, dateCreated, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 bAns = Delete(databasePath, id, out errOut);
             }

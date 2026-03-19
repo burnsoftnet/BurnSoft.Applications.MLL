@@ -74,6 +74,8 @@
     <Compile Include="Global\GeneralFunctions.cs" />
     <Compile Include="Global\GeneralSettings.cs" />
     <Compile Include="Global\MyRegistry.cs" />
+    <Compile Include="Global\Wishlists.cs" />
+    <Compile Include="Search\SyncTables.cs" />
     <Compile Include="Global\WeightValues.cs" />
     <Compile Include="Helpers\Converters.cs" />
     <Compile Include="Helpers\GeneralHelpers.cs" />
@@ -92,8 +94,12 @@
     <Compile Include="LoadersLog\Firearms.cs" />
     <Compile Include="LoadersLog\LoadersLogAmmunition.cs" />
     <Compile Include="LoadersLog\LoadersLogAmmunitionAudit.cs" />
+    <Compile Include="LoadersLog\LoadersLogMetallic.cs" />
+    <Compile Include="LoadersLog\LoadersLogShotgun.cs" />
     <Compile Include="PeopleAndPlaces\OwnerInformation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Search\MetalicData.cs" />
+    <Compile Include="Search\ShotgunData.cs" />
     <Compile Include="Types\AmmuntionTypeListings.cs" />
     <Compile Include="Types\BulletListings.cs" />
     <Compile Include="Types\BulletPictures.cs" />
@@ -110,14 +116,19 @@
     <Compile Include="Types\GunCollectionAmmoData.cs" />
     <Compile Include="Types\LoadersLogAmmunitionAuditData.cs" />
     <Compile Include="Types\LoadersLogAmmunitionData.cs" />
+    <Compile Include="Types\LoadersLogMetallicData.cs" />
+    <Compile Include="Types\LoadersLogShotgunData.cs" />
     <Compile Include="Types\LoginInformationOnly.cs" />
     <Compile Include="Types\PersonalInformation.cs" />
     <Compile Include="Types\PowderListing.cs" />
     <Compile Include="Types\PrimerListings.cs" />
     <Compile Include="Types\PrimerTypeListings.cs" />
     <Compile Include="Types\RegistrySettings.cs" />
+    <Compile Include="Types\SearchFieldsData.cs" />
     <Compile Include="Types\ShotgunBushingListings.cs" />
     <Compile Include="Types\ShotgunPowderListings.cs" />
+    <Compile Include="Types\SyncTablesData.cs" />
+    <Compile Include="Types\WishlistData.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bswtsicon.png" />

@@ -3,21 +3,19 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 
-
-namespace BurnSoft.Applications.MLL.LoadersLog
+namespace BurnSoft.Applications.MLL.Search
 {
     /// <summary>
-    /// Class LoadersLogAmmunition handles the data in the 
-    /// Loaders_Log_Ammunition_Audit_Audit 
+    /// Class SyncTables handles the data in the sync_tables table.
     /// </summary>
-    public class LoadersLogAmmunitionAudit
+    public class SyncTables
     {
         #region "Exception Error Handling"
 
         /// <summary>
         /// The class location
         /// </summary>
-        private static string ClassLocation = "BurnSoft.Applications.MLL.Inventory.LoadersLogAmmunitionAudit";
+        private static string ClassLocation = "BurnSoft.Applications.MLL.Search.SyncTables";
 
         /// <summary>
         /// Errors the message for regular Exceptions
@@ -64,30 +62,26 @@ namespace BurnSoft.Applications.MLL.LoadersLog
         private static string ErrorMessage(string functionName, ArgumentNullException e) =>
             $"{ClassLocation}.{functionName} - {e.Message}";
 
-        #endregion                                        
+        #endregion
+
         /// <summary>
         /// Gets the data.
         /// </summary>
         /// <param name="dt">The dt.</param>
         /// <param name="errOut">The error out.</param>
-        /// <returns>List&lt;LoadersLogAmmunitionAuditData&gt;.</returns>
-        private static List<LoadersLogAmmunitionAuditData> GetData(DataTable dt, out string errOut)
+        /// <returns>List&lt;SyncTablesData&gt;.</returns>
+        private static List<SyncTablesData> GetData(DataTable dt, out string errOut)
         {
-            List<LoadersLogAmmunitionAuditData> lst = new List<LoadersLogAmmunitionAuditData>();
+            List<SyncTablesData> lst = new List<SyncTablesData>();
             errOut = "";
             try
             {
                 foreach (DataRow d in dt.Rows)
                 {
-                    lst.Add(new LoadersLogAmmunitionAuditData()
+                    lst.Add(new SyncTablesData()
                     {
                         Id = Convert.ToInt32(d["id"]),
-                        ConfigId = Convert.ToInt32(d["CFID"]),
-                        DateCreated = d["dtc"] != DBNull.Value ? d["dtc"].ToString().Trim() : "",
-                        Qty = Convert.ToInt32(d["Qty"]),
-                        EstimatedCostToMakeTotal = Convert.ToDouble(d["ec"]),
-                        EstimatedCostToMalePerRound = Convert.ToDouble(d["ecpr"]),
-                        LastSync = d["sync_lastupdate"].ToString().Trim(),
+                        TableName = d["tblname"] != DBNull.Value ? d["tblname"].ToString().Trim() : ""
                     });
                 }
             }
@@ -98,16 +92,51 @@ namespace BurnSoft.Applications.MLL.LoadersLog
             return lst;
         }
         /// <summary>
+        /// Gets the details.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;SyncTablesData&gt;.</returns>
+        public static List<SyncTablesData> GetDetails(string databasePath, int id, out string errOut)
+        {
+            string sql = $"Select * from sync_tables where ID={id}";
+            return GetList(databasePath, sql, out errOut);
+        }
+        /// <summary>
+        /// Gets the details.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="tableName">Name of the table.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;SyncTablesData&gt;.</returns>
+        public static List<SyncTablesData> GetDetails(string databasePath, string tableName, out string errOut)
+        {
+            string sql = $"Select * from sync_tables where tblname='{tableName}'";
+            return GetList(databasePath, sql, out errOut);
+        }
+        /// <summary>
+        /// Gets all.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;SyncTablesData&gt;.</returns>
+        public static List<SyncTablesData> GetAll(string databasePath, out string errOut)
+        {
+            string sql = $"Select * from sync_tables order by tblname ASC";
+            return GetList(databasePath, sql, out errOut);
+        }
+        /// <summary>
         /// Gets the list.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="sql">The SQL.</param>
         /// <param name="errOut">The error out.</param>
-        /// <returns>List&lt;LoadersLogAmmunitionAuditData&gt;.</returns>
+        /// <returns>List&lt;SyncTablesData&gt;.</returns>
         /// <exception cref="System.Exception"></exception>
-        private static List<LoadersLogAmmunitionAuditData> GetList(string databasePath, string sql, out string errOut)
+        private static List<SyncTablesData> GetList(string databasePath, string sql, out string errOut)
         {
-            List<LoadersLogAmmunitionAuditData> lst = new List<LoadersLogAmmunitionAuditData>();
+            List<SyncTablesData> lst = new List<SyncTablesData>();
             errOut = "";
             try
             {
@@ -124,34 +153,23 @@ namespace BurnSoft.Applications.MLL.LoadersLog
             return lst;
         }
         /// <summary>
-        /// Gets all.
-        /// </summary>
-        /// <param name="databasePath">The database path.</param>
-        /// <param name="errOut">The error out.</param>
-        /// <returns>List&lt;LoadersLogAmmunitionAuditData&gt;.</returns>
-        public static List<LoadersLogAmmunitionAuditData> GetAll(string databasePath, out string errOut)
-        {
-            string sql = $"Select * from Loaders_Log_Ammunition_Audit order by CFID ASC";
-            return GetList(databasePath, sql, out errOut);
-        }
-        /// <summary>
         /// Gets the identifier.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
-        /// <param name="configId">The configuration identifier.</param>
+        /// <param name="tableName">Name of the table.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns>System.Int64.</returns>
         /// <exception cref="System.Exception"></exception>
-        public static long GetId(string databasePath, long configId, out string errOut)
+        public static long GetId(string databasePath, string tableName, out string errOut)
         {
             errOut = "";
             long lAns = 0;
             try
             {
-                string sql = $"Select * from Loaders_Log_Ammunition_Audit where CFID={configId}";
-                List<LoadersLogAmmunitionAuditData> lst = GetList(databasePath, sql, out errOut);
+                string sql = $"Select * from sync_tables where tblname='{tableName}'";
+                List<SyncTablesData> lst = GetList(databasePath, sql, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
-                foreach (LoadersLogAmmunitionAuditData i in lst)
+                foreach (SyncTablesData i in lst)
                 {
                     lAns = i.Id;
                     break;
@@ -159,34 +177,9 @@ namespace BurnSoft.Applications.MLL.LoadersLog
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage("GetId", e);
+                errOut = ErrorMessage("GetFirearmId", e);
             }
             return lAns;
-        }
-
-        /// <summary>
-        /// Gets the details.
-        /// </summary>
-        /// <param name="databasePath">The database path.</param>
-        /// <param name="id">The identifier.</param>
-        /// <param name="errOut">The error out.</param>
-        /// <returns>List&lt;LoadersLogAmmunitionAuditData&gt;.</returns>
-        public static List<LoadersLogAmmunitionAuditData> GetDetails(string databasePath, long id, out string errOut)
-        {
-            string sql = $"Select * from Loaders_Log_Ammunition_Audit where id={id}";
-            return GetList(databasePath, sql, out errOut);
-        }
-        /// <summary>
-        /// Gets the details.
-        /// </summary>
-        /// <param name="databasePath">The database path.</param>
-        /// <param name="configId">The configuration identifier.</param>
-        /// <param name="errOut">The error out.</param>
-        /// <returns>List&lt;LoadersLogAmmunitionAuditData&gt;.</returns>
-        public static List<LoadersLogAmmunitionAuditData> GetDetails(string databasePath, int configId, out string errOut)
-        {
-            string sql = $"Select * from Loaders_Log_Ammunition_Audit where cfid={configId}";
-            return GetList(databasePath, sql, out errOut);
         }
         /// <summary>
         /// Datas the exists.
@@ -201,7 +194,7 @@ namespace BurnSoft.Applications.MLL.LoadersLog
             errOut = @"";
             try
             {
-                List<LoadersLogAmmunitionAuditData> lst = GetAll(databasePath, out errOut);
+                List<SyncTablesData> lst = GetAll(databasePath, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 bAns = lst.Count > 0;
             }
@@ -215,43 +208,18 @@ namespace BurnSoft.Applications.MLL.LoadersLog
         /// Datas the exists.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
-        /// <param name="id">The identifier.</param>
+        /// <param name="tableName">Name of the table.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="System.Exception"></exception>
-        public static bool DataExists(string databasePath, long id, out string errOut)
+        public static bool DataExists(string databasePath, string tableName, out string errOut)
         {
             bool bAns = false;
             errOut = @"";
             try
             {
 
-                List<LoadersLogAmmunitionAuditData> lst = GetDetails(databasePath, id, out errOut);
-                if (errOut.Length > 0) throw new Exception(errOut);
-                bAns = lst.Count > 0;
-            }
-            catch (Exception e)
-            {
-                errOut = ErrorMessage("DataExists", e);
-            }
-            return bAns;
-        }
-        /// <summary>
-        /// Datas the exists.
-        /// </summary>
-        /// <param name="databasePath">The database path.</param>
-        /// <param name="configId">The configuration identifier.</param>
-        /// <param name="errOut">The error out.</param>
-        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        /// <exception cref="System.Exception"></exception>
-        public static bool DataExists(string databasePath, int configId, out string errOut)
-        {
-            bool bAns = false;
-            errOut = @"";
-            try
-            {
-
-                List<LoadersLogAmmunitionAuditData> lst = GetDetails(databasePath, configId, out errOut);
+                List<SyncTablesData> lst = GetDetails(databasePath, tableName, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 bAns = lst.Count > 0;
             }
@@ -265,26 +233,17 @@ namespace BurnSoft.Applications.MLL.LoadersLog
         /// Adds the specified database path.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
-        /// <param name="configId">The configuration identifier.</param>
-        /// <param name="dateCreated">The date created.</param>
-        /// <param name="qty">The qty.</param>
-        /// <param name="estimatedTotalCost">The estimated total cost.</param>
-        /// <param name="estimatedCostPerRound">The estimated cost per round.</param>
+        /// <param name="tableName">Name of the table.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        /// <exception cref="System.Exception"></exception>
-        public static bool Add(string databasePath, long configId, string dateCreated, long qty,
-            double estimatedTotalCost, double estimatedCostPerRound, out string errOut)
+        public static bool Add(string databasePath, string tableName, out string errOut)
         {
             errOut = "";
             bool bAns = false;
             try
             {
-                if (errOut.Length > 0) throw new Exception(errOut);
-                string sql = $"INSERT INTO Loaders_Log_Ammunition_Audit(CFID,dtc,qty," +
-                    $"ec,ecpr,sync_lastupdate) VALUES(" +
-                    $"{configId}, '{dateCreated}', {qty}, " +
-                    $"{estimatedTotalCost}, {estimatedCostPerRound}, Now())";
+                string sql = $"INSERT INTO sync_tables (tblname) " +
+                    $"VALUES('{tableName}')";
 
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
@@ -299,25 +258,16 @@ namespace BurnSoft.Applications.MLL.LoadersLog
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="id">The identifier.</param>
-        /// <param name="configId">The configuration identifier.</param>
-        /// <param name="dateCreated">The date created.</param>
-        /// <param name="qty">The qty.</param>
-        /// <param name="estimatedTotalCost">The estimated total cost.</param>
-        /// <param name="estimatedCostPerRound">The estimated cost per round.</param>
+        /// <param name="tableName">Name of the table.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        /// <exception cref="System.Exception"></exception>
-        public static bool Update(string databasePath, long id, long configId, string dateCreated, 
-            long qty, double estimatedTotalCost, double estimatedCostPerRound, out string errOut)
+        public static bool Update(string databasePath, long id, string tableName, out string errOut)
         {
             errOut = "";
             bool bAns = false;
             try
             {
-                if (errOut.Length > 0) throw new Exception(errOut);
-                string sql = $"UPDATE Loaders_Log_Ammunition_Audit set CFID={configId}," +
-                    $"dtc='{dateCreated}',qty={qty},ec={estimatedTotalCost}, " +
-                    $"ecpr={estimatedCostPerRound}, sync_lastupdate=Now() where id={id}";
+                string sql = $"UPDATE sync_tables set tblname='{tableName}' where id={id}";
 
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
@@ -340,7 +290,7 @@ namespace BurnSoft.Applications.MLL.LoadersLog
             bool bAns = false;
             try
             {
-                string sql = $"DELETE from Loaders_Log_Ammunition_Audit where id={id}";
+                string sql = $"DELETE from sync_tables where id={id}";
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
             catch (Exception e)
@@ -353,17 +303,17 @@ namespace BurnSoft.Applications.MLL.LoadersLog
         /// Deletes the specified database path.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
-        /// <param name="configId">The configuration identifier.</param>
+        /// <param name="tableName">Name of the table.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="System.Exception"></exception>
-        public static bool Delete(string databasePath, int configId, out string errOut)
+        public static bool Delete(string databasePath, string tableName, out string errOut)
         {
             errOut = "";
             bool bAns = false;
             try
             {
-                long id = GetId(databasePath, configId, out errOut);
+                long id = GetId(databasePath, tableName, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 bAns = Delete(databasePath, id, out errOut);
             }
