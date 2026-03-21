@@ -1,4 +1,5 @@
-﻿using BurnSoft.Applications.MLL.Types;
+﻿using BurnSoft.Applications.MLL.Helpers;
+using BurnSoft.Applications.MLL.Types;
 using BurnSoft.Security.RegularEncryption.SHA;
 using BurnSoft.Universal;
 using System;
@@ -304,21 +305,39 @@ namespace BurnSoft.Applications.MLL.PeopleAndPlaces
         /// <param name="forgotPhrase">The forgot phrase.</param>
         /// <param name="forgotAnswer">The forgot answer.</param>
         /// <param name="errOut">The error out.</param>
+        /// <param name="preFluffEn">Fluff Content for SQL and encypt reqired sections</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public static bool Add(string databasePath, string name, string loadName, string address, string city, string state, string zipCode, string phone, string license, bool usePassword,
-            string username, string password, string forgotPhrase, string forgotAnswer, out string errOut)
+        public static bool Add(string databasePath, string name, string loadName, string address, 
+            string city, string state, string zipCode, string phone, string license, bool usePassword,
+            string username, string password, string forgotPhrase, string forgotAnswer, 
+            out string errOut, bool preFluffEn = false)
         {
             bool bAns = false;
             errOut = @"";
             try
             {
+                if (preFluffEn)
+                {
+                    name = GeneralHelpers.FluffContent(name);
+                    loadName = GeneralHelpers.FluffContent(loadName);
+                    address = GeneralHelpers.FluffContent(address);
+                    city = GeneralHelpers.FluffContent(city);
+                    state = GeneralHelpers.FluffContent(state);
+                    zipCode = GeneralHelpers.FluffContent(zipCode);
+                    phone = GeneralHelpers.FluffContent(phone);
+                    license = One.Encrypt(GeneralHelpers.FluffContent(license));
+                    username = GeneralHelpers.FluffContent(username);
+                    password = One.Encrypt(GeneralHelpers.FluffContent(password));
+                    forgotPhrase = One.Encrypt(GeneralHelpers.FluffContent(forgotPhrase));
+                    forgotAnswer = One.Encrypt(GeneralHelpers.FluffContent(forgotAnswer));
+                }
                 BSOtherObjects o = new BSOtherObjects();
                 int useLock = usePassword ? 1 : 0;
                 string sql = "INSERT INTO Personal_Information (Name, Load_Name, Address, City, " +
                     "State, ZipCode, Phone, Lic, UseLock, UserName, Password, Password_Forgot, " +
-                    $"Password_Forgot_word) VALUES('{o.FC(name)}', '{o.FC(loadName)}', '{o.FC(address)}', '{o.FC(city)}', " +
-                    $"'{o.FC(state)}', '{o.FC(zipCode)}', '{o.FC(phone)}', '{o.FC(license)}', {useLock}, '{One.Encrypt(o.FC(username))}', " +
-                    $"'{One.Encrypt(o.FC(password))}', '{One.Encrypt(o.FC(forgotPhrase))}', '{One.Encrypt(o.FC(forgotAnswer))}')";
+                    $"Password_Forgot_word) VALUES('{name}', '{loadName}', '{address}', '{city}', " +
+                    $"'{state}', '{zipCode}', '{phone}', '{license}', {useLock}, '{username}', " +
+                    $"'{password}', '{forgotPhrase}', '{forgotAnswer}')";
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
             catch (Exception e)
