@@ -365,21 +365,37 @@ namespace BurnSoft.Applications.MLL.PeopleAndPlaces
         /// <param name="forgotPhrase">The forgot phrase.</param>
         /// <param name="forgotAnswer">The forgot answer.</param>
         /// <param name="errOut">The error out.</param>
+        /// <param name="preFluffEn">Fluff Content for SQL and encypt reqired sections</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool Update(string databasePath, int id, string name, string loadName, string address, string city, 
             string state, string zipCode, string phone, string license, bool usePassword,
-            string username, string password, string forgotPhrase, string forgotAnswer, out string errOut)
+            string username, string password, string forgotPhrase, string forgotAnswer, 
+            out string errOut, bool preFluffEn = false)
         {
             bool bAns = false;
             errOut = @"";
             try
             {
-                BSOtherObjects o = new BSOtherObjects();
+                if (preFluffEn)
+                {
+                    name = GeneralHelpers.FluffContent(name);
+                    loadName = GeneralHelpers.FluffContent(loadName);
+                    address = GeneralHelpers.FluffContent(address);
+                    city = GeneralHelpers.FluffContent(city);
+                    state = GeneralHelpers.FluffContent(state);
+                    zipCode = GeneralHelpers.FluffContent(zipCode);
+                    phone = GeneralHelpers.FluffContent(phone);
+                    license = One.Encrypt(GeneralHelpers.FluffContent(license));
+                    username = GeneralHelpers.FluffContent(username);
+                    password = One.Encrypt(GeneralHelpers.FluffContent(password));
+                    forgotPhrase = One.Encrypt(GeneralHelpers.FluffContent(forgotPhrase));
+                    forgotAnswer = One.Encrypt(GeneralHelpers.FluffContent(forgotAnswer));
+                }
                 int useLock = usePassword ? 1 : 0;
-                string sql = $"UPDATE Personal_Information set Load_Name='{o.FC(loadName)}',Name='{o.FC(name)}',Address='{o.FC(address)}'" +
-                        $",City='{o.FC(city)}',State='{o.FC(state)}',ZipCode='{o.FC(zipCode)}', Phone='{o.FC(phone)}',Lic='{o.FC(license)}', " +
-                        $"UseLock={useLock},UserName='{One.Encrypt(o.FC(username))}',Password='{One.Encrypt(o.FC(password))}'," +
-                        $"Password_forgot='{One.Encrypt(o.FC(forgotPhrase))}',Password_Forgot_word='{One.Encrypt(o.FC(forgotAnswer))}' " +
+                string sql = $"UPDATE Personal_Information set Load_Name='{loadName}',Name='{name}',Address='{address}'" +
+                        $",City='{city}',State='{state}',ZipCode='{zipCode}', Phone='{phone}',Lic='{license}', " +
+                        $"UseLock={useLock},UserName='{username}',Password='{password}'," +
+                        $"Password_forgot='{forgotPhrase}',Password_Forgot_word='{forgotAnswer}' " +
                         $"where ID={id}";
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
