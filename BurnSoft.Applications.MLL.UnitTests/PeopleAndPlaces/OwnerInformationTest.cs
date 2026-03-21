@@ -174,7 +174,7 @@ namespace BurnSoft.Applications.MLL.UnitTests.PeopleAndPlaces
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 bAns = OwnerInformation.Update(_databasePath, id, "John Doe", "Ky Ballistics", "234 there", "Lexington",
                     "ky", "40601", "555-867-5309", "MLKY38484888", true, "johnedoe", "21232ksksdfj",
-                    "forgot it", "i did", out _errOut);
+                    "forgot it", "i did", out _errOut, true);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine("======================================");
                 TestContext.WriteLine("AFTER");
