@@ -475,6 +475,24 @@ The value.
 [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 System.String.
 
+### **ShotgunShotListingsData(List&lt;ShotgunShotListings&gt;)**
+
+Shotguns the shot listings data.
+
+```csharp
+public static string ShotgunShotListingsData(List<ShotgunShotListings> value)
+```
+
+#### Parameters
+
+`value` [List&lt;ShotgunShotListings&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+The value.
+
+#### Returns
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+System.String.
+
 ---
 
 [`< Back`](./)

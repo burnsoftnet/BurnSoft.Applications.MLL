@@ -45,17 +45,17 @@ The default value.
 [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 System.String.
 
-### **FluffContent(String, Double)**
+### **FluffContent(Double, Double)**
 
 Fluffs the content to double
 
 ```csharp
-public static double FluffContent(string value, double defaultValue)
+public static double FluffContent(double value, double defaultValue)
 ```
 
 #### Parameters
 
-`value` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+`value` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
 The value.
 
 `defaultValue` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>

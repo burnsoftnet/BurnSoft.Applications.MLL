@@ -2,17 +2,17 @@
 
 ---
 
-# ShotgunPowderListings
+# ShotgunShotListings
 
 Namespace: BurnSoft.Applications.MLL.Types
 
-Class ShotgunPowderListings list container for the List_SG_Bushing_Powder table.
+Class ShotgunShotListings list container to handle the List_SG_Bushing_Shot table data
 
 ```csharp
-public class ShotgunPowderListings
+public class ShotgunShotListings
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [ShotgunPowderListings](./burnsoft.applications.mll.types.shotgunpowderlistings)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [ShotgunShotListings](./burnsoft.applications.mll.types.shotgunshotlistings)
 
 ## Properties
 
@@ -81,19 +81,6 @@ public string Type { get; set; }
 [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The type.
 
-### **PowderName**
-
-Gets or sets the name of the powder.
-
-```csharp
-public string PowderName { get; set; }
-```
-
-#### Property Value
-
-[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
-The name of the powder.
-
 ### **LastSync**
 
 Gets or sets the last synchronize for the sync_lastupdate column
@@ -109,10 +96,10 @@ The last synchronize.
 
 ## Constructors
 
-### **ShotgunPowderListings()**
+### **ShotgunShotListings()**
 
 ```csharp
-public ShotgunPowderListings()
+public ShotgunShotListings()
 ```
 
 ---
