@@ -42,7 +42,26 @@ namespace BurnSoft.Applications.MLL.Helpers
                 dAns = value.Value;
             }
             return dAns;
-        }   
+        }
+        /// <summary>
+        /// Fluffs the content.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="defaultValue">The default value.</param>
+        /// <returns>System.Double.</returns>
+        public static double FluffContent(string value, double defaultValue)
+        {
+            double dAns = 0;
+            if (value.Length == 0)
+            {
+                dAns = defaultValue;
+            }
+            else
+            {
+                dAns = Convert.ToDouble(value);
+            }
+            return dAns;
+        }
         /// <summary>
         /// Uns the content of the fluff.
         /// </summary>
