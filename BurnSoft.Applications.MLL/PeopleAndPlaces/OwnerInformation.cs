@@ -95,7 +95,7 @@ namespace BurnSoft.Applications.MLL.PeopleAndPlaces
                         Phone = d["Phone"] != DBNull.Value ? d["Phone"].ToString().Trim() : "",
                         License = d["lic"] != DBNull.Value ? d["lic"].ToString().Trim() : "",
                         UseLock = Convert.ToInt32(d["UseLock"]) == 1,
-                        UserName = d["UserName"] != DBNull.Value ? One.Decrypt(d["UserName"].ToString().Trim()) : "",
+                        UserName = d["UserName"] != DBNull.Value ? d["UserName"].ToString().Trim() : "",
                         Forgot = d["Password_Forgot"] != DBNull.Value ? One.Decrypt(d["Password_Forgot"].ToString().Trim()) : "",
                         ForgetPhrase = d["Password_Forgot_word"] != DBNull.Value ? One.Decrypt(d["Password_Forgot_word"].ToString().Trim()) : "",
                         LastSync = d["sync_lastupdate"].ToString().Trim(),
