@@ -19,8 +19,11 @@ namespace BurnSoft.Applications.MLL.Helpers
         /// <returns>System.String.</returns>
         public static string FluffContent(string value, string defaultValue = "  ")
         {
-            BSOtherObjects obj = new BSOtherObjects();
-            return obj.FC(value, defaultValue);
+            string sAns = "";
+            sAns = value.Replace("'", "''").Trim();
+            if (sAns.Length == 0 ) sAns = defaultValue;
+            return sAns;
+
         }
         /// <summary>
         /// Fluffs the content to double
@@ -28,12 +31,18 @@ namespace BurnSoft.Applications.MLL.Helpers
         /// <param name="value">The value.</param>
         /// <param name="defaultValue">The default value.</param>
         /// <returns>System.Double.</returns>
-        public static double FluffContent(double value, double defaultValue =0)
+        public static double FluffContent(double? value, double defaultValue = 0)
         {
-            BSOtherObjects obj = new BSOtherObjects();
-            double dAns = Convert.ToDouble(obj.FC(value.ToString(), $"{defaultValue}"));
+            double dAns = 0;
+            if (value == null)
+            {
+                dAns = defaultValue;
+            } else
+            {
+                dAns = value.Value;
+            }
             return dAns;
-        }
+        }   
         /// <summary>
         /// Uns the content of the fluff.
         /// </summary>
