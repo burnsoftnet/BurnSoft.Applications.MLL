@@ -36,7 +36,7 @@ namespace BurnSoft.Applications.MLL.Types
         /// Gets or sets the length.
         /// </summary>
         /// <value>The length.</value>
-        public int Length { get; set; }
+        public string Length { get; set; }
         /// <summary>
         /// Gets or sets the qty.
         /// </summary>

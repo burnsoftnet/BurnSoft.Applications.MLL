@@ -75,6 +75,7 @@
     <Compile Include="Global\GeneralSettings.cs" />
     <Compile Include="Global\MyRegistry.cs" />
     <Compile Include="Global\Wishlists.cs" />
+    <Compile Include="Inventory\ShotgunHullInventory.cs" />
     <Compile Include="Inventory\ShotgunShotInventory.cs" />
     <Compile Include="Search\SyncTables.cs" />
     <Compile Include="Global\WeightValues.cs" />
