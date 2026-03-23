@@ -180,6 +180,42 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
         }
 
         [TestMethod, TestCategory("Inventory Listings - Cases")]
+        public void UpdateQtyTest()
+        {
+            bool bAns = false;
+            try
+            {
+                AddTestCasesExists();
+                PrintTestCases();
+                long id = CaseInventory.GetId(_databasePath, _manufacturer, _name, out _);
+
+                double currentPrice = 0;
+                int currentQty = 0;
+                double currentPricePerItenm = 0;
+                List<CaseListings> lst = CaseInventory.GetDetails(_databasePath, id, out _);
+
+                foreach (CaseListings l in lst)
+                {
+                    currentPrice = l.Price;
+                    currentQty = l.Qty;
+                    currentPricePerItenm = l.EstimatedPricePerCase;
+                }
+
+                bool value = CaseInventory.UpdateQty(_databasePath, id, currentQty, currentPrice,
+                    currentPricePerItenm, 1000, 20.00, out _errOut);
+                if (_errOut.Length > 0) throw new Exception(_errOut);
+                TestContext.WriteLine($"VALUE: {value}");
+                PrintTestCases("AFTER");
+                bAns = true;
+            }
+            catch (Exception ex)
+            {
+                TestContext.WriteLine(ex.Message);
+            }
+            General.HasTrueValue(bAns, _errOut);
+        }
+
+        [TestMethod, TestCategory("Inventory Listings - Cases")]
         public void DeleteTest()
         {
             bool bAns = false;
