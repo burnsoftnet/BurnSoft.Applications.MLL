@@ -393,7 +393,6 @@ namespace BurnSoft.Applications.MLL.Inventory
                 int qty =  currentQty + newQty;
                 double price = (currentQty * currentPricePerItem) + NewPrice;
                 double estCostPerItem = Converters.ConvertToDollars((price == 0) ? 0 : (price / qty));
-                BSOtherObjects o = new BSOtherObjects();
                 string sql = $"UPDATE List_SG_Case set Qty={qty}," +
                     $"Price={price}, eppc={estCostPerItem} where id={id}";
 
