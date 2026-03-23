@@ -359,7 +359,18 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             return bAns;
         }
-
+        /// <summary>
+        /// Updates the qty.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="currentQty">The current qty.</param>
+        /// <param name="currentPrice">The current price.</param>
+        /// <param name="currentPricePerItem">The current price per item.</param>
+        /// <param name="newQty">The new qty.</param>
+        /// <param name="NewPrice">Creates new price.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool UpdateQty(string databasePath, long id, int currentQty, double currentPrice,
             double currentPricePerItem, int newQty, double NewPrice, out string errOut)
         {
