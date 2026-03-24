@@ -2,24 +2,24 @@
 
 ---
 
-# CaseInventory
+# ShotgunHullInventory
 
 Namespace: BurnSoft.Applications.MLL.Inventory
 
-Class CaseInventory handles the ability to interact with the List_Case Table
+Class ShotgunHullInventory to work with the data in the List_SG_Case table.
 
 ```csharp
-public class CaseInventory
+public class ShotgunHullInventory
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [CaseInventory](./burnsoft.applications.mll.inventory.caseinventory)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [ShotgunHullInventory](./burnsoft.applications.mll.inventory.shotgunhullinventory)
 
 ## Constructors
 
-### **CaseInventory()**
+### **ShotgunHullInventory()**
 
 ```csharp
-public CaseInventory()
+public ShotgunHullInventory()
 ```
 
 ## Methods
@@ -29,7 +29,7 @@ public CaseInventory()
 Gets all.
 
 ```csharp
-public static List<CaseListings> GetAll(string databasePath, String& errOut)
+public static List<ShotgunHullData> GetAll(string databasePath, String& errOut)
 ```
 
 #### Parameters
@@ -42,15 +42,15 @@ The error out.
 
 #### Returns
 
-[List&lt;CaseListings&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
-List&lt;CaseListings&gt;.
+[List&lt;ShotgunHullData&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+List&lt;ShotgunHullData&gt;.
 
-### **GetId(String, String, String, String&)**
+### **GetId(String, String, String, String, String&)**
 
 Gets the identifier.
 
 ```csharp
-public static long GetId(string databasePath, string manufacturer, string name, String& errOut)
+public static long GetId(string databasePath, string manufacturer, string name, string gauge, String& errOut)
 ```
 
 #### Parameters
@@ -63,6 +63,9 @@ The manufacturer.
 
 `name` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The name.
+
+`gauge` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The gauge.
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
 The error out.
@@ -76,12 +79,12 @@ System.Int64.
 
 [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
 
-### **GetDetails(String, String, String, String&)**
+### **GetDetails(String, String, String, String, String&)**
 
 Gets the details.
 
 ```csharp
-public static List<CaseListings> GetDetails(string databasePath, string manufacturer, string name, String& errOut)
+public static List<ShotgunHullData> GetDetails(string databasePath, string manufacturer, string name, string gauge, String& errOut)
 ```
 
 #### Parameters
@@ -95,20 +98,23 @@ The manufacturer.
 `name` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The name.
 
+`gauge` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The gauge.
+
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
 The error out.
 
 #### Returns
 
-[List&lt;CaseListings&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
-List&lt;CaseListings&gt;.
+[List&lt;ShotgunHullData&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+List&lt;ShotgunHullData&gt;.
 
 ### **GetDetails(String, Int64, String&)**
 
 Gets the details.
 
 ```csharp
-public static List<CaseListings> GetDetails(string databasePath, long id, String& errOut)
+public static List<ShotgunHullData> GetDetails(string databasePath, long id, String& errOut)
 ```
 
 #### Parameters
@@ -124,8 +130,8 @@ The error out.
 
 #### Returns
 
-[List&lt;CaseListings&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
-List&lt;CaseListings&gt;.
+[List&lt;ShotgunHullData&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+List&lt;ShotgunHullData&gt;.
 
 ### **DataExists(String, String&)**
 
@@ -152,12 +158,12 @@ The error out.
 
 [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
 
-### **DataExists(String, String, String, String&)**
+### **DataExists(String, String, String, String, String&)**
 
 Datas the exists.
 
 ```csharp
-public static bool DataExists(string databasePath, string manufacturer, string name, String& errOut)
+public static bool DataExists(string databasePath, string manufacturer, string name, string gauge, String& errOut)
 ```
 
 #### Parameters
@@ -170,6 +176,9 @@ The manufacturer.
 
 `name` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The name.
+
+`gauge` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The gauge.
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
 The error out.
@@ -183,12 +192,12 @@ The error out.
 
 [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
 
-### **Add(String, String, String, String, Boolean, Int32, Int32, Double, Int64, String&)**
+### **Add(String, String, String, String, Int64, String, Int32, Double, String, String&, Boolean)**
 
 Adds the specified database path.
 
 ```csharp
-public static bool Add(string databasePath, string manufacturer, string name, string ttl, bool IsNew, int TimesUsed, int qty, double price, long caliberId, String& errOut)
+public static bool Add(string databasePath, string manufacturer, string name, string gauge, long gunId, string length, int qty, double price, string dram, String& errOut, bool preFluffEn)
 ```
 
 #### Parameters
@@ -202,14 +211,14 @@ The manufacturer.
 `name` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The name.
 
-`ttl` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
-The TTL.
+`gauge` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The gauge.
 
-`IsNew` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
-if set to `true` [is new].
+`gunId` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
+The gun identifier.
 
-`TimesUsed` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
-The times used.
+`length` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The length.
 
 `qty` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
 The qty.
@@ -217,23 +226,26 @@ The qty.
 `price` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
 The price.
 
-`caliberId` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
-The caliber identifier.
+`dram` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The dram.
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
 The error out.
+
+`preFluffEn` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+if set to `true` [pre fluff en].
 
 #### Returns
 
 [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
 `true` if XXXX, `false` otherwise.
 
-### **Update(String, Int64, String, String, String, Boolean, Int32, Int32, Double, Int64, String&)**
+### **Update(String, Int64, String, String, String, Int64, String, Int32, Double, String, String&, Boolean)**
 
 Updates the specified database path.
 
 ```csharp
-public static bool Update(string databasePath, long id, string manufacturer, string name, string ttl, bool IsNew, int TimesUsed, int qty, double price, long caliberId, String& errOut)
+public static bool Update(string databasePath, long id, string manufacturer, string name, string gauge, long gunId, string length, int qty, double price, string dram, String& errOut, bool preFluffEn)
 ```
 
 #### Parameters
@@ -250,14 +262,14 @@ The manufacturer.
 `name` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The name.
 
-`ttl` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
-The TTL.
+`gauge` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The gauge.
 
-`IsNew` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
-if set to `true` [is new].
+`gunId` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
+The gun identifier.
 
-`TimesUsed` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
-The times used.
+`length` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The length.
 
 `qty` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
 The qty.
@@ -265,11 +277,14 @@ The qty.
 `price` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
 The price.
 
-`caliberId` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
-The caliber identifier.
+`dram` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The dram.
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
 The error out.
+
+`preFluffEn` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+if set to `true` [pre fluff en].
 
 #### Returns
 
@@ -369,12 +384,12 @@ The error out.
 [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
 `true` if XXXX, `false` otherwise.
 
-### **Delete(String, String, String, String&)**
+### **Delete(String, String, String, String, String&)**
 
 Deletes the specified database path.
 
 ```csharp
-public static bool Delete(string databasePath, string manufacturer, string name, String& errOut)
+public static bool Delete(string databasePath, string manufacturer, string name, string gauge, String& errOut)
 ```
 
 #### Parameters
@@ -387,6 +402,9 @@ The manufacturer.
 
 `name` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The name.
+
+`gauge` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The gauge.
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
 The error out.

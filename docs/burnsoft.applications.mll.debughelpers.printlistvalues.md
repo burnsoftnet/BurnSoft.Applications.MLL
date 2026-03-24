@@ -349,6 +349,24 @@ The value.
 [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 System.String.
 
+### **ShotgunHullDataData(List&lt;ShotgunHullData&gt;)**
+
+Shotguns the hull data data.
+
+```csharp
+public static string ShotgunHullDataData(List<ShotgunHullData> value)
+```
+
+#### Parameters
+
+`value` [List&lt;ShotgunHullData&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+The value.
+
+#### Returns
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+System.String.
+
 ### **PrimerListingsData(List&lt;PrimerListings&gt;)**
 
 Primers the listings data.

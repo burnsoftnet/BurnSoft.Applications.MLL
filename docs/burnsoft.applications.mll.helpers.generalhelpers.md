@@ -45,17 +45,38 @@ The default value.
 [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 System.String.
 
-### **FluffContent(Double, Double)**
+### **FluffContent(Nullable&lt;Double&gt;, Double)**
 
 Fluffs the content to double
 
 ```csharp
-public static double FluffContent(double value, double defaultValue)
+public static double FluffContent(Nullable<double> value, double defaultValue)
 ```
 
 #### Parameters
 
-`value` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
+`value` [Nullable&lt;Double&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.nullable-1)<br>
+The value.
+
+`defaultValue` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
+The default value.
+
+#### Returns
+
+[Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
+System.Double.
+
+### **FluffContent(String, Double)**
+
+Fluffs the content.
+
+```csharp
+public static double FluffContent(string value, double defaultValue)
+```
+
+#### Parameters
+
+`value` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The value.
 
 `defaultValue` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
