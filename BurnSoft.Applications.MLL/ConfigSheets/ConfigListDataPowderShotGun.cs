@@ -358,6 +358,38 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
             return bAns;
         }
         /// <summary>
+        /// Copies the configuration to copy the shotgun data
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="newConfigId">The new configuration identifier.</param>
+        /// <param name="oldConfigId">The old configuration identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool CopyConfig(string databasePath, int newConfigId, long oldConfigId, out string errOut)
+        {
+            errOut = "";
+            bool bAns = false;
+            try
+            {
+                List<ConfigListPowderData> lst = GetDetails(databasePath, oldConfigId, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                foreach (ConfigListPowderData d in lst)
+                {
+                    if (!Add(databasePath, newConfigId, d.PowderId, d.LoadMin, d.LoadMid, d.LoadMax,
+                        (double)d.FpsMin, (double)d.FpsMid, (double)d.FpsMax, (double)d.PsiMin,
+                        (double)d.PsiMid, (double)d.PsiMax, (double)d.LupMin,
+                        (double)d.LupMid, (double)d.LupMax, d.IsDefault, out errOut)) throw new Exception(errOut);
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("CopyConfig", e);
+            }
+            return bAns;
+        }
+
+        /// <summary>
         /// Updates the specified database path.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
