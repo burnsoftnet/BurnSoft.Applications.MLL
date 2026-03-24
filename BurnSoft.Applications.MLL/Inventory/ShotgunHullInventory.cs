@@ -284,7 +284,7 @@ namespace BurnSoft.Applications.MLL.Inventory
                 }
                 double estCostPerItem = (price == 0) ? 0 : (price / qty);
                 string sql = $"INSERT INTO List_SG_Case(Manufacturer,Name,Gauge," +
-                    $"GID,Length,Qty,Price,DRAM,ePPC, sync_lastupdate) VALUES(" +
+                    $"GID,Length,Qty,Price,DRAM,epps, sync_lastupdate) VALUES(" +
                     $"'{manufacturer}', '{name}', '{guage}', " +
                     $"{gunId}, '{length}',{qty}, {price}, '{dram}', " +
                     $"{estCostPerItem}, Now())";
@@ -333,7 +333,7 @@ namespace BurnSoft.Applications.MLL.Inventory
                 string sql = $"UPDATE List_SG_Case set Manufacturer='{manufacturer}'," +
                     $"Name='{name}',ttl='{guage}',IsNew={gunId}, " +
                     $"TimesUsed='{length}',Qty={qty}, Price={price}, " +
-                    $"CID='{dram}',eppc={estCostPerItem}, sync_lastupdate=Now() where id={id}";
+                    $"CID='{dram}',epps={estCostPerItem}, sync_lastupdate=Now() where id={id}";
 
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
@@ -361,7 +361,7 @@ namespace BurnSoft.Applications.MLL.Inventory
                 double estCostPerItem = (price == 0) ? 0 : (price / qty);
                 BSOtherObjects o = new BSOtherObjects();
                 string sql = $"UPDATE List_SG_Case set Qty={qty}," +
-                    $"Price={price}, eppc={estCostPerItem} where id={id}";
+                    $"Price={price}, epps={estCostPerItem} where id={id}";
 
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
@@ -394,7 +394,7 @@ namespace BurnSoft.Applications.MLL.Inventory
                 double price = (currentQty * currentPricePerItem) + NewPrice;
                 double estCostPerItem = Converters.ConvertToDollars((price == 0) ? 0 : (price / qty));
                 string sql = $"UPDATE List_SG_Case set Qty={qty}," +
-                    $"Price={price}, eppc={estCostPerItem} where id={id}";
+                    $"Price={price}, epps={estCostPerItem} where id={id}";
 
                 if (currentPricePerItem == estCostPerItem)
                 {
@@ -403,7 +403,7 @@ namespace BurnSoft.Applications.MLL.Inventory
                 }
                 else if (NewPrice == 0 && newQty == 0)
                 {
-                    sql = $"UPDATE List_SG_Case set Qty=0, Price=0, eppc=0 where id={id}";
+                    sql = $"UPDATE List_SG_Case set Qty=0, Price=0, epps=0 where id={id}";
                 }
 
                 bAns = Database.Execute(databasePath, sql, out errOut);
