@@ -36,9 +36,17 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
         /// </summary>
         private string _ConfigName;
         /// <summary>
+        /// The copy configuration name
+        /// </summary>
+        private string _copyConfigName;
+        /// <summary>
         /// The configuration identifier
         /// </summary>
         private int _configId;
+        /// <summary>
+        /// The copy configuration identifier
+        /// </summary>
+        private int _copyConfigId;
         /// <summary>
         /// The ammo type
         /// </summary>
@@ -59,16 +67,49 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
         /// The source
         /// </summary>
         private string _source;
+        /// <summary>
+        /// The shot weight
+        /// </summary>
         private double _shotWeight;
+        /// <summary>
+        /// The shot weight text
+        /// </summary>
         private string _shotWeightText;
+        /// <summary>
+        /// The shot size
+        /// </summary>
         private long _shotSize;
+        /// <summary>
+        /// The bushing
+        /// </summary>
         private long _bushing;
+        /// <summary>
+        /// The wad
+        /// </summary>
         private long _wad;
+        /// <summary>
+        /// The shot charge load
+        /// </summary>
         private long _shotChargeLoad;
+        /// <summary>
+        /// The gun identifier
+        /// </summary>
         private long _gunId;
+        /// <summary>
+        /// The is personal
+        /// </summary>
         private bool _isPersonal;
+        /// <summary>
+        /// The list type identifier
+        /// </summary>
         private long _listTypeId;
+        /// <summary>
+        /// The bushing identifier
+        /// </summary>
         private long _bushingId;
+        /// <summary>
+        /// The charge bar identifier
+        /// </summary>
         private long _chargeBarId;
 
         /// <summary>
@@ -83,7 +124,11 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
             _existingConfigId = 24;
             _existingId = 4;
             _ConfigName = "Unit Test 12GA";
-            _configId = Convert.ToInt32(ConfigListDataName.GetId(_databasePath, _ConfigName, out _));
+            _copyConfigName = $"Copy from {_ConfigName}";
+            AddConfigNameIfNotExists(_ConfigName);
+            _configId = Convert.ToInt32(ConfigListDataName.GetId(_databasePath, _ConfigName, out _errOut));
+            AddConfigNameIfNotExists(_copyConfigName);
+            _copyConfigId = Convert.ToInt32(ConfigListDataName.GetId(_databasePath, _copyConfigName, out _errOut));
             _ammoType = 8;
             _caliberId = 1;
             _primerId = 12;
@@ -101,6 +146,14 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
             _bushingId = 0;
             _chargeBarId = 0;
 
+        }
+
+        private void AddConfigNameIfNotExists(string name)
+        {
+            if (!ConfigListDataName.DataExists(_databasePath, name, out _))
+            {
+                ConfigListDataName.Add(_databasePath, name, true, false, "  ", true, true, out _);
+            }
         }
 
         private void AddTestConfigDataExists()
@@ -165,6 +218,25 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
                 TestContext.WriteLine($"VALUE: {value}");
                 long id = ConfigListDataShotgun.GetId(_databasePath, _configId, out _errOut);
                 TestContext.WriteLine(DebugHelpers.PrintListValues.ConfigListDataShotgunDataData(ConfigListDataShotgun.GetDetails(_databasePath, id, out _errOut)));
+                bAns = true;
+            }
+            catch (Exception ex)
+            {
+                TestContext.WriteLine(ex.Message);
+            }
+            General.HasTrueValue(bAns, _errOut);
+        }
+
+        [TestMethod, TestCategory("Config Sheets - Shotgun Config Data")]
+        public void CopyConfigTest()
+        {
+            bool bAns = false;
+            try
+            {
+                AddTestConfigDataExists();
+                bool value = ConfigListDataShotgun.CopyConfig(_databasePath, _copyConfigId, _existingConfigId, out _errOut);
+                if (_errOut.Length > 0) throw new Exception(_errOut);
+                TestContext.WriteLine($"VALUE: {value}");
                 bAns = true;
             }
             catch (Exception ex)

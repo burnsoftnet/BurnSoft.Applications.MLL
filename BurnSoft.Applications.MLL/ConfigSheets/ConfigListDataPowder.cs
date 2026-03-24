@@ -349,6 +349,38 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
             }
             return bAns;
         }
+
+        /// <summary>
+        /// Copies the configuration powder data from one config to another..
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="newConfigId">The new configuration identifier.</param>
+        /// <param name="oldConfigId">The old configuration identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool CopyConfig(string databasePath, int newConfigId, long oldConfigId, out string errOut)
+        {
+            errOut = "";
+            bool bAns = false;
+            try
+            {
+                List<ConfigListPowderData> lst = GetDetails(databasePath, oldConfigId, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                foreach (ConfigListPowderData d in lst)
+                {
+                    if (!Add(databasePath, newConfigId, d.PowderId, d.LoadMin, d.LoadMid, d.LoadMax,
+                        (double)d.FpsMin, (double)d.FpsMid, (double)d.FpsMax, (double)d.CupsMin, 
+                        (double)d.CupsMid, (double)d.CupsMax, d.IsDefault, out errOut)) throw new Exception(errOut);
+                }
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("CopyConfig", e);
+            }
+            return bAns;
+        }
         /// <summary>
         /// Updates the specified database path.
         /// </summary>
@@ -411,6 +443,28 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
             catch (Exception e)
             {
                 errOut = ErrorMessage("Delete", e);
+            }
+            return bAns;
+        }
+        /// <summary>
+        /// Deletes the by configuration id, which will take out all the powders with the config id.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool DeleteByConfigId(string databasePath, long id, out string errOut)
+        {
+            errOut = "";
+            bool bAns = false;
+            try
+            {
+                string sql = $"DELETE from Config_List_Powder_Data_NSG where CLNID={id}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("DeleteByConfigId", e);
             }
             return bAns;
         }
