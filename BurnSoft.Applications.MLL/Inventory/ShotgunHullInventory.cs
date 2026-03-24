@@ -1,16 +1,10 @@
 ﻿using BurnSoft.Applications.MLL.Helpers;
 using BurnSoft.Applications.MLL.Types;
-using BurnSoft.Security.RegularEncryption.SHA;
 using BurnSoft.Universal;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Net;
-using System.Reflection.Emit;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
-using static System.Windows.Forms.AxHost;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+
 
 namespace BurnSoft.Applications.MLL.Inventory
 {
@@ -151,17 +145,17 @@ namespace BurnSoft.Applications.MLL.Inventory
         /// <param name="databasePath">The database path.</param>
         /// <param name="manufacturer">The manufacturer.</param>
         /// <param name="name">The name.</param>
-        /// <param name="guage">The guage.</param>
+        /// <param name="gauge">The gauge.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns>System.Int64.</returns>
         /// <exception cref="System.Exception"></exception>
-        public static long GetId(string databasePath, string manufacturer, string name, string guage, out string errOut)
+        public static long GetId(string databasePath, string manufacturer, string name, string gauge, out string errOut)
         {
             errOut = "";
             long lAns = 0;
             try
             {
-                string sql = $"Select * from List_SG_Case where manufacturer='{manufacturer}' and name='{name}' and guage='{guage}'";
+                string sql = $"Select * from List_SG_Case where manufacturer='{manufacturer}' and name='{name}' and gauge='{gauge}'";
                 List<ShotgunHullData> lst = GetList(databasePath, sql, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 foreach (ShotgunHullData i in lst)
@@ -182,12 +176,12 @@ namespace BurnSoft.Applications.MLL.Inventory
         /// <param name="databasePath">The database path.</param>
         /// <param name="manufacturer">The manufacturer.</param>
         /// <param name="name">The name.</param>
-        /// <param name="guage">The guage.</param>
+        /// <param name="gauge">The gauge.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns>List&lt;ShotgunHullData&gt;.</returns>
-        public static List<ShotgunHullData> GetDetails(string databasePath, string manufacturer, string name, string guage, out string errOut)
+        public static List<ShotgunHullData> GetDetails(string databasePath, string manufacturer, string name, string gauge, out string errOut)
         {
-            string sql = $"Select * from List_SG_Case where manufacturer='{manufacturer}' and name='{name}' and guage='{guage}'";
+            string sql = $"Select * from List_SG_Case where manufacturer='{manufacturer}' and name='{name}' and Gauge='{gauge}'";
             return GetList(databasePath, sql, out errOut);
         }
         /// <summary>
@@ -231,18 +225,18 @@ namespace BurnSoft.Applications.MLL.Inventory
         /// <param name="databasePath">The database path.</param>
         /// <param name="manufacturer">The manufacturer.</param>
         /// <param name="name">The name.</param>
-        /// <param name="guage">The guage.</param>
+        /// <param name="gauge">The gauge.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="System.Exception"></exception>
-        public static bool DataExists(string databasePath, string manufacturer, string name, string guage, out string errOut)
+        public static bool DataExists(string databasePath, string manufacturer, string name, string gauge, out string errOut)
         {
             bool bAns = false;
             errOut = @"";
             try
             {
 
-                List<ShotgunHullData> lst = GetDetails(databasePath, manufacturer, name, guage, out errOut);
+                List<ShotgunHullData> lst = GetDetails(databasePath, manufacturer, name, gauge, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 bAns = lst.Count > 0;
             }
@@ -258,7 +252,7 @@ namespace BurnSoft.Applications.MLL.Inventory
         /// <param name="databasePath">The database path.</param>
         /// <param name="manufacturer">The manufacturer.</param>
         /// <param name="name">The name.</param>
-        /// <param name="guage">The guage.</param>
+        /// <param name="gauge">The gauge.</param>
         /// <param name="gunId">The gun identifier.</param>
         /// <param name="length">The length.</param>
         /// <param name="qty">The qty.</param>
@@ -267,7 +261,7 @@ namespace BurnSoft.Applications.MLL.Inventory
         /// <param name="errOut">The error out.</param>
         /// <param name="preFluffEn">if set to <c>true</c> [pre fluff en].</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public static bool Add(string databasePath, string manufacturer, string name, string guage,
+        public static bool Add(string databasePath, string manufacturer, string name, string gauge,
             long gunId, string length, int qty, double price, string dram, out string errOut, bool preFluffEn = false)
         {
             errOut = "";
@@ -278,14 +272,14 @@ namespace BurnSoft.Applications.MLL.Inventory
                 {
                     manufacturer = GeneralHelpers.FluffContent(manufacturer);
                     name = GeneralHelpers.FluffContent(name);
-                    guage = GeneralHelpers.FluffContent(guage);
+                    gauge = GeneralHelpers.FluffContent(gauge);
                     length = GeneralHelpers.FluffContent(length);
                     dram = GeneralHelpers.FluffContent(dram);
                 }
                 double estCostPerItem = (price == 0) ? 0 : (price / qty);
                 string sql = $"INSERT INTO List_SG_Case(Manufacturer,Name,Gauge," +
                     $"GID,Length,Qty,Price,DRAM,epps, sync_lastupdate) VALUES(" +
-                    $"'{manufacturer}', '{name}', '{guage}', " +
+                    $"'{manufacturer}', '{name}', '{gauge}', " +
                     $"{gunId}, '{length}',{qty}, {price}, '{dram}', " +
                     $"{estCostPerItem}, Now())";
 
@@ -304,7 +298,7 @@ namespace BurnSoft.Applications.MLL.Inventory
         /// <param name="id">The identifier.</param>
         /// <param name="manufacturer">The manufacturer.</param>
         /// <param name="name">The name.</param>
-        /// <param name="guage">The guage.</param>
+        /// <param name="gauge">The gauge.</param>
         /// <param name="gunId">The gun identifier.</param>
         /// <param name="length">The length.</param>
         /// <param name="qty">The qty.</param>
@@ -314,7 +308,7 @@ namespace BurnSoft.Applications.MLL.Inventory
         /// <param name="preFluffEn">if set to <c>true</c> [pre fluff en].</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool Update(string databasePath, long id, string manufacturer,
-            string name, string guage, long gunId, string length, int qty, double price,
+            string name, string gauge, long gunId, string length, int qty, double price,
             string dram, out string errOut, bool preFluffEn = false)
         {
             errOut = "";
@@ -325,15 +319,15 @@ namespace BurnSoft.Applications.MLL.Inventory
                 {
                     manufacturer = GeneralHelpers.FluffContent(manufacturer);
                     name = GeneralHelpers.FluffContent(name);
-                    guage = GeneralHelpers.FluffContent(guage);
+                    gauge = GeneralHelpers.FluffContent(gauge);
                     length = GeneralHelpers.FluffContent(length);
                     dram = GeneralHelpers.FluffContent(dram);
                 }
                 double estCostPerItem = (price == 0) ? 0 : (price / qty);
                 string sql = $"UPDATE List_SG_Case set Manufacturer='{manufacturer}'," +
-                    $"Name='{name}',ttl='{guage}',IsNew={gunId}, " +
-                    $"TimesUsed='{length}',Qty={qty}, Price={price}, " +
-                    $"CID='{dram}',epps={estCostPerItem}, sync_lastupdate=Now() where id={id}";
+                    $"Name='{name}',Gauge='{gauge}',GID={gunId}, " +
+                    $"Length='{length}',Qty={qty}, Price={price}, " +
+                    $"DRAM='{dram}',epps={estCostPerItem}, sync_lastupdate=Now() where id={id}";
 
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
@@ -442,17 +436,17 @@ namespace BurnSoft.Applications.MLL.Inventory
         /// <param name="databasePath">The database path.</param>
         /// <param name="manufacturer">The manufacturer.</param>
         /// <param name="name">The name.</param>
-        /// <param name="guage">The guage.</param>
+        /// <param name="gauge">The gauge.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="System.Exception"></exception>
-        public static bool Delete(string databasePath, string manufacturer, string name, string guage, out string errOut)
+        public static bool Delete(string databasePath, string manufacturer, string name, string gauge, out string errOut)
         {
             errOut = "";
             bool bAns = false;
             try
             {
-                long id = GetId(databasePath, manufacturer, name, guage, out errOut);
+                long id = GetId(databasePath, manufacturer, name, gauge, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 bAns = Delete(databasePath, id, out errOut);
             }

@@ -36,9 +36,9 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
         /// </summary>
         private int _existingId;
         /// <summary>
-        /// The existing guage
+        /// The existing Gauge
         /// </summary>
-        private string _existingGuage;
+        private string _existingGauge;
         /// <summary>
         /// The manufacturer
         /// </summary>
@@ -48,9 +48,9 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
         /// </summary>
         private string _name;
         /// <summary>
-        /// The guage
+        /// The Gauge
         /// </summary>
-        private string _guage;
+        private string _Gauge;
         /// <summary>
         /// The gun identifier
         /// </summary>
@@ -82,11 +82,11 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             _databasePath = Vs2019.GetSetting("DatabasePath");
             _existingManu = "Winchester";
             _existingName = "Plastic Shells with Plastic Basewad";
-            _existingGuage = "20 Gauge";
+            _existingGauge = "20 GA.";
             _existingId = 1;
             _manufacturer = "Starline";
             _name = "12GA Starline Primed Hulls 2 3/4\"";
-            _guage = "12 Gauge";
+            _Gauge = "12 Gauge";
             _gunId = 2;
             _length = "2 3/4\"";
             _qty = 69;
@@ -96,18 +96,18 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
 
         private void AddTestCasesExists()
         {
-            if (!ShotgunHullInventory.DataExists(_databasePath, _manufacturer, _name, _guage, out _))
+            if (!ShotgunHullInventory.DataExists(_databasePath, _manufacturer, _name, _Gauge, out _))
             {
                 ShotgunHullInventory.Add(_databasePath, _manufacturer, _name,
-                    _guage, _gunId, _length, _qty, _price, _dram, out _);
+                    _Gauge, _gunId, _length, _qty, _price, _dram, out _);
             }
         }
 
         private void DeleteTestCasesExists()
         {
-            if (ShotgunHullInventory.DataExists(_databasePath, _manufacturer, _name, _guage, out _))
+            if (ShotgunHullInventory.DataExists(_databasePath, _manufacturer, _name, _Gauge, out _))
             {
-                long id = ShotgunHullInventory.GetId(_databasePath, _manufacturer, _name, _guage, out _);
+                long id = ShotgunHullInventory.GetId(_databasePath, _manufacturer, _name, _Gauge, out _);
                 ShotgunHullInventory.Delete(_databasePath, id, out _);
             }
         }
@@ -116,7 +116,7 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
         {
             TestContext.WriteLine($"===========${BeforeAfter}===========");
             TestContext.WriteLine($"");
-            List<ShotgunHullData> value = ShotgunHullInventory.GetDetails(_databasePath, _manufacturer, _name, _guage, out _errOut);
+            List<ShotgunHullData> value = ShotgunHullInventory.GetDetails(_databasePath, _manufacturer, _name, _Gauge, out _errOut);
             TestContext.WriteLine(DebugHelpers.PrintListValues.ShotgunHullDataData(value));
             TestContext.WriteLine($"");
         }
@@ -147,10 +147,10 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             {
                 DeleteTestCasesExists();
                 bool value = ShotgunHullInventory.Add(_databasePath, _manufacturer, _name,
-                    _guage, _gunId, _length, _qty, _price, _dram, out _errOut);
+                    _Gauge, _gunId, _length, _qty, _price, _dram, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine($"VALUE: {value}");
-                long id = ShotgunHullInventory.GetId(_databasePath, _manufacturer, _name, _guage, out _errOut);
+                long id = ShotgunHullInventory.GetId(_databasePath, _manufacturer, _name, _Gauge, out _errOut);
                 TestContext.WriteLine(DebugHelpers.PrintListValues.ShotgunHullDataData(ShotgunHullInventory.GetDetails(_databasePath, id, out _errOut)));
                 bAns = true;
             }
@@ -169,9 +169,9 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             {
                 AddTestCasesExists();
                 PrintTestCases();
-                long id = ShotgunHullInventory.GetId(_databasePath, _manufacturer, _name, _guage, out _);
+                long id = ShotgunHullInventory.GetId(_databasePath, _manufacturer, _name, _Gauge, out _);
                 bool value = ShotgunHullInventory.Update(_databasePath, id, _manufacturer, _name,
-                    _guage, _gunId, _length, (_qty * 2), _price, _dram, out _errOut);
+                    _Gauge, _gunId, _length, (_qty * 2), _price, "2¾ Dram Eq", out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine($"VALUE: {value}");
                 PrintTestCases("AFTER");
@@ -192,7 +192,7 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             {
                 AddTestCasesExists();
                 PrintTestCases();
-                long id = ShotgunHullInventory.GetId(_databasePath, _manufacturer, _name, _guage, out _);
+                long id = ShotgunHullInventory.GetId(_databasePath, _manufacturer, _name, _Gauge, out _);
 
                 double currentPrice = 0;
                 int currentQty = 0;
@@ -227,7 +227,7 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             try
             {
                 AddTestCasesExists();
-                long id = ShotgunHullInventory.GetId(_databasePath, _manufacturer, _name, _guage, out _);
+                long id = ShotgunHullInventory.GetId(_databasePath, _manufacturer, _name, _Gauge, out _);
                 bool value = ShotgunHullInventory.Delete(_databasePath, id, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine($"VALUE: {value}");
@@ -247,7 +247,7 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             try
             {
                 AddTestCasesExists();
-                bool value = ShotgunHullInventory.Delete(_databasePath, _manufacturer, _name, _guage, out _errOut);
+                bool value = ShotgunHullInventory.Delete(_databasePath, _manufacturer, _name, _Gauge, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine($"VALUE: {value}");
                 bAns = true;
@@ -265,7 +265,7 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             bool bAns = false;
             try
             {
-                long value = ShotgunHullInventory.GetId(_databasePath, _existingManu, _existingName, _existingGuage, out _errOut);
+                long value = ShotgunHullInventory.GetId(_databasePath, _existingManu, _existingName, _existingGauge, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine($"ID RETURNED {value}, expected {_existingId}");
                 bAns = (value == _existingId);
@@ -284,7 +284,7 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             try
             {
                 List<ShotgunHullData> value = ShotgunHullInventory.GetDetails(_databasePath, _existingManu, 
-                    _existingName, _existingGuage, out _errOut);
+                    _existingName, _existingGauge, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine(DebugHelpers.PrintListValues.ShotgunHullDataData(value));
                 bAns = true;
@@ -338,7 +338,7 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             bool bAns = false;
             try
             {
-                bool value = ShotgunHullInventory.DataExists(_databasePath, _existingManu, _existingName, _existingGuage, out _errOut);
+                bool value = ShotgunHullInventory.DataExists(_databasePath, _existingManu, _existingName, _existingGauge, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine($"VALUE: {value}");
                 bAns = true;

@@ -44,7 +44,7 @@ namespace BurnSoft.Applications.MLL.UnitTests.Settings
             ls.Add(new Tuple<string, string>("ConvertOuncesToDoubleExpected", "0.875"));
             ls.Add(new Tuple<string, string>("ConvertWeight", "2"));
             ls.Add(new Tuple<string, string>("ConvertWeightLbsToGrainsExpected", "13999.98"));
-            ls.Add(new Tuple<string, string>("ConvertWeightLbsToGramsExpected", "32"));
+            ls.Add(new Tuple<string, string>("ConvertWeightLbsToGramsExpected", "907.184"));
             ls.Add(new Tuple<string, string>("ConvertToDollars", "152.3654"));
             ls.Add(new Tuple<string, string>("ConvertToDollarsExpectedValue", "152.37"));
             //ls.Add(new Tuple<string, string>("", ""));
