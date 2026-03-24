@@ -1,4 +1,4 @@
-﻿using BurnSoft.Applications.MLL.AutoFill;
+﻿using BurnSoft.Applications.MLL.Helpers;
 using BurnSoft.Applications.MLL.Types;
 using BurnSoft.Universal;
 using System;
@@ -294,7 +294,7 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
                 foreach( ConfigListDataMetalicData d in lst )
                 {
                     if (!Add(databasePath, newConfigId, d.AmmoTypeId, d.CaliberId, d.BulletId, d.PrimerId, 
-                        d.CaseId, d.Source, out errOut)) throw new Exception(errOut);
+                        d.CaseId, GeneralHelpers.FluffContent(d.Source), out errOut)) throw new Exception(errOut);
                 }
             }
             catch (Exception e)
