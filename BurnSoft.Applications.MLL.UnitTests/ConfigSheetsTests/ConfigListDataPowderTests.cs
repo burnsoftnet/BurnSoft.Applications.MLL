@@ -36,25 +36,60 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
         /// </summary>
         private string _ConfigName;
         /// <summary>
+        /// The copy configuration name
+        /// </summary>
+        private string _copyConfigName;
+        /// <summary>
         /// The configuration identifier
         /// </summary>
         private long _configId;
-
+        /// <summary>
+        /// The copy configuration identifier
+        /// </summary>
+        private int _copyConfigId;
+        /// <summary>
+        /// The powder identifier
+        /// </summary>
         private long _powderId;
-
+        /// <summary>
+        /// The load minimum
+        /// </summary>
         private double _loadMin;
-
+        /// <summary>
+        /// The load mid
+        /// </summary>
         private double _loadMid;
-        
+        /// <summary>
+        /// The load maximum
+        /// </summary>
         private double _loadMax;
-        
+        /// <summary>
+        /// The FPS minimum
+        /// </summary>
         private double _fpsMin;
-        
+        /// <summary>
+        /// The FPS mid
+        /// </summary>
         private double _fpsMid;
+        /// <summary>
+        /// The FPS maximum
+        /// </summary>
         private double _fpsMax;
+        /// <summary>
+        /// The cups minimum
+        /// </summary>
         private double _cupsMin;
+        /// <summary>
+        /// The cups mid
+        /// </summary>
         private double _cupsMid;
+        /// <summary>
+        /// The cups maximum
+        /// </summary>
         private double _cupsMax;
+        /// <summary>
+        /// The is default
+        /// </summary>
         private bool _isDefault;
 
         /// <summary>
@@ -69,7 +104,11 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
             _existingConfigId = 4;
             _existingId = 3;
             _ConfigName = "Unit Test 9mm";
+            _copyConfigName = $"Copy from {_ConfigName}";
+            AddConfigNameIfNotExists(_ConfigName);
             _configId = Convert.ToInt32(ConfigListDataName.GetId(_databasePath, _ConfigName, out _));
+            AddConfigNameIfNotExists(_copyConfigName);
+            _copyConfigId = Convert.ToInt32(ConfigListDataName.GetId(_databasePath, _copyConfigName, out _errOut));
             _powderId = 9;
             _loadMin = 6.5;
             _loadMid = 6.9;
@@ -83,6 +122,13 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
             _isDefault = true;
         }
 
+        private void AddConfigNameIfNotExists(string name)
+        {
+            if (!ConfigListDataName.DataExists(_databasePath, name, out _))
+            {
+                ConfigListDataName.Add(_databasePath, name, true, false, "  ", true, true, out _);
+            }
+        }
         private void AddTestConfigDataExists()
         {
             if (!ConfigListDataPowder.DataExists(_databasePath, _configId, out _))
@@ -143,6 +189,25 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
                 TestContext.WriteLine($"VALUE: {value}");
                 long id = ConfigListDataPowder.GetId(_databasePath, (int)_configId, out _errOut);
                 TestContext.WriteLine(DebugHelpers.PrintListValues.ConfigListPowderDataData(ConfigListDataPowder.GetDetails(_databasePath, id, out _errOut)));
+                bAns = true;
+            }
+            catch (Exception ex)
+            {
+                TestContext.WriteLine(ex.Message);
+            }
+            General.HasTrueValue(bAns, _errOut);
+        }
+
+        [TestMethod, TestCategory("Config Sheets - Metalic Powder Data")]
+        public void CopyConfigTest()
+        {
+            bool bAns = false;
+            try
+            {
+                AddTestConfigDataExists();
+                bool value = ConfigListDataPowder.CopyConfig(_databasePath, _copyConfigId, _existingConfigId, out _errOut);
+                if (_errOut.Length > 0) throw new Exception(_errOut);
+                TestContext.WriteLine($"VALUE: {value}");
                 bAns = true;
             }
             catch (Exception ex)

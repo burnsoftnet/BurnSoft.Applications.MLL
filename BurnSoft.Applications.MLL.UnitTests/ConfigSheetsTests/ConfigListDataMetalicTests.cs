@@ -202,7 +202,7 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
             try
             {
                 AddTestConfigDataExists();
-                bool value = ConfigListDataMetalic.CopyConfig(_databasePath, _copyConfigId, _existingId, out _errOut);
+                bool value = ConfigListDataMetalic.CopyConfig(_databasePath, _copyConfigId, _existingConfigId, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine($"VALUE: {value}");
                 bAns = true;
