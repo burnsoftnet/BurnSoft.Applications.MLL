@@ -296,6 +296,7 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
                     if (!Add(databasePath, newConfigId, d.AmmoTypeId, d.CaliberId, d.BulletId, d.PrimerId, 
                         d.CaseId, GeneralHelpers.FluffContent(d.Source), out errOut)) throw new Exception(errOut);
                 }
+                bAns = true;
             }
             catch (Exception e)
             {

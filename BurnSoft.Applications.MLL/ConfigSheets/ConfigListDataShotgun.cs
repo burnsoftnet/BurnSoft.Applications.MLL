@@ -323,6 +323,7 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
                         GeneralHelpers.FluffContent(d.Source), d.GunId, d.IsPersonal, d.ListTypeId, 
                         d.BushingId, d.ChargeBarId, out errOut)) throw new Exception(errOut);
                 }
+                bAns = true;
             }
             catch (Exception e)
             {

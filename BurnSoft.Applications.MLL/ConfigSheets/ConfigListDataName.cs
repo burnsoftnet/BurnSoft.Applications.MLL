@@ -317,6 +317,7 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
                     if (!ConfigListDataShotgun.CopyConfig(databasePath, id, oldConfigId, out errOut)) throw new Exception(errOut);
                     if (!ConfigListDataPowderShotGun.CopyConfig(databasePath, id, oldConfigId, out errOut)) throw new Exception(errOut);
                 }
+                bAns = true;
             }
             catch (Exception e)
             {

@@ -374,6 +374,7 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
                         (double)d.FpsMin, (double)d.FpsMid, (double)d.FpsMax, (double)d.CupsMin, 
                         (double)d.CupsMid, (double)d.CupsMax, d.IsDefault, out errOut)) throw new Exception(errOut);
                 }
+                bAns = true;
             }
             catch (Exception e)
             {

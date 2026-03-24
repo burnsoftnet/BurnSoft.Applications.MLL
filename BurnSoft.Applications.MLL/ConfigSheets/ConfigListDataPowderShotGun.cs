@@ -381,6 +381,7 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
                         (double)d.PsiMid, (double)d.PsiMax, (double)d.LupMin,
                         (double)d.LupMid, (double)d.LupMax, d.IsDefault, out errOut)) throw new Exception(errOut);
                 }
+                bAns = true;
             }
             catch (Exception e)
             {
