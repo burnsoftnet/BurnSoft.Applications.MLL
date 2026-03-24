@@ -492,6 +492,33 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
             return sAns;
         }
         /// <summary>
+        /// Shotguns the hull data data.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string ShotgunHullDataData(List<ShotgunHullData> value)
+        {
+            string sAns = "";
+            if (value.Count > 0)
+            {
+                foreach (ShotgunHullData v in value)
+                {
+                    sAns += $"id : {v.Id}{Environment.NewLine}";
+                    sAns += $"Manufacturer : {v.Manufacturer}{Environment.NewLine}";
+                    sAns += $"Name : {v.Name}{Environment.NewLine}";
+                    sAns += $"Gauge : {v.Gauge}{Environment.NewLine}";
+                    sAns += $"GunId : {v.GunId}{Environment.NewLine}";
+                    sAns += $"Length : {v.Length}{Environment.NewLine}";
+                    sAns += $"Qty : {v.Qty}{Environment.NewLine}";
+                    sAns += $"Price : {v.Price}{Environment.NewLine}";
+                    sAns += $"DRAM : {v.DRAM}{Environment.NewLine}";
+                    sAns += $"EstimatedPricePerItem : {v.EstimatedPricePerItem}{Environment.NewLine}";
+                    sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                }
+            }
+            return sAns;
+        }
+        /// <summary>
         /// Primers the listings data.
         /// </summary>
         /// <param name="value">The value.</param>
