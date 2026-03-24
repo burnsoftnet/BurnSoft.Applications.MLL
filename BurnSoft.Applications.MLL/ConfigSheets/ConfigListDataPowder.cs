@@ -1,5 +1,4 @@
-﻿using BurnSoft.Applications.MLL.Helpers;
-using BurnSoft.Applications.MLL.Types;
+﻿using BurnSoft.Applications.MLL.Types;
 using BurnSoft.Universal;
 using System;
 using System.Collections.Generic;
@@ -444,6 +443,28 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
             catch (Exception e)
             {
                 errOut = ErrorMessage("Delete", e);
+            }
+            return bAns;
+        }
+        /// <summary>
+        /// Deletes the by configuration id, which will take out all the powders with the config id.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool DeleteByConfigId(string databasePath, long id, out string errOut)
+        {
+            errOut = "";
+            bool bAns = false;
+            try
+            {
+                string sql = $"DELETE from Config_List_Powder_Data_NSG where CLNID={id}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("DeleteByConfigId", e);
             }
             return bAns;
         }

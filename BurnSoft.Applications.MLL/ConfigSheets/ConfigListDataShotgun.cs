@@ -404,5 +404,28 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
             }
             return bAns;
         }
+
+        /// <summary>
+        /// Deletes the by configuration identifier which will delete all the powder using the config id.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool DeleteByConfigId(string databasePath, long id, out string errOut)
+        {
+            errOut = "";
+            bool bAns = false;
+            try
+            {
+                string sql = $"DELETE from Config_List_Data_SG where CLNID={id}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("DeleteByConfigId", e);
+            }
+            return bAns;
+        }
     }
 }
