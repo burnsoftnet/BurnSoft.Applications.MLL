@@ -300,9 +300,13 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
                 if (errOut.Length > 0) throw new Exception(errOut);
                 foreach (ConfigNameList d in lst)
                 {
-                    if (!Add(databasePath, newConfigName, d.IsPersonal, d.IsShotGun, 
-                        GeneralHelpers.FluffContent(d.Notes), d.IsActive, d.IsFavorite, 
+                    if (!DataExists(databasePath, newConfigName, out errOut))
+                    {
+                        if (errOut.Length == 0) throw new Exception(errOut);
+                        if (!Add(databasePath, newConfigName, d.IsPersonal, d.IsShotGun,
+                        GeneralHelpers.FluffContent(d.Notes), d.IsActive, d.IsFavorite,
                         out errOut)) throw new Exception(errOut);
+                    }
                     isShotGun = d.IsShotGun;
                 }
 
