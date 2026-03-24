@@ -1,4 +1,5 @@
-﻿using BurnSoft.Applications.MLL.Types;
+﻿using BurnSoft.Applications.MLL.Helpers;
+using BurnSoft.Applications.MLL.Types;
 using BurnSoft.Universal;
 using System;
 using System.Collections.Generic;
@@ -274,6 +275,56 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
             }
             return bAns;
         }
+
+        /// <summary>
+        /// Copies the configuration based on the old Configuration ID.  This will created the new 
+        /// name with the settings of the old and copy the General Details and Powder Details from that
+        /// config id.  And Based on the Setting of the Config that is being Copied, it will determine
+        /// if it goes in the Metalic or shotgun config data tables.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="newConfigName">New name of the configuration.</param>
+        /// <param name="oldConfigId">The old configuration identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool CopyConfig(string databasePath, string newConfigName, long oldConfigId, 
+            out string errOut)
+        {
+            errOut = "";
+            bool bAns = false;
+            try
+            {
+                bool isShotGun = false;
+                List<ConfigNameList> lst = GetDetails(databasePath, oldConfigId, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                foreach (ConfigNameList d in lst)
+                {
+                    if (!Add(databasePath, newConfigName, d.IsPersonal, d.IsShotGun, 
+                        GeneralHelpers.FluffContent(d.Notes), d.IsActive, d.IsFavorite, 
+                        out errOut)) throw new Exception(errOut);
+                    isShotGun = d.IsShotGun;
+                }
+
+                int id = (int)GetId(databasePath, newConfigName, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                if (!isShotGun)
+                {
+                    if (!ConfigListDataMetalic.CopyConfig(databasePath, id, oldConfigId, out errOut)) throw new Exception(errOut);
+                    if (!ConfigListDataPowder.CopyConfig(databasePath, id, oldConfigId, out errOut)) throw new Exception(errOut);
+                } else
+                {
+                    if (!ConfigListDataShotgun.CopyConfig(databasePath, id, oldConfigId, out errOut)) throw new Exception(errOut);
+                    if (!ConfigListDataPowderShotGun.CopyConfig(databasePath, id, oldConfigId, out errOut)) throw new Exception(errOut);
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("CopyConfig", e);
+            }
+            return bAns;
+        }
+
         /// <summary>
         /// Updates the specified database path.
         /// </summary>
