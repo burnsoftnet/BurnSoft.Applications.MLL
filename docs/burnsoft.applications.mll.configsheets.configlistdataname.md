@@ -290,6 +290,33 @@ The error out.
 [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
 `true` if XXXX, `false` otherwise.
 
+### **Rename(String, Int64, String, String&)**
+
+Renames the specified configuration based on the id
+
+```csharp
+public static bool Rename(string databasePath, long id, string name, String& errOut)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`id` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
+The identifier.
+
+`name` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The name.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+`true` if XXXX, `false` otherwise.
+
 ### **Delete(String, Int64, String&)**
 
 Deletes The Configuration and all the data relating to it.
@@ -304,7 +331,7 @@ public static bool Delete(string databasePath, long id, String& errOut)
 The database path.
 
 `id` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
-The identifier.
+The configuration identifier.
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
 The error out.
