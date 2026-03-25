@@ -183,6 +183,42 @@ The string title.
 [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
 `true` if the specified l value is required; otherwise, `false`.
 
+### **FormatForXml(String)**
+
+Formats for XML.
+
+```csharp
+public static string FormatForXml(string value)
+```
+
+#### Parameters
+
+`value` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The value.
+
+#### Returns
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+System.String.
+
+### **FormatFromXml(String)**
+
+Formats from XML.
+
+```csharp
+public static string FormatFromXml(string value)
+```
+
+#### Parameters
+
+`value` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The value.
+
+#### Returns
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+System.String.
+
 ---
 
 [`< Back`](./)
