@@ -467,6 +467,37 @@ System.Int64.
 
 [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
 
+### **GetGetNumericValue(String, String, String, String&)**
+
+Gets the get numeric value.
+
+```csharp
+public static int GetGetNumericValue(string databasePath, string field, string sql, String& errOut)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`field` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The field.
+
+`sql` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The SQL.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+System.Int32.
+
+#### Exceptions
+
+[Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
+
 ### **GetName(String, String, String, String&)**
 
 Gets the name.

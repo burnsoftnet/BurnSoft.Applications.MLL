@@ -63,7 +63,7 @@ public static bool IsSlugConfig(string databasePath, long Id, String& errOut)
 The database path.
 
 `Id` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
-The identifier.
+The projectile identifier.
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
 The error out.
@@ -78,7 +78,7 @@ The error out.
 Ins the shotgun configs
 
 ```csharp
-public static bool InShotgun(string databasePath, long caliberId, String& errOut)
+public static bool InShotgun(string databasePath, long ammoTypeId, String& errOut)
 ```
 
 #### Parameters
@@ -86,8 +86,8 @@ public static bool InShotgun(string databasePath, long caliberId, String& errOut
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The database path.
 
-`caliberId` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
-The caliber identifier.
+`ammoTypeId` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
+The ammunition type identifier.
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
 The error out.
