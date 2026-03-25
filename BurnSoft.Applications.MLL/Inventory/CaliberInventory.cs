@@ -3,7 +3,6 @@ using BurnSoft.Universal;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Net.NetworkInformation;
 
 namespace BurnSoft.Applications.MLL.Inventory
 {

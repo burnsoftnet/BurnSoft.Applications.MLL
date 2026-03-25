@@ -1,5 +1,4 @@
 ﻿using System;
-using BurnSoft.Universal;
 using Microsoft.VisualBasic;
 // ReSharper disable CompareOfFloatsByEqualityOperator
 // ReSharper disable UnusedMember.Global
@@ -117,7 +116,28 @@ namespace BurnSoft.Applications.MLL.Helpers
                 Interaction.MsgBox("Please put in a value for " + strField + "!", MsgBoxStyle.Critical, strTitle);
             return bAns;
         }
-
-
+        /// <summary>
+        /// Formats for XML.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string FormatForXml(string value)
+        {
+            string sAns = "";
+            sAns = value.Replace("&", "&amp;");
+            return sAns;
+        }
+        /// <summary>
+        /// Formats from XML.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string FormatFromXml(string value)
+        {
+            string sAns = "";
+            sAns = value.Replace("&amp;", "&");
+            sAns = sAns.Replace("'", "''");
+            return sAns;
+        }
     }
 }
