@@ -106,11 +106,12 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
             }
         }
 
-        private void PrintTestConfigNames(string BeforeAfter = "BEFORE")
+        private void PrintTestConfigNames(string BeforeAfter = "BEFORE", string name = "")
         {
+            if (name.Length == 0) name = _ConfigName;
             TestContext.WriteLine($"===========${BeforeAfter}===========");
             TestContext.WriteLine($"");
-            List<ConfigNameList> value = ConfigListDataName.GetDetails(_databasePath, _ConfigName, out _errOut);
+            List<ConfigNameList> value = ConfigListDataName.GetDetails(_databasePath, name, out _errOut);
             TestContext.WriteLine(DebugHelpers.PrintListValues.ConfigNameListData(value));
             TestContext.WriteLine($"");
         }
@@ -211,7 +212,7 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
                 bool value = ConfigListDataName.Rename(_databasePath, id, $"(COPY) - {_ConfigName}", out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine($"VALUE: {value}");
-                PrintTestConfigNames("AFTER");
+                PrintTestConfigNames("AFTER", $"(COPY) - {_ConfigName}");
                 bAns = true;
             }
             catch (Exception ex)
