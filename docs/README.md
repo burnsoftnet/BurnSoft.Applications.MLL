@@ -38,6 +38,8 @@
 
 [ConfigListDataShotgun](./burnsoft.applications.mll.configsheets.configlistdatashotgun.md)
 
+[ConfigListGeneral](./burnsoft.applications.mll.configsheets.configlistgeneral.md)
+
 ## BurnSoft.Applications.MLL.DebugHelpers
 
 [PrintListValues](./burnsoft.applications.mll.debughelpers.printlistvalues.md)
