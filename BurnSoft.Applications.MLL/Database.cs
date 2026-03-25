@@ -463,6 +463,7 @@ namespace BurnSoft.Applications.MLL
             string sql = $"SELECT {column} FROM {table} where {column}='{value}'";
             return DataExists(databasePath, sql, out errOut);
         }
+
         /// <summary>
         /// Objects the exists in database.
         /// </summary>
@@ -474,6 +475,21 @@ namespace BurnSoft.Applications.MLL
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool ObjectExistsInDb(string databasePath, string column, string table, 
             int value, out string errOut)
+        {
+            string sql = $"SELECT {column} FROM {table} where {column}={value}";
+            return DataExists(databasePath, sql, out errOut);
+        }
+        /// <summary>
+        /// Objects the exists in database.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="column">The column.</param>
+        /// <param name="table">The table.</param>
+        /// <param name="value">The value.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool ObjectExistsInDb(string databasePath, string column, string table,
+           long value, out string errOut)
         {
             string sql = $"SELECT {column} FROM {table} where {column}={value}";
             return DataExists(databasePath, sql, out errOut);
