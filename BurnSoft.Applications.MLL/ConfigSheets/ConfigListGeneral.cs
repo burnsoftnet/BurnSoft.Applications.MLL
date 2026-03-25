@@ -107,7 +107,7 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
             return bAns;
         }
         /// <summary>
-        /// Ins the shotgun.
+        /// Ins the shotgun configs
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="caliberId">The caliber identifier.</param>
@@ -130,6 +130,31 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
             catch (Exception e)
             {
                 errOut = ErrorMessage("InShotgun", e);
+            }
+            return bAns;
+        }
+        /// <summary>
+        /// In the metallic config.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="caliberId">The caliber identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool InMetallic(string databasePath, long caliberId, out string errOut)
+        {
+            bool bAns = false;
+            try
+            {
+                string sql = $"SELECT Config_List_Name.ID,Config_List_Name.ConfigName,Config_List_Name.IsPersonal," +
+                    $"Config_List_Name.IsActive,Config_List_Name.IsFav,Config_List_Name.IsShotgun, Config_List_Data_NSG.ATID, " +
+                    $"Config_List_Data_NSG.CALID,Config_List_Data_NSG.CAID, Config_List_Data_NSG.BID, " +
+                    $"Config_List_Data_NSG.PRID from Config_List_Name INNER JOIN Config_List_Data_NSG on " +
+                    $"Config_List_Data_NSG.CLNID=Config_List_Name.ID  where Config_List_Data_NSG.CALID={caliberId} order by Config_List_Name.ConfigName ASC";
+                bAns = Database.DataExists(databasePath, sql, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("InMetallic", e);
             }
             return bAns;
         }
