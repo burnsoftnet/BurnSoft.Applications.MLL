@@ -1,9 +1,5 @@
-﻿using BurnSoft.Applications.MLL.AutoFill;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+
 
 namespace BurnSoft.Applications.MLL.ConfigSheets
 {
@@ -79,6 +75,7 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
             try
             {
                 bAns = Database.ObjectExistsInDb(databasePath, "Id", "qry_ConfigCal_SG", caliberId, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
             }
             catch (Exception e)
             {
@@ -90,7 +87,7 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
         /// Determines whether [is slug configuration] [the specified database path].
         /// </summary>
         /// <param name="databasePath">The database path.</param>
-        /// <param name="Id">The identifier.</param>
+        /// <param name="Id">The projectile identifier.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if [is slug configuration] [the specified database path]; otherwise, <c>false</c>.</returns>
         public static bool IsSlugConfig(string databasePath, long Id, out string errOut)
@@ -98,7 +95,10 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
             bool bAns = false;
             try
             {
-                bAns = Database.ObjectExistsInDb(databasePath, "Id", "qry_ConfigCal_SG", Id, out errOut);
+                string sql = $"Select IsSlug from List_SG_ShotType_Details where ID={Id}";
+                int value = Database.GetGetNumericValue(databasePath, "IsSlug", sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                bAns = (value == 1);
             }
             catch (Exception e)
             {
@@ -110,10 +110,10 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
         /// Ins the shotgun configs
         /// </summary>
         /// <param name="databasePath">The database path.</param>
-        /// <param name="caliberId">The caliber identifier.</param>
+        /// <param name="ammoTypeId">The ammunition type identifier.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public static bool InShotgun(string databasePath, long caliberId, out string errOut)
+        public static bool InShotgun(string databasePath, long ammoTypeId, out string errOut)
         {
             bool bAns = false;
             try
@@ -124,8 +124,9 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
                     $"Config_List_Data_SG.CAID,Config_List_Data_SG.SW,Config_List_Data_SG.SS,Config_List_Data_SG.WAD," +
                     $"Config_List_Data_SG.SCL,Config_List_Data_SG.GID,Config_List_Data_SG.LTID from Config_List_Name " +
                     $"INNER JOIN Config_List_Data_SG on Config_List_Data_SG.CLNID=Config_List_Name.ID where " +
-                    $"Config_List_Data_SG.ATID={caliberId} order by Config_List_Name.ConfigName ASC";
+                    $"Config_List_Data_SG.ATID={ammoTypeId} order by Config_List_Name.ConfigName ASC";
                 bAns = Database.DataExists(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
             }
             catch (Exception e)
             {
@@ -151,6 +152,7 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
                     $"Config_List_Data_NSG.PRID from Config_List_Name INNER JOIN Config_List_Data_NSG on " +
                     $"Config_List_Data_NSG.CLNID=Config_List_Name.ID  where Config_List_Data_NSG.CALID={caliberId} order by Config_List_Name.ConfigName ASC";
                 bAns = Database.DataExists(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
             }
             catch (Exception e)
             {

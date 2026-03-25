@@ -526,6 +526,38 @@ namespace BurnSoft.Applications.MLL
             }
             return dAns;
         }
+        /// <summary>
+        /// Gets the get numeric value.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="field">The field.</param>
+        /// <param name="sql">The SQL.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int32.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static int GetGetNumericValue(string databasePath, string field, string sql, out string errOut)
+        {
+            int dAns = 0;
+            errOut = "";
+            try
+            {
+                Database obj = new Database();
+                string con = ConnectionString(databasePath, out errOut);
+                DataTable dt = obj.GetData(con, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                foreach (DataRow dr in dt.Rows)
+                {
+                    dAns = Convert.ToInt32(dr[field]);
+                }
+
+                obj.Close(out _);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetGetNumericValue", e);
+            }
+            return dAns;
+        }
 
         /// <summary>
         /// Gets the name.
