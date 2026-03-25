@@ -158,5 +158,41 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
             }
             return bAns;
         }
+        /// <summary>
+        /// Determines whether [is not in shotgun configuration by caliber] [the specified database path].
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="caliberId">The caliber identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if [is not in shotgun configuration by caliber] [the specified database path]; otherwise, <c>false</c>.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool IsNotInShotgunConfigByCaliber(string databasePath, long caliberId, out string errOut)
+        {
+            bool bAns = false;
+            try
+            {
+                if (!InMetallic(databasePath, caliberId, out errOut))
+                {
+                    if (errOut.Length > 0) throw new Exception(errOut);
+                    if (!InShotgun(databasePath, caliberId, out errOut))
+                    {
+                        if (errOut.Length > 0) throw new Exception(errOut);
+                        bAns = false ;
+                    }
+                    else
+                    {
+                        bAns = true;
+                    }
+                } else
+                {
+                    bAns = true;
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("IsNotInShotgunConfigByCaliber", e);
+            }
+            return bAns;
+        }
     }
 }
