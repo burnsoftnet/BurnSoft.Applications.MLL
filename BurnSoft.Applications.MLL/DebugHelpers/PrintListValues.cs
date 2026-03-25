@@ -280,6 +280,53 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
             return sAns;
         }
         /// <summary>
+        /// Queries the configuration caliber metallic data data.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string QueryConfigCaliberMetallicDataData(List<QueryConfigCaliberMetallicData> value)
+        {
+            string sAns = "";
+            if (value.Count > 0)
+            {
+                foreach (QueryConfigCaliberMetallicData v in value)
+                {
+                    sAns += $"id : {v.Id}{Environment.NewLine}";
+                    sAns += $"Name : {v.Name}{Environment.NewLine}";
+                    sAns += $"IsPersonal : {v.IsPersonal}{Environment.NewLine}";
+                    sAns += $"IsShotGun : {v.IsShotGun}{Environment.NewLine}";
+                    sAns += $"CaliberId : {v.CaliberId}{Environment.NewLine}";
+                    sAns += $"IsActive : {v.IsActive}{Environment.NewLine}";
+                    sAns += $"IsFavorite : {v.IsFavorite}{Environment.NewLine}";
+                }
+            }
+            return sAns;
+        }
+        /// <summary>
+        /// Queries the configuration caliber shotgun data data.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string QueryConfigCaliberShotgunDataData(List<QueryConfigCaliberShotgunData> value)
+        {
+            string sAns = "";
+            if (value.Count > 0)
+            {
+                foreach (QueryConfigCaliberShotgunData v in value)
+                {
+                    sAns += $"id : {v.Id}{Environment.NewLine}";
+                    sAns += $"Name : {v.Name}{Environment.NewLine}";
+                    sAns += $"IsPersonal : {v.IsPersonal}{Environment.NewLine}";
+                    sAns += $"IsShotGun : {v.IsShotGun}{Environment.NewLine}";
+                    sAns += $"CaliberId : {v.CaliberId}{Environment.NewLine}";
+                    sAns += $"IsActive : {v.IsActive}{Environment.NewLine}";
+                    sAns += $"IsFavorite : {v.IsFavorite}{Environment.NewLine}";
+                }
+            }
+            return sAns;
+        }
+
+        /// <summary>
         /// Configurations the list powder data data.
         /// </summary>
         /// <param name="value">The value.</param>
