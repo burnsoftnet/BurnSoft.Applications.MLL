@@ -1,4 +1,5 @@
 ﻿using BurnSoft.Applications.MLL.Helpers;
+using BurnSoft.Applications.MLL.LoadersLog;
 using BurnSoft.Applications.MLL.Types;
 using BurnSoft.Universal;
 using System;
@@ -405,14 +406,11 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
             bool bAns = false;
             try
             {
-                if (!ConfigListDataMetalic.DeleteByConfigId(databasePath, id, out errOut));
-                if (errOut.Length > 0) throw new Exception(errOut);
-                if (!ConfigListDataPowder.DeleteByConfigId(databasePath, id, out errOut));
-                if (errOut.Length > 0) throw new Exception(errOut);
-                if (!ConfigListDataPowderShotGun.DeleteByConfigId(databasePath, id, out errOut));
-                if (errOut.Length > 0) throw new Exception(errOut);
-                if (!ConfigListDataShotgun.DeleteByConfigId(databasePath, id, out errOut));
-                if (errOut.Length > 0) throw new Exception(errOut);
+                if (!LoadersLogAmmunitionAudit.DeleteByConfigId(databasePath, id, out errOut)) throw new Exception(errOut);
+                if (!ConfigListDataMetalic.DeleteByConfigId(databasePath, id, out errOut)) throw new Exception(errOut);
+                if (!ConfigListDataPowder.DeleteByConfigId(databasePath, id, out errOut)) throw new Exception(errOut);
+                if (!ConfigListDataPowderShotGun.DeleteByConfigId(databasePath, id, out errOut)) throw new Exception(errOut);
+                if (!ConfigListDataShotgun.DeleteByConfigId(databasePath, id, out errOut)) throw new Exception(errOut);
                 string sql = $"DELETE from Config_List_Name where id={id}";
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
