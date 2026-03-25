@@ -214,6 +214,7 @@
     <Compile Include="ConfigSheetsTests\ConfigListDataShotgunTest.cs" />
     <Compile Include="ConfigSheetsTests\ConfigListGeneralTests.cs" />
     <Compile Include="ConfigSheetsTests\QueryConfigCaliberMetallicTests.cs" />
+    <Compile Include="ConfigSheetsTests\QueryConfigCaliberShotgunTest.cs" />
     <Compile Include="General.cs" />
     <Compile Include="Global\GeneralSettingsTest.cs" />
     <Compile Include="Global\MyRegistryTest.cs" />
