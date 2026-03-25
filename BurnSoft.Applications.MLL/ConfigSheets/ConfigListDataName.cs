@@ -302,7 +302,7 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
                 {
                     if (!DataExists(databasePath, newConfigName, out errOut))
                     {
-                        if (errOut.Length == 0) throw new Exception(errOut);
+                        if (errOut.Length > 0) throw new Exception(errOut);
                         if (!Add(databasePath, newConfigName, d.IsPersonal, d.IsShotGun,
                         GeneralHelpers.FluffContent(d.Notes), d.IsActive, d.IsFavorite,
                         out errOut)) throw new Exception(errOut);
