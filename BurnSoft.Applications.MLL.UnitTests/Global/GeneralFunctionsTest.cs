@@ -45,7 +45,7 @@ namespace BurnSoft.Applications.MLL.UnitTests.Global
         {
             long value = GeneralFunctions.CountReadyToUseAmmo(_databasePath, out _errOut);
             TestContext.WriteLine($"VALUE: {value}");
-            // nothing is in the table at this time.
+            //Nothing in table on first run eventually the table gets populater
             //if (value == 0) Assert.Fail();
             if (_errOut.Length > 0) Assert.Fail();
         }
