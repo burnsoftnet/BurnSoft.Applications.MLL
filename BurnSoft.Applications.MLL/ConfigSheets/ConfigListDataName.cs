@@ -191,6 +191,34 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
             return GetList(databasePath, sql, out errOut);
         }
         /// <summary>
+        /// Gets the name.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.String.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static string GetName(string databasePath, long id, out string errOut)
+        {
+            string sAns = "";
+            errOut = "";
+            try
+            {
+                List<ConfigNameList> lst = GetDetails(databasePath, id, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                foreach (ConfigNameList i in lst)
+                {
+                    sAns = i.Name;
+                    break;
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetName", e);
+            }
+            return sAns;
+        }
+        /// <summary>
         /// Datas the exists.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
