@@ -5,7 +5,7 @@ namespace BurnSoft.Applications.MLL.Types
     /// <summary>
     /// Class QueryConfigCaliberMetallicData list container to work with the qry_ConfigCal_NSG Query.
     /// </summary>
-    public class QueryConfigCaliberMetallicData
+    public class QueryConfigCaliberData
     {
         /// <summary>
         /// Gets or sets the identifier.

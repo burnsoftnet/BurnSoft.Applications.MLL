@@ -56,7 +56,7 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
             bool bAns = false;
             try
             {
-                List<QueryConfigCaliberMetallicData> value = QueryConfigCaliberMetallic.GetAll(_databasePath, out _errOut);
+                List<QueryConfigCaliberData> value = QueryConfigCaliberMetallic.GetAll(_databasePath, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine(DebugHelpers.PrintListValues.QueryConfigCaliberMetallicDataData(value));
                 bAns = true;
@@ -92,7 +92,7 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
             bool bAns = false;
             try
             {
-                List<QueryConfigCaliberMetallicData> value = QueryConfigCaliberMetallic.GetDetails(_databasePath, _existingConfigName, out _errOut);
+                List<QueryConfigCaliberData> value = QueryConfigCaliberMetallic.GetDetails(_databasePath, _existingConfigName, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine(DebugHelpers.PrintListValues.QueryConfigCaliberMetallicDataData(value));
                 bAns = true;
@@ -110,7 +110,7 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
             bool bAns = false;
             try
             {
-                List<QueryConfigCaliberMetallicData> value = QueryConfigCaliberMetallic.GetDetails(_databasePath, _existingId, out _errOut);
+                List<QueryConfigCaliberData> value = QueryConfigCaliberMetallic.GetDetails(_databasePath, _existingId, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine(DebugHelpers.PrintListValues.QueryConfigCaliberMetallicDataData(value));
                 bAns = true;
@@ -128,7 +128,7 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
             bool bAns = false;
             try
             {
-                List<QueryConfigCaliberMetallicData> value = QueryConfigCaliberMetallic.GetDetailsByCaliberId(_databasePath, _caliberId, out _errOut);
+                List<QueryConfigCaliberData> value = QueryConfigCaliberMetallic.GetDetailsByCaliberId(_databasePath, _caliberId, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine(DebugHelpers.PrintListValues.QueryConfigCaliberMetallicDataData(value));
                 bAns = true;

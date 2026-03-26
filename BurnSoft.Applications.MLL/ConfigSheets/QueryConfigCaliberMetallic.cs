@@ -69,15 +69,15 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
         /// <param name="dt">The dt.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns>List&lt;QueryConfigCaliberMetallicData&gt;.</returns>
-        private static List<QueryConfigCaliberMetallicData> GetData(DataTable dt, out string errOut)
+        private static List<QueryConfigCaliberData> GetData(DataTable dt, out string errOut)
         {
-            List<QueryConfigCaliberMetallicData> lst = new List<QueryConfigCaliberMetallicData>();
+            List<QueryConfigCaliberData> lst = new List<QueryConfigCaliberData>();
             errOut = "";
             try
             {
                 foreach (DataRow d in dt.Rows)
                 {
-                    lst.Add(new QueryConfigCaliberMetallicData()
+                    lst.Add(new QueryConfigCaliberData()
                     {
                         Id = Convert.ToInt32(d["id"]),
                         Name = d["ConfigName"] != DBNull.Value ? d["ConfigName"].ToString().Trim() : "",
@@ -103,9 +103,9 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
         /// <param name="errOut">The error out.</param>
         /// <returns>List&lt;QueryConfigCaliberMetallicData&gt;.</returns>
         /// <exception cref="System.Exception"></exception>
-        private static List<QueryConfigCaliberMetallicData> GetList(string databasePath, string sql, out string errOut)
+        private static List<QueryConfigCaliberData> GetList(string databasePath, string sql, out string errOut)
         {
-            List<QueryConfigCaliberMetallicData> lst = new List<QueryConfigCaliberMetallicData>();
+            List<QueryConfigCaliberData> lst = new List<QueryConfigCaliberData>();
             errOut = "";
             try
             {
@@ -127,7 +127,7 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
         /// <param name="databasePath">The database path.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns>List&lt;QueryConfigCaliberMetallicData&gt;.</returns>
-        public static List<QueryConfigCaliberMetallicData> GetAll(string databasePath, out string errOut)
+        public static List<QueryConfigCaliberData> GetAll(string databasePath, out string errOut)
         {
             string sql = $"Select * from qry_ConfigCal_NSG order by ConfigName ASC";
             return GetList(databasePath, sql, out errOut);
@@ -147,9 +147,9 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
             try
             {
                 string sql = $"Select * from qry_ConfigCal_NSG where ConfigName='{name}'";
-                List<QueryConfigCaliberMetallicData> lst = GetList(databasePath, sql, out errOut);
+                List<QueryConfigCaliberData> lst = GetList(databasePath, sql, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
-                foreach (QueryConfigCaliberMetallicData i in lst)
+                foreach (QueryConfigCaliberData i in lst)
                 {
                     lAns = i.Id;
                     break;
@@ -168,7 +168,7 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
         /// <param name="name">The name.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns>List&lt;QueryConfigCaliberMetallicData&gt;.</returns>
-        public static List<QueryConfigCaliberMetallicData> GetDetails(string databasePath, string name, out string errOut)
+        public static List<QueryConfigCaliberData> GetDetails(string databasePath, string name, out string errOut)
         {
             string sql = $"Select * from qry_ConfigCal_NSG where ConfigName='{name}'";
             return GetList(databasePath, sql, out errOut);
@@ -180,7 +180,7 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
         /// <param name="id">The identifier.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns>List&lt;QueryConfigCaliberMetallicData&gt;.</returns>
-        public static List<QueryConfigCaliberMetallicData> GetDetails(string databasePath, long id, out string errOut)
+        public static List<QueryConfigCaliberData> GetDetails(string databasePath, long id, out string errOut)
         {
             string sql = $"Select * from qry_ConfigCal_NSG where id={id}";
             return GetList(databasePath, sql, out errOut);
@@ -192,7 +192,7 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
         /// <param name="id">The identifier.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns>List&lt;QueryConfigCaliberMetallicData&gt;.</returns>
-        public static List<QueryConfigCaliberMetallicData> GetDetailsByCaliberId(string databasePath, long id, out string errOut)
+        public static List<QueryConfigCaliberData> GetDetailsByCaliberId(string databasePath, long id, out string errOut)
         {
             string sql = $"Select * from qry_ConfigCal_NSG where CalID={id}";
             return GetList(databasePath, sql, out errOut);
@@ -210,7 +210,7 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
             errOut = @"";
             try
             {
-                List<QueryConfigCaliberMetallicData> lst = GetAll(databasePath, out errOut);
+                List<QueryConfigCaliberData> lst = GetAll(databasePath, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 bAns = lst.Count > 0;
             }
@@ -234,7 +234,7 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
             errOut = @"";
             try
             {
-                List<QueryConfigCaliberMetallicData> lst = GetDetails(databasePath, name, out errOut);
+                List<QueryConfigCaliberData> lst = GetDetails(databasePath, name, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 bAns = lst.Count > 0;
             }
@@ -258,7 +258,7 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
             errOut = @"";
             try
             {
-                List<QueryConfigCaliberMetallicData> lst = GetDetailsByCaliberId(databasePath, id, out errOut);
+                List<QueryConfigCaliberData> lst = GetDetailsByCaliberId(databasePath, id, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 bAns = lst.Count > 0;
             }

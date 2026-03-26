@@ -284,12 +284,12 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>System.String.</returns>
-        public static string QueryConfigCaliberMetallicDataData(List<QueryConfigCaliberMetallicData> value)
+        public static string QueryConfigCaliberMetallicDataData(List<QueryConfigCaliberData> value)
         {
             string sAns = "";
             if (value.Count > 0)
             {
-                foreach (QueryConfigCaliberMetallicData v in value)
+                foreach (QueryConfigCaliberData v in value)
                 {
                     sAns += $"id : {v.Id}{Environment.NewLine}";
                     sAns += $"Name : {v.Name}{Environment.NewLine}";
