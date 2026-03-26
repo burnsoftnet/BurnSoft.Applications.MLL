@@ -56,9 +56,9 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
             bool bAns = false;
             try
             {
-                List<QueryConfigCaliberShotgunData> value = QueryConfigCaliberShotgun.GetAll(_databasePath, out _errOut);
+                List<QueryConfigCaliberData> value = QueryConfigCaliberShotgun.GetAll(_databasePath, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
-                TestContext.WriteLine(DebugHelpers.PrintListValues.QueryConfigCaliberShotgunDataData(value));
+                TestContext.WriteLine(DebugHelpers.PrintListValues.QueryConfigCaliberDataData(value));
                 bAns = true;
             }
             catch (Exception ex)
@@ -92,9 +92,9 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
             bool bAns = false;
             try
             {
-                List<QueryConfigCaliberShotgunData> value = QueryConfigCaliberShotgun.GetDetails(_databasePath, _existingConfigName, out _errOut);
+                List<QueryConfigCaliberData> value = QueryConfigCaliberShotgun.GetDetails(_databasePath, _existingConfigName, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
-                TestContext.WriteLine(DebugHelpers.PrintListValues.QueryConfigCaliberShotgunDataData(value));
+                TestContext.WriteLine(DebugHelpers.PrintListValues.QueryConfigCaliberDataData(value));
                 bAns = true;
             }
             catch (Exception ex)
@@ -110,9 +110,9 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
             bool bAns = false;
             try
             {
-                List<QueryConfigCaliberShotgunData> value = QueryConfigCaliberShotgun.GetDetails(_databasePath, _existingId, out _errOut);
+                List<QueryConfigCaliberData> value = QueryConfigCaliberShotgun.GetDetails(_databasePath, _existingId, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
-                TestContext.WriteLine(DebugHelpers.PrintListValues.QueryConfigCaliberShotgunDataData(value));
+                TestContext.WriteLine(DebugHelpers.PrintListValues.QueryConfigCaliberDataData(value));
                 bAns = true;
             }
             catch (Exception ex)
@@ -128,9 +128,9 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
             bool bAns = false;
             try
             {
-                List<QueryConfigCaliberShotgunData> value = QueryConfigCaliberShotgun.GetDetailsByCaliberId(_databasePath, _caliberId, out _errOut);
+                List<QueryConfigCaliberData> value = QueryConfigCaliberShotgun.GetDetailsByCaliberId(_databasePath, _caliberId, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
-                TestContext.WriteLine(DebugHelpers.PrintListValues.QueryConfigCaliberShotgunDataData(value));
+                TestContext.WriteLine(DebugHelpers.PrintListValues.QueryConfigCaliberDataData(value));
                 bAns = true;
             }
             catch (Exception ex)

@@ -129,7 +129,6 @@
     <Compile Include="Types\PrimerListings.cs" />
     <Compile Include="Types\PrimerTypeListings.cs" />
     <Compile Include="Types\QueryConfigCaliberData.cs" />
-    <Compile Include="Types\QueryConfigCaliberShotgunData.cs" />
     <Compile Include="Types\RegistrySettings.cs" />
     <Compile Include="Types\SearchFieldsData.cs" />
     <Compile Include="Types\ShotgunBushingListings.cs" />
