@@ -1,5 +1,4 @@
 ﻿using System;
-using BurnSoft.Universal;
 using Microsoft.VisualBasic;
 // ReSharper disable CompareOfFloatsByEqualityOperator
 // ReSharper disable UnusedMember.Global
@@ -19,8 +18,11 @@ namespace BurnSoft.Applications.MLL.Helpers
         /// <returns>System.String.</returns>
         public static string FluffContent(string value, string defaultValue = "  ")
         {
-            BSOtherObjects obj = new BSOtherObjects();
-            return obj.FC(value, defaultValue);
+            string sAns = "";
+            sAns = value.Replace("'", "''").Trim();
+            if (sAns.Length == 0 ) sAns = defaultValue;
+            return sAns;
+
         }
         /// <summary>
         /// Fluffs the content to double
@@ -28,10 +30,35 @@ namespace BurnSoft.Applications.MLL.Helpers
         /// <param name="value">The value.</param>
         /// <param name="defaultValue">The default value.</param>
         /// <returns>System.Double.</returns>
-        public static double FluffContent(string value, double defaultValue =0)
+        public static double FluffContent(double? value, double defaultValue = 0)
         {
-            BSOtherObjects obj = new BSOtherObjects();
-            double dAns = Convert.ToDouble(obj.FC(value, $"{defaultValue}"));
+            double dAns = 0;
+            if (value == null)
+            {
+                dAns = defaultValue;
+            } else
+            {
+                dAns = value.Value;
+            }
+            return dAns;
+        }
+        /// <summary>
+        /// Fluffs the content.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="defaultValue">The default value.</param>
+        /// <returns>System.Double.</returns>
+        public static double FluffContent(string value, double defaultValue)
+        {
+            double dAns = 0;
+            if (value.Length == 0)
+            {
+                dAns = defaultValue;
+            }
+            else
+            {
+                dAns = Convert.ToDouble(value);
+            }
             return dAns;
         }
         /// <summary>
@@ -89,7 +116,28 @@ namespace BurnSoft.Applications.MLL.Helpers
                 Interaction.MsgBox("Please put in a value for " + strField + "!", MsgBoxStyle.Critical, strTitle);
             return bAns;
         }
-
-
+        /// <summary>
+        /// Formats for XML.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string FormatForXml(string value)
+        {
+            string sAns = "";
+            sAns = value.Replace("&", "&amp;");
+            return sAns;
+        }
+        /// <summary>
+        /// Formats from XML.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string FormatFromXml(string value)
+        {
+            string sAns = "";
+            sAns = value.Replace("&amp;", "&");
+            sAns = sAns.Replace("'", "''");
+            return sAns;
+        }
     }
 }

@@ -297,6 +297,37 @@ The error out.
 [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
 `true` if XXXX, `false` otherwise.
 
+### **CopyConfig(String, Int32, Int64, String&)**
+
+Copies the configuration powder data from one config to another..
+
+```csharp
+public static bool CopyConfig(string databasePath, int newConfigId, long oldConfigId, String& errOut)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`newConfigId` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+The new configuration identifier.
+
+`oldConfigId` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
+The old configuration identifier.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+`true` if XXXX, `false` otherwise.
+
+#### Exceptions
+
+[Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
+
 ### **Update(String, Int64, Int64, Int64, Double, Double, Double, Double, Double, Double, Double, Double, Double, Boolean, String&)**
 
 Updates the specified database path.
@@ -363,6 +394,30 @@ Deletes the specified database path.
 
 ```csharp
 public static bool Delete(string databasePath, long id, String& errOut)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`id` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
+The identifier.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+`true` if XXXX, `false` otherwise.
+
+### **DeleteByConfigId(String, Int64, String&)**
+
+Deletes the by configuration id, which will take out all the powders with the config id.
+
+```csharp
+public static bool DeleteByConfigId(string databasePath, long id, String& errOut)
 ```
 
 #### Parameters

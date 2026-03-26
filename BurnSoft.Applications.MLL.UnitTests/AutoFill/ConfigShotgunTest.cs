@@ -111,6 +111,17 @@ namespace BurnSoft.Applications.MLL.UnitTests.AutoFill
         }
 
         [TestMethod, TestCategory("AutoFill - Config and Loaders Log Shotgun")]
+        public void BushingPowderChargeTest()
+        {
+            AutoCompleteStringCollection value = ConfigShotgun.BushingPowderCharge(_databasePath, out _errOut);
+            foreach (var a in value)
+            {
+                TestContext.WriteLine(a.ToString());
+            }
+            General.HasTrueValue(value.Count > 0, _errOut);
+        }
+
+        [TestMethod, TestCategory("AutoFill - Config and Loaders Log Shotgun")]
         public void BushingShotManufacturerTest()
         {
             AutoCompleteStringCollection value = ConfigShotgun.BushingShotManufacturer(_databasePath, out _errOut);

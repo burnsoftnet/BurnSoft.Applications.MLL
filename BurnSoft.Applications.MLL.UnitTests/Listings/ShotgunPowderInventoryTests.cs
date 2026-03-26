@@ -4,7 +4,6 @@ using BurnSoft.Applications.MLL.UnitTests.Settings;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using static Azure.Core.HttpHeader;
 
 namespace BurnSoft.Applications.MLL.UnitTests.Listings
 {

@@ -322,6 +322,70 @@ The error out.
 
 [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
 
+### **DropDownToEnum(String)**
+
+Drops down to enum.
+
+```csharp
+public static PowderWeightType DropDownToEnum(string value)
+```
+
+#### Parameters
+
+`value` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The value. ( Grains (grs) or Pounds (lbs) )
+
+#### Returns
+
+[PowderWeightType](./burnsoft.applications.mll.enums.powderweighttype)<br>
+PowderWeightType.
+
+### **UpdateQty(String, Int64, Int32, Double, Double, Int32, Double, PowderWeightType, String&)**
+
+Updates the qty.
+
+```csharp
+public static bool UpdateQty(string databasePath, long id, int currentQty, double currentPrice, double currentPricePerItem, int newQty, double NewPrice, PowderWeightType weightType, String& errOut)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`id` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
+The identifier.
+
+`currentQty` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+The current qty.
+
+`currentPrice` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
+The current price.
+
+`currentPricePerItem` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
+The current price per item.
+
+`newQty` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+The new qty.
+
+`NewPrice` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
+Creates new price.
+
+`weightType` [PowderWeightType](./burnsoft.applications.mll.enums.powderweighttype)<br>
+Type of the weight.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+`true` if XXXX, `false` otherwise.
+
+#### Exceptions
+
+[Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
+
 ### **Delete(String, Int64, String&)**
 
 Deletes the specified database path.

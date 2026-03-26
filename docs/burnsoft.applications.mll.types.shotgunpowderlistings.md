@@ -18,6 +18,8 @@ Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) 
 
 ### **Id**
 
+Gets or sets the identifier.
+
 ```csharp
 public int Id { get; set; }
 ```
@@ -25,6 +27,7 @@ public int Id { get; set; }
 #### Property Value
 
 [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+The identifier.
 
 ### **Manufacturer**
 

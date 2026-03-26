@@ -77,7 +77,18 @@ namespace BurnSoft.Applications.MLL.AutoFill
         {
             return General.MainCollection(databasePath, "sName", "List_SG_Bushing_Powder", out errOut);
         }
-        
+
+        /// <summary>
+        /// Bushings the powder charge.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>AutoCompleteStringCollection.</returns>
+        public static AutoCompleteStringCollection BushingPowderCharge(string databasePath, out string errOut)
+        {
+            return General.MainCollection(databasePath, "sCharge", "List_SG_Bushing_Powder", out errOut);
+        }
+
         /// <summary>
         /// Bushings the shot manufacturer.
         /// </summary>

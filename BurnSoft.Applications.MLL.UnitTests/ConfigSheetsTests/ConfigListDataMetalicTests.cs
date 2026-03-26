@@ -36,9 +36,17 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
         /// </summary>
         private string _ConfigName;
         /// <summary>
+        /// The copy configuration name
+        /// </summary>
+        private string _copyConfigName;
+        /// <summary>
         /// The configuration identifier
         /// </summary>
         private int _configId;
+        /// <summary>
+        /// The copy configuration identifier
+        /// </summary>
+        private int _copyConfigId;
         /// <summary>
         /// The ammo type
         /// </summary>
@@ -76,13 +84,25 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
             _existingConfigId = 4;
             _existingId = 4;
             _ConfigName = "Unit Test 9mm";
-            _configId = Convert.ToInt32(ConfigListDataName.GetId(_databasePath, _ConfigName, out _));
+            _copyConfigName = $"Copy from {_ConfigName}";
+            AddConfigNameIfNotExists(_ConfigName) ;
+            _configId = Convert.ToInt32(ConfigListDataName.GetId(_databasePath, _ConfigName, out _errOut));
+            AddConfigNameIfNotExists(_copyConfigName) ;
+            _copyConfigId = Convert.ToInt32(ConfigListDataName.GetId(_databasePath, _copyConfigName, out _errOut));
             _ammoType = 1;
             _caliberId = 2;
             _bulletId = 15;
             _primerId = 7;
             _caseId = 7;
             _source = "UnItest Reloaders Guide";
+        }
+
+        private void AddConfigNameIfNotExists(string name)
+        {
+            if (!ConfigListDataName.DataExists(_databasePath, name, out _))
+            {
+                ConfigListDataName.Add(_databasePath, name, true, false, "  ", true, true, out _);
+            }
         }
 
         private void AddTestConfigDataExists()
@@ -166,6 +186,25 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine($"VALUE: {value}");
                 PrintTestConfigData("AFTER");
+                bAns = true;
+            }
+            catch (Exception ex)
+            {
+                TestContext.WriteLine(ex.Message);
+            }
+            General.HasTrueValue(bAns, _errOut);
+        }
+
+        [TestMethod, TestCategory("Config Sheets - Metalic Config Data")]
+        public void CopyConfigTest()
+        {
+            bool bAns = false;
+            try
+            {
+                AddTestConfigDataExists();
+                bool value = ConfigListDataMetalic.CopyConfig(_databasePath, _copyConfigId, _existingConfigId, out _errOut);
+                if (_errOut.Length > 0) throw new Exception(_errOut);
+                TestContext.WriteLine($"VALUE: {value}");
                 bAns = true;
             }
             catch (Exception ex)

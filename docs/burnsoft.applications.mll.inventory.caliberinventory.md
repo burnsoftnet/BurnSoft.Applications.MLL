@@ -101,6 +101,30 @@ System.String.
 
 [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
 
+### **TotalConfigurationUsedByCaliber(String, Int64, String&)**
+
+Get the Total count of the configuration used by caliber.
+
+```csharp
+public static long TotalConfigurationUsedByCaliber(string databasePath, long id, String& errOut)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`id` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
+The caliber identifier.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
+System.Int64.
+
 ### **GetDetails(String, String, String&)**
 
 Gets the details.

@@ -48,6 +48,14 @@ The weight grams oz
 public static double WEIGHT_GRAMS_OZ;
 ```
 
+### **WEIGHT_OZ_1LBS**
+
+The weight oz 1 LBS
+
+```csharp
+public static double WEIGHT_OZ_1LBS;
+```
+
 ## Constructors
 
 ### **WeightValues()**

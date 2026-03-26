@@ -280,6 +280,53 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
             return sAns;
         }
         /// <summary>
+        /// Queries the configuration caliber metallic data data.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string QueryConfigCaliberMetallicDataData(List<QueryConfigCaliberData> value)
+        {
+            string sAns = "";
+            if (value.Count > 0)
+            {
+                foreach (QueryConfigCaliberData v in value)
+                {
+                    sAns += $"id : {v.Id}{Environment.NewLine}";
+                    sAns += $"Name : {v.Name}{Environment.NewLine}";
+                    sAns += $"IsPersonal : {v.IsPersonal}{Environment.NewLine}";
+                    sAns += $"IsShotGun : {v.IsShotGun}{Environment.NewLine}";
+                    sAns += $"CaliberId : {v.CaliberId}{Environment.NewLine}";
+                    sAns += $"IsActive : {v.IsActive}{Environment.NewLine}";
+                    sAns += $"IsFavorite : {v.IsFavorite}{Environment.NewLine}";
+                }
+            }
+            return sAns;
+        }
+        /// <summary>
+        /// Queries the configuration caliber shotgun data data.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string QueryConfigCaliberDataData(List<QueryConfigCaliberData> value)
+        {
+            string sAns = "";
+            if (value.Count > 0)
+            {
+                foreach (QueryConfigCaliberData v in value)
+                {
+                    sAns += $"id : {v.Id}{Environment.NewLine}";
+                    sAns += $"Name : {v.Name}{Environment.NewLine}";
+                    sAns += $"IsPersonal : {v.IsPersonal}{Environment.NewLine}";
+                    sAns += $"IsShotGun : {v.IsShotGun}{Environment.NewLine}";
+                    sAns += $"CaliberId : {v.CaliberId}{Environment.NewLine}";
+                    sAns += $"IsActive : {v.IsActive}{Environment.NewLine}";
+                    sAns += $"IsFavorite : {v.IsFavorite}{Environment.NewLine}";
+                }
+            }
+            return sAns;
+        }
+
+        /// <summary>
         /// Configurations the list powder data data.
         /// </summary>
         /// <param name="value">The value.</param>
@@ -396,7 +443,7 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
                     sAns += $"SectionDensity : {v.SectionDensity}{Environment.NewLine}";
                     sAns += $"PartNumber : {v.PartNumber}{Environment.NewLine}";
                     sAns += $"BallisticCoeffcient : {v.BallisticCoeffcient}{Environment.NewLine}";
-                    sAns += $"BullerType : {v.BullerType}{Environment.NewLine}";
+                    sAns += $"BullerType : {v.BulletType}{Environment.NewLine}";
                     sAns += $"Qty : {v.Qty}{Environment.NewLine}";
                     sAns += $"Price : {v.Price}{Environment.NewLine}";
                     sAns += $"CaliberId : {v.CaliberId}{Environment.NewLine}";
@@ -486,6 +533,33 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
                     sAns += $"Price : {v.Price}{Environment.NewLine}";
                     sAns += $"CaliberId : {v.CaliberId}{Environment.NewLine}";
                     sAns += $"EstimatedPricePerCase : {v.EstimatedPricePerCase}{Environment.NewLine}";
+                    sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                }
+            }
+            return sAns;
+        }
+        /// <summary>
+        /// Shotguns the hull data data.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string ShotgunHullDataData(List<ShotgunHullData> value)
+        {
+            string sAns = "";
+            if (value.Count > 0)
+            {
+                foreach (ShotgunHullData v in value)
+                {
+                    sAns += $"id : {v.Id}{Environment.NewLine}";
+                    sAns += $"Manufacturer : {v.Manufacturer}{Environment.NewLine}";
+                    sAns += $"Name : {v.Name}{Environment.NewLine}";
+                    sAns += $"Gauge : {v.Gauge}{Environment.NewLine}";
+                    sAns += $"GunId : {v.GunId}{Environment.NewLine}";
+                    sAns += $"Length : {v.Length}{Environment.NewLine}";
+                    sAns += $"Qty : {v.Qty}{Environment.NewLine}";
+                    sAns += $"Price : {v.Price}{Environment.NewLine}";
+                    sAns += $"DRAM : {v.DRAM}{Environment.NewLine}";
+                    sAns += $"EstimatedPricePerItem : {v.EstimatedPricePerItem}{Environment.NewLine}";
                     sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
                 }
             }
@@ -656,6 +730,28 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
                     sAns += $"TrimToLength : {v.Charge}{Environment.NewLine}";
                     sAns += $"Type : {v.Type}{Environment.NewLine}";
                     sAns += $"PowderName : {v.PowderName}{Environment.NewLine}";
+                    sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                }
+            }
+            return sAns;
+        }
+        /// <summary>
+        /// Shotguns the shot listings data.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string ShotgunShotListingsData(List<ShotgunShotListings> value)
+        {
+            string sAns = "";
+            if (value.Count > 0)
+            {
+                foreach (ShotgunShotListings v in value)
+                {
+                    sAns += $"id : {v.Id}{Environment.NewLine}";
+                    sAns += $"Manufacturer : {v.Manufacturer}{Environment.NewLine}";
+                    sAns += $"Name : {v.Name}{Environment.NewLine}";
+                    sAns += $"TrimToLength : {v.Charge}{Environment.NewLine}";
+                    sAns += $"Type : {v.Type}{Environment.NewLine}";
                     sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
                 }
             }

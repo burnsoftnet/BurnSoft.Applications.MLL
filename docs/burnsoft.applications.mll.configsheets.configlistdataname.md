@@ -214,6 +214,40 @@ The error out.
 [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
 `true` if XXXX, `false` otherwise.
 
+### **CopyConfig(String, String, Int64, String&)**
+
+Copies the configuration based on the old Configuration ID. This will created the new 
+ name with the settings of the old and copy the General Details and Powder Details from that
+ config id. And Based on the Setting of the Config that is being Copied, it will determine
+ if it goes in the Metalic or shotgun config data tables.
+
+```csharp
+public static bool CopyConfig(string databasePath, string newConfigName, long oldConfigId, String& errOut)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`newConfigName` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+New name of the configuration.
+
+`oldConfigId` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
+The old configuration identifier.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+`true` if XXXX, `false` otherwise.
+
+#### Exceptions
+
+[Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
+
 ### **Update(String, Int64, String, Boolean, Boolean, String, Boolean, Boolean, String&)**
 
 Updates the specified database path.
@@ -256,9 +290,36 @@ The error out.
 [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
 `true` if XXXX, `false` otherwise.
 
+### **Rename(String, Int64, String, String&)**
+
+Renames the specified configuration based on the id
+
+```csharp
+public static bool Rename(string databasePath, long id, string name, String& errOut)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`id` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
+The identifier.
+
+`name` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The name.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+`true` if XXXX, `false` otherwise.
+
 ### **Delete(String, Int64, String&)**
 
-Deletes the specified database path.
+Deletes The Configuration and all the data relating to it.
 
 ```csharp
 public static bool Delete(string databasePath, long id, String& errOut)
@@ -270,7 +331,7 @@ public static bool Delete(string databasePath, long id, String& errOut)
 The database path.
 
 `id` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
-The identifier.
+The configuration identifier.
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
 The error out.

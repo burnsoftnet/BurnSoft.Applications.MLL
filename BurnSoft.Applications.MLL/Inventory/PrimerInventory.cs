@@ -299,7 +299,7 @@ namespace BurnSoft.Applications.MLL.Inventory
                 if (errOut.Length > 0) throw new Exception(errOut);
                 double PricePerPrimer = CalculatePricePerItem(qty, price);
                 string sql = $"INSERT INTO General_Primer(Manufacturer,Name,Primer_Type," +
-                    $"Qty,Price,ePPP, sync_lastupdate) VALUES(" +
+                    $"Price,Qty, ePPP, sync_lastupdate) VALUES(" +
                     $"'{manufacturer}', '{name}', {primerType}, " +
                     $"{price}, {qty}, {PricePerPrimer},Now())";
 
@@ -346,6 +346,7 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             return bAns;
         }
+        
         /// <summary>
         /// Deletes the specified database path.
         /// </summary>

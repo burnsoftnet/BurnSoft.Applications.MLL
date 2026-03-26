@@ -373,5 +373,27 @@ namespace BurnSoft.Applications.MLL.LoadersLog
             }
             return bAns;
         }
+        /// <summary>
+        /// Deletes the by configuration identifier.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool DeleteByConfigId(string databasePath, long id, out string errOut)
+        {
+            errOut = "";
+            bool bAns = false;
+            try
+            {
+                string sql = $"DELETE from Loaders_Log_Ammunition_Audit where CFID={id}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("DeleteByConfigId", e);
+            }
+            return bAns;
+        }
     }
 }

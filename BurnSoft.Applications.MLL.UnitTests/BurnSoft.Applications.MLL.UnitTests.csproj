@@ -212,9 +212,13 @@
     <Compile Include="ConfigSheetsTests\ConfigListDataPowderTests.cs" />
     <Compile Include="ConfigSheetsTests\ConfigListDataPowderShotGunTests.cs" />
     <Compile Include="ConfigSheetsTests\ConfigListDataShotgunTest.cs" />
+    <Compile Include="ConfigSheetsTests\ConfigListGeneralTests.cs" />
+    <Compile Include="ConfigSheetsTests\QueryConfigCaliberMetallicTests.cs" />
+    <Compile Include="ConfigSheetsTests\QueryConfigCaliberShotgunTest.cs" />
     <Compile Include="General.cs" />
     <Compile Include="Global\GeneralSettingsTest.cs" />
     <Compile Include="Global\MyRegistryTest.cs" />
+    <Compile Include="Global\GeneralFunctionsTest.cs" />
     <Compile Include="Global\WishlistsTests.cs" />
     <Compile Include="Global\WeightValuesTest.cs" />
     <Compile Include="Helpers\ConvertersTest.cs" />
@@ -228,6 +232,8 @@
     <Compile Include="Listings\PrimerTypesTests.cs" />
     <Compile Include="Listings\PrimerInventoryTests.cs" />
     <Compile Include="Listings\ShotgunPowderInventoryTests.cs" />
+    <Compile Include="Listings\ShotgunShotInventoryTests.cs" />
+    <Compile Include="Listings\ShotgunHullInventoryTests.cs" />
     <Compile Include="LoadersLog\FirearmsTests.cs" />
     <Compile Include="LoadersLog\LoadersLogAmmunitionTests.cs" />
     <Compile Include="LoadersLog\LoadersLogAmmunitionAuditTests.cs" />

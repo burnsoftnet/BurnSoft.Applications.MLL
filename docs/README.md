@@ -38,6 +38,8 @@
 
 [ConfigListDataShotgun](./burnsoft.applications.mll.configsheets.configlistdatashotgun.md)
 
+[ConfigListGeneral](./burnsoft.applications.mll.configsheets.configlistgeneral.md)
+
 ## BurnSoft.Applications.MLL.DebugHelpers
 
 [PrintListValues](./burnsoft.applications.mll.debughelpers.printlistvalues.md)
@@ -88,7 +90,11 @@
 
 [ShotgunBushingInventory](./burnsoft.applications.mll.inventory.shotgunbushinginventory.md)
 
+[ShotgunHullInventory](./burnsoft.applications.mll.inventory.shotgunhullinventory.md)
+
 [ShotgunPowderInventory](./burnsoft.applications.mll.inventory.shotgunpowderinventory.md)
+
+[ShotgunShotInventory](./burnsoft.applications.mll.inventory.shotgunshotinventory.md)
 
 ## BurnSoft.Applications.MLL.LoadersLog
 
@@ -168,7 +174,11 @@
 
 [ShotgunBushingListings](./burnsoft.applications.mll.types.shotgunbushinglistings.md)
 
+[ShotgunHullData](./burnsoft.applications.mll.types.shotgunhulldata.md)
+
 [ShotgunPowderListings](./burnsoft.applications.mll.types.shotgunpowderlistings.md)
+
+[ShotgunShotListings](./burnsoft.applications.mll.types.shotgunshotlistings.md)
 
 [SyncTablesData](./burnsoft.applications.mll.types.synctablesdata.md)
 
