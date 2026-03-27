@@ -17,11 +17,15 @@ namespace BurnSoft.Applications.MLL.Global
         /// <summary>
         /// The weight grams 1 LBS
         /// </summary>
-        public const double WEIGHT_GRAMS_1LBS = 16;
+        public const double WEIGHT_GRAMS_1LBS = 453.592;
         /// <summary>
         /// The weight grams oz
         /// </summary>
         public const double WEIGHT_GRAMS_OZ = 28.35;
+        /// <summary>
+        /// The weight oz 1 LBS
+        /// </summary>
+        public const double WEIGHT_OZ_1LBS = 16;
         /// <summary>
         /// Enum WeightType
         /// </summary>

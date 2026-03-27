@@ -379,6 +379,89 @@ namespace BurnSoft.Applications.MLL.Inventory
             return bAns;
         }
         /// <summary>
+        /// Drops down to enum.
+        /// </summary>
+        /// <param name="value">The value. ( Grains (grs) or Pounds (lbs) )</param>
+        /// <returns>PowderWeightType.</returns>
+        public static PowderWeightType DropDownToEnum(string value)
+        {
+            switch(value.ToLower())
+            {
+                case "grains (grs)":
+                    return PowderWeightType.Grains;
+                case "pounds (lbs)":
+                    return PowderWeightType.Pounds;
+                default:
+                    return PowderWeightType.Pounds;
+            }
+        }
+        /// <summary>
+        /// Updates the qty.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="currentQty">The current qty.</param>
+        /// <param name="currentPrice">The current price.</param>
+        /// <param name="currentPricePerItem">The current price per item.</param>
+        /// <param name="newQty">The new qty.</param>
+        /// <param name="NewPrice">Creates new price.</param>
+        /// <param name="weightType">Type of the weight.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool UpdateQty(string databasePath, long id, int currentQty, double currentPrice,
+            double currentPricePerItem, int newQty, double NewPrice, PowderWeightType weightType, out string errOut)
+        {
+            errOut = "";
+            bool bAns = false;
+            try
+            {
+                int qty = currentQty + newQty;
+                double price = (currentQty * currentPricePerItem) + NewPrice;
+                double estCostPerItem = Converters.ConvertToDollars((price == 0) ? 0 : (price / qty));
+                double newGrains = 0;
+                double newPounds = 0;
+
+                switch (weightType)
+                {
+                    case PowderWeightType.Pounds:
+                        newPounds = newQty;
+                        newGrains = Converters.ConvertWeight(newQty, WeightValues.WeightType.Grains, WeightValues.WeightType.Pounds, out errOut);
+                        if (errOut.Length > 0) throw new Exception(errOut);
+                        estCostPerItem = Converters.ConvertToDollars((price == 0) ? 0 : (price / (qty * WeightValues.WEIGHT_GRAINS_1LBS)));
+                        break;
+                    case PowderWeightType.Grains:
+                        newGrains = newQty;
+                        newPounds = Converters.ConvertWeight(newQty, WeightValues.WeightType.Pounds, WeightValues.WeightType.Grains, out errOut);
+                        if (errOut.Length > 0) throw new Exception(errOut);
+                        estCostPerItem = Converters.ConvertToDollars((price == 0) ? 0 : (price / qty));
+                        break;
+                }
+
+                string sql = $"UPDATE General_Powder set weightlbs={newPounds}, weightgn={newGrains}, " +
+                    $"Price={price}, ePPP={estCostPerItem} where id={id}";
+
+                if (currentPricePerItem == estCostPerItem)
+                {
+                    sql = $"UPDATE General_Powder set weightlbs={newPounds}, weightgn={newGrains}, " +
+                    $"Price={NewPrice} where id={id}";
+                }
+                else if (NewPrice == 0 && newQty == 0)
+                {
+                    sql = $"UPDATE General_Powder set weightlbs=0, weightgn=0, Price=0, ePPP=0 where id={id}";
+                }
+
+                bAns = Database.Execute(databasePath, sql, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("UpdateQty", e);
+            }
+            return bAns;
+        }
+
+
+        /// <summary>
         /// Deletes the specified database path.
         /// </summary>
         /// <param name="databasePath">The database path.</param>

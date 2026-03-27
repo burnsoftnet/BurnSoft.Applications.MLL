@@ -463,6 +463,7 @@ namespace BurnSoft.Applications.MLL
             string sql = $"SELECT {column} FROM {table} where {column}='{value}'";
             return DataExists(databasePath, sql, out errOut);
         }
+
         /// <summary>
         /// Objects the exists in database.
         /// </summary>
@@ -474,6 +475,21 @@ namespace BurnSoft.Applications.MLL
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool ObjectExistsInDb(string databasePath, string column, string table, 
             int value, out string errOut)
+        {
+            string sql = $"SELECT {column} FROM {table} where {column}={value}";
+            return DataExists(databasePath, sql, out errOut);
+        }
+        /// <summary>
+        /// Objects the exists in database.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="column">The column.</param>
+        /// <param name="table">The table.</param>
+        /// <param name="value">The value.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool ObjectExistsInDb(string databasePath, string column, string table,
+           long value, out string errOut)
         {
             string sql = $"SELECT {column} FROM {table} where {column}={value}";
             return DataExists(databasePath, sql, out errOut);
@@ -507,6 +523,38 @@ namespace BurnSoft.Applications.MLL
             catch (Exception e)
             {
                 errOut = ErrorMessage("GetId", e);
+            }
+            return dAns;
+        }
+        /// <summary>
+        /// Gets the get numeric value.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="field">The field.</param>
+        /// <param name="sql">The SQL.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int32.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static int GetGetNumericValue(string databasePath, string field, string sql, out string errOut)
+        {
+            int dAns = 0;
+            errOut = "";
+            try
+            {
+                Database obj = new Database();
+                string con = ConnectionString(databasePath, out errOut);
+                DataTable dt = obj.GetData(con, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                foreach (DataRow dr in dt.Rows)
+                {
+                    dAns = Convert.ToInt32(dr[field]);
+                }
+
+                obj.Close(out _);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetGetNumericValue", e);
             }
             return dAns;
         }

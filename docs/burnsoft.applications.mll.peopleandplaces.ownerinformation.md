@@ -152,12 +152,12 @@ System.Int32.
 
 [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
 
-### **Add(String, String, String, String, String, String, String, String, String, Boolean, String, String, String, String, String&)**
+### **Add(String, String, String, String, String, String, String, String, String, Boolean, String, String, String, String, String&, Boolean)**
 
 Adds The owner Information to the database
 
 ```csharp
-public static bool Add(string databasePath, string name, string loadName, string address, string city, string state, string zipCode, string phone, string license, bool usePassword, string username, string password, string forgotPhrase, string forgotAnswer, String& errOut)
+public static bool Add(string databasePath, string name, string loadName, string address, string city, string state, string zipCode, string phone, string license, bool usePassword, string username, string password, string forgotPhrase, string forgotAnswer, String& errOut, bool preFluffEn)
 ```
 
 #### Parameters
@@ -207,17 +207,20 @@ The forgot answer.
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
 The error out.
 
+`preFluffEn` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+Fluff Content for SQL and encypt reqired sections
+
 #### Returns
 
 [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
 `true` if XXXX, `false` otherwise.
 
-### **Update(String, Int32, String, String, String, String, String, String, String, String, Boolean, String, String, String, String, String&)**
+### **Update(String, Int32, String, String, String, String, String, String, String, String, Boolean, String, String, String, String, String&, Boolean)**
 
 Updates the specified database path.
 
 ```csharp
-public static bool Update(string databasePath, int id, string name, string loadName, string address, string city, string state, string zipCode, string phone, string license, bool usePassword, string username, string password, string forgotPhrase, string forgotAnswer, String& errOut)
+public static bool Update(string databasePath, int id, string name, string loadName, string address, string city, string state, string zipCode, string phone, string license, bool usePassword, string username, string password, string forgotPhrase, string forgotAnswer, String& errOut, bool preFluffEn)
 ```
 
 #### Parameters
@@ -269,6 +272,9 @@ The forgot answer.
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
 The error out.
+
+`preFluffEn` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+Fluff Content for SQL and encypt reqired sections
 
 #### Returns
 

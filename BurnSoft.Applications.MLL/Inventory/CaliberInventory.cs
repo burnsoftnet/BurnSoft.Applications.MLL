@@ -187,6 +187,20 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             return sAns;
         }
+
+        /// <summary>
+        /// Get the Total count of the configuration used by caliber.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The caliber identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int64.</returns>
+        public static long TotalConfigurationUsedByCaliber(string databasePath, long id, out string errOut)
+        {
+            string sql = $"SELECT Count(*) as Total from qry_CFG_SR_PowderList where MyCalID={id}";
+            return Database.GetCount(databasePath, sql, out errOut);
+        }
+
         /// <summary>
         /// Gets the details.
         /// </summary>

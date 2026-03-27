@@ -349,6 +349,24 @@ The value.
 [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 System.String.
 
+### **ShotgunHullDataData(List&lt;ShotgunHullData&gt;)**
+
+Shotguns the hull data data.
+
+```csharp
+public static string ShotgunHullDataData(List<ShotgunHullData> value)
+```
+
+#### Parameters
+
+`value` [List&lt;ShotgunHullData&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+The value.
+
+#### Returns
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+System.String.
+
 ### **PrimerListingsData(List&lt;PrimerListings&gt;)**
 
 Primers the listings data.
@@ -468,6 +486,24 @@ public static string ShotgunPowderListingsData(List<ShotgunPowderListings> value
 #### Parameters
 
 `value` [List&lt;ShotgunPowderListings&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+The value.
+
+#### Returns
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+System.String.
+
+### **ShotgunShotListingsData(List&lt;ShotgunShotListings&gt;)**
+
+Shotguns the shot listings data.
+
+```csharp
+public static string ShotgunShotListingsData(List<ShotgunShotListings> value)
+```
+
+#### Parameters
+
+`value` [List&lt;ShotgunShotListings&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
 The value.
 
 #### Returns

@@ -120,12 +120,12 @@ public string BallisticCoeffcient { get; set; }
 [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The ballistic coeffcient.
 
-### **BullerType**
+### **BulletType**
 
 Gets or sets the type of the buller. Using the Bullet_Type column
 
 ```csharp
-public int BullerType { get; set; }
+public int BulletType { get; set; }
 ```
 
 #### Property Value

@@ -257,9 +257,9 @@ namespace BurnSoft.Applications.MLL.Inventory
             {
                 BSOtherObjects o = new BSOtherObjects();
                 string sql = $"INSERT INTO List_SG_Bushing_Powder(Manufacturer,sName,sCharge," +
-                    $"sType,PowderName) VALUES(" +
+                    $"sType,PowderName, sync_lastupdate) VALUES(" +
                     $"'{o.FC(manufacturer)}', '{o.FC(name)}', '{o.FC(charge)}', " +
-                    $"'{type}', '{powderName}')";
+                    $"'{type}', '{powderName}', Now())";
 
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
@@ -292,7 +292,7 @@ namespace BurnSoft.Applications.MLL.Inventory
                 BSOtherObjects o = new BSOtherObjects();
                 string sql = $"UPDATE List_SG_Bushing_Powder set Manufacturer='{o.FC(manufacturer)}'," +
                     $"sName='{o.FC(name)}',sCharge='{o.FC(charge)}', sType='{type}', " +
-                    $"PowderName='{powderName}' where id={id}";
+                    $"PowderName='{powderName}', sync_lastupdate=Now() where id={id}";
 
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }

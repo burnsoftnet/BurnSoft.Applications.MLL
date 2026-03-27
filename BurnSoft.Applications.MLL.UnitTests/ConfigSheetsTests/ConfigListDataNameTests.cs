@@ -23,7 +23,9 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
         /// The database path
         /// </summary>
         private string _databasePath;
-
+        /// <summary>
+        /// The existing configuration name
+        /// </summary>
         private string _existingConfigName;
         /// <summary>
         /// The existing identifier
@@ -33,15 +35,29 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
         /// The configuration name
         /// </summary>
         private string _ConfigName;
-
+        /// <summary>
+        /// The copy configuration name
+        /// </summary>
+        private string _copyConfigName;
+        /// <summary>
+        /// The is personal
+        /// </summary>
         private bool _isPersonal;
-
+        /// <summary>
+        /// The is shotgun
+        /// </summary>
         private bool _isShotgun;
-
+        /// <summary>
+        /// The notes
+        /// </summary>
         private string _notes;
-
+        /// <summary>
+        /// The is active
+        /// </summary>
         private bool _isActive;
-
+        /// <summary>
+        /// The is favorite
+        /// </summary>
         private bool _isFavorite;
 
         /// <summary>
@@ -56,11 +72,20 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
             _existingConfigName = "HL8007U";
             _existingId = 13;
             _ConfigName = "Unit Test 9mm";
+            _copyConfigName = $"Copy from {_ConfigName}";
             _isPersonal = true;  ///Replace with Function
             _isShotgun = false;
             _notes = "Competition Load Testing";
             _isActive = true;
             _isFavorite = true;
+        }
+
+        private void AddConfigNameIfNotExists(string name)
+        {
+            if (!ConfigListDataName.DataExists(_databasePath, name, out _))
+            {
+                ConfigListDataName.Add(_databasePath, name, true, false, "  ", true, true, out _);
+            }
         }
 
         private void AddTestConfigNameExists()
@@ -81,11 +106,12 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
             }
         }
 
-        private void PrintTestConfigNames(string BeforeAfter = "BEFORE")
+        private void PrintTestConfigNames(string BeforeAfter = "BEFORE", string name = "")
         {
+            if (name.Length == 0) name = _ConfigName;
             TestContext.WriteLine($"===========${BeforeAfter}===========");
             TestContext.WriteLine($"");
-            List<ConfigNameList> value = ConfigListDataName.GetDetails(_databasePath, _ConfigName, out _errOut);
+            List<ConfigNameList> value = ConfigListDataName.GetDetails(_databasePath, name, out _errOut);
             TestContext.WriteLine(DebugHelpers.PrintListValues.ConfigNameListData(value));
             TestContext.WriteLine($"");
         }
@@ -132,6 +158,26 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
         }
 
         [TestMethod, TestCategory("Config Sheets - Config Name Data")]
+        public void CopyConfigTest()
+        {
+            bool bAns = false;
+            try
+            {
+                AddTestConfigNameExists();
+                bool value = ConfigListDataName.CopyConfig(_databasePath, _copyConfigName, _existingId, out _errOut);
+                if (_errOut.Length > 0) throw new Exception(_errOut);
+                TestContext.WriteLine($"VALUE: {value}");
+                bAns = true;
+            }
+            catch (Exception ex)
+            {
+                TestContext.WriteLine(ex.Message);
+            }
+            General.HasTrueValue(bAns, _errOut);
+        }
+
+
+        [TestMethod, TestCategory("Config Sheets - Config Name Data")]
         public void UpdateTest()
         {
             bool bAns = false;
@@ -145,6 +191,28 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine($"VALUE: {value}");
                 PrintTestConfigNames("AFTER");
+                bAns = true;
+            }
+            catch (Exception ex)
+            {
+                TestContext.WriteLine(ex.Message);
+            }
+            General.HasTrueValue(bAns, _errOut);
+        }
+
+        [TestMethod, TestCategory("Config Sheets - Config Name Data")]
+        public void RenameTest()
+        {
+            bool bAns = false;
+            try
+            {
+                AddTestConfigNameExists();
+                PrintTestConfigNames();
+                long id = ConfigListDataName.GetId(_databasePath, _ConfigName, out _);
+                bool value = ConfigListDataName.Rename(_databasePath, id, $"(COPY) - {_ConfigName}", out _errOut);
+                if (_errOut.Length > 0) throw new Exception(_errOut);
+                TestContext.WriteLine($"VALUE: {value}");
+                PrintTestConfigNames("AFTER", $"(COPY) - {_ConfigName}");
                 bAns = true;
             }
             catch (Exception ex)
@@ -220,6 +288,24 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine(DebugHelpers.PrintListValues.ConfigNameListData(value));
                 bAns = true;
+            }
+            catch (Exception ex)
+            {
+                TestContext.WriteLine(ex.Message);
+            }
+            General.HasTrueValue(bAns, _errOut);
+        }
+
+        [TestMethod, TestCategory("Config Sheets - Config Name Data")]
+        public void GetNameTest()
+        {
+            bool bAns = false;
+            try
+            {
+                String value = ConfigListDataName.GetName(_databasePath, _existingId, out _errOut);
+                if (_errOut.Length > 0) throw new Exception(_errOut);
+                TestContext.WriteLine($"VALUE: {value}");
+                bAns = (value.Length > 0);
             }
             catch (Exception ex)
             {

@@ -1,4 +1,5 @@
-﻿using BurnSoft.Applications.MLL.Types;
+﻿using BurnSoft.Applications.MLL.Helpers;
+using BurnSoft.Applications.MLL.Types;
 using BurnSoft.Universal;
 using System;
 using System.Collections.Generic;
@@ -299,6 +300,39 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
             return bAns;
         }
         /// <summary>
+        /// Copies the configuration settings from an existing to a new config.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="newConfigId">The new configuration identifier.</param>
+        /// <param name="oldConfigId">The old configuration identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool CopyConfig(string databasePath, int newConfigId, long oldConfigId, out string errOut)
+        {
+            errOut = "";
+            bool bAns = false;
+            try
+            {
+                List<ConfigListDataShotgunData> lst = GetDetails(databasePath, oldConfigId, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                foreach (ConfigListDataShotgunData d in lst)
+                {
+                    if (!Add(databasePath, newConfigId, d.AmmoTypeId, d.CaliberId, d.PrimerId, d.CaseId, 
+                        d.ShotWeight, d.ShotWeightText, d.ShotSize, d.Bushing, d.Wad, d.ShotChargeLoad, 
+                        GeneralHelpers.FluffContent(d.Source), d.GunId, d.IsPersonal, d.ListTypeId, 
+                        d.BushingId, d.ChargeBarId, out errOut)) throw new Exception(errOut);
+                }
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("CopyConfig", e);
+            }
+            return bAns;
+        }
+
+        /// <summary>
         /// Updates the specified database path.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
@@ -367,6 +401,29 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
             catch (Exception e)
             {
                 errOut = ErrorMessage("Delete", e);
+            }
+            return bAns;
+        }
+
+        /// <summary>
+        /// Deletes the by configuration identifier which will delete all the powder using the config id.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool DeleteByConfigId(string databasePath, long id, out string errOut)
+        {
+            errOut = "";
+            bool bAns = false;
+            try
+            {
+                string sql = $"DELETE from Config_List_Data_SG where CLNID={id}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("DeleteByConfigId", e);
             }
             return bAns;
         }

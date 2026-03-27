@@ -387,18 +387,19 @@ namespace BurnSoft.Applications.MLL.Global
                         myReg = Registry.CurrentUser.CreateSubKey(strValue);
                     foreach (RegistrySettings s in settings)
                     {
+                        if (s.LastSucBackup.Length > 0) myReg.SetValue("Successful", s.LastSucBackup);
                         myReg.SetValue("TrackHistoryDays", s.TrackHistoryDays);
                         myReg.SetValue("TrackHistory", s.TrackHistory);
-                        myReg.SetValue("NumberFormat", s.NumberFormat);
+                        if (s.NumberFormat.Length > 0) myReg.SetValue("NumberFormat", s.NumberFormat);
                         myReg.SetValue("AutoUpdate", s.AutoUpdate);
                         myReg.SetValue("AlertOnBackUp", s.AlertOnBackUp);
                         myReg.SetValue("BackupOnExit", s.BackupOnExit);
-                        myReg.SetValue("ConfigSort", s.ConfigSort);
+                        if (s.ConfigSort.Length > 0) myReg.SetValue("ConfigSort", s.ConfigSort);
                         myReg.SetValue("UseOrgImage", s.UseOrgImage);
                         myReg.SetValue("LOADERTYPE_SHOTGUN", s.LoaderTypeShotGun);
                         myReg.SetValue("IndvReports", s.IndvReports);
                         myReg.SetValue("LOADERTYPE_NONSHOTGUN", s.LoaderTypeMetalic);
-                        myReg.SetValue("DefaultList", s.DefaultList);
+                        if (s.DefaultList.Length > 0) myReg.SetValue("DefaultList", s.DefaultList);
                         myReg.SetValue("VIEW_FPS", s.ViewFps);
                         myReg.SetValue("VIEW_CUPS", s.ViewCups);
                         myReg.Close();

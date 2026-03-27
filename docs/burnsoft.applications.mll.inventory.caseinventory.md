@@ -306,6 +306,45 @@ The error out.
 [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
 `true` if XXXX, `false` otherwise.
 
+### **UpdateQty(String, Int64, Int32, Double, Double, Int32, Double, String&)**
+
+Updates the qty.
+
+```csharp
+public static bool UpdateQty(string databasePath, long id, int currentQty, double currentPrice, double currentPricePerItem, int newQty, double NewPrice, String& errOut)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`id` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
+The identifier.
+
+`currentQty` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+The current qty.
+
+`currentPrice` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
+The current price.
+
+`currentPricePerItem` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
+The current price per item.
+
+`newQty` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+The new qty.
+
+`NewPrice` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
+Creates new price.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+`true` if XXXX, `false` otherwise.
+
 ### **Delete(String, Int64, String&)**
 
 Deletes the specified database path.

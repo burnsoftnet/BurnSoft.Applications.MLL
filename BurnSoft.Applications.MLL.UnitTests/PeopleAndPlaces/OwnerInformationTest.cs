@@ -44,6 +44,7 @@ namespace BurnSoft.Applications.MLL.UnitTests.PeopleAndPlaces
             bool bAns = false;
             try
             {
+                AddOwner();
                 List<PersonalInformation> value = OwnerInformation.GetAllData(_databasePath, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine(DebugHelpers.PrintListValues.PersonalInformationData(value));
@@ -64,9 +65,11 @@ namespace BurnSoft.Applications.MLL.UnitTests.PeopleAndPlaces
 
         private bool AddOwner()
         {
-            return OwnerInformation.Add(_databasePath, "John Doe", "Ky Ballistics", "234 there", "Lexington",
+            if (!OwnerInformation.DataExists(_databasePath, out _errOut))
+                return OwnerInformation.Add(_databasePath, "John Doe", "Ky Ballistics", "234 there", "Lexington",
                     "ky", "40601", "555-867-5309", "MLKY39394858", false, "johnedoe", "21232ksksdfj",
-                    "forgot it", "i did", out _errOut);
+                    "forgot it", "i did", out _errOut, true);
+            else return true;
         }
 
         [TestMethod, TestCategory("Personal Information")]
@@ -171,7 +174,7 @@ namespace BurnSoft.Applications.MLL.UnitTests.PeopleAndPlaces
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 bAns = OwnerInformation.Update(_databasePath, id, "John Doe", "Ky Ballistics", "234 there", "Lexington",
                     "ky", "40601", "555-867-5309", "MLKY38484888", true, "johnedoe", "21232ksksdfj",
-                    "forgot it", "i did", out _errOut);
+                    "forgot it", "i did", out _errOut, true);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine("======================================");
                 TestContext.WriteLine("AFTER");

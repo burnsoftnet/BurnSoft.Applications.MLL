@@ -406,6 +406,36 @@ The error out.
 [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
 `true` if XXXX, `false` otherwise.
 
+### **ObjectExistsInDb(String, String, String, Int64, String&)**
+
+Objects the exists in database.
+
+```csharp
+public static bool ObjectExistsInDb(string databasePath, string column, string table, long value, String& errOut)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`column` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The column.
+
+`table` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The table.
+
+`value` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
+The value.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+`true` if XXXX, `false` otherwise.
+
 ### **GetId(String, String, String&, String)**
 
 Gets the identifier.
@@ -432,6 +462,37 @@ The field.
 
 [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
 System.Int64.
+
+#### Exceptions
+
+[Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
+
+### **GetGetNumericValue(String, String, String, String&)**
+
+Gets the get numeric value.
+
+```csharp
+public static int GetGetNumericValue(string databasePath, string field, string sql, String& errOut)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`field` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The field.
+
+`sql` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The SQL.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+System.Int32.
 
 #### Exceptions
 

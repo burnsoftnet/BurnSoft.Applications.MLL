@@ -67,6 +67,9 @@
     <Compile Include="ConfigSheets\ConfigListDataPowder.cs" />
     <Compile Include="ConfigSheets\ConfigListDataPowderShotGun.cs" />
     <Compile Include="ConfigSheets\ConfigListDataShotgun.cs" />
+    <Compile Include="ConfigSheets\ConfigListGeneral.cs" />
+    <Compile Include="ConfigSheets\QueryConfigCaliberMetallic.cs" />
+    <Compile Include="ConfigSheets\QueryConfigCaliberShotgun.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="DebugHelpers\PrintListValues.cs" />
     <Compile Include="Enums\PowderWeightType.cs" />
@@ -75,6 +78,8 @@
     <Compile Include="Global\GeneralSettings.cs" />
     <Compile Include="Global\MyRegistry.cs" />
     <Compile Include="Global\Wishlists.cs" />
+    <Compile Include="Inventory\ShotgunHullInventory.cs" />
+    <Compile Include="Inventory\ShotgunShotInventory.cs" />
     <Compile Include="Search\SyncTables.cs" />
     <Compile Include="Global\WeightValues.cs" />
     <Compile Include="Helpers\Converters.cs" />
@@ -123,10 +128,13 @@
     <Compile Include="Types\PowderListing.cs" />
     <Compile Include="Types\PrimerListings.cs" />
     <Compile Include="Types\PrimerTypeListings.cs" />
+    <Compile Include="Types\QueryConfigCaliberData.cs" />
     <Compile Include="Types\RegistrySettings.cs" />
     <Compile Include="Types\SearchFieldsData.cs" />
     <Compile Include="Types\ShotgunBushingListings.cs" />
+    <Compile Include="Types\ShotgunHullData.cs" />
     <Compile Include="Types\ShotgunPowderListings.cs" />
+    <Compile Include="Types\ShotgunShotListings.cs" />
     <Compile Include="Types\SyncTablesData.cs" />
     <Compile Include="Types\WishlistData.cs" />
   </ItemGroup>
