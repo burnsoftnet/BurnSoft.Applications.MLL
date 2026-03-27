@@ -410,7 +410,7 @@ namespace BurnSoft.Applications.MLL.Inventory
         /// <param name="newQty">The new qty.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public static bool UpdateQty(string databasePath, long id, int newQty, out string errOut)
+        public static bool UpdateQty(string databasePath, long id, long newQty, out string errOut)
         {
             errOut = "";
             bool bAns = false;
