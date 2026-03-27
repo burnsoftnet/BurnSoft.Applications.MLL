@@ -1,11 +1,6 @@
 ﻿using BurnSoft.Applications.MLL.AutoFill;
 using BurnSoft.Applications.MLL.Global;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BurnSoft.Applications.MLL.Inventory
 {
@@ -92,16 +87,16 @@ namespace BurnSoft.Applications.MLL.Inventory
             errOut = "";
             try
             {
-                long newBulletQty = bulletsInStockQty - qtyMade;
-                long newPrimer = primersInStockQty - qtyMade;
-                long newCase = caseInStockQty - qtyMade;
-                double newPowderGrains = powderInStockGrains - (midRangePowderUsed * qtyMade);
-                double newPowderPounds = Math.Round(newPowderGrains / WeightValues.WEIGHT_GRAINS_1LBS, 3);
+                //long newBulletQty = bulletsInStockQty - qtyMade;
+                //long newPrimer = primersInStockQty - qtyMade;
+                //long newCase = caseInStockQty - qtyMade;
+                //double newPowderGrains = powderInStockGrains - (midRangePowderUsed * qtyMade);
+                //double newPowderPounds = Math.Round(newPowderGrains / WeightValues.WEIGHT_GRAINS_1LBS, 3);
 
-                if (!BulletsInventory.UpdateQty(databasePath, bulletId, newBulletQty, out errOut)) throw new Exception(errOut);
-                if (!PrimerInventory.UpdateQty(databasePath, primerId, newPrimer, out errOut)) throw new Exception(errOut);
-                if (!CaseInventory.UpdateQty(databasePath, caseId, newCase, out errOut)) throw new Exception(errOut);
-                if (!PowderInventory.UpdateQty(databasePath, perfferedPowderId, newPowderPounds, newPowderGrains, 
+                if (!UpdateBullets(databasePath, bulletId, bulletsInStockQty, qtyMade, out errOut)) throw new Exception(errOut);
+                if (!UpdatePrimers(databasePath, primerId, primersInStockQty, qtyMade, out errOut)) throw new Exception(errOut);
+                if (!UpdateCases(databasePath, caseId, caseInStockQty, qtyMade, out errOut)) throw new Exception(errOut);
+                if (!UpdatePowder(databasePath, perfferedPowderId, powderInStockGrains, midRangePowderUsed, qtyMade, 
                     out errOut)) throw new Exception(errOut);
                 bAns = true;
             }
@@ -156,16 +151,16 @@ namespace BurnSoft.Applications.MLL.Inventory
                     //QL = "UPDATE List_SG_ShotType_Details set weight=" & dNewShotLBS & _
                     //        ", ounces=" & dNewShotOz & ", grams=" & dNewShotGrans & " where ID=" & BID
                 }
-                long newPrimer = primersInStockQty - qtyMade;
-                long newCase = caseInStockQty - qtyMade;
-                double newPowderGrains = powderInStockGrains - (midRangePowderUsed * qtyMade);
-                double newPowderPounds = Math.Round(newPowderGrains / WeightValues.WEIGHT_GRAINS_1LBS, 3);
-                long newWad = wadsInStock - qtyMade;
+                //long newPrimer = primersInStockQty - qtyMade;
+                //long newCase = caseInStockQty - qtyMade;
+                //double newPowderGrains = powderInStockGrains - (midRangePowderUsed * qtyMade);
+                //double newPowderPounds = Math.Round(newPowderGrains / WeightValues.WEIGHT_GRAINS_1LBS, 3);
+                //long newWad = wadsInStock - qtyMade;
 
                 // TODO: #36 Added Wad Update Function once it is available.
-                if (!PrimerInventory.UpdateQty(databasePath, primerId, newPrimer, out errOut)) throw new Exception(errOut);
-                if (!CaseInventory.UpdateQty(databasePath, caseId, newCase, out errOut)) throw new Exception(errOut);
-                if (!PowderInventory.UpdateQty(databasePath, perfferedPowderId, newPowderPounds, newPowderGrains,
+                if (!UpdatePrimers(databasePath, primerId, primersInStockQty, qtyMade, out errOut)) throw new Exception(errOut);
+                if (!UpdateHulls(databasePath, caseId, caseInStockQty, qtyMade, out errOut)) throw new Exception(errOut);
+                if (!UpdatePowder(databasePath, perfferedPowderId, powderInStockGrains, midRangePowderUsed, qtyMade,
                     out errOut)) throw new Exception(errOut);
                 bAns = true;
             }
@@ -175,7 +170,46 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             return bAns;
         }
-
+        /// <summary>
+        /// Updates the powder.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="powderInStockGrains">The powder in stock grains.</param>
+        /// <param name="midRangePowderUsed">The mid range powder used.</param>
+        /// <param name="qtyMade">The qty made.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        internal static bool UpdatePowder(string databasePath, long id, double powderInStockGrains, 
+            double midRangePowderUsed, long qtyMade, out string errOut)
+        {
+            bool bAns = false;
+            errOut = "";
+            try
+            {
+                double newPowderGrains = powderInStockGrains - (midRangePowderUsed * qtyMade);
+                double newPowderPounds = Math.Round(newPowderGrains / WeightValues.WEIGHT_GRAINS_1LBS, 3);
+                if (!PowderInventory.UpdateQty(databasePath, id, newPowderPounds, newPowderGrains, 
+                    out errOut)) throw new Exception(errOut);
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("UpdatePowder", e);
+            }
+            return bAns;
+        }
+        /// <summary>
+        /// Updates the primers.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="qty">The qty.</param>
+        /// <param name="qtyMade">The qty made.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
         internal static bool UpdatePrimers(string databasePath, long id, long qty, long qtyMade, out string errOut)
         {
             bool bAns = false;
@@ -192,7 +226,16 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             return bAns;
         }
-
+        /// <summary>
+        /// Updates the cases.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="qty">The qty.</param>
+        /// <param name="qtyMade">The qty made.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
         internal static bool UpdateCases(string databasePath, long id, long qty, long qtyMade, out string errOut)
         {
             bool bAns = false;
@@ -205,7 +248,59 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage("UpdatePrimers", e);
+                errOut = ErrorMessage("UpdateCases", e);
+            }
+            return bAns;
+        }
+        /// <summary>
+        /// Updates the hulls.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="qty">The qty.</param>
+        /// <param name="qtyMade">The qty made.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        internal static bool UpdateHulls(string databasePath, long id, long qty, long qtyMade, out string errOut)
+        {
+            bool bAns = false;
+            errOut = "";
+            try
+            {
+                long newQty = qty - qtyMade;
+                if (!ShotgunHullInventory.UpdateQty(databasePath, id, (int)newQty, out errOut)) throw new Exception(errOut);
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("UpdateHulls", e);
+            }
+            return bAns;
+        }
+        /// <summary>
+        /// Updates the bullets.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="qty">The qty.</param>
+        /// <param name="qtyMade">The qty made.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        internal static bool UpdateBullets(string databasePath, long id, long qty, long qtyMade, out string errOut)
+        {
+            bool bAns = false;
+            errOut = "";
+            try
+            {
+                long newQty = qty - qtyMade;
+                if (!BulletsInventory.UpdateQty(databasePath, id, newQty, out errOut)) throw new Exception(errOut);
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("UpdateBullets", e);
             }
             return bAns;
         }
