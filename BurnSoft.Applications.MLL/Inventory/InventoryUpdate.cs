@@ -1,7 +1,9 @@
-﻿using BurnSoft.Applications.MLL.Global;
+﻿using BurnSoft.Applications.MLL.AutoFill;
+using BurnSoft.Applications.MLL.Global;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -67,7 +69,7 @@ namespace BurnSoft.Applications.MLL.Inventory
 
         #endregion            
         /// <summary>
-        /// Metallics the update qty for items used in make laoded ammuniation process
+        /// Metallics the update qty for items used in make laoded ammunition process
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="qtyMade">The qty made.</param>
@@ -101,11 +103,109 @@ namespace BurnSoft.Applications.MLL.Inventory
                 if (!CaseInventory.UpdateQty(databasePath, caseId, newCase, out errOut)) throw new Exception(errOut);
                 if (!PowderInventory.UpdateQty(databasePath, perfferedPowderId, newPowderPounds, newPowderGrains, 
                     out errOut)) throw new Exception(errOut);
-
+                bAns = true;
             }
             catch (Exception e)
             {
                 errOut = ErrorMessage("MetallicUpdate", e);
+            }
+            return bAns;
+        }
+        /// <summary>
+        /// Shotguns the update qty for items used in make laoded ammunition process
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="qtyMade">The qty made.</param>
+        /// <param name="shotDetailsId">The shot details identifier.</param>
+        /// <param name="shotDetailsQty">The shot details qty.</param>
+        /// <param name="isSlug">if set to <c>true</c> [is slug].</param>
+        /// <param name="shotDetailsShotOz">The shot details shot oz.</param>
+        /// <param name="shotDetailsShotGrains">The shot details shot grains.</param>
+        /// <param name="shotDetailsMidRangeLoad">The shot details mid range load.</param>
+        /// <param name="wadsInStock">The wads in stock.</param>
+        /// <param name="wadsId">The wads identifier.</param>
+        /// <param name="primersInStockQty">The primers in stock qty.</param>
+        /// <param name="primerId">The primer identifier.</param>
+        /// <param name="caseInStockQty">The case in stock qty.</param>
+        /// <param name="caseId">The case identifier.</param>
+        /// <param name="powderInStockGrains">The powder in stock grains.</param>
+        /// <param name="perfferedPowderId">The perffered powder identifier.</param>
+        /// <param name="midRangePowderUsed">The mid range powder used.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool ShotgunUpdate(string databasePath, long qtyMade, long shotDetailsId, long shotDetailsQty, 
+            bool isSlug, double shotDetailsShotOz, double shotDetailsShotGrains, double shotDetailsMidRangeLoad, 
+            long wadsInStock, long wadsId, long primersInStockQty, long primerId, long caseInStockQty, 
+            long caseId, double powderInStockGrains, long perfferedPowderId, double midRangePowderUsed, out string errOut)
+        {
+            bool bAns = false;
+            errOut = "";
+            try
+            {
+                if (isSlug)
+                {
+                    long newShotDetails = shotDetailsQty * qtyMade;
+                    // TODO: #36  UPDATE List_SG_ShotType_Details set Qty=" & newShotDetails & " where ID=" & shotDetailsId
+                }
+                else
+                {
+                    double newShotOz = shotDetailsShotOz - (shotDetailsMidRangeLoad * qtyMade);
+                    double newShotGrains = newShotOz * WeightValues.WEIGHT_GRAMS_OZ;
+                    double newShotPounds = newShotOz / WeightValues.WEIGHT_OZ_1LBS;
+                    //QL = "UPDATE List_SG_ShotType_Details set weight=" & dNewShotLBS & _
+                    //        ", ounces=" & dNewShotOz & ", grams=" & dNewShotGrans & " where ID=" & BID
+                }
+                long newPrimer = primersInStockQty - qtyMade;
+                long newCase = caseInStockQty - qtyMade;
+                double newPowderGrains = powderInStockGrains - (midRangePowderUsed * qtyMade);
+                double newPowderPounds = Math.Round(newPowderGrains / WeightValues.WEIGHT_GRAINS_1LBS, 3);
+                long newWad = wadsInStock - qtyMade;
+
+                // TODO: #36 Added Wad Update Function once it is available.
+                if (!PrimerInventory.UpdateQty(databasePath, primerId, newPrimer, out errOut)) throw new Exception(errOut);
+                if (!CaseInventory.UpdateQty(databasePath, caseId, newCase, out errOut)) throw new Exception(errOut);
+                if (!PowderInventory.UpdateQty(databasePath, perfferedPowderId, newPowderPounds, newPowderGrains,
+                    out errOut)) throw new Exception(errOut);
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("ShotgunUpdate", e);
+            }
+            return bAns;
+        }
+
+        internal static bool UpdatePrimers(string databasePath, long id, long qty, long qtyMade, out string errOut)
+        {
+            bool bAns = false;
+            errOut = "";
+            try
+            {
+                long newQty = qty - qtyMade;
+                if (!PrimerInventory.UpdateQty(databasePath, id, newQty, out errOut)) throw new Exception(errOut);
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("UpdatePrimers", e);
+            }
+            return bAns;
+        }
+
+        internal static bool UpdateCases(string databasePath, long id, long qty, long qtyMade, out string errOut)
+        {
+            bool bAns = false;
+            errOut = "";
+            try
+            {
+                long newQty = qty - qtyMade;
+                if (!CaseInventory.UpdateQty(databasePath, id, newQty, out errOut)) throw new Exception(errOut);
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("UpdatePrimers", e);
             }
             return bAns;
         }
