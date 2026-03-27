@@ -297,6 +297,24 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
         }
 
         [TestMethod, TestCategory("Config Sheets - Config Name Data")]
+        public void GetNameTest()
+        {
+            bool bAns = false;
+            try
+            {
+                String value = ConfigListDataName.GetName(_databasePath, _existingId, out _errOut);
+                if (_errOut.Length > 0) throw new Exception(_errOut);
+                TestContext.WriteLine($"VALUE: {value}");
+                bAns = (value.Length > 0);
+            }
+            catch (Exception ex)
+            {
+                TestContext.WriteLine(ex.Message);
+            }
+            General.HasTrueValue(bAns, _errOut);
+        }
+
+        [TestMethod, TestCategory("Config Sheets - Config Name Data")]
         public void DataExistsTest()
         {
             bool bAns = false;
