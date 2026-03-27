@@ -140,6 +140,29 @@ namespace BurnSoft.Applications.MLL.UnitTests.LoadersLog
         }
 
         [TestMethod, TestCategory("Inventory Listings - Ammunition")]
+        public void IsAlreadyListedTest()
+        {
+            bool bAns = false;
+            try
+            {
+                AddTestDataExists();
+                long id = LoadersLogAmmunition.GetId(_databasePath, _manufacturer, _name, out _errOut);
+                bool value = LoadersLogAmmunition.IsAlreadyListed(_databasePath, _manufacturer, _name, 
+                    _caliber, _grain, _jacket, out _errOut, out var qty, out var ammoId);
+                TestContext.WriteLine($"VALUE: {value}");
+                TestContext.WriteLine($"qty: {qty}");
+                TestContext.WriteLine($"ammoId: {ammoId}");
+                if (_errOut.Length > 0) throw new Exception(_errOut);
+                bAns = true;
+            }
+            catch (Exception ex)
+            {
+                TestContext.WriteLine(ex.Message);
+            }
+            General.HasTrueValue(bAns, _errOut);
+        }
+
+        [TestMethod, TestCategory("Inventory Listings - Ammunition")]
         public void UpdateTest()
         {
             bool bAns = false;
