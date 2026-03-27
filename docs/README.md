@@ -40,6 +40,10 @@
 
 [ConfigListGeneral](./burnsoft.applications.mll.configsheets.configlistgeneral.md)
 
+[QueryConfigCaliberMetallic](./burnsoft.applications.mll.configsheets.queryconfigcalibermetallic.md)
+
+[QueryConfigCaliberShotgun](./burnsoft.applications.mll.configsheets.queryconfigcalibershotgun.md)
+
 ## BurnSoft.Applications.MLL.DebugHelpers
 
 [PrintListValues](./burnsoft.applications.mll.debughelpers.printlistvalues.md)
@@ -81,6 +85,8 @@
 [CaseInventory](./burnsoft.applications.mll.inventory.caseinventory.md)
 
 [EquipmentInventory](./burnsoft.applications.mll.inventory.equipmentinventory.md)
+
+[InventoryUpdate](./burnsoft.applications.mll.inventory.inventoryupdate.md)
 
 [PowderInventory](./burnsoft.applications.mll.inventory.powderinventory.md)
 
@@ -167,6 +173,8 @@
 [PrimerListings](./burnsoft.applications.mll.types.primerlistings.md)
 
 [PrimerTypeListings](./burnsoft.applications.mll.types.primertypelistings.md)
+
+[QueryConfigCaliberData](./burnsoft.applications.mll.types.queryconfigcaliberdata.md)
 
 [RegistrySettings](./burnsoft.applications.mll.types.registrysettings.md)
 

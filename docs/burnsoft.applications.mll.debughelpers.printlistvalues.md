@@ -205,6 +205,42 @@ The value.
 [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 System.String.
 
+### **QueryConfigCaliberMetallicDataData(List&lt;QueryConfigCaliberData&gt;)**
+
+Queries the configuration caliber metallic data data.
+
+```csharp
+public static string QueryConfigCaliberMetallicDataData(List<QueryConfigCaliberData> value)
+```
+
+#### Parameters
+
+`value` [List&lt;QueryConfigCaliberData&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+The value.
+
+#### Returns
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+System.String.
+
+### **QueryConfigCaliberDataData(List&lt;QueryConfigCaliberData&gt;)**
+
+Queries the configuration caliber shotgun data data.
+
+```csharp
+public static string QueryConfigCaliberDataData(List<QueryConfigCaliberData> value)
+```
+
+#### Parameters
+
+`value` [List&lt;QueryConfigCaliberData&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+The value.
+
+#### Returns
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+System.String.
+
 ### **ConfigListPowderDataData(List&lt;ConfigListPowderData&gt;)**
 
 Configurations the list powder data data.
