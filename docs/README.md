@@ -102,6 +102,8 @@
 
 [ShotgunShotInventory](./burnsoft.applications.mll.inventory.shotgunshotinventory.md)
 
+[WadInventory](./burnsoft.applications.mll.inventory.wadinventory.md)
+
 ## BurnSoft.Applications.MLL.LoadersLog
 
 [Firearms](./burnsoft.applications.mll.loaderslog.firearms.md)
@@ -189,5 +191,7 @@
 [ShotgunShotListings](./burnsoft.applications.mll.types.shotgunshotlistings.md)
 
 [SyncTablesData](./burnsoft.applications.mll.types.synctablesdata.md)
+
+[WadData](./burnsoft.applications.mll.types.waddata.md)
 
 [WishlistData](./burnsoft.applications.mll.types.wishlistdata.md)

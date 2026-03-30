@@ -403,6 +403,24 @@ The value.
 [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 System.String.
 
+### **WadDataData(List&lt;WadData&gt;)**
+
+Wads the data data.
+
+```csharp
+public static string WadDataData(List<WadData> value)
+```
+
+#### Parameters
+
+`value` [List&lt;WadData&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+The value.
+
+#### Returns
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+System.String.
+
 ### **PrimerListingsData(List&lt;PrimerListings&gt;)**
 
 Primers the listings data.
