@@ -1,5 +1,4 @@
-﻿using BurnSoft.Applications.MLL.AutoFill;
-using BurnSoft.Applications.MLL.Global;
+﻿using BurnSoft.Applications.MLL.Global;
 using System;
 
 namespace BurnSoft.Applications.MLL.Inventory
@@ -87,12 +86,6 @@ namespace BurnSoft.Applications.MLL.Inventory
             errOut = "";
             try
             {
-                //long newBulletQty = bulletsInStockQty - qtyMade;
-                //long newPrimer = primersInStockQty - qtyMade;
-                //long newCase = caseInStockQty - qtyMade;
-                //double newPowderGrains = powderInStockGrains - (midRangePowderUsed * qtyMade);
-                //double newPowderPounds = Math.Round(newPowderGrains / WeightValues.WEIGHT_GRAINS_1LBS, 3);
-
                 if (!UpdateBullets(databasePath, bulletId, bulletsInStockQty, qtyMade, out errOut)) throw new Exception(errOut);
                 if (!UpdatePrimers(databasePath, primerId, primersInStockQty, qtyMade, out errOut)) throw new Exception(errOut);
                 if (!UpdateCases(databasePath, caseId, caseInStockQty, qtyMade, out errOut)) throw new Exception(errOut);
@@ -151,13 +144,6 @@ namespace BurnSoft.Applications.MLL.Inventory
                     //QL = "UPDATE List_SG_ShotType_Details set weight=" & dNewShotLBS & _
                     //        ", ounces=" & dNewShotOz & ", grams=" & dNewShotGrans & " where ID=" & BID
                 }
-                //long newPrimer = primersInStockQty - qtyMade;
-                //long newCase = caseInStockQty - qtyMade;
-                //double newPowderGrains = powderInStockGrains - (midRangePowderUsed * qtyMade);
-                //double newPowderPounds = Math.Round(newPowderGrains / WeightValues.WEIGHT_GRAINS_1LBS, 3);
-                //long newWad = wadsInStock - qtyMade;
-
-                // TODO: #36 Added Wad Update Function once it is available.
                 if (!UpdateWads(databasePath, primerId, primersInStockQty, qtyMade, out errOut)) throw new Exception(errOut);
                 if (!UpdatePrimers(databasePath, primerId, primersInStockQty, qtyMade, out errOut)) throw new Exception(errOut);
                 if (!UpdateHulls(databasePath, caseId, caseInStockQty, qtyMade, out errOut)) throw new Exception(errOut);
