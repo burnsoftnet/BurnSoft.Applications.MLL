@@ -158,6 +158,7 @@ namespace BurnSoft.Applications.MLL.Inventory
                 //long newWad = wadsInStock - qtyMade;
 
                 // TODO: #36 Added Wad Update Function once it is available.
+                if (!UpdateWads(databasePath, primerId, primersInStockQty, qtyMade, out errOut)) throw new Exception(errOut);
                 if (!UpdatePrimers(databasePath, primerId, primersInStockQty, qtyMade, out errOut)) throw new Exception(errOut);
                 if (!UpdateHulls(databasePath, caseId, caseInStockQty, qtyMade, out errOut)) throw new Exception(errOut);
                 if (!UpdatePowder(databasePath, perfferedPowderId, powderInStockGrains, midRangePowderUsed, qtyMade,
@@ -296,6 +297,32 @@ namespace BurnSoft.Applications.MLL.Inventory
             {
                 long newQty = qty - qtyMade;
                 if (!BulletsInventory.UpdateQty(databasePath, id, newQty, out errOut)) throw new Exception(errOut);
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("UpdateBullets", e);
+            }
+            return bAns;
+        }
+        /// <summary>
+        /// Updates the wads.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="qty">The qty.</param>
+        /// <param name="qtyMade">The qty made.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        internal static bool UpdateWads(string databasePath, long id, long qty, long qtyMade, out string errOut)
+        {
+            bool bAns = false;
+            errOut = "";
+            try
+            {
+                int newQty = Convert.ToInt32(qty - qtyMade);
+                if (!WadInventory.UpdateQty(databasePath, id, newQty, out errOut)) throw new Exception(errOut);
                 bAns = true;
             }
             catch (Exception e)
