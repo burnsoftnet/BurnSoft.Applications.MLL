@@ -2,24 +2,24 @@
 
 ---
 
-# PowderInventory
+# WadInventory
 
 Namespace: BurnSoft.Applications.MLL.Inventory
 
-Class PowderInventory to work with the data in the General_Powder Table.
+Class WadInventory handles the data in the List_SG_WAD table
 
 ```csharp
-public class PowderInventory
+public class WadInventory
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [PowderInventory](./burnsoft.applications.mll.inventory.powderinventory)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [WadInventory](./burnsoft.applications.mll.inventory.wadinventory)
 
 ## Constructors
 
-### **PowderInventory()**
+### **WadInventory()**
 
 ```csharp
-public PowderInventory()
+public WadInventory()
 ```
 
 ## Methods
@@ -29,7 +29,7 @@ public PowderInventory()
 Gets all.
 
 ```csharp
-public static List<PowderListing> GetAll(string databasePath, String& errOut)
+public static List<WadData> GetAll(string databasePath, String& errOut)
 ```
 
 #### Parameters
@@ -42,15 +42,15 @@ The error out.
 
 #### Returns
 
-[List&lt;PowderListing&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
-List&lt;PowderListing&gt;.
+[List&lt;WadData&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+List&lt;WadData&gt;.
 
-### **GetId(String, String, String, String&)**
+### **GetId(String, String, String, String, String&)**
 
 Gets the identifier.
 
 ```csharp
-public static long GetId(string databasePath, string manufacturer, string name, String& errOut)
+public static long GetId(string databasePath, string manufacturer, string name, string gauge, String& errOut)
 ```
 
 #### Parameters
@@ -63,6 +63,9 @@ The manufacturer.
 
 `name` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The name.
+
+`gauge` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The gauge.
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
 The error out.
@@ -76,68 +79,12 @@ System.Int64.
 
 [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
 
-### **GetQtyPerPowder(String, Int64, String&)**
-
-Gets the qty per powder using the weight in grains
-
-```csharp
-public static double GetQtyPerPowder(string databasePath, long id, String& errOut)
-```
-
-#### Parameters
-
-`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
-The database path.
-
-`id` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
-The identifier.
-
-`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
-The error out.
-
-#### Returns
-
-[Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
-System.Double.
-
-#### Exceptions
-
-[Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
-
-### **GetPricePerPowder(String, Int64, String&)**
-
-Gets the price per powder.
-
-```csharp
-public static double GetPricePerPowder(string databasePath, long id, String& errOut)
-```
-
-#### Parameters
-
-`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
-The database path.
-
-`id` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
-The identifier.
-
-`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
-The error out.
-
-#### Returns
-
-[Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
-System.Double.
-
-#### Exceptions
-
-[Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
-
-### **GetDetails(String, String, String, String&)**
+### **GetDetails(String, String, String, String, String&)**
 
 Gets the details.
 
 ```csharp
-public static List<PowderListing> GetDetails(string databasePath, string manufacturer, string name, String& errOut)
+public static List<WadData> GetDetails(string databasePath, string manufacturer, string name, string gauge, String& errOut)
 ```
 
 #### Parameters
@@ -151,20 +98,23 @@ The manufacturer.
 `name` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The name.
 
+`gauge` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The gauge.
+
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
 The error out.
 
 #### Returns
 
-[List&lt;PowderListing&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
-List&lt;PowderListing&gt;.
+[List&lt;WadData&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+List&lt;WadData&gt;.
 
 ### **GetDetails(String, Int64, String&)**
 
 Gets the details.
 
 ```csharp
-public static List<PowderListing> GetDetails(string databasePath, long id, String& errOut)
+public static List<WadData> GetDetails(string databasePath, long id, String& errOut)
 ```
 
 #### Parameters
@@ -180,8 +130,8 @@ The error out.
 
 #### Returns
 
-[List&lt;PowderListing&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
-List&lt;PowderListing&gt;.
+[List&lt;WadData&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+List&lt;WadData&gt;.
 
 ### **DataExists(String, String&)**
 
@@ -208,12 +158,12 @@ The error out.
 
 [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
 
-### **DataExists(String, String, String, String&)**
+### **DataExists(String, String, String, String, String&)**
 
 Datas the exists.
 
 ```csharp
-public static bool DataExists(string databasePath, string manufacturer, string name, String& errOut)
+public static bool DataExists(string databasePath, string manufacturer, string name, string gauge, String& errOut)
 ```
 
 #### Parameters
@@ -227,6 +177,9 @@ The manufacturer.
 `name` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The name.
 
+`gauge` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The gauge.
+
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
 The error out.
 
@@ -239,12 +192,12 @@ The error out.
 
 [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
 
-### **Add(String, String, String, Double, Double, String, String&)**
+### **Add(String, String, String, String, Int64, String, Int32, Double, String&, Boolean)**
 
 Adds the specified database path.
 
 ```csharp
-public static bool Add(string databasePath, string manufacturer, string name, double weightInPounds, double price, string notes, String& errOut)
+public static bool Add(string databasePath, string manufacturer, string name, string gauge, long gaugeId, string load, int qty, double price, String& errOut, bool preFluffEn)
 ```
 
 #### Parameters
@@ -258,17 +211,26 @@ The manufacturer.
 `name` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The name.
 
-`weightInPounds` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
-The weight in pounds.
+`gauge` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The gauge.
+
+`gaugeId` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
+The gun identifier.
+
+`load` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The load.
+
+`qty` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+The qty.
 
 `price` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
 The price.
 
-`notes` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
-The notes.
-
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
 The error out.
+
+`preFluffEn` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+if set to `true` [pre fluff en].
 
 #### Returns
 
@@ -279,12 +241,12 @@ The error out.
 
 [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
 
-### **Update(String, Int64, String, String, Double, Double, String, String&)**
+### **Update(String, Int64, String, String, String, Int64, String, Int32, Double, String&, Boolean)**
 
 Updates the specified database path.
 
 ```csharp
-public static bool Update(string databasePath, long id, string manufacturer, string name, double weightInPounds, double price, string notes, String& errOut)
+public static bool Update(string databasePath, long id, string manufacturer, string name, string gauge, long guageId, string load, int qty, double price, String& errOut, bool preFluffEn)
 ```
 
 #### Parameters
@@ -301,17 +263,26 @@ The manufacturer.
 `name` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The name.
 
-`weightInPounds` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
-The weight in pounds.
+`gauge` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The gauge.
+
+`guageId` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
+The guage identifier.
+
+`load` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The load.
+
+`qty` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+The qty.
 
 `price` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
 The price.
 
-`notes` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
-The notes.
-
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
 The error out.
+
+`preFluffEn` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+if set to `true` [pre fluff en].
 
 #### Returns
 
@@ -322,30 +293,42 @@ The error out.
 
 [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
 
-### **DropDownToEnum(String)**
+### **Update(String, Int64, Int32, Double, String&)**
 
-Drops down to enum.
+Updates the specified database path.
 
 ```csharp
-public static PowderWeightType DropDownToEnum(string value)
+public static bool Update(string databasePath, long id, int qty, double price, String& errOut)
 ```
 
 #### Parameters
 
-`value` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
-The value. ( Grains (grs) or Pounds (lbs) )
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`id` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
+The identifier.
+
+`qty` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+The qty.
+
+`price` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
+The price.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
 
 #### Returns
 
-[PowderWeightType](./burnsoft.applications.mll.enums.powderweighttype)<br>
-PowderWeightType.
+[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+`true` if XXXX, `false` otherwise.
 
-### **UpdateQty(String, Int64, Int32, Double, Double, Int32, Double, PowderWeightType, String&)**
+### **UpdateQty(String, Int64, Int32, Double, Double, Int32, Double, String&)**
 
 Updates the qty.
 
 ```csharp
-public static bool UpdateQty(string databasePath, long id, int currentQty, double currentPrice, double currentPricePerItem, int newQty, double NewPrice, PowderWeightType weightType, String& errOut)
+public static bool UpdateQty(string databasePath, long id, int currentQty, double currentPrice, double currentPricePerItem, int newQty, double NewPrice, String& errOut)
 ```
 
 #### Parameters
@@ -371,9 +354,6 @@ The new qty.
 `NewPrice` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
 Creates new price.
 
-`weightType` [PowderWeightType](./burnsoft.applications.mll.enums.powderweighttype)<br>
-Type of the weight.
-
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
 The error out.
 
@@ -382,16 +362,12 @@ The error out.
 [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
 `true` if XXXX, `false` otherwise.
 
-#### Exceptions
-
-[Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
-
-### **UpdateQty(String, Int64, Double, Double, String&)**
+### **UpdateQty(String, Int64, Int32, String&)**
 
 Updates the qty.
 
 ```csharp
-public static bool UpdateQty(string databasePath, long id, double newPounds, double newGrains, String& errOut)
+public static bool UpdateQty(string databasePath, long id, int newQty, String& errOut)
 ```
 
 #### Parameters
@@ -402,11 +378,8 @@ The database path.
 `id` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
 The identifier.
 
-`newPounds` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
-The new pounds.
-
-`newGrains` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
-The new grains.
+`newQty` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+The new qty.
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
 The error out.
@@ -440,12 +413,12 @@ The error out.
 [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
 `true` if XXXX, `false` otherwise.
 
-### **Delete(String, String, String, String&)**
+### **Delete(String, String, String, String, String&)**
 
 Deletes the specified database path.
 
 ```csharp
-public static bool Delete(string databasePath, string manufacturer, string name, String& errOut)
+public static bool Delete(string databasePath, string manufacturer, string name, string gauge, String& errOut)
 ```
 
 #### Parameters
@@ -459,82 +432,8 @@ The manufacturer.
 `name` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The name.
 
-`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
-The error out.
-
-#### Returns
-
-[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
-`true` if XXXX, `false` otherwise.
-
-#### Exceptions
-
-[Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
-
-### **CalculatePricePerItem(Double, Double, PowderWeightType, Boolean)**
-
-Calculates the price per item.
-
-```csharp
-public static double CalculatePricePerItem(double weightValue, double price, PowderWeightType VolumeType, bool useDollar)
-```
-
-#### Parameters
-
-`weightValue` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
-The weight value.
-
-`price` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
-The price.
-
-`VolumeType` [PowderWeightType](./burnsoft.applications.mll.enums.powderweighttype)<br>
-Type of the of weight: Grains (grs) , Pounds (lbs).
-
-`useDollar` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
-Use the Dollar amount to get the doube with 2 decimal places, 
- when set to false it will give you the full double.
-
-#### Returns
-
-[Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
-System.Double.
-
-### **UpdateQty(String, Int64, Double, Double, Double, Double, Double, Double, PowderWeightType, String&)**
-
-Updates the qty and price per item using the current qty in inventory and adding the new item details in stock
-
-```csharp
-public static bool UpdateQty(string databasePath, long id, double currentQty, double currentGrains, double currentPrice, double currentPricePerItem, double newQty, double newPrice, PowderWeightType VolumeType, String& errOut)
-```
-
-#### Parameters
-
-`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
-The database path.
-
-`id` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
-The identifier.
-
-`currentQty` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
-The current qy.
-
-`currentGrains` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
-The current grains.
-
-`currentPrice` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
-The current price.
-
-`currentPricePerItem` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
-The current price per item.
-
-`newQty` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
-The new qty.
-
-`newPrice` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
-The new price.
-
-`VolumeType` [PowderWeightType](./burnsoft.applications.mll.enums.powderweighttype)<br>
-Type of the volume.
+`gauge` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The gauge.
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
 The error out.

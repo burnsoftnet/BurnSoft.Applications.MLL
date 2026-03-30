@@ -9,16 +9,16 @@ using System.Data;
 namespace BurnSoft.Applications.MLL.Inventory
 {
     /// <summary>
-    /// Class PrimerInventory handles working with the data in the General_Primer Table.
+    /// Class WadInventory handles the data in the  List_SG_WAD table
     /// </summary>
-    public class PrimerInventory
+    public class WadInventory
     {
         #region "Exception Error Handling"
 
         /// <summary>
         /// The class location
         /// </summary>
-        private static string ClassLocation = "BurnSoft.Applications.MLL.Inventory.PrimerInventory";
+        private static string ClassLocation = "BurnSoft.Applications.MLL.Inventory.WadInventory";
 
         /// <summary>
         /// Errors the message for regular Exceptions
@@ -65,34 +65,33 @@ namespace BurnSoft.Applications.MLL.Inventory
         private static string ErrorMessage(string functionName, ArgumentNullException e) =>
             $"{ClassLocation}.{functionName} - {e.Message}";
 
-        #endregion                                        
+        #endregion                        
         /// <summary>
         /// Gets the data.
         /// </summary>
-        /// <param name="databasePath">The database path.</param>
         /// <param name="dt">The dt.</param>
         /// <param name="errOut">The error out.</param>
-        /// <returns>List&lt;PrimerListings&gt;.</returns>
-        private static List<PrimerListings> GetData(string databasePath, DataTable dt, out string errOut)
+        /// <returns>List&lt;WadData&gt;.</returns>
+        private static List<WadData> GetData(DataTable dt, out string errOut)
         {
-            List<PrimerListings> lst = new List<PrimerListings>();
+            List<WadData> lst = new List<WadData>();
             errOut = "";
             try
             {
                 foreach (DataRow d in dt.Rows)
                 {
-                    int primerTypeId = Convert.ToInt32(d["Primer_Type"]);
-                    int id = Convert.ToInt32(d["id"]);
-                    lst.Add(new PrimerListings()
+                    lst.Add(new WadData()
                     {
-                        Id = id,
+                        Id = Convert.ToInt32(d["id"]),
                         Manufacturer = d["Manufacturer"] != DBNull.Value ? d["Manufacturer"].ToString().Trim() : "",
-                        Name = d["Name"] != DBNull.Value ? d["Name"].ToString().Trim() : "",
-                        PrimerTypeId = primerTypeId,
-                        PrimerType = PrimerTypes.GetName(databasePath, id, out _),
+                        Name = d["WAD"] != DBNull.Value ? d["WAD"].ToString().Trim() : "",
+                        Gauge = d["Gauge"] != DBNull.Value ? d["Gauge"].ToString().Trim() : "",
+                        GaugeId = Convert.ToInt32(d["GID"]),
+                        LoadInOzText = d["load_t"] != DBNull.Value ? d["load_t"].ToString().Trim() : "",
+                        Qty = Convert.ToInt32(d["Qty"]),
                         Price = Convert.ToDouble(d["Price"]),
-                        Qty = Convert.ToInt32(d["qty"]),
-                        PricePerPrimer = Convert.ToDouble(d["ePPP"]),
+                        LoadInOz = Convert.ToDouble(d["load_d"]),
+                        EstimatedPricePerItem = Convert.ToDouble(d["eppw"]),
                         LastSync = d["sync_lastupdate"].ToString().Trim(),
                     });
                 }
@@ -109,17 +108,17 @@ namespace BurnSoft.Applications.MLL.Inventory
         /// <param name="databasePath">The database path.</param>
         /// <param name="sql">The SQL.</param>
         /// <param name="errOut">The error out.</param>
-        /// <returns>List&lt;PrimerListings&gt;.</returns>
+        /// <returns>List&lt;WadData&gt;.</returns>
         /// <exception cref="System.Exception"></exception>
-        private static List<PrimerListings> GetList(string databasePath, string sql, out string errOut)
+        private static List<WadData> GetList(string databasePath, string sql, out string errOut)
         {
-            List<PrimerListings> lst = new List<PrimerListings>();
+            List<WadData> lst = new List<WadData>();
             errOut = "";
             try
             {
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
-                lst = GetData(databasePath, dt, out errOut);
+                lst = GetData(dt, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
             }
             catch (Exception e)
@@ -134,10 +133,10 @@ namespace BurnSoft.Applications.MLL.Inventory
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="errOut">The error out.</param>
-        /// <returns>List&lt;PrimerListings&gt;.</returns>
-        public static List<PrimerListings> GetAll(string databasePath, out string errOut)
+        /// <returns>List&lt;WadData&gt;.</returns>
+        public static List<WadData> GetAll(string databasePath, out string errOut)
         {
-            string sql = $"Select * from General_Primer order by Manufacturer,Name  ASC";
+            string sql = $"Select * from List_SG_WAD order by Manufacturer,WAD  ASC";
             return GetList(databasePath, sql, out errOut);
         }
         /// <summary>
@@ -146,19 +145,20 @@ namespace BurnSoft.Applications.MLL.Inventory
         /// <param name="databasePath">The database path.</param>
         /// <param name="manufacturer">The manufacturer.</param>
         /// <param name="name">The name.</param>
+        /// <param name="gauge">The gauge.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns>System.Int64.</returns>
         /// <exception cref="System.Exception"></exception>
-        public static long GetId(string databasePath, string manufacturer, string name, out string errOut)
+        public static long GetId(string databasePath, string manufacturer, string name, string gauge, out string errOut)
         {
             errOut = "";
             long lAns = 0;
             try
             {
-                string sql = $"Select * from General_Primer where manufacturer='{manufacturer}' and name='{name}'";
-                List<PrimerListings> lst = GetList(databasePath, sql, out errOut);
+                string sql = $"Select * from List_SG_WAD where manufacturer='{manufacturer}' and WAD='{name}' and gauge='{gauge}'";
+                List<WadData> lst = GetList(databasePath, sql, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
-                foreach (PrimerListings i in lst)
+                foreach (WadData i in lst)
                 {
                     lAns = i.Id;
                     break;
@@ -171,45 +171,17 @@ namespace BurnSoft.Applications.MLL.Inventory
             return lAns;
         }
         /// <summary>
-        /// Gets the type of the primer.
-        /// </summary>
-        /// <param name="databasePath">The database path.</param>
-        /// <param name="id">The identifier.</param>
-        /// <param name="errOut">The error out.</param>
-        /// <returns>System.String.</returns>
-        /// <exception cref="System.Exception"></exception>
-        public static string GetPrimerType(string databasePath, long id, out string errOut)
-        {
-            errOut = "";
-            string sAns = "";
-            try
-            {
-                string sql = $"Select * from General_Primer where id={id}";
-                List<PrimerListings> lst = GetList(databasePath, sql, out errOut);
-                if (errOut.Length > 0) throw new Exception(errOut);
-                foreach (PrimerListings i in lst)
-                {
-                    sAns = i.Name;
-                    break;
-                }
-            }
-            catch (Exception e)
-            {
-                errOut = ErrorMessage("GetPrimerType", e);
-            }
-            return sAns;
-        }
-        /// <summary>
         /// Gets the details.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="manufacturer">The manufacturer.</param>
         /// <param name="name">The name.</param>
+        /// <param name="gauge">The gauge.</param>
         /// <param name="errOut">The error out.</param>
-        /// <returns>List&lt;PrimerListings&gt;.</returns>
-        public static List<PrimerListings> GetDetails(string databasePath, string manufacturer, string name, out string errOut)
+        /// <returns>List&lt;WadData&gt;.</returns>
+        public static List<WadData> GetDetails(string databasePath, string manufacturer, string name, string gauge, out string errOut)
         {
-            string sql = $"Select * from General_Primer where manufacturer='{manufacturer}' and name='{name}'";
+            string sql = $"Select * from List_SG_WAD where manufacturer='{manufacturer}' and WAD='{name}' and Gauge='{gauge}'";
             return GetList(databasePath, sql, out errOut);
         }
         /// <summary>
@@ -218,10 +190,10 @@ namespace BurnSoft.Applications.MLL.Inventory
         /// <param name="databasePath">The database path.</param>
         /// <param name="id">The identifier.</param>
         /// <param name="errOut">The error out.</param>
-        /// <returns>List&lt;PrimerListings&gt;.</returns>
-        public static List<PrimerListings> GetDetails(string databasePath, long id, out string errOut)
+        /// <returns>List&lt;WadData&gt;.</returns>
+        public static List<WadData> GetDetails(string databasePath, long id, out string errOut)
         {
-            string sql = $"Select * from General_Primer where id={id}";
+            string sql = $"Select * from List_SG_WAD where id={id}";
             return GetList(databasePath, sql, out errOut);
         }
         /// <summary>
@@ -237,7 +209,7 @@ namespace BurnSoft.Applications.MLL.Inventory
             errOut = @"";
             try
             {
-                List<PrimerListings> lst = GetAll(databasePath, out errOut);
+                List<WadData> lst = GetAll(databasePath, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 bAns = lst.Count > 0;
             }
@@ -253,17 +225,18 @@ namespace BurnSoft.Applications.MLL.Inventory
         /// <param name="databasePath">The database path.</param>
         /// <param name="manufacturer">The manufacturer.</param>
         /// <param name="name">The name.</param>
+        /// <param name="gauge">The gauge.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="System.Exception"></exception>
-        public static bool DataExists(string databasePath, string manufacturer, string name, out string errOut)
+        public static bool DataExists(string databasePath, string manufacturer, string name, string gauge, out string errOut)
         {
             bool bAns = false;
             errOut = @"";
             try
             {
 
-                List<PrimerListings> lst = GetDetails(databasePath, manufacturer, name, out errOut);
+                List<WadData> lst = GetDetails(databasePath, manufacturer, name, gauge, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 bAns = lst.Count > 0;
             }
@@ -279,29 +252,36 @@ namespace BurnSoft.Applications.MLL.Inventory
         /// <param name="databasePath">The database path.</param>
         /// <param name="manufacturer">The manufacturer.</param>
         /// <param name="name">The name.</param>
-        /// <param name="primerType">Type of the primer.</param>
-        /// <param name="price">The price.</param>
+        /// <param name="gauge">The gauge.</param>
+        /// <param name="gaugeId">The gun identifier.</param>
+        /// <param name="load">The load.</param>
         /// <param name="qty">The qty.</param>
+        /// <param name="price">The price.</param>
         /// <param name="errOut">The error out.</param>
+        /// <param name="preFluffEn">if set to <c>true</c> [pre fluff en].</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="System.Exception"></exception>
-        public static bool Add(string databasePath, string manufacturer, string name, int primerType,
-            double price, long qty, out string errOut)
+        public static bool Add(string databasePath, string manufacturer, string name, string gauge,
+            long gaugeId, string load, int qty, double price, out string errOut, bool preFluffEn = false)
         {
             errOut = "";
             bool bAns = false;
             try
             {
-                BSOtherObjects o = new BSOtherObjects();
-                manufacturer = o.FC(manufacturer);
-                name = o.FC(name);
-
+                if (preFluffEn)
+                {
+                    manufacturer = GeneralHelpers.FluffContent(manufacturer);
+                    name = GeneralHelpers.FluffContent(name);
+                    gauge = GeneralHelpers.FluffContent(gauge);
+                    load = GeneralHelpers.FluffContent(load);
+                }
+                double loadDouble = Converters.ConvertOzToDouble(load, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
-                double PricePerPrimer = CalculatePricePerItem(qty, price);
-                string sql = $"INSERT INTO General_Primer(Manufacturer,Name,Primer_Type," +
-                    $"Price,Qty, ePPP, sync_lastupdate) VALUES(" +
-                    $"'{manufacturer}', '{name}', {primerType}, " +
-                    $"{price}, {qty}, {PricePerPrimer},Now())";
+                double estCostPerItem = (price == 0) ? 0 : (price / qty);
+                string sql = $"INSERT INTO List_SG_WAD(Manufacturer,WAD,Gauge," +
+                    $"GID,load_t,load_d,Qty,Price,eppw, sync_lastupdate) VALUES(" +
+                    $"'{manufacturer}', '{name}', '{gauge}', {gaugeId}, '{load}'," +
+                    $"{loadDouble},{qty}, {price}, {estCostPerItem}, Now())";
 
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
@@ -318,25 +298,36 @@ namespace BurnSoft.Applications.MLL.Inventory
         /// <param name="id">The identifier.</param>
         /// <param name="manufacturer">The manufacturer.</param>
         /// <param name="name">The name.</param>
-        /// <param name="primerType">Type of the primer.</param>
-        /// <param name="price">The price.</param>
+        /// <param name="gauge">The gauge.</param>
+        /// <param name="guageId">The guage identifier.</param>
+        /// <param name="load">The load.</param>
         /// <param name="qty">The qty.</param>
+        /// <param name="price">The price.</param>
         /// <param name="errOut">The error out.</param>
+        /// <param name="preFluffEn">if set to <c>true</c> [pre fluff en].</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="System.Exception"></exception>
-        public static bool Update(string databasePath, long id, string manufacturer, string name, int primerType,
-            double price, long qty, out string errOut)
+        public static bool Update(string databasePath, long id, string manufacturer, string name, string gauge,
+            long guageId, string load, int qty, double price, out string errOut, bool preFluffEn = false)
         {
             errOut = "";
             bool bAns = false;
             try
             {
-                BSOtherObjects o = new BSOtherObjects();
+                if (preFluffEn)
+                {
+                    manufacturer = GeneralHelpers.FluffContent(manufacturer);
+                    name = GeneralHelpers.FluffContent(name);
+                    gauge = GeneralHelpers.FluffContent(gauge);
+                    load = GeneralHelpers.FluffContent(load);
+                }
+                double loadDouble = Converters.ConvertOzToDouble(load, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
-                double PricePerGrain = (price / qty);
-                string sql = $"UPDATE General_Primer set Manufacturer='{o.FC(manufacturer)}'," +
-                    $"Name='{o.FC(name)}',Primer_Type={primerType},qty={qty},Price={price}," +
-                    $"ePPP={PricePerGrain}, sync_lastupdate=Now() where id={id}";
+                double estCostPerItem = (price == 0) ? 0 : (price / qty);
+                string sql = $"UPDATE List_SG_WAD set Manufacturer='{manufacturer}'," +
+                    $"WAD='{name}',Gauge='{gauge}',GID={guageId}, " +
+                    $"load_t='{load}', load_d={loadDouble}, Qty={qty}, Price={price}, " +
+                    $"eppw={estCostPerItem}, sync_lastupdate=Now() where id={id}";
 
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
@@ -346,7 +337,101 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             return bAns;
         }
-        
+        /// <summary>
+        /// Updates the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="qty">The qty.</param>
+        /// <param name="price">The price.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool Update(string databasePath, long id, int qty, double price, out string errOut)
+        {
+            errOut = "";
+            bool bAns = false;
+            try
+            {
+                double estCostPerItem = (price == 0) ? 0 : (price / qty);
+                BSOtherObjects o = new BSOtherObjects();
+                string sql = $"UPDATE List_SG_WAD set Qty={qty}," +
+                    $"Price={price}, epps={estCostPerItem} where id={id}";
+
+                bAns = Database.Execute(databasePath, sql, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Update", e);
+            }
+            return bAns;
+        }
+        /// <summary>
+        /// Updates the qty.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="currentQty">The current qty.</param>
+        /// <param name="currentPrice">The current price.</param>
+        /// <param name="currentPricePerItem">The current price per item.</param>
+        /// <param name="newQty">The new qty.</param>
+        /// <param name="NewPrice">Creates new price.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool UpdateQty(string databasePath, long id, int currentQty, double currentPrice,
+            double currentPricePerItem, int newQty, double NewPrice, out string errOut)
+        {
+            errOut = "";
+            bool bAns = false;
+            try
+            {
+                int qty = currentQty + newQty;
+                double price = (currentQty * currentPricePerItem) + NewPrice;
+                double estCostPerItem = Converters.ConvertToDollars((price == 0) ? 0 : (price / qty));
+                string sql = $"UPDATE List_SG_WAD set Qty={qty}," +
+                    $"Price={price}, eppw={estCostPerItem} where id={id}";
+
+                if (currentPricePerItem == estCostPerItem)
+                {
+                    sql = $"UPDATE List_SG_WAD set Qty={newQty}," +
+                    $"Price={NewPrice} where id={id}";
+                }
+                else if (NewPrice == 0 && newQty == 0)
+                {
+                    sql = $"UPDATE List_SG_WAD set Qty=0, Price=0, eppw=0 where id={id}";
+                }
+
+                bAns = Database.Execute(databasePath, sql, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("UpdateQty", e);
+            }
+            return bAns;
+        }
+        /// <summary>
+        /// Updates the qty.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="newQty">The new qty.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool UpdateQty(string databasePath, long id, int newQty, out string errOut)
+        {
+            errOut = "";
+            bool bAns = false;
+            try
+            {
+                string sql = $"UPDATE List_SG_WAD set Qty={newQty} where id={id}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("UpdateQty", e);
+            }
+            return bAns;
+        }
+
         /// <summary>
         /// Deletes the specified database path.
         /// </summary>
@@ -360,7 +445,7 @@ namespace BurnSoft.Applications.MLL.Inventory
             bool bAns = false;
             try
             {
-                string sql = $"DELETE from General_Primer where id={id}";
+                string sql = $"DELETE from List_SG_WAD where id={id}";
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
             catch (Exception e)
@@ -375,16 +460,18 @@ namespace BurnSoft.Applications.MLL.Inventory
         /// <param name="databasePath">The database path.</param>
         /// <param name="manufacturer">The manufacturer.</param>
         /// <param name="name">The name.</param>
+        /// <param name="gauge">The gauge.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="System.Exception"></exception>
-        public static bool Delete(string databasePath, string manufacturer, string name, out string errOut)
+        public static bool Delete(string databasePath, string manufacturer, string name, 
+            string gauge, out string errOut)
         {
             errOut = "";
             bool bAns = false;
             try
             {
-                long id = GetId(databasePath, manufacturer, name, out errOut);
+                long id = GetId(databasePath, manufacturer, name, gauge, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 bAns = Delete(databasePath, id, out errOut);
             }
@@ -394,97 +481,6 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             return bAns;
         }
-        /// <summary>
-        /// Calculates the price per item.
-        /// </summary>
-        /// <param name="qty">The qty.</param>
-        /// <param name="price">The price.</param>
-        /// <param name="useDollar">if set to <c>true</c> [use dollar].</param>
-        /// <returns>System.Double.</returns>
-        public static double CalculatePricePerItem(long qty, double price, bool useDollar = false)
-        {
-            double dAns = 0;
-            if (qty > 0)
-            {
-                dAns = price / qty;
-            }
 
-            if (useDollar)
-            {
-                return Converters.ConvertToDollars(dAns);
-            }
-            else
-            {
-                return dAns;
-            }
-        }
-        /// <summary>
-        /// Updates the qty.
-        /// </summary>
-        /// <param name="databasePath">The database path.</param>
-        /// <param name="id">The identifier.</param>
-        /// <param name="currentQty">The current qty.</param>
-        /// <param name="currentPrice">The current price.</param>
-        /// <param name="currentPricePerItem">The current price per item.</param>
-        /// <param name="newQty">The new qty.</param>
-        /// <param name="newPrice">The new price.</param>
-        /// <param name="errOut">The error out.</param>
-        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public static bool UpdateQty(string databasePath, long id, long currentQty, double currentPrice,
-            double currentPricePerItem, long newQty, double newPrice, out string errOut)
-        {
-            errOut = "";
-            bool bAns = false;
-            try
-            {
-                double updatedPricePerItem = CalculatePricePerItem(newQty, newPrice);
-                long updatedQty = (currentQty + newQty);
-                double UpdatedPrice = (currentQty * currentPricePerItem) + newPrice;
-                double newPricePerItem = CalculatePricePerItem(updatedQty, UpdatedPrice);
-                string sql = "";
-                if (currentPricePerItem == updatedPricePerItem)
-                {
-                    sql = $"UPDATE General_Primer set QTY={updatedQty}, Price={UpdatedPrice} where ID={id}";
-                }
-                else if ((UpdatedPrice == 0) && (currentQty == 0))
-                {
-                    sql = $"UPDATE General_Primer set QTY=0, Price=0, eppp=0 where ID={id}";
-                }
-                else
-                {
-                    sql = $"UPDATE General_Primer set QTY={updatedQty}, Price={UpdatedPrice}," +
-                        $"eppp={newPricePerItem} where ID={id}";
-                }
-                bAns = Database.Execute(databasePath, sql, out errOut);
-            }
-            catch (Exception e)
-            {
-                errOut = ErrorMessage("UpdateQty", e);
-            }
-            return bAns;
-        }
-        /// <summary>
-        /// Updates the qty only
-        /// </summary>
-        /// <param name="databasePath">The database path.</param>
-        /// <param name="id">The identifier.</param>
-        /// <param name="newQty">The new qty.</param>
-        /// <param name="errOut">The error out.</param>
-        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public static bool UpdateQty(string databasePath, long id, long newQty, out string errOut)
-        {
-            errOut = "";
-            bool bAns = false;
-            try
-            {
-                string sql = $"UPDATE General_Primer set Qty={newQty} where id={id}";
-                bAns = Database.Execute(databasePath, sql, out errOut);
-            }
-            catch (Exception e)
-            {
-                errOut = ErrorMessage("UpdateQty", e);
-            }
-            return bAns;
-        }
     }
 }

@@ -459,6 +459,30 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             return bAns;
         }
+        /// <summary>
+        /// Updates the qty.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="newPounds">The new pounds.</param>
+        /// <param name="newGrains">The new grains.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool UpdateQty(string databasePath, long id, double newPounds, double newGrains, out string errOut)
+        {
+            errOut = "";
+            bool bAns = false;
+            try
+            {
+                string sql = $"UPDATE General_Powder set  weightlbs={newPounds}, weightgn={newGrains} where id={id}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("UpdateQty", e);
+            }
+            return bAns;
+        }
 
 
         /// <summary>

@@ -196,6 +196,51 @@ namespace BurnSoft.Applications.MLL.LoadersLog
             return GetList(databasePath, sql, out errOut);
         }
         /// <summary>
+        /// Determines whether the ammo is already listed in the ammo log from the make ready functions 
+        /// based on all the fields that is passed.  If it is then it will also return the qty and 
+        /// ammo ID so you can updated the table accordingly.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="manufacturer">The manufacturer.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="caliber">The caliber.</param>
+        /// <param name="grain">The grain.</param>
+        /// <param name="jacket">The jacket.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <param name="qty">The qty.</param>
+        /// <param name="ammoId">The ammo identifier.</param>
+        /// <returns><c>true</c> if [is already listed] [the specified database path]; otherwise, <c>false</c>.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool IsAlreadyListed(string databasePath, string manufacturer, string name, string caliber, 
+            string grain, string jacket, out string errOut, out long qty, out long ammoId)
+        {
+            qty = 0;
+            ammoId = 0;
+            errOut = "";
+            bool bAns = false;
+            try
+            {
+                string sql = $"SELECT * from Loaders_Log_Ammunition where Manufacturer='{manufacturer}'  and Name='{name}' " +
+                    $"and Cal='{caliber}' and Grain='{grain}' and Jacket='{jacket}'";
+                List<LoadersLogAmmunitionData> lst = GetList(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                if (lst.Count > 0)
+                {
+                    foreach (LoadersLogAmmunitionData i in lst)
+                    {
+                        qty = i.Qty;
+                        ammoId = i.Id;
+                    }
+                    bAns = true;
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("IsAlreadyListed", e);
+            }
+            return bAns;
+        }
+        /// <summary>
         /// Datas the exists.
         /// </summary>
         /// <param name="databasePath">The database path.</param>

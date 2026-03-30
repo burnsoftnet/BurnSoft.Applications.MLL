@@ -412,6 +412,33 @@ The error out.
 [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
 `true` if XXXX, `false` otherwise.
 
+### **UpdateQty(String, Int64, Int64, String&)**
+
+Updates the qty only
+
+```csharp
+public static bool UpdateQty(string databasePath, long id, long newQty, String& errOut)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`id` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
+The identifier.
+
+`newQty` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
+The new qty.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+`true` if XXXX, `false` otherwise.
+
 ---
 
 [`< Back`](./)
