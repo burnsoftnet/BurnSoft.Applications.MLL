@@ -56,14 +56,6 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
         /// </summary>
         private double _price;
         /// <summary>
-        /// The type
-        /// </summary>
-        private string _type;
-        /// <summary>
-        /// The powder name
-        /// </summary>
-        private string _powderName;
-        /// <summary>
         /// The gauge
         /// </summary>
         private string _gauge;

@@ -84,15 +84,14 @@ namespace BurnSoft.Applications.MLL.Inventory
                     {
                         Id = Convert.ToInt32(d["id"]),
                         Manufacturer = d["Manufacturer"] != DBNull.Value ? d["Manufacturer"].ToString().Trim() : "",
-                        Name = d["Name"] != DBNull.Value ? d["Name"].ToString().Trim() : "",
+                        Name = d["WAD"] != DBNull.Value ? d["WAD"].ToString().Trim() : "",
                         Gauge = d["Gauge"] != DBNull.Value ? d["Gauge"].ToString().Trim() : "",
                         GaugeId = Convert.ToInt32(d["GID"]),
-                        LoadInOzText = d["LoadInOzText"] != DBNull.Value ? d["LoadInOzText"].ToString().Trim() : "",
+                        LoadInOzText = d["load_t"] != DBNull.Value ? d["load_t"].ToString().Trim() : "",
                         Qty = Convert.ToInt32(d["Qty"]),
                         Price = Convert.ToDouble(d["Price"]),
                         LoadInOz = Convert.ToDouble(d["load_d"]),
-
-                        EstimatedPricePerItem = Convert.ToDouble(d["epps"]),
+                        EstimatedPricePerItem = Convert.ToDouble(d["eppw"]),
                         LastSync = d["sync_lastupdate"].ToString().Trim(),
                     });
                 }
@@ -137,7 +136,7 @@ namespace BurnSoft.Applications.MLL.Inventory
         /// <returns>List&lt;WadData&gt;.</returns>
         public static List<WadData> GetAll(string databasePath, out string errOut)
         {
-            string sql = $"Select * from List_SG_WAD order by Manufacturer,Name  ASC";
+            string sql = $"Select * from List_SG_WAD order by Manufacturer,WAD  ASC";
             return GetList(databasePath, sql, out errOut);
         }
         /// <summary>
@@ -328,7 +327,7 @@ namespace BurnSoft.Applications.MLL.Inventory
                 string sql = $"UPDATE List_SG_WAD set Manufacturer='{manufacturer}'," +
                     $"WAD='{name}',Gauge='{gauge}',GID={guageId}, " +
                     $"load_t='{load}', load_d={loadDouble}, Qty={qty}, Price={price}, " +
-                    $"epps={estCostPerItem}, sync_lastupdate=Now() where id={id}";
+                    $"eppw={estCostPerItem}, sync_lastupdate=Now() where id={id}";
 
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
