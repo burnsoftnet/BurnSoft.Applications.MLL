@@ -81,6 +81,7 @@
     <Compile Include="Inventory\InventoryUpdate.cs" />
     <Compile Include="Inventory\ShotgunHullInventory.cs" />
     <Compile Include="Inventory\ShotgunShotInventory.cs" />
+    <Compile Include="Inventory\WadInventory.cs" />
     <Compile Include="Search\SyncTables.cs" />
     <Compile Include="Global\WeightValues.cs" />
     <Compile Include="Helpers\Converters.cs" />

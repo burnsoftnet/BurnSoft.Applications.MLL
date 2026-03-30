@@ -32,12 +32,13 @@ namespace BurnSoft.Applications.MLL.Types
         /// <value>The gauge identifier.</value>
         public long GaugeId { get; set; }
         /// <summary>
-        /// Gets or sets Load in oz. text
+        /// Gets or sets Load in oz. text fort he load_t column
         /// </summary>
         /// <value>The length.</value>
         public string LoadInOzText { get; set; }
         /// <summary>
-        /// Gets or sets Load in oz. in numeric form, background calculation
+        /// Gets or sets Load in oz. in numeric form, background 
+        /// calculation for the load_d column
         /// </summary>
         /// <value>The load in oz.</value>
         public double LoadInOz { get; set; }
