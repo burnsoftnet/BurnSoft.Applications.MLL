@@ -4,9 +4,7 @@ using BurnSoft.Universal;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace BurnSoft.Applications.MLL.Inventory
 {
@@ -20,7 +18,7 @@ namespace BurnSoft.Applications.MLL.Inventory
         /// <summary>
         /// The class location
         /// </summary>
-        private static string ClassLocation = "BurnSoft.Applications.MLL.Inventory.ShotgunHullInventory";
+        private static string ClassLocation = "BurnSoft.Applications.MLL.Inventory.WadInventory";
 
         /// <summary>
         /// Errors the message for regular Exceptions
