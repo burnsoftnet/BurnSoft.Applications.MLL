@@ -566,6 +566,33 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
             return sAns;
         }
         /// <summary>
+        /// Wads the data data.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string WadDataData(List<WadData> value)
+        {
+            string sAns = "";
+            if (value.Count > 0)
+            {
+                foreach (WadData v in value)
+                {
+                    sAns += $"id : {v.Id}{Environment.NewLine}";
+                    sAns += $"Manufacturer : {v.Manufacturer}{Environment.NewLine}";
+                    sAns += $"Name : {v.Name}{Environment.NewLine}";
+                    sAns += $"Gauge : {v.Gauge}{Environment.NewLine}";
+                    sAns += $"GaugeId : {v.GaugeId}{Environment.NewLine}";
+                    sAns += $"LoadInOzText : {v.LoadInOzText}{Environment.NewLine}";
+                    sAns += $"LoadInOz : {v.LoadInOz}{Environment.NewLine}";
+                    sAns += $"Qty : {v.Qty}{Environment.NewLine}";
+                    sAns += $"Price : {v.Price}{Environment.NewLine}";
+                    sAns += $"EstimatedPricePerItem : {v.EstimatedPricePerItem}{Environment.NewLine}";
+                    sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                }
+            }
+            return sAns;
+        }
+        /// <summary>
         /// Primers the listings data.
         /// </summary>
         /// <param name="value">The value.</param>

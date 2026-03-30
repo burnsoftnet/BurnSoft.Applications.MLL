@@ -131,6 +131,54 @@ The error out.
 [List&lt;LoadersLogAmmunitionData&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
 List&lt;LoadersLogAmmunitionData&gt;.
 
+### **IsAlreadyListed(String, String, String, String, String, String, String&, Int64&, Int64&)**
+
+Determines whether the ammo is already listed in the ammo log from the make ready functions 
+ based on all the fields that is passed. If it is then it will also return the qty and 
+ ammo ID so you can updated the table accordingly.
+
+```csharp
+public static bool IsAlreadyListed(string databasePath, string manufacturer, string name, string caliber, string grain, string jacket, String& errOut, Int64& qty, Int64& ammoId)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`manufacturer` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The manufacturer.
+
+`name` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The name.
+
+`caliber` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The caliber.
+
+`grain` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The grain.
+
+`jacket` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The jacket.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+`qty` [Int64&](https://docs.microsoft.com/en-us/dotnet/api/system.int64&)<br>
+The qty.
+
+`ammoId` [Int64&](https://docs.microsoft.com/en-us/dotnet/api/system.int64&)<br>
+The ammo identifier.
+
+#### Returns
+
+[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+`true` if [is already listed] [the specified database path]; otherwise, `false`.
+
+#### Exceptions
+
+[Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
+
 ### **DataExists(String, String&)**
 
 Datas the exists.
