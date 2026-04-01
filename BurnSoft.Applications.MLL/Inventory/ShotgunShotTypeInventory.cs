@@ -1,0 +1,291 @@
+﻿using BurnSoft.Applications.MLL.Enums;
+using BurnSoft.Applications.MLL.Global;
+using BurnSoft.Applications.MLL.Types;
+using BurnSoft.Universal;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BurnSoft.Applications.MLL.Inventory
+{
+    /// <summary>
+    /// Class ShotgunShotTypeInventory handles the data in 
+    /// the List_SG_ShotType_Details table
+    /// </summary>
+    public class ShotgunShotTypeInventory
+    {
+        #region "Exception Error Handling"
+
+        /// <summary>
+        /// The class location
+        /// </summary>
+        private static string ClassLocation = "BurnSoft.Applications.MLL.Inventory.ShotgunShotTypeInventory";
+
+        /// <summary>
+        /// Errors the message for regular Exceptions
+        /// </summary>
+        /// <param name="functionName">Name of the function.</param>
+        /// <param name="e">The e.</param>
+        /// <returns>System.String.</returns>
+        private static string ErrorMessage(string functionName, Exception e) =>
+            $"{ClassLocation}.{functionName} - {e.Message}";
+
+        /// <summary>
+        /// Errors the message for access violations
+        /// </summary>
+        /// <param name="functionName">Name of the function.</param>
+        /// <param name="e">The e.</param>
+        /// <returns>System.String.</returns>
+        private static string ErrorMessage(string functionName, AccessViolationException e) =>
+            $"{ClassLocation}.{functionName} - {e.Message}";
+
+        /// <summary>
+        /// Errors the message for invalid cast exception
+        /// </summary>
+        /// <param name="functionName">Name of the function.</param>
+        /// <param name="e">The e.</param>
+        /// <returns>System.String.</returns>
+        private static string ErrorMessage(string functionName, InvalidCastException e) =>
+            $"{ClassLocation}.{functionName} - {e.Message}";
+
+        /// <summary>
+        /// Errors the message argument exception
+        /// </summary>
+        /// <param name="functionName">Name of the function.</param>
+        /// <param name="e">The e.</param>
+        /// <returns>System.String.</returns>
+        private static string ErrorMessage(string functionName, ArgumentException e) =>
+            $"{ClassLocation}.{functionName} - {e.Message}";
+
+        /// <summary>
+        /// Errors the message for argument null exception.
+        /// </summary>
+        /// <param name="functionName">Name of the function.</param>
+        /// <param name="e">The e.</param>
+        /// <returns>System.String.</returns>
+        private static string ErrorMessage(string functionName, ArgumentNullException e) =>
+            $"{ClassLocation}.{functionName} - {e.Message}";
+
+        #endregion                                        
+        
+        private static List<ShotgunShotTypeData> GetData(DataTable dt, out string errOut)
+        {
+            List<ShotgunShotTypeData> lst = new List<ShotgunShotTypeData>();
+            errOut = "";
+            try
+            {
+                foreach (DataRow d in dt.Rows)
+                {
+                    lst.Add(new ShotgunShotTypeData()
+                    {
+                        Id = Convert.ToInt32(d["id"]),
+                        Manufacturer = d["Manufacturer"] != DBNull.Value ? d["Manufacturer"].ToString().Trim() : "",
+                        Name = d["Name"] != DBNull.Value ? d["Name"].ToString().Trim() : "",
+                        IsSlug = Convert.ToInt32(d["IsSlug"]) == 1 ? true : false,
+                        MaterialUsed = d["mat"] != DBNull.Value ? d["mat"].ToString().Trim() : "",
+                        ShotNumber = d["ShotNo"] != DBNull.Value ? d["ShotNo"].ToString().Trim() : "",
+                        Weight = d["weight"] != DBNull.Value ? d["weight"].ToString().Trim() : "",
+                        SlugDetails = d["CAL"] != DBNull.Value ? d["CAL"].ToString().Trim() : "",
+                        Ounces = Convert.ToDouble(d["ounces"]),
+                        Qty = Convert.ToInt32(d["Qty"]),
+                        Price = Convert.ToDouble(d["Price"]),
+                        EstimatedPricePerItem = Convert.ToDouble(d["epps"]),
+                        LastSync = d["sync_lastupdate"].ToString().Trim(),
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetData", e);
+            }
+            return lst;
+        }
+        
+        private static List<ShotgunShotTypeData> GetList(string databasePath, string sql, out string errOut)
+        {
+            List<ShotgunShotTypeData> lst = new List<ShotgunShotTypeData>();
+            errOut = "";
+            try
+            {
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                lst = GetData(dt, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetList", e);
+                errOut = $"{errOut}{Environment.NewLine}SQL: {sql}";
+            }
+            return lst;
+        }
+       
+        public static List<ShotgunShotTypeData> GetAll(string databasePath, out string errOut)
+        {
+            string sql = $"Select * from List_SG_ShotType_Details order by Manufacturer,Name  ASC";
+            return GetList(databasePath, sql, out errOut);
+        }
+ 
+        public static long GetId(string databasePath, string manufacturer, string name, string materialUsed, out string errOut)
+        {
+            errOut = "";
+            long lAns = 0;
+            try
+            {
+                string sql = $"Select * from List_SG_ShotType_Details where manufacturer='{manufacturer}' " +
+                    $"and name='{name}' and mat='{materialUsed}'";
+                List<ShotgunShotTypeData> lst = GetList(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                foreach (ShotgunShotTypeData i in lst)
+                {
+                    lAns = i.Id;
+                    break;
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetId", e);
+            }
+            return lAns;
+        }
+       
+        public static List<ShotgunShotTypeData> GetDetails(string databasePath, string manufacturer,
+            string name, string materialUsed, out string errOut)
+        {
+            string sql = $"Select * from List_SG_ShotType_Details where manufacturer='{manufacturer}' " +
+                $"and name='{name}' and mat='{materialUsed}'";
+            return GetList(databasePath, sql, out errOut);
+        }
+        
+        public static List<ShotgunShotTypeData> GetDetails(string databasePath, long id, out string errOut)
+        {
+            string sql = $"Select * from List_SG_ShotType_Details where id={id}";
+            return GetList(databasePath, sql, out errOut);
+        }
+        
+        public static bool DataExists(string databasePath, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                List<ShotgunShotTypeData> lst = GetAll(databasePath, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                bAns = lst.Count > 0;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("DataExists", e);
+            }
+            return bAns;
+        }
+        
+        public static bool DataExists(string databasePath, string manufacturer, string name, string materialUsed, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+
+                List<ShotgunShotTypeData> lst = GetDetails(databasePath, manufacturer, name, materialUsed, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                bAns = lst.Count > 0;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("DataExists", e);
+            }
+            return bAns;
+        }
+        
+        public static bool Add(string databasePath, string manufacturer, string name, string materialUsed,
+            string weight, bool isSlug, string shotNumber, string shotDetails,int qty, double price, out string errOut)
+        {
+            errOut = "";
+            bool bAns = false;
+            try
+            {
+                int iSlug = isSlug ? 1 : 0;
+                double ounces = WeightValues.WEIGHT_OZ_1LBS * Convert.ToDouble(weight);
+                double grams = ounces * WeightValues.WEIGHT_GRAMS_OZ;
+                double costPerItem = price / grams;
+                string sql = $"INSERT INTO List_SG_ShotType_Details(Manufacturer,Name,IsSlug,mat," +
+                    $"weight,ShotNo,CAL,Qty,Price,epps,ounces,grams,sync_lastupdate) VALUES(" +
+                    $"'{manufacturer}', '{name}',{iSlug}, '{materialUsed}', " +
+                    $"'{weight}','{shotNumber}','{shotDetails}',{qty}, {price}, " +
+                    $"{costPerItem}, {ounces}, {grams}, Now())";
+
+                bAns = Database.Execute(databasePath, sql, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Add", e);
+            }
+            return bAns;
+        }
+       
+        public static bool Update(string databasePath, long id, string manufacturer, string name, 
+            string materialUsed, string weight, bool isSlug, string shotNumber, string shotDetails, 
+            int qty, double price, out string errOut)
+        {
+            errOut = "";
+            bool bAns = false;
+            try
+            {
+                int iSlug = isSlug ? 1 : 0;
+                double ounces = WeightValues.WEIGHT_OZ_1LBS * Convert.ToDouble(weight);
+                double grams = ounces * WeightValues.WEIGHT_GRAMS_OZ;
+                double costPerItem = price / grams;
+                string sql = $"UPDATE List_SG_ShotType_Details set Manufacturer='{manufacturer}'," +
+                    $"Name='{name}',mat='{materialUsed}', IsSlug={iSlug}, ShotNo='{shotNumber}', " +
+                    $"weight='{weight}', CAL='{shotDetails}', qty={qty}, price={price}," +
+                    $" epps={costPerItem}, ounces={ounces}, grams={grams}," +
+                    $"sync_lastupdate=Now() where id={id}";
+
+                bAns = Database.Execute(databasePath, sql, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Update", e);
+            }
+            return bAns;
+        }
+        
+        public static bool Delete(string databasePath, long id, out string errOut)
+        {
+            errOut = "";
+            bool bAns = false;
+            try
+            {
+                string sql = $"DELETE from List_SG_ShotType_Details where id={id}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Delete", e);
+            }
+            return bAns;
+        }
+        
+        public static bool Delete(string databasePath, string manufacturer, string name, 
+            string materialUsed, out string errOut)
+        {
+            errOut = "";
+            bool bAns = false;
+            try
+            {
+                long id = GetId(databasePath, manufacturer, name, materialUsed, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                bAns = Delete(databasePath, id, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Delete", e);
+            }
+            return bAns;
+        }
+    }
+}
