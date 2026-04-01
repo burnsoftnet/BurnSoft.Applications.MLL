@@ -73,6 +73,7 @@
     <Compile Include="Database.cs" />
     <Compile Include="DebugHelpers\PrintListValues.cs" />
     <Compile Include="Enums\PowderWeightType.cs" />
+    <Compile Include="Enums\WeightTypes.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Global\GeneralFunctions.cs" />
     <Compile Include="Global\GeneralSettings.cs" />

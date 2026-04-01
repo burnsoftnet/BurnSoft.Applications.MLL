@@ -290,6 +290,7 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             return bAns;
         }
+
         /// <summary>
         /// Updates the specified database path.
         /// </summary>
