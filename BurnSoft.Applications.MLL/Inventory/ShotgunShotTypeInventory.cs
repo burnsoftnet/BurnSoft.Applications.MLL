@@ -1,4 +1,5 @@
-﻿using BurnSoft.Applications.MLL.Global;
+﻿using BurnSoft.Applications.MLL.Enums;
+using BurnSoft.Applications.MLL.Global;
 using BurnSoft.Applications.MLL.Types;
 using System;
 using System.Collections.Generic;
@@ -291,6 +292,38 @@ namespace BurnSoft.Applications.MLL.Inventory
             return bAns;
         }
 
+        /// <summary>
+        /// Gets the type of the weight base on the weight string passed where first 
+        /// part is numeric and the second part is the weight type.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>WeightTypes.</returns>
+        public static WeightTypes GetWeightType(string value)
+        {
+            string weightValue = value.Split(' ')[1].ToLower().Trim();
+            switch (weightValue)
+            {
+                case "oz":
+                case "ounces":
+                case "oz.":
+                    return WeightTypes.Ounces;
+                case "grains":
+                case "gn":
+                case "gn.":
+                    return WeightTypes.Grains;
+                case "grams":
+                case "gm.":
+                case "gm":
+                    return WeightTypes.Grams;
+                case "lbs":
+                case "lbs.":
+                case "pound":
+                case "pounds":
+                    return WeightTypes.Pound;
+                default:
+                    return WeightTypes.Ounces;
+            }
+        }
         /// <summary>
         /// Updates the specified database path.
         /// </summary>

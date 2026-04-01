@@ -1,4 +1,5 @@
-﻿using BurnSoft.Applications.MLL.Inventory;
+﻿using BurnSoft.Applications.MLL.Enums;
+using BurnSoft.Applications.MLL.Inventory;
 using BurnSoft.Applications.MLL.Types;
 using BurnSoft.Applications.MLL.UnitTests.Settings;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -106,6 +107,70 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
                 TestContext.WriteLine(ex.Message);
             }
             General.HasTrueValue(bAns, _errOut);
+        }
+
+        [TestMethod, TestCategory("Inventory Listings - Shotgun Shot Types")]
+        public void GetWeightTypeOunces()
+        {
+            WeightTypes value = ShotgunShotTypeInventory.GetWeightType("1/2 oz");
+            bool bAns = (value == WeightTypes.Ounces);
+            General.HasTrueValue(bAns);
+        }
+
+        [TestMethod, TestCategory("Inventory Listings - Shotgun Shot Types")]
+        public void GetWeightTypeOunces2()
+        {
+            WeightTypes value = ShotgunShotTypeInventory.GetWeightType("1/2 oz.");
+            bool bAns = (value == WeightTypes.Ounces);
+            General.HasTrueValue(bAns);
+        }
+
+        [TestMethod, TestCategory("Inventory Listings - Shotgun Shot Types")]
+        public void GetWeightTypeGrains()
+        {
+            WeightTypes value = ShotgunShotTypeInventory.GetWeightType("1/2 gn");
+            bool bAns = (value == WeightTypes.Grains);
+            General.HasTrueValue(bAns);
+        }
+
+        [TestMethod, TestCategory("Inventory Listings - Shotgun Shot Types")]
+        public void GetWeightTypeGrains2()
+        {
+            WeightTypes value = ShotgunShotTypeInventory.GetWeightType("1/2 gn.");
+            bool bAns = (value == WeightTypes.Grains);
+            General.HasTrueValue(bAns);
+        }
+
+        [TestMethod, TestCategory("Inventory Listings - Shotgun Shot Types")]
+        public void GetWeightTypePound()
+        {
+            WeightTypes value = ShotgunShotTypeInventory.GetWeightType("1/2 lbs");
+            bool bAns = (value == WeightTypes.Grains);
+            General.HasTrueValue(bAns);
+        }
+
+        [TestMethod, TestCategory("Inventory Listings - Shotgun Shot Types")]
+        public void GetWeightTypePound2()
+        {
+            WeightTypes value = ShotgunShotTypeInventory.GetWeightType("1/2 lbs.");
+            bool bAns = (value == WeightTypes.Pound);
+            General.HasTrueValue(bAns);
+        }
+
+        [TestMethod, TestCategory("Inventory Listings - Shotgun Shot Types")]
+        public void GetWeightTypeGrams()
+        {
+            WeightTypes value = ShotgunShotTypeInventory.GetWeightType("1/2 gm");
+            bool bAns = (value == WeightTypes.Grams);
+            General.HasTrueValue(bAns);
+        }
+
+        [TestMethod, TestCategory("Inventory Listings - Shotgun Shot Types")]
+        public void GetWeightTypeGrams2()
+        {
+            WeightTypes value = ShotgunShotTypeInventory.GetWeightType("1/2 Grams");
+            bool bAns = (value == WeightTypes.Grams);
+            General.HasTrueValue(bAns);
         }
 
         [TestMethod, TestCategory("Inventory Listings - Shotgun Shot Types")]
