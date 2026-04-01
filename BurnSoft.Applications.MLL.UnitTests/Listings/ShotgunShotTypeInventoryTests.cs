@@ -57,7 +57,7 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             _isSlug = false;
             _materialUsed = "Lead/Zinc";
             _shotNumber = "7 1/2";
-            _weight = "1oz";
+            _weight = "1 oz";
             _caliber = "12 Gauge";
             _qty = 1000;
             _price = 39.99;
@@ -145,7 +145,7 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
         public void GetWeightTypePound()
         {
             WeightTypes value = ShotgunShotTypeInventory.GetWeightType("1/2 lbs");
-            bool bAns = (value == WeightTypes.Grains);
+            bool bAns = (value == WeightTypes.Pound);
             General.HasTrueValue(bAns);
         }
 

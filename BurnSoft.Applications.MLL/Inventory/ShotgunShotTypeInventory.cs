@@ -90,10 +90,10 @@ namespace BurnSoft.Applications.MLL.Inventory
                         ShotNumber = d["ShotNo"] != DBNull.Value ? d["ShotNo"].ToString().Trim() : "",
                         Weight = d["weight"] != DBNull.Value ? d["weight"].ToString().Trim() : "",
                         Caliber = d["CAL"] != DBNull.Value ? d["CAL"].ToString().Trim() : "",
-                        Ounces = Convert.ToDouble(d["ounces"]),
-                        Qty = Convert.ToInt32(d["Qty"]),
-                        Price = Convert.ToDouble(d["Price"]),
-                        EstimatedPricePerItem = Convert.ToDouble(d["epps"]),
+                        Ounces = d["ounces"] != DBNull.Value ? Convert.ToDouble(d["ounces"]) : 0,
+                        Qty = d["Qty"] != DBNull.Value ? Convert.ToInt32(d["Qty"]) : 0,
+                        Price = d["Price"] != DBNull.Value ? Convert.ToDouble(d["Price"]) : 0,
+                        EstimatedPricePerItem = d["epps"] != DBNull.Value ? Convert.ToDouble(d["epps"]) : 0,
                         LastSync = d["sync_lastupdate"].ToString().Trim(),
                     });
                 }
@@ -274,7 +274,8 @@ namespace BurnSoft.Applications.MLL.Inventory
             try
             {
                 int iSlug = isSlug ? 1 : 0;
-                double ounces = WeightValues.WEIGHT_OZ_1LBS * Convert.ToDouble(weight);
+                //double ounces = WeightValues.WEIGHT_OZ_1LBS * Convert.ToDouble(weight);
+                double ounces = ConvertValueTo(weight, WeightTypes.Ounces);
                 double grams = ounces * WeightValues.WEIGHT_GRAMS_OZ;
                 double costPerItem = price / grams;
                 string sql = $"INSERT INTO List_SG_ShotType_Details(Manufacturer,Name,IsSlug,mat," +
@@ -290,6 +291,33 @@ namespace BurnSoft.Applications.MLL.Inventory
                 errOut = ErrorMessage("Add", e);
             }
             return bAns;
+        }
+        /// <summary>
+        /// Converts the value to for the weight types, but this might already exist. just need to 
+        /// look around in the code.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="type">The type.</param>
+        /// <returns>System.Double.</returns>
+        public static double ConvertValueTo(string value, WeightTypes type)
+        {
+            double dAns = 0;
+            string numericValue = value.Split(' ')[0].Trim();
+            switch (type)
+            {
+                case WeightTypes.Ounces:
+                    WeightTypes myWeight = GetWeightType(value);
+                    if (myWeight == WeightTypes.Ounces)
+                    {
+                        dAns = Convert.ToDouble(numericValue);
+                    }
+                    else if( myWeight == WeightTypes.Pound)
+                    {
+                        dAns = WeightValues.WEIGHT_OZ_1LBS * Convert.ToDouble(numericValue);
+                    }
+                    break;
+            }
+            return dAns;
         }
 
         /// <summary>
@@ -349,7 +377,8 @@ namespace BurnSoft.Applications.MLL.Inventory
             try
             {
                 int iSlug = isSlug ? 1 : 0;
-                double ounces = WeightValues.WEIGHT_OZ_1LBS * Convert.ToDouble(weight);
+                //double ounces = WeightValues.WEIGHT_OZ_1LBS * Convert.ToDouble(weight);
+                double ounces = ConvertValueTo(weight, WeightTypes.Ounces);
                 double grams = ounces * WeightValues.WEIGHT_GRAMS_OZ;
                 double costPerItem = price / grams;
                 string sql = $"UPDATE List_SG_ShotType_Details set Manufacturer='{manufacturer}'," +
