@@ -81,7 +81,7 @@ The error out.
 Shotguns the update qty for items used in make laoded ammunition process
 
 ```csharp
-public static bool ShotgunUpdate(string databasePath, long qtyMade, long shotDetailsId, long shotDetailsQty, bool isSlug, double shotDetailsShotOz, double shotDetailsShotGrains, double shotDetailsMidRangeLoad, long wadsInStock, long wadsId, long primersInStockQty, long primerId, long caseInStockQty, long caseId, double powderInStockGrains, long perfferedPowderId, double midRangePowderUsed, String& errOut)
+public static bool ShotgunUpdate(string databasePath, long qtyMade, long shotDetailsId, long shotDetailsQty, bool isSlug, double shotDetailsShotOz, double shotDetailsShotGrains, double shotDetailsMidRangeLoadOz, long wadsInStock, long wadsId, long primersInStockQty, long primerId, long caseInStockQty, long caseId, double powderInStockGrains, long perfferedPowderId, double midRangePowderUsed, String& errOut)
 ```
 
 #### Parameters
@@ -107,7 +107,7 @@ The shot details shot oz.
 `shotDetailsShotGrains` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
 The shot details shot grains.
 
-`shotDetailsMidRangeLoad` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
+`shotDetailsMidRangeLoadOz` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
 The shot details mid range load.
 
 `wadsInStock` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
