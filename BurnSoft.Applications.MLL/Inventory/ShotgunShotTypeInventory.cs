@@ -88,7 +88,7 @@ namespace BurnSoft.Applications.MLL.Inventory
                         MaterialUsed = d["mat"] != DBNull.Value ? d["mat"].ToString().Trim() : "",
                         ShotNumber = d["ShotNo"] != DBNull.Value ? d["ShotNo"].ToString().Trim() : "",
                         Weight = d["weight"] != DBNull.Value ? d["weight"].ToString().Trim() : "",
-                        SlugDetails = d["CAL"] != DBNull.Value ? d["CAL"].ToString().Trim() : "",
+                        Caliber = d["CAL"] != DBNull.Value ? d["CAL"].ToString().Trim() : "",
                         Ounces = Convert.ToDouble(d["ounces"]),
                         Qty = Convert.ToInt32(d["Qty"]),
                         Price = Convert.ToDouble(d["Price"]),
@@ -260,13 +260,13 @@ namespace BurnSoft.Applications.MLL.Inventory
         /// <param name="weight">The weight.</param>
         /// <param name="isSlug">if set to <c>true</c> [is slug].</param>
         /// <param name="shotNumber">The shot number.</param>
-        /// <param name="shotDetails">The shot details.</param>
+        /// <param name="caliber">The caliber.</param>
         /// <param name="qty">The qty.</param>
         /// <param name="price">The price.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool Add(string databasePath, string manufacturer, string name, string materialUsed,
-            string weight, bool isSlug, string shotNumber, string shotDetails,int qty, double price, out string errOut)
+            string weight, bool isSlug, string shotNumber, string caliber,int qty, double price, out string errOut)
         {
             errOut = "";
             bool bAns = false;
@@ -279,7 +279,7 @@ namespace BurnSoft.Applications.MLL.Inventory
                 string sql = $"INSERT INTO List_SG_ShotType_Details(Manufacturer,Name,IsSlug,mat," +
                     $"weight,ShotNo,CAL,Qty,Price,epps,ounces,grams,sync_lastupdate) VALUES(" +
                     $"'{manufacturer}', '{name}',{iSlug}, '{materialUsed}', " +
-                    $"'{weight}','{shotNumber}','{shotDetails}',{qty}, {price}, " +
+                    $"'{weight}','{shotNumber}','{caliber}',{qty}, {price}, " +
                     $"{costPerItem}, {ounces}, {grams}, Now())";
 
                 bAns = Database.Execute(databasePath, sql, out errOut);
@@ -301,13 +301,13 @@ namespace BurnSoft.Applications.MLL.Inventory
         /// <param name="weight">The weight.</param>
         /// <param name="isSlug">if set to <c>true</c> [is slug].</param>
         /// <param name="shotNumber">The shot number.</param>
-        /// <param name="shotDetails">The shot details.</param>
+        /// <param name="caliber">The caliber details.</param>
         /// <param name="qty">The qty.</param>
         /// <param name="price">The price.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool Update(string databasePath, long id, string manufacturer, string name, 
-            string materialUsed, string weight, bool isSlug, string shotNumber, string shotDetails, 
+            string materialUsed, string weight, bool isSlug, string shotNumber, string caliber, 
             int qty, double price, out string errOut)
         {
             errOut = "";
@@ -320,7 +320,7 @@ namespace BurnSoft.Applications.MLL.Inventory
                 double costPerItem = price / grams;
                 string sql = $"UPDATE List_SG_ShotType_Details set Manufacturer='{manufacturer}'," +
                     $"Name='{name}',mat='{materialUsed}', IsSlug={iSlug}, ShotNo='{shotNumber}', " +
-                    $"weight='{weight}', CAL='{shotDetails}', qty={qty}, price={price}," +
+                    $"weight='{weight}', CAL='{caliber}', qty={qty}, price={price}," +
                     $" epps={costPerItem}, ounces={ounces}, grams={grams}," +
                     $"sync_lastupdate=Now() where id={id}";
 

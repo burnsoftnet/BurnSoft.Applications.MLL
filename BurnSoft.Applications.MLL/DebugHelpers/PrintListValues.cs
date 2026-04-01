@@ -184,7 +184,7 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
                     sAns += $"MaterialUsed : {v.MaterialUsed}{Environment.NewLine}";
                     sAns += $"ShotNumber : {v.ShotNumber}{Environment.NewLine}";
                     sAns += $"Weight : {v.Weight}{Environment.NewLine}";
-                    sAns += $"SlugDetails : {v.SlugDetails}{Environment.NewLine}";
+                    sAns += $"SlugDetails : {v.Caliber}{Environment.NewLine}";
                     sAns += $"Ounces : {v.Ounces}{Environment.NewLine}";
                     sAns += $"Qty : {v.Qty}{Environment.NewLine}";
                     sAns += $"Price : {v.Price}{Environment.NewLine}";

@@ -44,10 +44,10 @@ namespace BurnSoft.Applications.MLL.Types
         /// <value>The weight.</value>
         public string Weight { get; set; }
         /// <summary>
-        /// Gets or sets the slug details for the CAL column
+        /// Gets or sets the Caliber for the CAL column
         /// </summary>
         /// <value>The slug details.</value>
-        public string SlugDetails { get; set; }
+        public string Caliber { get; set; }
         /// <summary>
         /// Gets or sets the ounces.
         /// </summary>
