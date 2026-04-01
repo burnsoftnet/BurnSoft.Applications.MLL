@@ -1,13 +1,8 @@
-﻿using BurnSoft.Applications.MLL.Enums;
-using BurnSoft.Applications.MLL.Global;
+﻿using BurnSoft.Applications.MLL.Global;
 using BurnSoft.Applications.MLL.Types;
-using BurnSoft.Universal;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BurnSoft.Applications.MLL.Inventory
 {
