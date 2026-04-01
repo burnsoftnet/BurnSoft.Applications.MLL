@@ -54,6 +54,11 @@ namespace BurnSoft.Applications.MLL.Types
         /// <value>The ounces.</value>
         public double Ounces { get; set; }
         /// <summary>
+        /// Gets or sets the grams.
+        /// </summary>
+        /// <value>The grams.</value>
+        public double Grams { get; set; }
+        /// <summary>
         /// Gets or sets the qty.
         /// </summary>
         /// <value>The qty.</value>

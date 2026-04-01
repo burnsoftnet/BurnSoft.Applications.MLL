@@ -91,6 +91,7 @@ namespace BurnSoft.Applications.MLL.Inventory
                         Weight = d["weight"] != DBNull.Value ? d["weight"].ToString().Trim() : "",
                         Caliber = d["CAL"] != DBNull.Value ? d["CAL"].ToString().Trim() : "",
                         Ounces = d["ounces"] != DBNull.Value ? Convert.ToDouble(d["ounces"]) : 0,
+                        Grams = d["grams"] != DBNull.Value ? Convert.ToDouble(d["grams"]) : 0,
                         Qty = d["Qty"] != DBNull.Value ? Convert.ToInt32(d["Qty"]) : 0,
                         Price = d["Price"] != DBNull.Value ? Convert.ToDouble(d["Price"]) : 0,
                         EstimatedPricePerItem = d["epps"] != DBNull.Value ? Convert.ToDouble(d["epps"]) : 0,
