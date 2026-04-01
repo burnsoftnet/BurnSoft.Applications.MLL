@@ -133,6 +133,24 @@ The value.
 [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 System.String.
 
+### **ShotgunShotTypeDataData(List&lt;ShotgunShotTypeData&gt;)**
+
+Shotguns the shot type data data.
+
+```csharp
+public static string ShotgunShotTypeDataData(List<ShotgunShotTypeData> value)
+```
+
+#### Parameters
+
+`value` [List&lt;ShotgunShotTypeData&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+The value.
+
+#### Returns
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+System.String.
+
 ### **LoadersLogShotgunDataData(List&lt;LoadersLogShotgunData&gt;)**
 
 Loaderses the log shotgun data data.
