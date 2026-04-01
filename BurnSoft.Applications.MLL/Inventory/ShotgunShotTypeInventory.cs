@@ -396,6 +396,57 @@ namespace BurnSoft.Applications.MLL.Inventory
             return bAns;
         }
         /// <summary>
+        /// Updates the qty for a slug
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="newQty">The new qty.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool UpdateSlugQty(string databasePath, long id, long newQty, out string errOut)
+        {
+            errOut = "";
+            bool bAns = false;
+            try
+            {
+                string sql = $"UPDATE List_SG_ShotType_Details set Qty={newQty} where id={id}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("UpdateQty", e);
+            }
+            return bAns;
+        }
+        /// <summary>
+        /// Updates the qty.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="newShotOz">The new shot oz.</param>
+        /// <param name="newShotGrains">The new shot grains.</param>
+        /// <param name="newShotPounds">The new shot pounds.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool UpdateQty(string databasePath, long id, double newShotOz, double newShotGrains, 
+            double newShotPounds, out string errOut)
+        {
+            errOut = "";
+            bool bAns = false;
+            try
+            {
+                string sql = $"UPDATE List_SG_ShotType_Details set weight={newShotPounds}, " +
+                    $"ounces={newShotOz}, grams={newShotGrains} where id={id}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("UpdateQty", e);
+            }
+            return bAns;
+        }
+
+        /// <summary>
         /// Deletes the specified database path.
         /// </summary>
         /// <param name="databasePath">The database path.</param>

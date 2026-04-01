@@ -109,7 +109,7 @@ namespace BurnSoft.Applications.MLL.Inventory
         /// <param name="isSlug">if set to <c>true</c> [is slug].</param>
         /// <param name="shotDetailsShotOz">The shot details shot oz.</param>
         /// <param name="shotDetailsShotGrains">The shot details shot grains.</param>
-        /// <param name="shotDetailsMidRangeLoad">The shot details mid range load.</param>
+        /// <param name="shotDetailsMidRangeLoadOz">The shot details mid range load.</param>
         /// <param name="wadsInStock">The wads in stock.</param>
         /// <param name="wadsId">The wads identifier.</param>
         /// <param name="primersInStockQty">The primers in stock qty.</param>
@@ -123,7 +123,7 @@ namespace BurnSoft.Applications.MLL.Inventory
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="System.Exception"></exception>
         public static bool ShotgunUpdate(string databasePath, long qtyMade, long shotDetailsId, long shotDetailsQty, 
-            bool isSlug, double shotDetailsShotOz, double shotDetailsShotGrains, double shotDetailsMidRangeLoad, 
+            bool isSlug, double shotDetailsShotOz, double shotDetailsShotGrains, double shotDetailsMidRangeLoadOz, 
             long wadsInStock, long wadsId, long primersInStockQty, long primerId, long caseInStockQty, 
             long caseId, double powderInStockGrains, long perfferedPowderId, double midRangePowderUsed, out string errOut)
         {
@@ -134,15 +134,16 @@ namespace BurnSoft.Applications.MLL.Inventory
                 if (isSlug)
                 {
                     long newShotDetails = shotDetailsQty * qtyMade;
-                    // TODO: #36  UPDATE List_SG_ShotType_Details set Qty=" & newShotDetails & " where ID=" & shotDetailsId
+                    if (!ShotgunShotTypeInventory.UpdateSlugQty(databasePath, shotDetailsId, 
+                        newShotDetails, out errOut)) throw new Exception(errOut);
                 }
                 else
                 {
-                    double newShotOz = shotDetailsShotOz - (shotDetailsMidRangeLoad * qtyMade);
+                    double newShotOz = shotDetailsShotOz - (shotDetailsMidRangeLoadOz * qtyMade);
                     double newShotGrains = newShotOz * WeightValues.WEIGHT_GRAMS_OZ;
                     double newShotPounds = newShotOz / WeightValues.WEIGHT_OZ_1LBS;
-                    //QL = "UPDATE List_SG_ShotType_Details set weight=" & dNewShotLBS & _
-                    //        ", ounces=" & dNewShotOz & ", grams=" & dNewShotGrans & " where ID=" & BID
+                    if (!ShotgunShotTypeInventory.UpdateQty(databasePath, shotDetailsId,
+                        newShotOz, newShotGrains, newShotPounds, out errOut)) throw new Exception(errOut);
                 }
                 if (!UpdateWads(databasePath, primerId, primersInStockQty, qtyMade, out errOut)) throw new Exception(errOut);
                 if (!UpdatePrimers(databasePath, primerId, primersInStockQty, qtyMade, out errOut)) throw new Exception(errOut);
