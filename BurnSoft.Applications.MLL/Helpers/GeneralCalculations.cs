@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -82,6 +83,54 @@ namespace BurnSoft.Applications.MLL.Helpers
             catch (Exception e)
             {
                 errOut = ErrorMessage("CalculateMetallicRoundsToMake", e);
+            }
+            return lAns;
+        }
+
+        public static long CalculateShotgunRoundsToMake(double shotOzQty, double shotPrefferedLoad, long caseQty,
+            long wadQty, double powderQty, double powderMidRangeLoad, long primerQty, out string errOut)
+        {
+            errOut = "";
+            long lAns = 0;
+            try
+            {
+                long lowMarker = 0;
+                double powderPerBullet = (powderQty / powderMidRangeLoad);
+                double countMakeAble = (shotOzQty / shotPrefferedLoad);
+                lowMarker = (long)countMakeAble;
+                if (lowMarker > caseQty) lowMarker = caseQty;
+                if (lowMarker > wadQty) lowMarker = wadQty;
+                if (lowMarker > primerQty) lowMarker = primerQty;
+                if (lowMarker > powderPerBullet) lowMarker = Convert.ToInt64(powderPerBullet);
+                lAns = lowMarker;
+
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("CalculateShotgunRoundsToMake", e);
+            }
+            return lAns;
+        }
+
+        public static long CalculateShotgunSlugRoundsToMake(long slugQty, long caseQty,
+            long wadQty, double powderQty, double powderMidRangeLoad, long primerQty, out string errOut)
+        {
+            errOut = "";
+            long lAns = 0;
+            try
+            {
+                long lowMarker = 0;
+                double powderPerBullet = (powderQty / powderMidRangeLoad);
+                lowMarker = slugQty;
+                if (lowMarker > caseQty) lowMarker = caseQty;
+                if (lowMarker > wadQty) lowMarker = wadQty;
+                if (lowMarker > primerQty) lowMarker = primerQty;
+                if (lowMarker > powderPerBullet) lowMarker = Convert.ToInt64(powderPerBullet);
+                lAns = lowMarker;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("CalculateShotgunSlugRoundsToMake", e);
             }
             return lAns;
         }
