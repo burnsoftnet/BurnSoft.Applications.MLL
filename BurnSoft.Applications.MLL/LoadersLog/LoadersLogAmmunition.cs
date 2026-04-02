@@ -364,6 +364,30 @@ namespace BurnSoft.Applications.MLL.LoadersLog
             return bAns;
         }
         /// <summary>
+        /// Updates the qty.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="newQty">The new qty.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool UpdateQty(string databasePath, long id, long newQty, out string errOut)
+        {
+            errOut = "";
+            bool bAns = false;
+            try
+            {
+                string sql = $"UPDATE Loaders_Log_Ammunition set Qty={newQty} where id={id}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("UpdateQty", e);
+            }
+            return bAns;
+        }
+
+        /// <summary>
         /// Deletes the specified database path.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
