@@ -131,6 +131,19 @@ public double Ounces { get; set; }
 [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
 The ounces.
 
+### **Grams**
+
+Gets or sets the grams.
+
+```csharp
+public double Grams { get; set; }
+```
+
+#### Property Value
+
+[Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
+The grams.
+
 ### **Qty**
 
 Gets or sets the qty.

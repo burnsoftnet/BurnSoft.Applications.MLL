@@ -70,6 +70,8 @@
 
 [Converters](./burnsoft.applications.mll.helpers.converters.md)
 
+[GeneralCalculations](./burnsoft.applications.mll.helpers.generalcalculations.md)
+
 [GeneralHelpers](./burnsoft.applications.mll.helpers.generalhelpers.md)
 
 ## BurnSoft.Applications.MLL.hotixes
