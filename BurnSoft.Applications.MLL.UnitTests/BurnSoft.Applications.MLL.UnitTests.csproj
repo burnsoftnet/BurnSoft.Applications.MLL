@@ -222,6 +222,7 @@
     <Compile Include="Global\WishlistsTests.cs" />
     <Compile Include="Global\WeightValuesTest.cs" />
     <Compile Include="Helpers\ConvertersTest.cs" />
+    <Compile Include="Helpers\GeneralCalculationsTests.cs" />
     <Compile Include="Listings\BulletsTest.cs" />
     <Compile Include="Listings\CaliberInventoryTests.cs" />
     <Compile Include="Listings\CaseInventoryTests.cs" />
