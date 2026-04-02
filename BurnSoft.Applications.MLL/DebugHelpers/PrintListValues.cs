@@ -166,6 +166,36 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
             return sAns;
         }
         /// <summary>
+        /// Shotguns the shot type data data.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string ShotgunShotTypeDataData(List<ShotgunShotTypeData> value)
+        {
+            string sAns = "";
+            if (value.Count > 0)
+            {
+                foreach (ShotgunShotTypeData v in value)
+                {
+                    sAns += $"id : {v.Id}{Environment.NewLine}";
+                    sAns += $"Manufacturer : {v.Manufacturer}{Environment.NewLine}";
+                    sAns += $"Name : {v.Name}{Environment.NewLine}";
+                    sAns += $"IsSlug : {v.IsSlug}{Environment.NewLine}";
+                    sAns += $"MaterialUsed : {v.MaterialUsed}{Environment.NewLine}";
+                    sAns += $"ShotNumber : {v.ShotNumber}{Environment.NewLine}";
+                    sAns += $"Weight : {v.Weight}{Environment.NewLine}";
+                    sAns += $"SlugDetails : {v.Caliber}{Environment.NewLine}";
+                    sAns += $"Ounces : {v.Ounces}{Environment.NewLine}";
+                    sAns += $"Qty : {v.Qty}{Environment.NewLine}";
+                    sAns += $"Price : {v.Price}{Environment.NewLine}";
+                    sAns += $"EstimatedPricePerItem : {v.EstimatedPricePerItem}{Environment.NewLine}";
+                    sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                }
+            }
+            return sAns;
+        }
+
+        /// <summary>
         /// Loaderses the log shotgun data data.
         /// </summary>
         /// <param name="value">The value.</param>

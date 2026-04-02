@@ -1,26 +1,24 @@
-﻿using BurnSoft.Applications.MLL.Helpers;
+﻿using BurnSoft.Applications.MLL.Enums;
+using BurnSoft.Applications.MLL.Global;
 using BurnSoft.Applications.MLL.Types;
 using System;
 using System.Collections.Generic;
 using System.Data;
 
-namespace BurnSoft.Applications.MLL.LoadersLog
+namespace BurnSoft.Applications.MLL.Inventory
 {
     /// <summary>
-    /// Class LoadersLogAmmunition handles the data in the 
-    /// Loaders_Log_Ammunition Table which is where the 
-    /// Make Ammunition function stores the ammo to ether 
-    /// track on your own or export to the My Gun 
-    /// Collection application
+    /// Class ShotgunShotTypeInventory handles the data in 
+    /// the List_SG_ShotType_Details table
     /// </summary>
-    public class LoadersLogAmmunition
+    public class ShotgunShotTypeInventory
     {
         #region "Exception Error Handling"
 
         /// <summary>
         /// The class location
         /// </summary>
-        private static string ClassLocation = "BurnSoft.Applications.MLL.Inventory.LoadersLogAmmunition";
+        private static string ClassLocation = "BurnSoft.Applications.MLL.Inventory.ShotgunShotTypeInventory";
 
         /// <summary>
         /// Errors the message for regular Exceptions
@@ -67,32 +65,36 @@ namespace BurnSoft.Applications.MLL.LoadersLog
         private static string ErrorMessage(string functionName, ArgumentNullException e) =>
             $"{ClassLocation}.{functionName} - {e.Message}";
 
-        #endregion                                
+        #endregion                                                
         /// <summary>
         /// Gets the data.
         /// </summary>
         /// <param name="dt">The dt.</param>
         /// <param name="errOut">The error out.</param>
-        /// <returns>List&lt;LoadersLogAmmunitionData&gt;.</returns>
-        private static List<LoadersLogAmmunitionData> GetData(DataTable dt, out string errOut)
+        /// <returns>List&lt;ShotgunShotTypeData&gt;.</returns>
+        private static List<ShotgunShotTypeData> GetData(DataTable dt, out string errOut)
         {
-            List<LoadersLogAmmunitionData> lst = new List<LoadersLogAmmunitionData>();
+            List<ShotgunShotTypeData> lst = new List<ShotgunShotTypeData>();
             errOut = "";
             try
             {
                 foreach (DataRow d in dt.Rows)
                 {
-                    lst.Add(new LoadersLogAmmunitionData()
+                    lst.Add(new ShotgunShotTypeData()
                     {
                         Id = Convert.ToInt32(d["id"]),
                         Manufacturer = d["Manufacturer"] != DBNull.Value ? d["Manufacturer"].ToString().Trim() : "",
                         Name = d["Name"] != DBNull.Value ? d["Name"].ToString().Trim() : "",
-                        Caliber = d["Cal"] != DBNull.Value ? d["Cal"].ToString().Trim() : "",
-                        Grain = d["Grain"] != DBNull.Value ? d["Grain"].ToString().Trim() : "",
-                        Jacket = d["Jacket"] != DBNull.Value ? d["Jacket"].ToString().Trim() : "",
-                        Qty = Convert.ToInt32(d["Qty"]),
-                        GrainDouble = Convert.ToDouble(d["dcal"]),
-                        Velocity = Convert.ToInt32(d["Vel"]),
+                        IsSlug = Convert.ToInt32(d["IsSlug"]) == 1 ? true : false,
+                        MaterialUsed = d["mat"] != DBNull.Value ? d["mat"].ToString().Trim() : "",
+                        ShotNumber = d["ShotNo"] != DBNull.Value ? d["ShotNo"].ToString().Trim() : "",
+                        Weight = d["weight"] != DBNull.Value ? d["weight"].ToString().Trim() : "",
+                        Caliber = d["CAL"] != DBNull.Value ? d["CAL"].ToString().Trim() : "",
+                        Ounces = d["ounces"] != DBNull.Value ? Convert.ToDouble(d["ounces"]) : 0,
+                        Grams = d["grams"] != DBNull.Value ? Convert.ToDouble(d["grams"]) : 0,
+                        Qty = d["Qty"] != DBNull.Value ? Convert.ToInt32(d["Qty"]) : 0,
+                        Price = d["Price"] != DBNull.Value ? Convert.ToDouble(d["Price"]) : 0,
+                        EstimatedPricePerItem = d["epps"] != DBNull.Value ? Convert.ToDouble(d["epps"]) : 0,
                         LastSync = d["sync_lastupdate"].ToString().Trim(),
                     });
                 }
@@ -109,11 +111,11 @@ namespace BurnSoft.Applications.MLL.LoadersLog
         /// <param name="databasePath">The database path.</param>
         /// <param name="sql">The SQL.</param>
         /// <param name="errOut">The error out.</param>
-        /// <returns>List&lt;LoadersLogAmmunitionData&gt;.</returns>
+        /// <returns>List&lt;ShotgunShotTypeData&gt;.</returns>
         /// <exception cref="System.Exception"></exception>
-        private static List<LoadersLogAmmunitionData> GetList(string databasePath, string sql, out string errOut)
+        private static List<ShotgunShotTypeData> GetList(string databasePath, string sql, out string errOut)
         {
-            List<LoadersLogAmmunitionData> lst = new List<LoadersLogAmmunitionData>();
+            List<ShotgunShotTypeData> lst = new List<ShotgunShotTypeData>();
             errOut = "";
             try
             {
@@ -134,10 +136,10 @@ namespace BurnSoft.Applications.MLL.LoadersLog
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="errOut">The error out.</param>
-        /// <returns>List&lt;LoadersLogAmmunitionData&gt;.</returns>
-        public static List<LoadersLogAmmunitionData> GetAll(string databasePath, out string errOut)
+        /// <returns>List&lt;ShotgunShotTypeData&gt;.</returns>
+        public static List<ShotgunShotTypeData> GetAll(string databasePath, out string errOut)
         {
-            string sql = $"Select * from Loaders_Log_Ammunition order by Manufacturer,Name  ASC";
+            string sql = $"Select * from List_SG_ShotType_Details order by Manufacturer,Name  ASC";
             return GetList(databasePath, sql, out errOut);
         }
         /// <summary>
@@ -146,19 +148,21 @@ namespace BurnSoft.Applications.MLL.LoadersLog
         /// <param name="databasePath">The database path.</param>
         /// <param name="manufacturer">The manufacturer.</param>
         /// <param name="name">The name.</param>
+        /// <param name="materialUsed">The material used.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns>System.Int64.</returns>
         /// <exception cref="System.Exception"></exception>
-        public static long GetId(string databasePath, string manufacturer, string name, out string errOut)
+        public static long GetId(string databasePath, string manufacturer, string name, string materialUsed, out string errOut)
         {
             errOut = "";
             long lAns = 0;
             try
             {
-                string sql = $"Select * from Loaders_Log_Ammunition where manufacturer='{manufacturer}' and name='{name}'";
-                List<LoadersLogAmmunitionData> lst = GetList(databasePath, sql, out errOut);
+                string sql = $"Select * from List_SG_ShotType_Details where manufacturer='{manufacturer}' " +
+                    $"and name='{name}' and mat='{materialUsed}'";
+                List<ShotgunShotTypeData> lst = GetList(databasePath, sql, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
-                foreach (LoadersLogAmmunitionData i in lst)
+                foreach (ShotgunShotTypeData i in lst)
                 {
                     lAns = i.Id;
                     break;
@@ -176,11 +180,14 @@ namespace BurnSoft.Applications.MLL.LoadersLog
         /// <param name="databasePath">The database path.</param>
         /// <param name="manufacturer">The manufacturer.</param>
         /// <param name="name">The name.</param>
+        /// <param name="materialUsed">The material used.</param>
         /// <param name="errOut">The error out.</param>
-        /// <returns>List&lt;LoadersLogAmmunitionData&gt;.</returns>
-        public static List<LoadersLogAmmunitionData> GetDetails(string databasePath, string manufacturer, string name, out string errOut)
+        /// <returns>List&lt;ShotgunShotTypeData&gt;.</returns>
+        public static List<ShotgunShotTypeData> GetDetails(string databasePath, string manufacturer,
+            string name, string materialUsed, out string errOut)
         {
-            string sql = $"Select * from Loaders_Log_Ammunition where manufacturer='{manufacturer}' and name='{name}'";
+            string sql = $"Select * from List_SG_ShotType_Details where manufacturer='{manufacturer}' " +
+                $"and name='{name}' and mat='{materialUsed}'";
             return GetList(databasePath, sql, out errOut);
         }
         /// <summary>
@@ -189,56 +196,11 @@ namespace BurnSoft.Applications.MLL.LoadersLog
         /// <param name="databasePath">The database path.</param>
         /// <param name="id">The identifier.</param>
         /// <param name="errOut">The error out.</param>
-        /// <returns>List&lt;LoadersLogAmmunitionData&gt;.</returns>
-        public static List<LoadersLogAmmunitionData> GetDetails(string databasePath, long id, out string errOut)
+        /// <returns>List&lt;ShotgunShotTypeData&gt;.</returns>
+        public static List<ShotgunShotTypeData> GetDetails(string databasePath, long id, out string errOut)
         {
-            string sql = $"Select * from Loaders_Log_Ammunition where id={id}";
+            string sql = $"Select * from List_SG_ShotType_Details where id={id}";
             return GetList(databasePath, sql, out errOut);
-        }
-        /// <summary>
-        /// Determines whether the ammo is already listed in the ammo log from the make ready functions 
-        /// based on all the fields that is passed.  If it is then it will also return the qty and 
-        /// ammo ID so you can updated the table accordingly.
-        /// </summary>
-        /// <param name="databasePath">The database path.</param>
-        /// <param name="manufacturer">The manufacturer.</param>
-        /// <param name="name">The name.</param>
-        /// <param name="caliber">The caliber.</param>
-        /// <param name="grain">The grain.</param>
-        /// <param name="jacket">The jacket.</param>
-        /// <param name="errOut">The error out.</param>
-        /// <param name="qty">The qty.</param>
-        /// <param name="ammoId">The ammo identifier.</param>
-        /// <returns><c>true</c> if [is already listed] [the specified database path]; otherwise, <c>false</c>.</returns>
-        /// <exception cref="System.Exception"></exception>
-        public static bool IsAlreadyListed(string databasePath, string manufacturer, string name, string caliber, 
-            string grain, string jacket, out string errOut, out long qty, out long ammoId)
-        {
-            qty = 0;
-            ammoId = 0;
-            errOut = "";
-            bool bAns = false;
-            try
-            {
-                string sql = $"SELECT * from Loaders_Log_Ammunition where Manufacturer='{manufacturer}'  and Name='{name}' " +
-                    $"and Cal='{caliber}' and Grain='{grain}' and Jacket='{jacket}'";
-                List<LoadersLogAmmunitionData> lst = GetList(databasePath, sql, out errOut);
-                if (errOut.Length > 0) throw new Exception(errOut);
-                if (lst.Count > 0)
-                {
-                    foreach (LoadersLogAmmunitionData i in lst)
-                    {
-                        qty = i.Qty;
-                        ammoId = i.Id;
-                    }
-                    bAns = true;
-                }
-            }
-            catch (Exception e)
-            {
-                errOut = ErrorMessage("IsAlreadyListed", e);
-            }
-            return bAns;
         }
         /// <summary>
         /// Datas the exists.
@@ -253,7 +215,7 @@ namespace BurnSoft.Applications.MLL.LoadersLog
             errOut = @"";
             try
             {
-                List<LoadersLogAmmunitionData> lst = GetAll(databasePath, out errOut);
+                List<ShotgunShotTypeData> lst = GetAll(databasePath, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 bAns = lst.Count > 0;
             }
@@ -269,17 +231,18 @@ namespace BurnSoft.Applications.MLL.LoadersLog
         /// <param name="databasePath">The database path.</param>
         /// <param name="manufacturer">The manufacturer.</param>
         /// <param name="name">The name.</param>
+        /// <param name="materialUsed">The material used.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="System.Exception"></exception>
-        public static bool DataExists(string databasePath, string manufacturer, string name, out string errOut)
+        public static bool DataExists(string databasePath, string manufacturer, string name, string materialUsed, out string errOut)
         {
             bool bAns = false;
             errOut = @"";
             try
             {
 
-                List<LoadersLogAmmunitionData> lst = GetDetails(databasePath, manufacturer, name, out errOut);
+                List<ShotgunShotTypeData> lst = GetDetails(databasePath, manufacturer, name, materialUsed, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 bAns = lst.Count > 0;
             }
@@ -295,27 +258,32 @@ namespace BurnSoft.Applications.MLL.LoadersLog
         /// <param name="databasePath">The database path.</param>
         /// <param name="manufacturer">The manufacturer.</param>
         /// <param name="name">The name.</param>
+        /// <param name="materialUsed">The material used.</param>
+        /// <param name="weight">The weight.</param>
+        /// <param name="isSlug">if set to <c>true</c> [is slug].</param>
+        /// <param name="shotNumber">The shot number.</param>
         /// <param name="caliber">The caliber.</param>
-        /// <param name="grain">The grain.</param>
-        /// <param name="jacket">The jacket.</param>
         /// <param name="qty">The qty.</param>
-        /// <param name="velocity">The velocity.</param>
+        /// <param name="price">The price.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        /// <exception cref="System.Exception"></exception>
-        public static bool Add(string databasePath, string manufacturer, string name, string caliber,
-            string grain, string jacket, long qty, int velocity, out string errOut)
+        public static bool Add(string databasePath, string manufacturer, string name, string materialUsed,
+            string weight, bool isSlug, string shotNumber, string caliber,int qty, double price, out string errOut)
         {
             errOut = "";
             bool bAns = false;
             try
             {
-                double dGrains = Converters.ConvertToNumber(grain, out errOut);
-                if (errOut.Length > 0) throw new Exception(errOut);
-                string sql = $"INSERT INTO Loaders_Log_Ammunition(Manufacturer,Name,Cal," +
-                    $"Grain,Jacket,Qty,dcal,Vel,sync_lastupdate) VALUES(" +
-                    $"'{manufacturer}', '{name}', '{caliber}', " +
-                    $"'{grain}', '{jacket}', {qty}, {dGrains}, {velocity}, Now())";
+                int iSlug = isSlug ? 1 : 0;
+                //double ounces = WeightValues.WEIGHT_OZ_1LBS * Convert.ToDouble(weight);
+                double ounces = ConvertValueTo(weight, WeightTypes.Ounces);
+                double grams = ounces * WeightValues.WEIGHT_GRAMS_OZ;
+                double costPerItem = price / grams;
+                string sql = $"INSERT INTO List_SG_ShotType_Details(Manufacturer,Name,IsSlug,mat," +
+                    $"weight,ShotNo,CAL,Qty,Price,epps,ounces,grams,sync_lastupdate) VALUES(" +
+                    $"'{manufacturer}', '{name}',{iSlug}, '{materialUsed}', " +
+                    $"'{weight}','{shotNumber}','{caliber}',{qty}, {price}, " +
+                    $"{costPerItem}, {ounces}, {grams}, Now())";
 
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
@@ -326,33 +294,98 @@ namespace BurnSoft.Applications.MLL.LoadersLog
             return bAns;
         }
         /// <summary>
+        /// Converts the value to for the weight types, but this might already exist. just need to 
+        /// look around in the code.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="type">The type.</param>
+        /// <returns>System.Double.</returns>
+        public static double ConvertValueTo(string value, WeightTypes type)
+        {
+            double dAns = 0;
+            string numericValue = value.Split(' ')[0].Trim();
+            switch (type)
+            {
+                case WeightTypes.Ounces:
+                    WeightTypes myWeight = GetWeightType(value);
+                    if (myWeight == WeightTypes.Ounces)
+                    {
+                        dAns = Convert.ToDouble(numericValue);
+                    }
+                    else if( myWeight == WeightTypes.Pound)
+                    {
+                        dAns = WeightValues.WEIGHT_OZ_1LBS * Convert.ToDouble(numericValue);
+                    }
+                    break;
+            }
+            return dAns;
+        }
+
+        /// <summary>
+        /// Gets the type of the weight base on the weight string passed where first 
+        /// part is numeric and the second part is the weight type.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>WeightTypes.</returns>
+        public static WeightTypes GetWeightType(string value)
+        {
+            string weightValue = value.Split(' ')[1].ToLower().Trim();
+            switch (weightValue)
+            {
+                case "oz":
+                case "ounces":
+                case "oz.":
+                    return WeightTypes.Ounces;
+                case "grains":
+                case "gn":
+                case "gn.":
+                    return WeightTypes.Grains;
+                case "grams":
+                case "gm.":
+                case "gm":
+                    return WeightTypes.Grams;
+                case "lbs":
+                case "lbs.":
+                case "pound":
+                case "pounds":
+                    return WeightTypes.Pound;
+                default:
+                    return WeightTypes.Ounces;
+            }
+        }
+        /// <summary>
         /// Updates the specified database path.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="id">The identifier.</param>
         /// <param name="manufacturer">The manufacturer.</param>
         /// <param name="name">The name.</param>
-        /// <param name="caliber">The caliber.</param>
-        /// <param name="grain">The grain.</param>
-        /// <param name="jacket">The jacket.</param>
+        /// <param name="materialUsed">The material used.</param>
+        /// <param name="weight">The weight.</param>
+        /// <param name="isSlug">if set to <c>true</c> [is slug].</param>
+        /// <param name="shotNumber">The shot number.</param>
+        /// <param name="caliber">The caliber details.</param>
         /// <param name="qty">The qty.</param>
-        /// <param name="velocity">The velocity.</param>
+        /// <param name="price">The price.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        /// <exception cref="System.Exception"></exception>
-        public static bool Update(string databasePath, long id, string manufacturer,
-            string name, string caliber, string grain, string jacket, long qty, 
-            int velocity, out string errOut)
+        public static bool Update(string databasePath, long id, string manufacturer, string name, 
+            string materialUsed, string weight, bool isSlug, string shotNumber, string caliber, 
+            int qty, double price, out string errOut)
         {
             errOut = "";
             bool bAns = false;
             try
             {
-                double dGrains = Converters.ConvertToNumber(grain, out errOut);
-                if (errOut.Length > 0) throw new Exception(errOut);
-                string sql = $"UPDATE Loaders_Log_Ammunition set Manufacturer='{manufacturer}'," +
-                    $"Name='{name}',Cal='{caliber}',Grain='{grain}', " +
-                    $"Jacket='{jacket}', Qty={qty}, vel={velocity}, dcal={dGrains}," +
+                int iSlug = isSlug ? 1 : 0;
+                //double ounces = WeightValues.WEIGHT_OZ_1LBS * Convert.ToDouble(weight);
+                double ounces = ConvertValueTo(weight, WeightTypes.Ounces);
+                double grams = ounces * WeightValues.WEIGHT_GRAMS_OZ;
+                double costPerItem = price / grams;
+                string sql = $"UPDATE List_SG_ShotType_Details set Manufacturer='{manufacturer}'," +
+                    $"Name='{name}',mat='{materialUsed}', IsSlug={iSlug}, ShotNo='{shotNumber}', " +
+                    $"weight='{weight}', CAL='{caliber}', qty={qty}, price={price}," +
+                    $" epps={costPerItem}, ounces={ounces}, grams={grams}," +
                     $"sync_lastupdate=Now() where id={id}";
 
                 bAns = Database.Execute(databasePath, sql, out errOut);
@@ -364,20 +397,47 @@ namespace BurnSoft.Applications.MLL.LoadersLog
             return bAns;
         }
         /// <summary>
-        /// Updates the qty.
+        /// Updates the qty for a slug
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="id">The identifier.</param>
         /// <param name="newQty">The new qty.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public static bool UpdateQty(string databasePath, long id, long newQty, out string errOut)
+        public static bool UpdateSlugQty(string databasePath, long id, long newQty, out string errOut)
         {
             errOut = "";
             bool bAns = false;
             try
             {
-                string sql = $"UPDATE Loaders_Log_Ammunition set Qty={newQty} where id={id}";
+                string sql = $"UPDATE List_SG_ShotType_Details set Qty={newQty} where id={id}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("UpdateQty", e);
+            }
+            return bAns;
+        }
+        /// <summary>
+        /// Updates the qty.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="newShotOz">The new shot oz.</param>
+        /// <param name="newShotGrains">The new shot grains.</param>
+        /// <param name="newShotPounds">The new shot pounds.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool UpdateQty(string databasePath, long id, double newShotOz, double newShotGrains, 
+            double newShotPounds, out string errOut)
+        {
+            errOut = "";
+            bool bAns = false;
+            try
+            {
+                string sql = $"UPDATE List_SG_ShotType_Details set weight={newShotPounds}, " +
+                    $"ounces={newShotOz}, grams={newShotGrains} where id={id}";
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
             catch (Exception e)
@@ -400,7 +460,7 @@ namespace BurnSoft.Applications.MLL.LoadersLog
             bool bAns = false;
             try
             {
-                string sql = $"DELETE from Loaders_Log_Ammunition where id={id}";
+                string sql = $"DELETE from List_SG_ShotType_Details where id={id}";
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
             catch (Exception e)
@@ -415,16 +475,18 @@ namespace BurnSoft.Applications.MLL.LoadersLog
         /// <param name="databasePath">The database path.</param>
         /// <param name="manufacturer">The manufacturer.</param>
         /// <param name="name">The name.</param>
+        /// <param name="materialUsed">The material used.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="System.Exception"></exception>
-        public static bool Delete(string databasePath, string manufacturer, string name, out string errOut)
+        public static bool Delete(string databasePath, string manufacturer, string name, 
+            string materialUsed, out string errOut)
         {
             errOut = "";
             bool bAns = false;
             try
             {
-                long id = GetId(databasePath, manufacturer, name, out errOut);
+                long id = GetId(databasePath, manufacturer, name, materialUsed, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 bAns = Delete(databasePath, id, out errOut);
             }

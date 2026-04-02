@@ -307,7 +307,7 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
             {
                 double powderLoad = 0;
                 double? fps = 0;
-                long value = ConfigListDataPowder.GetDefaultPowderId(_databasePath, _existingConfigId, 
+                long value = ConfigListDataPowder.GetDefaultPowderId(_databasePath, _existingConfigId,
                     out powderLoad, out fps, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine($"POWDER ID RETURNED {value}");

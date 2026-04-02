@@ -52,6 +52,8 @@
 
 [PowderWeightType](./burnsoft.applications.mll.enums.powderweighttype.md)
 
+[WeightTypes](./burnsoft.applications.mll.enums.weighttypes.md)
+
 ## BurnSoft.Applications.MLL.Global
 
 [GeneralFunctions](./burnsoft.applications.mll.global.generalfunctions.md)
@@ -67,6 +69,8 @@
 ## BurnSoft.Applications.MLL.Helpers
 
 [Converters](./burnsoft.applications.mll.helpers.converters.md)
+
+[GeneralCalculations](./burnsoft.applications.mll.helpers.generalcalculations.md)
 
 [GeneralHelpers](./burnsoft.applications.mll.helpers.generalhelpers.md)
 
@@ -101,6 +105,8 @@
 [ShotgunPowderInventory](./burnsoft.applications.mll.inventory.shotgunpowderinventory.md)
 
 [ShotgunShotInventory](./burnsoft.applications.mll.inventory.shotgunshotinventory.md)
+
+[ShotgunShotTypeInventory](./burnsoft.applications.mll.inventory.shotgunshottypeinventory.md)
 
 [WadInventory](./burnsoft.applications.mll.inventory.wadinventory.md)
 
@@ -189,6 +195,8 @@
 [ShotgunPowderListings](./burnsoft.applications.mll.types.shotgunpowderlistings.md)
 
 [ShotgunShotListings](./burnsoft.applications.mll.types.shotgunshotlistings.md)
+
+[ShotgunShotTypeData](./burnsoft.applications.mll.types.shotgunshottypedata.md)
 
 [SyncTablesData](./burnsoft.applications.mll.types.synctablesdata.md)
 

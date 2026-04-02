@@ -73,14 +73,17 @@
     <Compile Include="Database.cs" />
     <Compile Include="DebugHelpers\PrintListValues.cs" />
     <Compile Include="Enums\PowderWeightType.cs" />
+    <Compile Include="Enums\WeightTypes.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Global\GeneralFunctions.cs" />
     <Compile Include="Global\GeneralSettings.cs" />
     <Compile Include="Global\MyRegistry.cs" />
     <Compile Include="Global\Wishlists.cs" />
+    <Compile Include="Helpers\GeneralCalculations.cs" />
     <Compile Include="Inventory\InventoryUpdate.cs" />
     <Compile Include="Inventory\ShotgunHullInventory.cs" />
     <Compile Include="Inventory\ShotgunShotInventory.cs" />
+    <Compile Include="Inventory\ShotgunShotTypeInventory.cs" />
     <Compile Include="Inventory\WadInventory.cs" />
     <Compile Include="Search\SyncTables.cs" />
     <Compile Include="Global\WeightValues.cs" />
@@ -137,6 +140,7 @@
     <Compile Include="Types\ShotgunHullData.cs" />
     <Compile Include="Types\ShotgunPowderListings.cs" />
     <Compile Include="Types\ShotgunShotListings.cs" />
+    <Compile Include="Types\ShotgunShotTypeData.cs" />
     <Compile Include="Types\SyncTablesData.cs" />
     <Compile Include="Types\WadData.cs" />
     <Compile Include="Types\WishlistData.cs" />
