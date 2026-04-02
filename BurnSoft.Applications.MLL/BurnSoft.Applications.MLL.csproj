@@ -144,6 +144,8 @@
     <Compile Include="Types\SyncTablesData.cs" />
     <Compile Include="Types\WadData.cs" />
     <Compile Include="Types\WishlistData.cs" />
+    <Compile Include="Xml\ConfigurationSheets.cs" />
+    <Compile Include="Xml\XmlConstants.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bswtsicon.png" />
