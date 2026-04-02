@@ -79,6 +79,7 @@
     <Compile Include="Global\GeneralSettings.cs" />
     <Compile Include="Global\MyRegistry.cs" />
     <Compile Include="Global\Wishlists.cs" />
+    <Compile Include="Helpers\GeneralCalculations.cs" />
     <Compile Include="Inventory\InventoryUpdate.cs" />
     <Compile Include="Inventory\ShotgunHullInventory.cs" />
     <Compile Include="Inventory\ShotgunShotInventory.cs" />
