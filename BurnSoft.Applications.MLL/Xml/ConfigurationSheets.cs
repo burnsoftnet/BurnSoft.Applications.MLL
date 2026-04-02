@@ -1,4 +1,6 @@
-﻿using BurnSoft.Universal;
+﻿using BurnSoft.Applications.MLL.ConfigSheets;
+using BurnSoft.Applications.MLL.Types;
+using BurnSoft.Universal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -61,6 +63,8 @@ namespace BurnSoft.Applications.MLL.Xml
             {
                 string body = $"<?xml version=\"1.0\" encoding=\"utf-8\" ?>{Environment.NewLine}";
                 body += $"<Inventory>{Environment.NewLine}";
+                List<ConfigListAllMetallicData> lst = ConfigListAll.Metallic(databasePath, configId, out errOut);
+
                 //TODO Add Function Here
                 body += $"</Inventory>{Environment.NewLine}";
                 body = body.Replace("&", XmlConstants.Ampersand);
