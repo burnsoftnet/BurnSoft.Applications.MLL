@@ -62,6 +62,7 @@
     <Compile Include="AutoFill\GeneralShotgun.cs" />
     <Compile Include="AutoFill\Powder.cs" />
     <Compile Include="AutoFill\Primers.cs" />
+    <Compile Include="ConfigSheets\ConfigListAll.cs" />
     <Compile Include="ConfigSheets\ConfigListDataMetalic.cs" />
     <Compile Include="ConfigSheets\ConfigListDataName.cs" />
     <Compile Include="ConfigSheets\ConfigListDataPowder.cs" />
@@ -117,6 +118,8 @@
     <Compile Include="Types\BulletSupportingCaliber.cs" />
     <Compile Include="Types\CaliberLists.cs" />
     <Compile Include="Types\CaseListings.cs" />
+    <Compile Include="Types\ConfigListAllMetallicData.cs" />
+    <Compile Include="Types\ConfigListAllShotgunData.cs" />
     <Compile Include="Types\ConfigListDataMetalicData.cs" />
     <Compile Include="Types\ConfigListDataShotgunData.cs" />
     <Compile Include="Types\ConfigListPowderData.cs" />
