@@ -238,7 +238,7 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
                 if (errOut.Length > 0) throw new Exception(errOut);
                 foreach (ConfigListPowderData l in lst)
                 {
-                    lAns = l.Id;
+                    lAns = l.PowderId;
                     powderLoad = l.LoadMid;
                 }
             }
