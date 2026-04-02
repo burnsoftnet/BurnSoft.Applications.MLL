@@ -36,5 +36,25 @@ namespace BurnSoft.Applications.MLL.UnitTests.Helpers
             TestContext.WriteLine($"RETURNED VALUE: {roundsCanMake}, expected: {ConverThisToNumberExpected}");
             General.HasTrueValue(roundsCanMake == ConverThisToNumberExpected, _errOut);
         }
+
+        [TestMethod, TestCategory("Helpers - Calculations")]
+        public void CalculateShotgunRoundsToMakeTest()
+        {
+            long ConverThisToNumberExpected = 200;
+            long roundsCanMake = GeneralCalculations.CalculateShotgunRoundsToMake(shotOzQty: 400, shotPrefferedLoad: 0.5, caseQty: 2000,
+                wadQty: 200, powderQty: 4981.99, powderMidRangeLoad: 5.6, primerQty: 640, out _errOut);
+            TestContext.WriteLine($"RETURNED VALUE: {roundsCanMake}, expected: {ConverThisToNumberExpected}");
+            General.HasTrueValue(roundsCanMake == ConverThisToNumberExpected, _errOut);
+        }
+
+        [TestMethod, TestCategory("Helpers - Calculations")]
+        public void CalculateShotgunSlugRoundsToMakeTest()
+        {
+            long ConverThisToNumberExpected = 200;
+            long roundsCanMake = GeneralCalculations.CalculateShotgunSlugRoundsToMake(slugQty: 1140, caseQty: 2000,
+                wadQty: 200, powderQty: 4981.99, powderMidRangeLoad: 5.6, primerQty: 640, out _errOut);
+            TestContext.WriteLine($"RETURNED VALUE: {roundsCanMake}, expected: {ConverThisToNumberExpected}");
+            General.HasTrueValue(roundsCanMake == ConverThisToNumberExpected, _errOut);
+        }
     }
 }
