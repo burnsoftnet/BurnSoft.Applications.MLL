@@ -75,7 +75,7 @@ namespace BurnSoft.Applications.MLL.Helpers
 
                 lowMarker = bulletQty;
                 if (lowMarker > caseQty) lowMarker = caseQty;
-                if (lowMarker < primerQty) lowMarker = primerQty;
+                if (lowMarker > primerQty) lowMarker = primerQty;
                 if (lowMarker > powderPerBullet) lowMarker = Convert.ToInt64(powderPerBullet);
                 lAns = lowMarker;
             }
