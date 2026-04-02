@@ -86,7 +86,18 @@ namespace BurnSoft.Applications.MLL.Helpers
             }
             return lAns;
         }
-
+        /// <summary>
+        /// Calculates the shotgun rounds to make.
+        /// </summary>
+        /// <param name="shotOzQty">The shot oz qty.</param>
+        /// <param name="shotPrefferedLoad">The shot preffered load.</param>
+        /// <param name="caseQty">The case qty.</param>
+        /// <param name="wadQty">The wad qty.</param>
+        /// <param name="powderQty">The powder qty.</param>
+        /// <param name="powderMidRangeLoad">The powder mid range load.</param>
+        /// <param name="primerQty">The primer qty.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int64.</returns>
         public static long CalculateShotgunRoundsToMake(double shotOzQty, double shotPrefferedLoad, long caseQty,
             long wadQty, double powderQty, double powderMidRangeLoad, long primerQty, out string errOut)
         {
@@ -111,7 +122,17 @@ namespace BurnSoft.Applications.MLL.Helpers
             }
             return lAns;
         }
-
+        /// <summary>
+        /// Calculates the shotgun slug rounds to make.
+        /// </summary>
+        /// <param name="slugQty">The slug qty.</param>
+        /// <param name="caseQty">The case qty.</param>
+        /// <param name="wadQty">The wad qty.</param>
+        /// <param name="powderQty">The powder qty.</param>
+        /// <param name="powderMidRangeLoad">The powder mid range load.</param>
+        /// <param name="primerQty">The primer qty.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int64.</returns>
         public static long CalculateShotgunSlugRoundsToMake(long slugQty, long caseQty,
             long wadQty, double powderQty, double powderMidRangeLoad, long primerQty, out string errOut)
         {
