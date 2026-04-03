@@ -82,31 +82,6 @@ namespace BurnSoft.Applications.MLL.Xml
             return bAns;
         }
 
-        private static string LineFormat(string xmlField, string value)
-        {
-            return $"<{xmlField}>{value}</{xmlField}>";
-        }
-
-        private static string LineFormat(string xmlField, bool value)
-        {
-            return $"<{xmlField}>{value}</{xmlField}>";
-        }
-
-        private static string LineFormat(string xmlField, long value)
-        {
-            return $"<{xmlField}>{value}</{xmlField}>";
-        }
-
-        private static string LineFormat(string xmlField, int value)
-        {
-            return $"<{xmlField}>{value}</{xmlField}>";
-        }
-
-        private static string LineFormat(string xmlField, double value)
-        {
-            return $"<{xmlField}>{value}</{xmlField}>";
-        }
-
         private static string GenerateConfigSection(string databasePath, List<ConfigListAllMetallicData> configData, out string errOut)
         {
             errOut = "";
