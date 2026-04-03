@@ -1,4 +1,5 @@
 ﻿using BurnSoft.Applications.MLL.ConfigSheets;
+using BurnSoft.Applications.MLL.Inventory;
 using BurnSoft.Applications.MLL.Types;
 using BurnSoft.Universal;
 using System;
@@ -64,7 +65,9 @@ namespace BurnSoft.Applications.MLL.Xml
                 string body = $"<?xml version=\"1.0\" encoding=\"utf-8\" ?>{Environment.NewLine}";
                 body += $"<Inventory>{Environment.NewLine}";
                 List<ConfigListAllMetallicData> lst = ConfigListAll.Metallic(databasePath, configId, out errOut);
-
+                body += $"{GenerateConfigSection(databasePath, lst, out errOut)}";
+                body += $"";
+                body += $"";
                 //TODO Add Function Here
                 body += $"</Inventory>{Environment.NewLine}";
                 body = body.Replace("&", XmlConstants.Ampersand);
@@ -84,13 +87,57 @@ namespace BurnSoft.Applications.MLL.Xml
             return $"<{xmlField}>{value}</{xmlField}>";
         }
 
-        private static string GenerateConfigSection(string databasePath, long configId, out string errOut)
+        private static string LineFormat(string xmlField, bool value)
+        {
+            return $"<{xmlField}>{value}</{xmlField}>";
+        }
+
+        private static string LineFormat(string xmlField, long value)
+        {
+            return $"<{xmlField}>{value}</{xmlField}>";
+        }
+
+        private static string LineFormat(string xmlField, int value)
+        {
+            return $"<{xmlField}>{value}</{xmlField}>";
+        }
+
+        private static string LineFormat(string xmlField, double value)
+        {
+            return $"<{xmlField}>{value}</{xmlField}>";
+        }
+
+        private static string GenerateConfigSection(string databasePath, List<ConfigListAllMetallicData> configData, out string errOut)
         {
             errOut = "";
             string body = "";
             try
             {
+                long configId = 0;
+                body = "    <Details>";
+                foreach (ConfigListAllMetallicData i in configData)
+                {
+                    foreach (ConfigNameList c in i.ConfigSection)
+                    {
+                        configId = c.Id;
+                        body += $"       {LineFormat("ConfigName", c.Name)}";
+                        body += $"       {LineFormat("IsPersonal", c.IsPersonal)}";
+                        body += $"       {LineFormat("IsShotGun", c.IsShotGun)}";
+                        body += $"       {LineFormat("Notes", c.Notes)}";
+                    }
 
+                    foreach(ConfigListDataMetalicData s in i.SettingsDetails)
+                    {
+                        string ammoType = AmmuntionType.GetAmmoType(databasePath, s.AmmoTypeId, out errOut);
+                        if (errOut.Length > 0) throw new Exception(errOut);
+                        string caliber = CaliberInventory.GetName(databasePath, s.CaliberId, out errOut);
+                        if (errOut.Length > 0) throw new Exception(errOut);
+                        body += $"       {LineFormat("AmmoType", ammoType)}";
+                        body += $"       {LineFormat("Caliber", caliber)}";
+                        body += $"       {LineFormat("Notes", s.Source)}";
+                    }
+                }
+                body += "    </Details>";
             }
             catch (Exception e)
             {
