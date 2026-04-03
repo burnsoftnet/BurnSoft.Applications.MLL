@@ -215,6 +215,7 @@
     <Compile Include="ConfigSheetsTests\ConfigListGeneralTests.cs" />
     <Compile Include="ConfigSheetsTests\QueryConfigCaliberMetallicTests.cs" />
     <Compile Include="ConfigSheetsTests\QueryConfigCaliberShotgunTest.cs" />
+    <Compile Include="ConfigSheetsTests\QueryConfigPowderListMetallicTests.cs" />
     <Compile Include="General.cs" />
     <Compile Include="Global\GeneralSettingsTest.cs" />
     <Compile Include="Global\MyRegistryTest.cs" />
@@ -249,6 +250,7 @@
     <Compile Include="Searches\SyncTablesTests.cs" />
     <Compile Include="Settings\VS2019.cs" />
     <Compile Include="DatabaseTests.cs" />
+    <Compile Include="Xml\ConfigurationSheetsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BurnSoft.Applications.MLL\BurnSoft.Applications.MLL.csproj">
