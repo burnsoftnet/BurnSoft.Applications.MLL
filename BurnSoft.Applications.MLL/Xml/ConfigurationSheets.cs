@@ -4,9 +4,6 @@ using BurnSoft.Applications.MLL.Types;
 using BurnSoft.Universal;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BurnSoft.Applications.MLL.Xml
 {
@@ -55,7 +52,16 @@ namespace BurnSoft.Applications.MLL.Xml
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
         private static string ErrorMessage(string functionName, ArgumentNullException e) => $"{_classLocation}.{functionName} - {e.Message}";
-        #endregion     
+        #endregion             
+        /// <summary>
+        /// Generates The XML File report for the selected configuration id that you pass and
+        /// saves it to the selected file.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="configId">The configuration identifier.</param>
+        /// <param name="filePath">The file path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool Generate(string databasePath, long configId, string filePath, out string errOut)
         {
             bool bAns = false;
@@ -69,8 +75,6 @@ namespace BurnSoft.Applications.MLL.Xml
                 body += $"{GenerateCaseSection(databasePath, lst, out errOut)}";
                 body += $"{GeneratePrimerSection(databasePath, lst, out errOut)}";
                 body += $"{GenerateBulletSection(databasePath, lst, out errOut)}";
-                body += $"";
-                //TODO Add Function Here
                 body += $"</Inventory>{Environment.NewLine}";
                 body = body.Replace("&", XmlConstants.Ampersand);
                 FileIO obj = new FileIO();
@@ -83,7 +87,14 @@ namespace BurnSoft.Applications.MLL.Xml
             }
             return bAns;
         }
-
+        /// <summary>
+        /// Generates the configuration section.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="configData">The configuration data.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.String.</returns>
+        /// <exception cref="System.Exception"></exception>
         private static string GenerateConfigSection(string databasePath, List<ConfigListAllMetallicData> configData, out string errOut)
         {
             errOut = "";
@@ -122,7 +133,14 @@ namespace BurnSoft.Applications.MLL.Xml
             }
             return body ;
         }
-
+        /// <summary>
+        /// Generates the case section.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="configData">The configuration data.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.String.</returns>
+        /// <exception cref="System.Exception"></exception>
         private static string GenerateCaseSection(string databasePath, List<ConfigListAllMetallicData> configData, out string errOut)
         {
             errOut = "";
@@ -154,7 +172,14 @@ namespace BurnSoft.Applications.MLL.Xml
             }
             return body;
         }
-
+        /// <summary>
+        /// Generates the primer section.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="configData">The configuration data.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.String.</returns>
+        /// <exception cref="System.Exception"></exception>
         private static string GeneratePrimerSection(string databasePath, List<ConfigListAllMetallicData> configData, out string errOut)
         {
             errOut = "";
@@ -185,7 +210,14 @@ namespace BurnSoft.Applications.MLL.Xml
             }
             return body;
         }
-
+        /// <summary>
+        /// Generates the bullet section.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="configData">The configuration data.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.String.</returns>
+        /// <exception cref="System.Exception"></exception>
         private static string GenerateBulletSection(string databasePath, List<ConfigListAllMetallicData> configData, out string errOut)
         {
             errOut = "";
