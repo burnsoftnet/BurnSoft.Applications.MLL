@@ -201,6 +201,50 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
         }
 
         [TestMethod, TestCategory("Config Sheets - Config Name Data")]
+        public void SetActivityTrueTest()
+        {
+            bool bAns = false;
+            try
+            {
+                AddTestConfigNameExists();
+                PrintTestConfigNames();
+                long id = ConfigListDataName.GetId(_databasePath, _ConfigName, out _);
+                bool value = ConfigListDataName.SetActivity(_databasePath, id, true, out _errOut);
+                if (_errOut.Length > 0) throw new Exception(_errOut);
+                TestContext.WriteLine($"VALUE: {value}");
+                PrintTestConfigNames("AFTER");
+                bAns = true;
+            }
+            catch (Exception ex)
+            {
+                TestContext.WriteLine(ex.Message);
+            }
+            General.HasTrueValue(bAns, _errOut);
+        }
+
+        [TestMethod, TestCategory("Config Sheets - Config Name Data")]
+        public void SetActivityFalseTest()
+        {
+            bool bAns = false;
+            try
+            {
+                AddTestConfigNameExists();
+                PrintTestConfigNames();
+                long id = ConfigListDataName.GetId(_databasePath, _ConfigName, out _);
+                bool value = ConfigListDataName.SetActivity(_databasePath, id, false, out _errOut);
+                if (_errOut.Length > 0) throw new Exception(_errOut);
+                TestContext.WriteLine($"VALUE: {value}");
+                PrintTestConfigNames("AFTER");
+                bAns = true;
+            }
+            catch (Exception ex)
+            {
+                TestContext.WriteLine(ex.Message);
+            }
+            General.HasTrueValue(bAns, _errOut);
+        }
+
+        [TestMethod, TestCategory("Config Sheets - Config Name Data")]
         public void RenameTest()
         {
             bool bAns = false;
