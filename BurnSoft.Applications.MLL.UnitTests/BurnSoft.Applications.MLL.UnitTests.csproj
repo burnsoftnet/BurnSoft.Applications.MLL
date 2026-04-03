@@ -249,6 +249,7 @@
     <Compile Include="Searches\SyncTablesTests.cs" />
     <Compile Include="Settings\VS2019.cs" />
     <Compile Include="DatabaseTests.cs" />
+    <Compile Include="Xml\ConfigurationSheetsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BurnSoft.Applications.MLL\BurnSoft.Applications.MLL.csproj">
