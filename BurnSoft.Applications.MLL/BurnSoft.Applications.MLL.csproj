@@ -71,6 +71,7 @@
     <Compile Include="ConfigSheets\ConfigListGeneral.cs" />
     <Compile Include="ConfigSheets\QueryConfigCaliberMetallic.cs" />
     <Compile Include="ConfigSheets\QueryConfigCaliberShotgun.cs" />
+    <Compile Include="ConfigSheets\QueryConfigPowderListMetallic.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="DebugHelpers\PrintListValues.cs" />
     <Compile Include="Enums\PowderWeightType.cs" />
