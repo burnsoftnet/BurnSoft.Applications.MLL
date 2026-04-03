@@ -89,7 +89,7 @@ namespace BurnSoft.Applications.MLL.Inventory
                         Manufacturer = d["Manufacturer"] != DBNull.Value ? d["Manufacturer"].ToString().Trim() : "",
                         Name = d["Name"] != DBNull.Value ? d["Name"].ToString().Trim() : "",
                         PrimerTypeId = primerTypeId,
-                        PrimerType = PrimerTypes.GetName(databasePath, id, out _),
+                        PrimerType = PrimerTypes.GetName(databasePath, primerTypeId, out _),
                         Price = Convert.ToDouble(d["Price"]),
                         Qty = Convert.ToInt32(d["qty"]),
                         PricePerPrimer = Convert.ToDouble(d["ePPP"]),
