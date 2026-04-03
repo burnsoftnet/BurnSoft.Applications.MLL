@@ -31,10 +31,6 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
         /// The existing identifier
         /// </summary>
         private int _existingId;
-        /// <summary>
-        /// The caliber identifier
-        /// </summary>
-        private long _caliberId;
 
         /// <summary>
         /// Initializes this instance.
@@ -45,18 +41,55 @@ namespace BurnSoft.Applications.MLL.UnitTests.ConfigSheetsTests
             // Vs2019.GetSetting("");
             _errOut = @"";
             _databasePath = Vs2019.GetSetting("DatabasePath");
-            _existingConfigName = "HL8007U";
-            _existingId = 13;
-            _caliberId = 4;
+            _existingConfigName = "HL8014U";
+            _existingId = 4;
         }
 
-        [TestMethod, TestCategory("Config Sheets - Metallic Query Data")]
+        [TestMethod, TestCategory("Config Sheets - Metallic Query Data All")]
         public void GetAllTest()
         {
             bool bAns = false;
             try
             {
                 List<QueryConfigPowderListData> value = QueryConfigPowderListMetallic.GetAll(_databasePath, out _errOut);
+                if (_errOut.Length > 0) throw new Exception(_errOut);
+                TestContext.WriteLine(DebugHelpers.PrintListValues.QueryConfigPowderListDataData(value));
+                bAns = true;
+            }
+            catch (Exception ex)
+            {
+                TestContext.WriteLine(ex.Message);
+            }
+            General.HasTrueValue(bAns, _errOut);
+        }
+
+        [TestMethod, TestCategory("Config Sheets - Metallic Query Data All")]
+        public void GetDetailsByNameTest()
+        {
+            bool bAns = false;
+            try
+            {
+                List<QueryConfigPowderListData> value = QueryConfigPowderListMetallic.GetDetails(_databasePath, 
+                    _existingConfigName, out _errOut);
+                if (_errOut.Length > 0) throw new Exception(_errOut);
+                TestContext.WriteLine(DebugHelpers.PrintListValues.QueryConfigPowderListDataData(value));
+                bAns = true;
+            }
+            catch (Exception ex)
+            {
+                TestContext.WriteLine(ex.Message);
+            }
+            General.HasTrueValue(bAns, _errOut);
+        }
+
+        [TestMethod, TestCategory("Config Sheets - Metallic Query Data All")]
+        public void GetDetailsByIdTest()
+        {
+            bool bAns = false;
+            try
+            {
+                List<QueryConfigPowderListData> value = QueryConfigPowderListMetallic.GetDetails(_databasePath,
+                    _existingId, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 TestContext.WriteLine(DebugHelpers.PrintListValues.QueryConfigPowderListDataData(value));
                 bAns = true;

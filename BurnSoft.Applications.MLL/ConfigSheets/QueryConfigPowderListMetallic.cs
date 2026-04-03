@@ -85,8 +85,8 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
                         IsShotGun = Convert.ToInt32(d["IsShotGun"]) == 1 ? true : false,
                         CaliberName = d["Cal"] != DBNull.Value ? d["Cal"].ToString().Trim() : "",
                         CaliberId = Convert.ToInt32(d["MyCalID"]),
-                        PowderManufacturer = d["General_Powder.Manufacturer"] != DBNull.Value ? d["General_Powder.Manufacturer"].ToString().Trim() : "",
-                        PowderName = d["General_Powder.Name"] != DBNull.Value ? d["General_Powder.Name"].ToString().Trim() : "",
+                        PowderManufacturer = d["Manufacturer"] != DBNull.Value ? d["Manufacturer"].ToString().Trim() : "",
+                        PowderName = d["Name"] != DBNull.Value ? d["Name"].ToString().Trim() : "",
                         IsDefaultChargeLoad = Convert.ToInt32(d["IsPref"]) == 1 ? true : false,
                         LoadMin = Convert.ToDouble(d["Load_Min"]),
                         LoadMid = Convert.ToDouble(d["Load_Mid"]),
@@ -97,8 +97,8 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
                         CupsMin = Convert.ToDouble(d["CUPS_Min"]),
                         CupsMid = Convert.ToDouble(d["CUPS_Mid"]),
                         CupsMax = Convert.ToDouble(d["CUPS_Max"]),
-                        BulletManufacturer = d["List_Bullets.Manufacturer"] != DBNull.Value ? d["List_Bullets.Manufacturer"].ToString().Trim() : "",
-                        BulletName = d["List_Bullets.Name"] != DBNull.Value ? d["List_Bullets.Name"].ToString().Trim() : "",
+                        BulletManufacturer = d["Manufacturer1"] != DBNull.Value ? d["Manufacturer1"].ToString().Trim() : "",
+                        BulletName = d["Name1"] != DBNull.Value ? d["Name1"].ToString().Trim() : "",
                         BulletDiameter = d["Diameter"] != DBNull.Value ? d["Diameter"].ToString().Trim() : "",
                         BulletWeight = d["Weight"] != DBNull.Value ? d["Weight"].ToString().Trim() : "",
 
@@ -160,10 +160,16 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
             string sql = $"Select * from qry_CFG_SR_PowderList where ConfigName='{name}'";
             return GetList(databasePath, sql, out errOut);
         }
-
+        /// <summary>
+        /// Gets the details.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;QueryConfigPowderListData&gt;.</returns>
         public static List<QueryConfigPowderListData> GetDetails(string databasePath, long id, out string errOut)
         {
-            string sql = $"Select * from qry_CFG_SR_PowderList where id={id}";
+            string sql = $"Select * from qry_CFG_SR_PowderList where CLNID={id}";
             return GetList(databasePath, sql, out errOut);
         }
     }
