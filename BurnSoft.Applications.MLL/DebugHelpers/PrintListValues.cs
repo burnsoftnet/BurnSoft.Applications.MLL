@@ -333,6 +333,44 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
             return sAns;
         }
         /// <summary>
+        /// Queries the configuration powder list data data.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string QueryConfigPowderListDataData(List<QueryConfigPowderListData> value)
+        {
+            string sAns = "";
+            if (value.Count > 0)
+            {
+                foreach (QueryConfigPowderListData v in value)
+                {
+                    sAns += $"ConfigId : {v.ConfigId}{Environment.NewLine}";
+                    sAns += $"ConfigName : {v.ConfigName}{Environment.NewLine}";
+                    sAns += $"IsPersonal : {v.IsPersonal}{Environment.NewLine}";
+                    sAns += $"IsShotGun : {v.IsShotGun}{Environment.NewLine}";
+                    sAns += $"CaliberName : {v.CaliberName}{Environment.NewLine}";
+                    sAns += $"CaliberId : {v.CaliberId}{Environment.NewLine}";
+                    sAns += $"PowderManufacturer : {v.PowderManufacturer}{Environment.NewLine}";
+                    sAns += $"PowderName : {v.PowderName}{Environment.NewLine}";
+                    sAns += $"IsDefaultChargeLoad : {v.IsDefaultChargeLoad}{Environment.NewLine}";
+                    sAns += $"LoadMin : {v.LoadMin}{Environment.NewLine}";
+                    sAns += $"LoadMid : {v.LoadMid}{Environment.NewLine}";
+                    sAns += $"LoadMax : {v.LoadMax}{Environment.NewLine}";
+                    sAns += $"FpsMin : {v.FpsMin}{Environment.NewLine}";
+                    sAns += $"FpsMid : {v.FpsMid}{Environment.NewLine}";
+                    sAns += $"FpsMax : {v.FpsMax}{Environment.NewLine}";
+                    sAns += $"CupsMin : {v.CupsMin}{Environment.NewLine}";
+                    sAns += $"CupsMid : {v.CupsMid}{Environment.NewLine}";
+                    sAns += $"CupsMax : {v.CupsMax}{Environment.NewLine}";
+                    sAns += $"BulletManufacturer : {v.BulletManufacturer}{Environment.NewLine}";
+                    sAns += $"BulletName : {v.BulletName}{Environment.NewLine}";
+                    sAns += $"BulletDiameter : {v.BulletDiameter}{Environment.NewLine}";
+                    sAns += $"BulletWeight : {v.BulletWeight}{Environment.NewLine}";
+                }
+            }
+            return sAns;
+        }
+        /// <summary>
         /// Queries the configuration caliber shotgun data data.
         /// </summary>
         /// <param name="value">The value.</param>
