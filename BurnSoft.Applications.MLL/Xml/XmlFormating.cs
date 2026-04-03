@@ -54,7 +54,7 @@ namespace BurnSoft.Applications.MLL.Xml
         /// <param name="xmlField">The XML field.</param>
         /// <param name="value">The value.</param>
         /// <returns>System.String.</returns>
-        public static string LineFormat(string xmlField, double value)
+        public static string LineFormat(string xmlField, double? value)
         {
             return $"<{xmlField}>{value}</{xmlField}>{Environment.NewLine}";
         }

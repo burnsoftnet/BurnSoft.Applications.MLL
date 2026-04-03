@@ -68,18 +68,23 @@ namespace BurnSoft.Applications.MLL.Xml
             errOut = "";
             try
             {
+                FileIO obj = new FileIO();
+                obj.DeleteFile(filePath);
+
                 string body = $"<?xml version=\"1.0\" encoding=\"utf-8\" ?>{Environment.NewLine}";
                 body += $"<Inventory>{Environment.NewLine}";
                 List<ConfigListAllMetallicData> lst = ConfigListAll.Metallic(databasePath, configId, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
                 body += $"{GenerateConfigSection(databasePath, lst, out errOut)}";
                 body += $"{GenerateCaseSection(databasePath, lst, out errOut)}";
                 body += $"{GeneratePrimerSection(databasePath, lst, out errOut)}";
                 body += $"{GenerateBulletSection(databasePath, lst, out errOut)}";
+                body += $"{GeneratePowderSection(databasePath, lst, out errOut)}";
                 body += $"</Inventory>{Environment.NewLine}";
                 body = body.Replace("&", XmlConstants.Ampersand);
-                FileIO obj = new FileIO();
-                obj.DeleteFile(filePath);
+                
                 obj.AppendToFile(filePath, body);
+                bAns = true;
             }
             catch (Exception e)
             {
@@ -252,6 +257,46 @@ namespace BurnSoft.Applications.MLL.Xml
             catch (Exception e)
             {
                 errOut = ErrorMessage("GenerateBulletSection", e);
+            }
+            return body;
+        }
+
+        private static string GeneratePowderSection(string databasePath, List<ConfigListAllMetallicData> configData, out string errOut)
+        {
+            errOut = "";
+            string body = "";
+            try
+            {
+                foreach (ConfigListAllMetallicData i in configData)
+                {
+                    foreach (ConfigListDataMetalicData s in i.SettingsDetails)
+                    {
+                        long Id = s.ConfgNameId;
+                        List<QueryConfigPowderListData> lst = QueryConfigPowderListMetallic.GetDetails(databasePath, Id, out errOut);
+                        if (errOut.Length > 0) throw new Exception(errOut);
+                        foreach (QueryConfigPowderListData c in lst)
+                        {
+                            body += $"    <General_Powder>{Environment.NewLine}";
+                            body += $"       {XmlFormating.LineFormat("Manufacturer", c.PowderManufacturer)}";
+                            body += $"       {XmlFormating.LineFormat("Name", c.PowderName)}";
+                            body += $"       {XmlFormating.LineFormat("IsPref", c.IsDefaultChargeLoad)}";
+                            body += $"       {XmlFormating.LineFormat("Load_Min", c.LoadMin)}";
+                            body += $"       {XmlFormating.LineFormat("Load_Mid", c.LoadMid)}";
+                            body += $"       {XmlFormating.LineFormat("Load_Max", c.LoadMax)}";
+                            body += $"       {XmlFormating.LineFormat("FPS_Min", c.FpsMin)}";
+                            body += $"       {XmlFormating.LineFormat("FPS_MID", c.FpsMid)}";
+                            body += $"       {XmlFormating.LineFormat("FPS_Max", c.FpsMax)}";
+                            body += $"       {XmlFormating.LineFormat("CUPS_Min", c.CupsMin)}";
+                            body += $"       {XmlFormating.LineFormat("CUPS_Mid", c.CupsMid)}";
+                            body += $"       {XmlFormating.LineFormat("CUPS_Max", c.CupsMax)}";
+                            body += $"    </General_Powder>{Environment.NewLine}";
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GeneratePowderSection", e);
             }
             return body;
         }

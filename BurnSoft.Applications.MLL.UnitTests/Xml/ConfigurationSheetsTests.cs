@@ -26,11 +26,19 @@ namespace BurnSoft.Applications.MLL.UnitTests.Xml
         /// <summary>
         /// The metallic configuration identifier
         /// </summary>
-        private long _metallicConfigId;
+        private long _metallicRifleConfigId;
+        /// <summary>
+        /// The metallic pistol configuration identifier
+        /// </summary>
+        private long _metallicPistolConfigId;
         /// <summary>
         /// The save path
         /// </summary>
-        private string _savePath;
+        private string _savePathRifle;
+        /// <summary>
+        /// The save path pistol
+        /// </summary>
+        private string _savePathPistol;
         /// <summary>
         /// Initializes this instance.
         /// </summary>
@@ -41,16 +49,28 @@ namespace BurnSoft.Applications.MLL.UnitTests.Xml
             _errOut = @"";
             string AppPath = AppDomain.CurrentDomain.BaseDirectory;
             _databasePath = Vs2019.GetSetting("DatabasePath");
-            _metallicConfigId = 20;
-            _savePath = Path.Combine(AppPath, "data\\Unit Test Pistol Config Sheet.xml");
+            _metallicRifleConfigId = 4;
+            _metallicPistolConfigId = 20;
+            _savePathRifle = Path.Combine(AppPath, "data\\Unit Test Rifle Config Sheet.xml");
+            _savePathPistol = Path.Combine(AppPath, "data\\Unit Test Pistol Config Sheet.xml");
         }
 
         [TestMethod, TestCategory("XML - Config Sheets")]
-        public void GenerateMetallicTest()
+        public void GenerateMetallicRifleTest()
         {
-            bool value = ConfigurationSheets.Generate(_databasePath, _metallicConfigId, _savePath, out _errOut);
+            bool value = ConfigurationSheets.Generate(_databasePath, _metallicRifleConfigId, _savePathRifle, out _errOut);
             TestContext.WriteLine($"VALUE: {value}");
-            TestContext.WriteLine($"XML SAVED TO: {_savePath}");
+            TestContext.WriteLine($"XML SAVED TO: {_savePathRifle}");
+            if (!value) Assert.Fail();
+            if (_errOut.Length > 0) Assert.Fail();
+        }
+
+        [TestMethod, TestCategory("XML - Config Sheets")]
+        public void GenerateMetallicPistolTest()
+        {
+            bool value = ConfigurationSheets.Generate(_databasePath, _metallicPistolConfigId, _savePathPistol, out _errOut);
+            TestContext.WriteLine($"VALUE: {value}");
+            TestContext.WriteLine($"XML SAVED TO: {_savePathRifle}");
             if (!value) Assert.Fail();
             if (_errOut.Length > 0) Assert.Fail();
         }
