@@ -260,7 +260,14 @@ namespace BurnSoft.Applications.MLL.Xml
             }
             return body;
         }
-
+        /// <summary>
+        /// Generates the powder section.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="configData">The configuration data.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.String.</returns>
+        /// <exception cref="System.Exception"></exception>
         private static string GeneratePowderSection(string databasePath, List<ConfigListAllMetallicData> configData, out string errOut)
         {
             errOut = "";
