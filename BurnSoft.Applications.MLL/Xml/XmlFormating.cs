@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace BurnSoft.Applications.MLL.Xml
 {
     /// <summary>
@@ -14,7 +16,7 @@ namespace BurnSoft.Applications.MLL.Xml
         /// <returns>System.String.</returns>
         public static string LineFormat(string xmlField, string value)
         {
-            return $"<{xmlField}>{value}</{xmlField}>";
+            return $"<{xmlField}>{value}</{xmlField}>{Environment.NewLine}";
         }
         /// <summary>
         /// Lines the format.
@@ -24,7 +26,7 @@ namespace BurnSoft.Applications.MLL.Xml
         /// <returns>System.String.</returns>
         public static string LineFormat(string xmlField, bool value)
         {
-            return $"<{xmlField}>{value}</{xmlField}>";
+            return $"<{xmlField}>{value}</{xmlField}>{Environment.NewLine}";
         }
         /// <summary>
         /// Lines the format.
@@ -34,7 +36,7 @@ namespace BurnSoft.Applications.MLL.Xml
         /// <returns>System.String.</returns>
         public static string LineFormat(string xmlField, long value)
         {
-            return $"<{xmlField}>{value}</{xmlField}>";
+            return $"<{xmlField}>{value}</{xmlField}>{Environment.NewLine}";
         }
         /// <summary>
         /// Lines the format.
@@ -44,7 +46,7 @@ namespace BurnSoft.Applications.MLL.Xml
         /// <returns>System.String.</returns>
         public static string LineFormat(string xmlField, int value)
         {
-            return $"<{xmlField}>{value}</{xmlField}>";
+            return $"<{xmlField}>{value}</{xmlField}>{Environment.NewLine}";
         }
         /// <summary>
         /// Lines the format.
@@ -54,7 +56,7 @@ namespace BurnSoft.Applications.MLL.Xml
         /// <returns>System.String.</returns>
         public static string LineFormat(string xmlField, double value)
         {
-            return $"<{xmlField}>{value}</{xmlField}>";
+            return $"<{xmlField}>{value}</{xmlField}>{Environment.NewLine}";
         }
     }
 }

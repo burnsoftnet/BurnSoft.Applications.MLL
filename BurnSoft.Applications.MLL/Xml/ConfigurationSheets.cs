@@ -66,7 +66,8 @@ namespace BurnSoft.Applications.MLL.Xml
                 body += $"<Inventory>{Environment.NewLine}";
                 List<ConfigListAllMetallicData> lst = ConfigListAll.Metallic(databasePath, configId, out errOut);
                 body += $"{GenerateConfigSection(databasePath, lst, out errOut)}";
-                body += $"";
+                body += $"{GenerateCaseSection(databasePath, lst, out errOut)}";
+                body += $"{GeneratePrimerSection(databasePath, lst, out errOut)}";
                 body += $"";
                 //TODO Add Function Here
                 body += $"</Inventory>{Environment.NewLine}";
@@ -89,7 +90,7 @@ namespace BurnSoft.Applications.MLL.Xml
             try
             {
                 long configId = 0;
-                body = "    <Details>";
+                body = $"    <Details>{Environment.NewLine}";
                 foreach (ConfigListAllMetallicData i in configData)
                 {
                     foreach (ConfigNameList c in i.ConfigSection)
@@ -112,13 +113,76 @@ namespace BurnSoft.Applications.MLL.Xml
                         body += $"       {XmlFormating.LineFormat("Notes", s.Source)}";
                     }
                 }
-                body += "    </Details>";
+                body += $"    </Details>{Environment.NewLine}";
             }
             catch (Exception e)
             {
-
+                errOut = ErrorMessage("GenerateConfigSection", e);
             }
             return body ;
+        }
+
+        private static string GenerateCaseSection(string databasePath, List<ConfigListAllMetallicData> configData, out string errOut)
+        {
+            errOut = "";
+            string body = "";
+            try
+            {
+                body = $"    <List_Case>{Environment.NewLine}";
+                foreach (ConfigListAllMetallicData i in configData)
+                {
+                    foreach (ConfigListDataMetalicData s in i.SettingsDetails)
+                    {
+                        long caseId = s.CaseId;
+                        List<CaseListings> lst = CaseInventory.GetDetails(databasePath, caseId, out errOut);
+                        if (errOut.Length > 0) throw new Exception(errOut);
+                        foreach (CaseListings c in lst)
+                        {
+                            body += $"       {XmlFormating.LineFormat("Manufacturer", c.Manufacturer)}";
+                            body += $"       {XmlFormating.LineFormat("Name", c.Name)}";
+                            body += $"       {XmlFormating.LineFormat("ttl", c.TrimToLength)}";
+                            body += $"       {XmlFormating.LineFormat("TimesUsed", c.TimesUsed)}";
+                        }
+                    }
+                }
+                body += $"    </List_Case>{Environment.NewLine}";
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GenerateCaseSection", e);
+            }
+            return body;
+        }
+
+        private static string GeneratePrimerSection(string databasePath, List<ConfigListAllMetallicData> configData, out string errOut)
+        {
+            errOut = "";
+            string body = "";
+            try
+            {
+                body = $"    <General_Primer>{Environment.NewLine}";
+                foreach (ConfigListAllMetallicData i in configData)
+                {
+                    foreach (ConfigListDataMetalicData s in i.SettingsDetails)
+                    {
+                        long Id = s.PrimerId;
+                        List<PrimerListings> lst = PrimerInventory.GetDetails(databasePath, Id, out errOut);
+                        if (errOut.Length > 0) throw new Exception(errOut);
+                        foreach (PrimerListings c in lst)
+                        {
+                            body += $"       {XmlFormating.LineFormat("Manufacturer", c.Manufacturer)}";
+                            body += $"       {XmlFormating.LineFormat("Name", c.Name)}";
+                            body += $"       {XmlFormating.LineFormat("Primer_Type", c.PrimerType)}";
+                        }
+                    }
+                }
+                body += $"    </General_Primer>{Environment.NewLine}";
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GeneratePrimerSection", e);
+            }
+            return body;
         }
     }
 }
