@@ -149,6 +149,7 @@
     <Compile Include="Types\WishlistData.cs" />
     <Compile Include="Xml\ConfigurationSheets.cs" />
     <Compile Include="Xml\XmlConstants.cs" />
+    <Compile Include="Xml\XmlFormating.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bswtsicon.png" />

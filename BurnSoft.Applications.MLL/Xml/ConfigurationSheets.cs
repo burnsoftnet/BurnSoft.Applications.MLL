@@ -120,10 +120,10 @@ namespace BurnSoft.Applications.MLL.Xml
                     foreach (ConfigNameList c in i.ConfigSection)
                     {
                         configId = c.Id;
-                        body += $"       {LineFormat("ConfigName", c.Name)}";
-                        body += $"       {LineFormat("IsPersonal", c.IsPersonal)}";
-                        body += $"       {LineFormat("IsShotGun", c.IsShotGun)}";
-                        body += $"       {LineFormat("Notes", c.Notes)}";
+                        body += $"       {XmlFormating.LineFormat("ConfigName", c.Name)}";
+                        body += $"       {XmlFormating.LineFormat("IsPersonal", c.IsPersonal)}";
+                        body += $"       {XmlFormating.LineFormat("IsShotGun", c.IsShotGun)}";
+                        body += $"       {XmlFormating.LineFormat("Notes", c.Notes)}";
                     }
 
                     foreach(ConfigListDataMetalicData s in i.SettingsDetails)
@@ -132,9 +132,9 @@ namespace BurnSoft.Applications.MLL.Xml
                         if (errOut.Length > 0) throw new Exception(errOut);
                         string caliber = CaliberInventory.GetName(databasePath, s.CaliberId, out errOut);
                         if (errOut.Length > 0) throw new Exception(errOut);
-                        body += $"       {LineFormat("AmmoType", ammoType)}";
-                        body += $"       {LineFormat("Caliber", caliber)}";
-                        body += $"       {LineFormat("Notes", s.Source)}";
+                        body += $"       {XmlFormating.LineFormat("AmmoType", ammoType)}";
+                        body += $"       {XmlFormating.LineFormat("Caliber", caliber)}";
+                        body += $"       {XmlFormating.LineFormat("Notes", s.Source)}";
                     }
                 }
                 body += "    </Details>";
