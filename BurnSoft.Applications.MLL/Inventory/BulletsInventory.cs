@@ -245,6 +245,33 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             return bAns;
         }
+        /// <summary>
+        /// Gets the name.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.String.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static string GetName(string databasePath, long id, out string errOut)
+        {
+            string bAns = "";
+            errOut = @"";
+            try
+            {
+                List<BulletListings> lst = GetDetails(databasePath, id, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                foreach(BulletListings b in lst)
+                {
+                    bAns = b.Name;
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetName", e);
+            }
+            return bAns;
+        }
 
         /// <summary>
         /// Adds The new bullet information to the database
