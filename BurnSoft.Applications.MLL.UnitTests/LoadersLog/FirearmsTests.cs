@@ -168,6 +168,27 @@ namespace BurnSoft.Applications.MLL.UnitTests.LoadersLog
         }
 
         [TestMethod, TestCategory("Loaders Log - Firearms")]
+        public void GetNameTest()
+        {
+            bool bAns = false;
+            try
+            {
+                AddTestFirearmExists();
+                long id = Firearms.GetId(_databasePath, _fullName, out _errOut);
+                if (_errOut.Length > 0) throw new Exception(_errOut);
+                string value = Firearms.GetName(_databasePath,id , out _errOut);
+                if (_errOut.Length > 0) throw new Exception(_errOut);
+                TestContext.WriteLine($"VALUE: {value}");
+                bAns = value.Equals(_fullName);
+            }
+            catch (Exception ex)
+            {
+                TestContext.WriteLine(ex.Message);
+            }
+            General.HasTrueValue(bAns, _errOut);
+        }
+
+        [TestMethod, TestCategory("Loaders Log - Firearms")]
         public void DataExistsTest()
         {
             bool bAns = false;
