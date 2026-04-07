@@ -322,11 +322,6 @@ namespace BurnSoft.Applications.MLL.Inventory
             bool bAns = false;
             try
             {
-                BSOtherObjects o = new BSOtherObjects();
-                manufacturer = o.FC(manufacturer);
-                name = o.FC(name);
-
-                if (errOut.Length > 0) throw new Exception(errOut);
                 double PricePerPrimer = CalculatePricePerItem(qty, price);
                 string sql = $"INSERT INTO General_Primer(Manufacturer,Name,Primer_Type," +
                     $"Price,Qty, ePPP, sync_lastupdate) VALUES(" +
@@ -361,11 +356,9 @@ namespace BurnSoft.Applications.MLL.Inventory
             bool bAns = false;
             try
             {
-                BSOtherObjects o = new BSOtherObjects();
-                if (errOut.Length > 0) throw new Exception(errOut);
                 double PricePerGrain = (price / qty);
-                string sql = $"UPDATE General_Primer set Manufacturer='{o.FC(manufacturer)}'," +
-                    $"Name='{o.FC(name)}',Primer_Type={primerType},qty={qty},Price={price}," +
+                string sql = $"UPDATE General_Primer set Manufacturer='{manufacturer}'," +
+                    $"Name='{name}',Primer_Type={primerType},qty={qty},Price={price}," +
                     $"ePPP={PricePerGrain}, sync_lastupdate=Now() where id={id}";
 
                 bAns = Database.Execute(databasePath, sql, out errOut);
