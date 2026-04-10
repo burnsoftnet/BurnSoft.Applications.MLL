@@ -1,8 +1,10 @@
-﻿using BurnSoft.Applications.MLL.Types;
+﻿using BurnSoft.Applications.MLL.AutoFill;
+using BurnSoft.Applications.MLL.Types;
 using BurnSoft.Universal;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Runtime.CompilerServices;
 
 namespace BurnSoft.Applications.MLL.ConfigSheets
 {
@@ -408,8 +410,6 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
             bool bAns = false;
             try
             {
-
-                BSOtherObjects o = new BSOtherObjects();
                 int IsPref = isDefault ? 0 : 1;
                 string sql = $"UPDATE Config_List_Powder_Data_NSG set CLNID={ConfgNameId}," +
                     $"PID={PowderId},Load_Min={LoadMin},Load_Mid={LoadMid}, Load_Max={LoadMax}, " +
@@ -424,6 +424,52 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
             }
             return bAns;
         }
+
+        /// <summary>
+        /// Sets the new default powder to use
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool SetNewDefault(string databasePath, long id, out string errOut)
+        {
+            errOut = "";
+            bool bAns = false;
+            try
+            {
+                string sql = $"UPDATE Config_List_Powder_Data_NSG IsPref=1 where id={id}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("SetNewDefault", e);
+            }
+            return bAns;
+        }
+        /// <summary>
+        /// Clears the default on the powder list so you can set a new one.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="configId">The configuration identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool ClearDefault(string databasePath, long configId, out string errOut)
+        {
+            errOut = "";
+            bool bAns = false;
+            try
+            {
+                string sql = $"UPDATE Config_List_Powder_Data_NSG IsPref=0 where CLNID={configId}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("ClearDefault", e);
+            }
+            return bAns;
+        }
+
         /// <summary>
         /// Deletes the specified database path.
         /// </summary>

@@ -1,6 +1,5 @@
 ﻿using BurnSoft.Applications.MLL.Helpers;
 using BurnSoft.Applications.MLL.Types;
-using BurnSoft.Universal;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -89,7 +88,7 @@ namespace BurnSoft.Applications.MLL.Inventory
                         Manufacturer = d["Manufacturer"] != DBNull.Value ? d["Manufacturer"].ToString().Trim() : "",
                         Name = d["Name"] != DBNull.Value ? d["Name"].ToString().Trim() : "",
                         PrimerTypeId = primerTypeId,
-                        PrimerType = PrimerTypes.GetName(databasePath, id, out _),
+                        PrimerType = PrimerTypes.GetName(databasePath, primerTypeId, out _),
                         Price = Convert.ToDouble(d["Price"]),
                         Qty = Convert.ToInt32(d["qty"]),
                         PricePerPrimer = Convert.ToDouble(d["ePPP"]),
@@ -170,6 +169,36 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             return lAns;
         }
+        /// <summary>
+        /// Gets the name.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.String.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static string GetName(string databasePath, long id, out string errOut)
+        {
+            errOut = "";
+            string sAns = "";
+            try
+            {
+                string sql = $"Select * from General_Primer where id={id}";
+                List<PrimerListings> lst = GetList(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                foreach (PrimerListings i in lst)
+                {
+                    sAns = i.Name;
+                    break;
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetName", e);
+            }
+            return sAns;
+        }
+
         /// <summary>
         /// Gets the type of the primer.
         /// </summary>
@@ -292,11 +321,6 @@ namespace BurnSoft.Applications.MLL.Inventory
             bool bAns = false;
             try
             {
-                BSOtherObjects o = new BSOtherObjects();
-                manufacturer = o.FC(manufacturer);
-                name = o.FC(name);
-
-                if (errOut.Length > 0) throw new Exception(errOut);
                 double PricePerPrimer = CalculatePricePerItem(qty, price);
                 string sql = $"INSERT INTO General_Primer(Manufacturer,Name,Primer_Type," +
                     $"Price,Qty, ePPP, sync_lastupdate) VALUES(" +
@@ -331,11 +355,9 @@ namespace BurnSoft.Applications.MLL.Inventory
             bool bAns = false;
             try
             {
-                BSOtherObjects o = new BSOtherObjects();
-                if (errOut.Length > 0) throw new Exception(errOut);
                 double PricePerGrain = (price / qty);
-                string sql = $"UPDATE General_Primer set Manufacturer='{o.FC(manufacturer)}'," +
-                    $"Name='{o.FC(name)}',Primer_Type={primerType},qty={qty},Price={price}," +
+                string sql = $"UPDATE General_Primer set Manufacturer='{manufacturer}'," +
+                    $"Name='{name}',Primer_Type={primerType},qty={qty},Price={price}," +
                     $"ePPP={PricePerGrain}, sync_lastupdate=Now() where id={id}";
 
                 bAns = Database.Execute(databasePath, sql, out errOut);

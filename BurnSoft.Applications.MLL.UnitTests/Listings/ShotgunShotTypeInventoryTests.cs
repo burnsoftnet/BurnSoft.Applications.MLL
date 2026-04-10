@@ -278,6 +278,26 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
         }
 
         [TestMethod, TestCategory("Inventory Listings - Shotgun Shot Types")]
+        public void GetNameTest()
+        {
+            bool bAns = false;
+            try
+            {
+                AddTestDataExists();
+                long id = ShotgunShotTypeInventory.GetId(_databasePath, _manufacturer, _name, _materialUsed, out _errOut);
+                string value = ShotgunShotTypeInventory.GetName(_databasePath, id, out _errOut);
+                if (_errOut.Length > 0) throw new Exception(_errOut);
+                TestContext.WriteLine($"VALUE RETURNED {value}");
+                bAns = (value.Length > 0);
+            }
+            catch (Exception ex)
+            {
+                TestContext.WriteLine(ex.Message);
+            }
+            General.HasTrueValue(bAns, _errOut);
+        }
+
+        [TestMethod, TestCategory("Inventory Listings - Shotgun Shot Types")]
         public void GetDetailsTest()
         {
             bool bAns = false;

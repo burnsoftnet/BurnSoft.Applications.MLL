@@ -388,6 +388,54 @@ The error out.
 [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
 `true` if XXXX, `false` otherwise.
 
+### **SetNewDefault(String, Int64, String&)**
+
+Sets the new default powder to use
+
+```csharp
+public static bool SetNewDefault(string databasePath, long id, String& errOut)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`id` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
+The identifier.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+`true` if XXXX, `false` otherwise.
+
+### **ClearDefault(String, Int64, String&)**
+
+Clears the default on the powder list so you can set a new one.
+
+```csharp
+public static bool ClearDefault(string databasePath, long configId, String& errOut)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`configId` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
+The configuration identifier.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+`true` if XXXX, `false` otherwise.
+
 ### **Delete(String, Int64, String&)**
 
 Deletes the specified database path.
