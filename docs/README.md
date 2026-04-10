@@ -28,6 +28,8 @@
 
 ## BurnSoft.Applications.MLL.ConfigSheets
 
+[ConfigListAll](./burnsoft.applications.mll.configsheets.configlistall.md)
+
 [ConfigListDataMetalic](./burnsoft.applications.mll.configsheets.configlistdatametalic.md)
 
 [ConfigListDataName](./burnsoft.applications.mll.configsheets.configlistdataname.md)
@@ -44,6 +46,8 @@
 
 [QueryConfigCaliberShotgun](./burnsoft.applications.mll.configsheets.queryconfigcalibershotgun.md)
 
+[QueryConfigPowderListMetallic](./burnsoft.applications.mll.configsheets.queryconfigpowderlistmetallic.md)
+
 ## BurnSoft.Applications.MLL.DebugHelpers
 
 [PrintListValues](./burnsoft.applications.mll.debughelpers.printlistvalues.md)
@@ -51,6 +55,8 @@
 ## BurnSoft.Applications.MLL.Enums
 
 [PowderWeightType](./burnsoft.applications.mll.enums.powderweighttype.md)
+
+[WeightTypes](./burnsoft.applications.mll.enums.weighttypes.md)
 
 ## BurnSoft.Applications.MLL.Global
 
@@ -67,6 +73,8 @@
 ## BurnSoft.Applications.MLL.Helpers
 
 [Converters](./burnsoft.applications.mll.helpers.converters.md)
+
+[GeneralCalculations](./burnsoft.applications.mll.helpers.generalcalculations.md)
 
 [GeneralHelpers](./burnsoft.applications.mll.helpers.generalhelpers.md)
 
@@ -101,6 +109,8 @@
 [ShotgunPowderInventory](./burnsoft.applications.mll.inventory.shotgunpowderinventory.md)
 
 [ShotgunShotInventory](./burnsoft.applications.mll.inventory.shotgunshotinventory.md)
+
+[ShotgunShotTypeInventory](./burnsoft.applications.mll.inventory.shotgunshottypeinventory.md)
 
 [WadInventory](./burnsoft.applications.mll.inventory.wadinventory.md)
 
@@ -144,6 +154,10 @@
 
 [CaseListings](./burnsoft.applications.mll.types.caselistings.md)
 
+[ConfigListAllMetallicData](./burnsoft.applications.mll.types.configlistallmetallicdata.md)
+
+[ConfigListAllShotgunData](./burnsoft.applications.mll.types.configlistallshotgundata.md)
+
 [ConfigListDataMetalicData](./burnsoft.applications.mll.types.configlistdatametalicdata.md)
 
 [ConfigListDataShotgunData](./burnsoft.applications.mll.types.configlistdatashotgundata.md)
@@ -178,6 +192,8 @@
 
 [QueryConfigCaliberData](./burnsoft.applications.mll.types.queryconfigcaliberdata.md)
 
+[QueryConfigPowderListData](./burnsoft.applications.mll.types.queryconfigpowderlistdata.md)
+
 [RegistrySettings](./burnsoft.applications.mll.types.registrysettings.md)
 
 [SearchFieldsData](./burnsoft.applications.mll.types.searchfieldsdata.md)
@@ -190,8 +206,18 @@
 
 [ShotgunShotListings](./burnsoft.applications.mll.types.shotgunshotlistings.md)
 
+[ShotgunShotTypeData](./burnsoft.applications.mll.types.shotgunshottypedata.md)
+
 [SyncTablesData](./burnsoft.applications.mll.types.synctablesdata.md)
 
 [WadData](./burnsoft.applications.mll.types.waddata.md)
 
 [WishlistData](./burnsoft.applications.mll.types.wishlistdata.md)
+
+## BurnSoft.Applications.MLL.Xml
+
+[ConfigurationSheets](./burnsoft.applications.mll.xml.configurationsheets.md)
+
+[XmlConstants](./burnsoft.applications.mll.xml.xmlconstants.md)
+
+[XmlFormating](./burnsoft.applications.mll.xml.xmlformating.md)

@@ -420,6 +420,80 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
             }
             return bAns;
         }
+        /// <summary>
+        /// Sets the activity of the config, when set to try it will show in the active section, when false it is archived.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="isActive">if set to <c>true</c> [is active].</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool SetActivity(string databasePath, long id, bool isActive, out string errOut)
+        {
+            errOut = "";
+            bool bAns = false;
+            try
+            {
+                int iActive = isActive ? 1 : 0;
+                string sql = $"UPDATE Config_List_Name set IsActive={iActive} where id={id}";
+
+                bAns = Database.Execute(databasePath, sql, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("SetActivity", e);
+            }
+            return bAns;
+        }
+        /// <summary>
+        /// Sets the favorite marker
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="isFavorite">if set to <c>true</c> [is favorite].</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool SetFavorite(string databasePath, long id, bool isFavorite, out string errOut)
+        {
+            errOut = "";
+            bool bAns = false;
+            try
+            {
+                int iFavorite = isFavorite ? 1 : 0;
+                string sql = $"UPDATE Config_List_Name set IsFav={iFavorite} where id={id}";
+
+                bAns = Database.Execute(databasePath, sql, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("SetActivity", e);
+            }
+            return bAns;
+        }
+        /// <summary>
+        /// Updates the notes.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="value">The value.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool UpdateNotes(string databasePath, long id, string value, out string errOut)
+        {
+            errOut = "";
+            bool bAns = false;
+            try
+            {
+                string sql = $"UPDATE Config_List_Name set Notes='{value}' where id={id}";
+
+                bAns = Database.Execute(databasePath, sql, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("SetActivity", e);
+            }
+            return bAns;
+        }
 
         /// <summary>
         /// Deletes The Configuration and all the data relating to it.

@@ -133,6 +133,24 @@ The value.
 [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 System.String.
 
+### **ShotgunShotTypeDataData(List&lt;ShotgunShotTypeData&gt;)**
+
+Shotguns the shot type data data.
+
+```csharp
+public static string ShotgunShotTypeDataData(List<ShotgunShotTypeData> value)
+```
+
+#### Parameters
+
+`value` [List&lt;ShotgunShotTypeData&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+The value.
+
+#### Returns
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+System.String.
+
 ### **LoadersLogShotgunDataData(List&lt;LoadersLogShotgunData&gt;)**
 
 Loaderses the log shotgun data data.
@@ -216,6 +234,24 @@ public static string QueryConfigCaliberMetallicDataData(List<QueryConfigCaliberD
 #### Parameters
 
 `value` [List&lt;QueryConfigCaliberData&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+The value.
+
+#### Returns
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+System.String.
+
+### **QueryConfigPowderListDataData(List&lt;QueryConfigPowderListData&gt;)**
+
+Queries the configuration powder list data data.
+
+```csharp
+public static string QueryConfigPowderListDataData(List<QueryConfigPowderListData> value)
+```
+
+#### Parameters
+
+`value` [List&lt;QueryConfigPowderListData&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
 The value.
 
 #### Returns

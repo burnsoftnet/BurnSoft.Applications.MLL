@@ -196,6 +196,36 @@ namespace BurnSoft.Applications.MLL.LoadersLog
             return lAns;
         }
         /// <summary>
+        /// Gets the name.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.String.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static string GetName(string databasePath, long id, out string errOut)
+        {
+            errOut = "";
+            string sAns = "";
+            try
+            {
+                string sql = $"Select * from Loaders_Log_Firearms where id={id}";
+                List<FirearmCollection> lst = GetList(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                foreach (FirearmCollection i in lst)
+                {
+                    sAns = i.FullName;
+                    break;
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetName", e);
+            }
+            return sAns;
+        }
+
+        /// <summary>
         /// Datas the exists.
         /// </summary>
         /// <param name="databasePath">The database path.</param>

@@ -38,6 +38,7 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
                     sAns += $"Forgot : {p.Forgot}{Environment.NewLine}";
                     sAns += $"ForgetPhrase : {p.ForgetPhrase}{Environment.NewLine}";
                     sAns += $"LastSync : {p.LastSync}{Environment.NewLine}";
+                    sAns += $"{Environment.NewLine}";
                 }
             }
             return sAns;
@@ -60,6 +61,7 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
                     sAns += $"Password : {p.Password}{Environment.NewLine}";
                     sAns += $"Forgot : {p.Forgot}{Environment.NewLine}";
                     sAns += $"ForgetPhrase : {p.ForgetPhrase}{Environment.NewLine}";
+                    sAns += $"{Environment.NewLine}";
                 }
             }
             return sAns;
@@ -78,6 +80,7 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
                 {
                     sAns += $"Id : {p.Id}{Environment.NewLine}";
                     sAns += $"TableName : {p.TableName}{Environment.NewLine}";
+                    sAns += $"{Environment.NewLine}";
                 }
             }
             return sAns;
@@ -101,6 +104,7 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
                     sAns += $"Qty : {v.Qty}{Environment.NewLine}";
                     sAns += $"Value : {v.Value}{Environment.NewLine}";
                     sAns += $"Notes : {v.Notes}{Environment.NewLine}";
+                    sAns += $"{Environment.NewLine}";
                 }
             }
             return sAns;
@@ -127,6 +131,7 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
                     sAns += $"CaseId : {v.CaseId}{Environment.NewLine}";
                     sAns += $"Source : {v.Source}{Environment.NewLine}";
                     sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                    sAns += $"{Environment.NewLine}";
                 }
             }
             return sAns;
@@ -161,10 +166,42 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
                     sAns += $"BarrelLength : {v.BarrelLength}{Environment.NewLine}";
                     sAns += $"Notes : {v.Notes}{Environment.NewLine}";
                     sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                    sAns += $"{Environment.NewLine}";
                 }
             }
             return sAns;
         }
+        /// <summary>
+        /// Shotguns the shot type data data.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string ShotgunShotTypeDataData(List<ShotgunShotTypeData> value)
+        {
+            string sAns = "";
+            if (value.Count > 0)
+            {
+                foreach (ShotgunShotTypeData v in value)
+                {
+                    sAns += $"id : {v.Id}{Environment.NewLine}";
+                    sAns += $"Manufacturer : {v.Manufacturer}{Environment.NewLine}";
+                    sAns += $"Name : {v.Name}{Environment.NewLine}";
+                    sAns += $"IsSlug : {v.IsSlug}{Environment.NewLine}";
+                    sAns += $"MaterialUsed : {v.MaterialUsed}{Environment.NewLine}";
+                    sAns += $"ShotNumber : {v.ShotNumber}{Environment.NewLine}";
+                    sAns += $"Weight : {v.Weight}{Environment.NewLine}";
+                    sAns += $"SlugDetails : {v.Caliber}{Environment.NewLine}";
+                    sAns += $"Ounces : {v.Ounces}{Environment.NewLine}";
+                    sAns += $"Qty : {v.Qty}{Environment.NewLine}";
+                    sAns += $"Price : {v.Price}{Environment.NewLine}";
+                    sAns += $"EstimatedPricePerItem : {v.EstimatedPricePerItem}{Environment.NewLine}";
+                    sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                    sAns += $"{Environment.NewLine}";
+                }
+            }
+            return sAns;
+        }
+
         /// <summary>
         /// Loaderses the log shotgun data data.
         /// </summary>
@@ -195,6 +232,7 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
                     sAns += $"PatternDensity : {v.PatternDensity}{Environment.NewLine}";
                     sAns += $"Notes : {v.Notes}{Environment.NewLine}";
                     sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                    sAns += $"{Environment.NewLine}";
                 }
             }
             return sAns;
@@ -216,6 +254,7 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
                     sAns += $"ColumnName : {v.ColumnName}{Environment.NewLine}";
                     sAns += $"ColumnType : {v.ColumnType}{Environment.NewLine}";
                     sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                    sAns += $"{Environment.NewLine}";
                 }
             }
             return sAns;
@@ -250,6 +289,7 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
                     sAns += $"BushingId : {v.BushingId}{Environment.NewLine}";
                     sAns += $"ChargeBarId : {v.ChargeBarId}{Environment.NewLine}";
                     sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                    sAns += $"{Environment.NewLine}";
                 }
             }
             return sAns;
@@ -275,6 +315,7 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
                     sAns += $"IsActive : {v.IsActive}{Environment.NewLine}";
                     sAns += $"IsFavorite : {v.IsFavorite}{Environment.NewLine}";
                     sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                    sAns += $"{Environment.NewLine}";
                 }
             }
             return sAns;
@@ -298,6 +339,46 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
                     sAns += $"CaliberId : {v.CaliberId}{Environment.NewLine}";
                     sAns += $"IsActive : {v.IsActive}{Environment.NewLine}";
                     sAns += $"IsFavorite : {v.IsFavorite}{Environment.NewLine}";
+                    sAns += $"{Environment.NewLine}";
+                }
+            }
+            return sAns;
+        }
+        /// <summary>
+        /// Queries the configuration powder list data data.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string QueryConfigPowderListDataData(List<QueryConfigPowderListData> value)
+        {
+            string sAns = "";
+            if (value.Count > 0)
+            {
+                foreach (QueryConfigPowderListData v in value)
+                {
+                    sAns += $"ConfigId : {v.ConfigId}{Environment.NewLine}";
+                    sAns += $"ConfigName : {v.ConfigName}{Environment.NewLine}";
+                    sAns += $"IsPersonal : {v.IsPersonal}{Environment.NewLine}";
+                    sAns += $"IsShotGun : {v.IsShotGun}{Environment.NewLine}";
+                    sAns += $"CaliberName : {v.CaliberName}{Environment.NewLine}";
+                    sAns += $"CaliberId : {v.CaliberId}{Environment.NewLine}";
+                    sAns += $"PowderManufacturer : {v.PowderManufacturer}{Environment.NewLine}";
+                    sAns += $"PowderName : {v.PowderName}{Environment.NewLine}";
+                    sAns += $"IsDefaultChargeLoad : {v.IsDefaultChargeLoad}{Environment.NewLine}";
+                    sAns += $"LoadMin : {v.LoadMin}{Environment.NewLine}";
+                    sAns += $"LoadMid : {v.LoadMid}{Environment.NewLine}";
+                    sAns += $"LoadMax : {v.LoadMax}{Environment.NewLine}";
+                    sAns += $"FpsMin : {v.FpsMin}{Environment.NewLine}";
+                    sAns += $"FpsMid : {v.FpsMid}{Environment.NewLine}";
+                    sAns += $"FpsMax : {v.FpsMax}{Environment.NewLine}";
+                    sAns += $"CupsMin : {v.CupsMin}{Environment.NewLine}";
+                    sAns += $"CupsMid : {v.CupsMid}{Environment.NewLine}";
+                    sAns += $"CupsMax : {v.CupsMax}{Environment.NewLine}";
+                    sAns += $"BulletManufacturer : {v.BulletManufacturer}{Environment.NewLine}";
+                    sAns += $"BulletName : {v.BulletName}{Environment.NewLine}";
+                    sAns += $"BulletDiameter : {v.BulletDiameter}{Environment.NewLine}";
+                    sAns += $"BulletWeight : {v.BulletWeight}{Environment.NewLine}";
+                    sAns += $"{Environment.NewLine}";
                 }
             }
             return sAns;
@@ -321,6 +402,7 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
                     sAns += $"CaliberId : {v.CaliberId}{Environment.NewLine}";
                     sAns += $"IsActive : {v.IsActive}{Environment.NewLine}";
                     sAns += $"IsFavorite : {v.IsFavorite}{Environment.NewLine}";
+                    sAns += $"{Environment.NewLine}";
                 }
             }
             return sAns;
@@ -358,6 +440,7 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
                     if (v.LupMax != null) sAns += $"LupMax : {v.LupMax}{Environment.NewLine}";
                     sAns += $"IsDefault : {v.IsDefault}{Environment.NewLine}";
                     sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                    sAns += $"{Environment.NewLine}";
                 }
             }
             return sAns;
@@ -392,6 +475,7 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
                     sAns += $"ViewCups : {v.ViewCups}{Environment.NewLine}";
                     sAns += $"DefaultList : {v.DefaultList}{Environment.NewLine}";
                     sAns += $"BackupOnExit : {v.BackupOnExit}{Environment.NewLine}";
+                    sAns += $"{Environment.NewLine}";
                 }
             }
             return sAns;
@@ -419,6 +503,7 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
                     sAns += $"GunType : {v.GunType}{Environment.NewLine}";
                     sAns += $"Exclude : {v.Exclude}{Environment.NewLine}";
                     sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                    sAns += $"{Environment.NewLine}";
                 }
             }
             return sAns;
@@ -449,6 +534,7 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
                     sAns += $"CaliberId : {v.CaliberId}{Environment.NewLine}";
                     sAns += $"EsitmatedPricePerBullet : {v.EsitmatedPricePerBullet}{Environment.NewLine}";
                     sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                    sAns += $"{Environment.NewLine}";
                 }
             }
             return sAns;
@@ -468,6 +554,7 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
                     sAns += $"id : {v.Id}{Environment.NewLine}";
                     sAns += $"Caliber : {v.Caliber}{Environment.NewLine}";
                     sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                    sAns += $"{Environment.NewLine}";
                 }
             }
             return sAns;
@@ -487,6 +574,7 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
                     sAns += $"id : {v.Id}{Environment.NewLine}";
                     sAns += $"FirearmType : {v.FirearmType}{Environment.NewLine}";
                     sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                    sAns += $"{Environment.NewLine}";
                 }
             }
             return sAns;
@@ -506,6 +594,7 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
                     sAns += $"id : {v.Id}{Environment.NewLine}";
                     sAns += $"Name : {v.Name}{Environment.NewLine}";
                     sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                    sAns += $"{Environment.NewLine}";
                 }
             }
             return sAns;
@@ -534,6 +623,7 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
                     sAns += $"CaliberId : {v.CaliberId}{Environment.NewLine}";
                     sAns += $"EstimatedPricePerCase : {v.EstimatedPricePerCase}{Environment.NewLine}";
                     sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                    sAns += $"{Environment.NewLine}";
                 }
             }
             return sAns;
@@ -561,6 +651,7 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
                     sAns += $"DRAM : {v.DRAM}{Environment.NewLine}";
                     sAns += $"EstimatedPricePerItem : {v.EstimatedPricePerItem}{Environment.NewLine}";
                     sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                    sAns += $"{Environment.NewLine}";
                 }
             }
             return sAns;
@@ -588,6 +679,7 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
                     sAns += $"Price : {v.Price}{Environment.NewLine}";
                     sAns += $"EstimatedPricePerItem : {v.EstimatedPricePerItem}{Environment.NewLine}";
                     sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                    sAns += $"{Environment.NewLine}";
                 }
             }
             return sAns;
@@ -613,6 +705,7 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
                     sAns += $"Price : {v.Price}{Environment.NewLine}";
                     sAns += $"PricePerPrimer : {v.PricePerPrimer}{Environment.NewLine}";
                     sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                    sAns += $"{Environment.NewLine}";
                 }
             }
             return sAns;
@@ -636,6 +729,7 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
                     sAns += $"Cost : {v.Cost}{Environment.NewLine}";
                     sAns += $"Notes : {v.Notes}{Environment.NewLine}";
                     sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                    sAns += $"{Environment.NewLine}";
                 }
             }
             return sAns;
@@ -662,6 +756,7 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
                     sAns += $"GrainDouble : {v.GrainDouble}{Environment.NewLine}";
                     sAns += $"Velocity : {v.Velocity}{Environment.NewLine}";
                     sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                    sAns += $"{Environment.NewLine}";
                 }
             }
             return sAns;
@@ -685,6 +780,7 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
                     sAns += $"EstimatedCostToMakeTotal : {v.EstimatedCostToMakeTotal}{Environment.NewLine}";
                     sAns += $"EstimatedCostToMalePerRound : {v.EstimatedCostToMalePerRound}{Environment.NewLine}";
                     sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                    sAns += $"{Environment.NewLine}";
                 }
             }
             return sAns;
@@ -711,6 +807,7 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
                     sAns += $"Notes : {v.Notes}{Environment.NewLine}";
                     sAns += $"PricePerGrain : {v.PricePerGrain}{Environment.NewLine}";
                     sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                    sAns += $"{Environment.NewLine}";
                 }
             }
             return sAns;
@@ -735,6 +832,7 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
                     sAns += $"ForPowder : {v.ForPowder}{Environment.NewLine}";
                     sAns += $"ForShot : {v.ForShot}{Environment.NewLine}";
                     sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                    sAns += $"{Environment.NewLine}";
                 }
             }
             return sAns;
@@ -758,6 +856,7 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
                     sAns += $"Type : {v.Type}{Environment.NewLine}";
                     sAns += $"PowderName : {v.PowderName}{Environment.NewLine}";
                     sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                    sAns += $"{Environment.NewLine}";
                 }
             }
             return sAns;
@@ -780,6 +879,7 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
                     sAns += $"TrimToLength : {v.Charge}{Environment.NewLine}";
                     sAns += $"Type : {v.Type}{Environment.NewLine}";
                     sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                    sAns += $"{Environment.NewLine}";
                 }
             }
             return sAns;

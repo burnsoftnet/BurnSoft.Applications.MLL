@@ -224,6 +224,24 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
         }
 
         [TestMethod, TestCategory("Inventory Listings - Equipment")]
+        public void GetNameTest()
+        {
+            bool bAns = false;
+            try
+            {
+                string value = EquipmentInventory.GetName(_databasePath,_existingId, out _errOut);
+                if (_errOut.Length > 0) throw new Exception(_errOut);
+                TestContext.WriteLine($"VALUE RETURNED {value}, expected {_existingId}");
+                bAns = (value.Equals(_existingName));
+            }
+            catch (Exception ex)
+            {
+                TestContext.WriteLine(ex.Message);
+            }
+            General.HasTrueValue(bAns, _errOut);
+        }
+
+        [TestMethod, TestCategory("Inventory Listings - Equipment")]
         public void GetDetailsTest()
         {
             bool bAns = false;
