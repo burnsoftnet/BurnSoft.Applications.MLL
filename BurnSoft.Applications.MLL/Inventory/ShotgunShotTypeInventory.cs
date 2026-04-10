@@ -1,5 +1,6 @@
 ﻿using BurnSoft.Applications.MLL.Enums;
 using BurnSoft.Applications.MLL.Global;
+using BurnSoft.Applications.MLL.Helpers;
 using BurnSoft.Applications.MLL.Types;
 using System;
 using System.Collections.Generic;
@@ -467,6 +468,39 @@ namespace BurnSoft.Applications.MLL.Inventory
             {
                 string sql = $"UPDATE List_SG_ShotType_Details set weight={newShotPounds}, " +
                     $"ounces={newShotOz}, grams={newShotGrains} where id={id}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("UpdateQty", e);
+            }
+            return bAns;
+        }
+
+        public static bool UpdateQty(string databasePath, long id, int currentQty, double currentPrice,
+            double currentPricePerItem, int newQty, double NewPrice, out string errOut)
+        {
+            errOut = "";
+            bool bAns = false;
+            try
+            {
+                int qty = currentQty + newQty;
+                double price = (currentQty * currentPricePerItem) + NewPrice;
+                double estCostPerItem = Converters.ConvertToDollars((price == 0) ? 0 : (price / qty));
+                double ounces = WeightValues.WEIGHT_OZ_1LBS * qty;
+                string sql = $"UPDATE List_Bullets set Qty={qty}," +
+                    $"Price={price}, eppb={estCostPerItem} where id={id}";
+
+                if (currentPricePerItem == estCostPerItem)
+                {
+                    sql = $"UPDATE List_Bullets set Qty={newQty}," +
+                    $"Price={NewPrice} where id={id}";
+                }
+                else if (NewPrice == 0 && newQty == 0)
+                {
+                    sql = $"UPDATE List_Bullets set Qty=0, Price=0, eppb=0 where id={id}";
+                }
+
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
             catch (Exception e)
