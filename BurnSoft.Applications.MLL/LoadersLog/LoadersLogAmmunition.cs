@@ -93,7 +93,7 @@ namespace BurnSoft.Applications.MLL.LoadersLog
                         Qty = Convert.ToInt32(d["Qty"]),
                         GrainDouble = Convert.ToDouble(d["dcal"]),
                         Velocity = Convert.ToInt32(d["Vel"]),
-                        LastSync = d["sync_lastupdate"].ToString().Trim(),
+                        LastSync = d["sync_lastupdate"] != DBNull.Value ? d["sync_lastupdate"].ToString().Trim() : DateTime.Now.ToString()
                     });
                 }
             }

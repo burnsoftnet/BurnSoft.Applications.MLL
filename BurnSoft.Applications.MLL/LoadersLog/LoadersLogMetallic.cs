@@ -97,7 +97,7 @@ namespace BurnSoft.Applications.MLL.LoadersLog
                         BarrelLength = d["BarrelLen"] != DBNull.Value ? d["BarrelLen"].ToString().Trim() : "",
                         ConfigName = d["ConfigName"] != DBNull.Value ? d["ConfigName"].ToString().Trim() : "",
                         Notes = d["notes"] != DBNull.Value ? d["notes"].ToString().Trim() : "",
-                        LastSync = d["sync_lastupdate"].ToString().Trim(),
+                        LastSync = d["sync_lastupdate"] != DBNull.Value ? d["sync_lastupdate"].ToString().Trim() : DateTime.Now.ToString()
                     });
                 }
             }

@@ -91,7 +91,7 @@ namespace BurnSoft.Applications.MLL.Inventory
                         Price = Convert.ToDouble(d["Price"]),
                         CaliberId = Convert.ToInt32(d["CID"]),
                         EstimatedPricePerCase = Convert.ToDouble(d["ePPC"]),
-                        LastSync = d["sync_lastupdate"].ToString().Trim(),
+                        LastSync = d["sync_lastupdate"] != DBNull.Value ? d["sync_lastupdate"].ToString().Trim() : DateTime.Now.ToString()
                     });
                 }
             }

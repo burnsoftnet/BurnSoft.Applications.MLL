@@ -90,7 +90,7 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
                         IsShotGun = Convert.ToInt32(d["IsShotGun"]) == 1 ? true : false,
                         IsActive = Convert.ToInt32(d["IsActive"]) == 1 ? true : false,
                         IsFavorite = Convert.ToInt32(d["IsFav"]) == 1 ? true : false,
-                        LastSync = d["sync_lastupdate"].ToString().Trim(),
+                        LastSync = d["sync_lastupdate"] != DBNull.Value ? d["sync_lastupdate"].ToString().Trim() : DateTime.Now.ToString()
                     });
                 }
             }

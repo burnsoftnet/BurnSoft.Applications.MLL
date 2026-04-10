@@ -95,7 +95,7 @@ namespace BurnSoft.Applications.MLL.Inventory
                         Qty = d["Qty"] != DBNull.Value ? Convert.ToInt32(d["Qty"]) : 0,
                         Price = d["Price"] != DBNull.Value ? Convert.ToDouble(d["Price"]) : 0,
                         EstimatedPricePerItem = d["epps"] != DBNull.Value ? Convert.ToDouble(d["epps"]) : 0,
-                        LastSync = d["sync_lastupdate"].ToString().Trim(),
+                        LastSync = d["sync_lastupdate"] != DBNull.Value ? d["sync_lastupdate"].ToString().Trim() : DateTime.Now.ToString()
                     });
                 }
             }

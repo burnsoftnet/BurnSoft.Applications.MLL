@@ -86,7 +86,7 @@ namespace BurnSoft.Applications.MLL.Inventory
                         Name = d["sName"] != DBNull.Value ? d["sName"].ToString().Trim() : "",
                         Charge = d["sCharge"] != DBNull.Value ? d["sCharge"].ToString().Trim() : "",
                         Type = d["sType"] != DBNull.Value ? d["sType"].ToString().Trim() : "",
-                        LastSync = d["sync_lastupdate"].ToString().Trim(),
+                        LastSync = d["sync_lastupdate"] != DBNull.Value ? d["sync_lastupdate"].ToString().Trim() : DateTime.Now.ToString()
                     });
                 }
             }

@@ -87,7 +87,7 @@ namespace BurnSoft.Applications.MLL.LoadersLog
                         Qty = Convert.ToInt32(d["Qty"]),
                         EstimatedCostToMakeTotal = Convert.ToDouble(d["ec"]),
                         EstimatedCostToMalePerRound = Convert.ToDouble(d["ecpr"]),
-                        LastSync = d["sync_lastupdate"].ToString().Trim(),
+                        LastSync = d["sync_lastupdate"] != DBNull.Value ? d["sync_lastupdate"].ToString().Trim() : DateTime.Now.ToString()
                     });
                 }
             }

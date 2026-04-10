@@ -96,7 +96,7 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
                         CupsMid = Convert.ToDouble(d["CUPS_Mid"]),
                         CupsMax = Convert.ToDouble(d["CUPS_Max"]),
                         IsDefault = Convert.ToInt32(d["IsPref"]) == 1 ? true : false,
-                        LastSync = d["sync_lastupdate"].ToString().Trim(),
+                        LastSync = d["sync_lastupdate"] != DBNull.Value ? d["sync_lastupdate"].ToString().Trim() : DateTime.Now.ToString()
                     });
                 }
             }

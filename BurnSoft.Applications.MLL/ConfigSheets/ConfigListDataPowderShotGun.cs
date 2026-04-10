@@ -97,7 +97,7 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
                         LupMid = Convert.ToDouble(d["LUP_Mid"]),
                         LupMax = Convert.ToDouble(d["LUP_Max"]),
                         IsDefault = Convert.ToInt32(d["IsPref"]) == 1 ? true : false,
-                        LastSync = d["sync_lastupdate"].ToString().Trim(),
+                        LastSync = d["sync_lastupdate"] != DBNull.Value ? d["sync_lastupdate"].ToString().Trim() : DateTime.Now.ToString()
                     });
                 }
             }
