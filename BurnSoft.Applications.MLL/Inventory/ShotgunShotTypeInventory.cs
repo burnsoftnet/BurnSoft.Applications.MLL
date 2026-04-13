@@ -476,6 +476,7 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             return bAns;
         }
+
         /// <summary>
         /// Updates the qty.
         /// </summary>
@@ -496,20 +497,20 @@ namespace BurnSoft.Applications.MLL.Inventory
             try
             {
                 int qty = currentQty + newQty;
-                double price = (currentQty * currentPricePerItem) + NewPrice;
+                double price = currentPricePerItem + NewPrice;
                 double estCostPerItem = Converters.ConvertToDollars((price == 0) ? 0 : (price / qty));
                 double ounces = WeightValues.WEIGHT_OZ_1LBS * qty;
-                string sql = $"UPDATE List_Bullets set Qty={qty}," +
-                    $"Price={price}, eppb={estCostPerItem} where id={id}";
+                string sql = $"UPDATE List_SG_ShotType_Details set weight={qty}," +
+                    $"Price={price}, ounces={ounces} where id={id}";
 
                 if (currentPricePerItem == estCostPerItem)
                 {
-                    sql = $"UPDATE List_Bullets set Qty={newQty}," +
-                    $"Price={NewPrice} where id={id}";
+                    sql = $"UPDATE List_SG_ShotType_Details set weight={newQty}," +
+                    $"Price={NewPrice}, ounces={ounces} where id={id}";
                 }
                 else if (NewPrice == 0 && newQty == 0)
                 {
-                    sql = $"UPDATE List_Bullets set Qty=0, Price=0, eppb=0 where id={id}";
+                    sql = $"UPDATE List_SG_ShotType_Details set weight=0, Price=0, ounces=0 where id={id}";
                 }
 
                 bAns = Database.Execute(databasePath, sql, out errOut);
