@@ -521,6 +521,49 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             return bAns;
         }
+        /// <summary>
+        /// Updates the qty slug.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="currentQty">The current qty.</param>
+        /// <param name="currentPrice">The current price.</param>
+        /// <param name="currentPricePerItem">The current price per item.</param>
+        /// <param name="newQty">The new qty.</param>
+        /// <param name="NewPrice">Creates new price.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool UpdateQtySlug(string databasePath, long id, int currentQty, double currentPrice,
+            double currentPricePerItem, int newQty, double NewPrice, out string errOut)
+        {
+            errOut = "";
+            bool bAns = false;
+            try
+            {
+                int qty = currentQty + newQty;
+                double price = (currentPricePerItem * currentQty) + NewPrice;
+                double estCostPerItem = Converters.ConvertToDollars((price == 0) ? 0 : (price / qty));
+                string sql = $"UPDATE List_SG_ShotType_Details set QTY={qty}," +
+                    $"Price={price}, epps={estCostPerItem} where id={id}";
+
+                if (currentPricePerItem == estCostPerItem)
+                {
+                    sql = $"UPDATE List_SG_ShotType_Details set QTY={newQty}," +
+                    $"Price={NewPrice} where id={id}";
+                }
+                else if (NewPrice == 0 && newQty == 0)
+                {
+                    sql = $"UPDATE List_SG_ShotType_Details set QTY=0, Price=0, epps=0 where id={id}";
+                }
+
+                bAns = Database.Execute(databasePath, sql, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("UpdateQty", e);
+            }
+            return bAns;
+        }
 
         /// <summary>
         /// Deletes the specified database path.
