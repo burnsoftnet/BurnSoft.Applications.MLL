@@ -470,6 +470,25 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
             }
             return bAns;
         }
+
+        public static bool SetPersonal(string databasePath, long id, bool isPersonal, out string errOut)
+        {
+            errOut = "";
+            bool bAns = false;
+            try
+            {
+                int iPersonal = isPersonal ? 1 : 0;
+                string sql = $"UPDATE Config_List_Name set IsPersonal={iPersonal} where id={id}";
+
+                bAns = Database.Execute(databasePath, sql, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("SetActivity", e);
+            }
+            return bAns;
+        }
+
         /// <summary>
         /// Updates the notes.
         /// </summary>
