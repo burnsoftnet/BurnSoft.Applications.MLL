@@ -309,6 +309,32 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
             return bAns;
         }
         /// <summary>
+        /// Determines whether [has default powder] [the specified database path].
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="Configid">The configid.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if [has default powder] [the specified database path]; otherwise, <c>false</c>.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool HasDefaultPowder(string databasePath, long Configid, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"Select * from Config_List_Powder_Data_NSG where CLNID={Configid} and IsPref=1";
+                List<ConfigListPowderData> lst = GetList(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                bAns = lst.Count > 0;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("HasDefaultPowder", e);
+            }
+            return bAns;
+        }
+
+        /// <summary>
         /// Adds the specified database path.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
