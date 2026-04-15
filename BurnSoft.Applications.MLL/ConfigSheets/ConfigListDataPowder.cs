@@ -1,10 +1,8 @@
-﻿using BurnSoft.Applications.MLL.AutoFill;
-using BurnSoft.Applications.MLL.Types;
+﻿using BurnSoft.Applications.MLL.Types;
 using BurnSoft.Universal;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Runtime.CompilerServices;
 
 namespace BurnSoft.Applications.MLL.ConfigSheets
 {
