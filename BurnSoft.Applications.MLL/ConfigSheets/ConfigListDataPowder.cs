@@ -353,8 +353,8 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool Add(string databasePath, long ConfgNameId, long PowderId, double LoadMin,
-            double LoadMid, double LoadMax, double FpsMin, double FpsMid, double FpsMax, double CupsMin, double CupsMid, double CupsMax,
-            bool isDefault, out string errOut)
+            double LoadMid, double LoadMax, double FpsMin, double FpsMid, double FpsMax, double CupsMin, 
+            double CupsMid, double CupsMax, bool isDefault, out string errOut)
         {
             errOut = "";
             bool bAns = false;

@@ -470,7 +470,14 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
             }
             return bAns;
         }
-
+        /// <summary>
+        /// Sets the personal.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="isPersonal">if set to <c>true</c> [is personal].</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool SetPersonal(string databasePath, long id, bool isPersonal, out string errOut)
         {
             errOut = "";
@@ -484,7 +491,7 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage("SetActivity", e);
+                errOut = ErrorMessage("SetPersonal", e);
             }
             return bAns;
         }
