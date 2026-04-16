@@ -64,8 +64,13 @@ namespace BurnSoft.Applications.MLL.Inventory
         private static string ErrorMessage(string functionName, ArgumentNullException e) =>
             $"{ClassLocation}.{functionName} - {e.Message}";
 
-        #endregion                        
-
+        #endregion                                
+        /// <summary>
+        /// Gets the data.
+        /// </summary>
+        /// <param name="dt">The dt.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;ShotgunGaugeData&gt;.</returns>
         private static List<ShotgunGaugeData> GetData(DataTable dt, out string errOut)
         {
             List<ShotgunGaugeData> lst = new List<ShotgunGaugeData>();
@@ -88,7 +93,14 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             return lst;
         }
-
+        /// <summary>
+        /// Gets the list.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="sql">The SQL.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;ShotgunGaugeData&gt;.</returns>
+        /// <exception cref="System.Exception"></exception>
         private static List<ShotgunGaugeData> GetList(string databasePath, string sql, out string errOut)
         {
             List<ShotgunGaugeData> lst = new List<ShotgunGaugeData>();
@@ -107,13 +119,25 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             return lst;
         }
-
+        /// <summary>
+        /// Gets all.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;ShotgunGaugeData&gt;.</returns>
         public static List<ShotgunGaugeData> GetAll(string databasePath, out string errOut)
         {
             string sql = $"Select * from List_SG_Gauge order by ga ASC";
             return GetList(databasePath, sql, out errOut);
         }
-
+        /// <summary>
+        /// Gets the identifier.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int64.</returns>
+        /// <exception cref="System.Exception"></exception>
         public static long GetId(string databasePath, string name, out string errOut)
         {
             errOut = "";
@@ -135,7 +159,16 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             return lAns;
         }
-
+        /// <summary>
+        /// Generates the gauge identifier by cgecking to see if it already exists, if it 
+        /// does not then add it and then return the id, if it already exists then it 
+        /// will return the id of the existing gauge name
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int64.</returns>
+        /// <exception cref="System.Exception"></exception>
         public static long GenerateGaugeId(string databasePath, string name, out string errOut)
         {
             errOut = "";
@@ -155,19 +188,38 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             return lAns;
         }
-
+        /// <summary>
+        /// Gets the details.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;ShotgunGaugeData&gt;.</returns>
         public static List<ShotgunGaugeData> GetDetails(string databasePath, string name, out string errOut)
         {
             string sql = $"Select * from List_SG_Gauge where ga='{name}'";
             return GetList(databasePath, sql, out errOut);
         }
-
+        /// <summary>
+        /// Gets the details.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;ShotgunGaugeData&gt;.</returns>
         public static List<ShotgunGaugeData> GetDetails(string databasePath, long id, out string errOut)
         {
             string sql = $"Select * from List_SG_Gauge where id={id}";
             return GetList(databasePath, sql, out errOut);
         }
-
+        /// <summary>
+        /// Gets the name of the gauge.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.String.</returns>
+        /// <exception cref="System.Exception"></exception>
         public static string GetGaugeName(string databasePath, long id, out string errOut)
         {
             string sAns = "";
@@ -188,7 +240,13 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             return sAns;
         }
-
+        /// <summary>
+        /// Datas the exists.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
         public static bool DataExists(string databasePath, out string errOut)
         {
             bool bAns = false;
@@ -205,7 +263,14 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             return bAns;
         }
-
+        /// <summary>
+        /// Datas the exists.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
         public static bool DataExists(string databasePath, string name, out string errOut)
         {
             bool bAns = false;
@@ -223,7 +288,13 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             return bAns;
         }
-
+        /// <summary>
+        /// Adds the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool Add(string databasePath, string name, out string errOut)
         {
             errOut = "";
@@ -239,7 +310,14 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             return bAns;
         }
-
+        /// <summary>
+        /// Updates the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool Update(string databasePath, long id, string name, out string errOut)
         {
             errOut = "";
@@ -257,7 +335,13 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             return bAns;
         }
-
+        /// <summary>
+        /// Deletes the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool Delete(string databasePath, long id, out string errOut)
         {
             errOut = "";
@@ -273,7 +357,14 @@ namespace BurnSoft.Applications.MLL.Inventory
             }
             return bAns;
         }
-
+        /// <summary>
+        /// Deletes the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
         public static bool Delete(string databasePath, string name, out string errOut)
         {
             errOut = "";
