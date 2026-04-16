@@ -45,6 +45,7 @@ namespace BurnSoft.Applications.MLL.UnitTests.Listings
             _errOut = @"";
             _databasePath = Vs2019.GetSetting("DatabasePath");
             _existingName = "12 Gauge";
+            _existingId = 2;
             _name = "8 Gauge";
         }
 
