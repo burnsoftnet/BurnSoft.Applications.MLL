@@ -83,6 +83,7 @@
     <Compile Include="Global\Wishlists.cs" />
     <Compile Include="Helpers\GeneralCalculations.cs" />
     <Compile Include="Inventory\InventoryUpdate.cs" />
+    <Compile Include="Inventory\ShotgunGauges.cs" />
     <Compile Include="Inventory\ShotgunHullInventory.cs" />
     <Compile Include="Inventory\ShotgunShotInventory.cs" />
     <Compile Include="Inventory\ShotgunShotTypeInventory.cs" />
