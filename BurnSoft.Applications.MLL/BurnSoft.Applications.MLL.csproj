@@ -83,6 +83,7 @@
     <Compile Include="Global\Wishlists.cs" />
     <Compile Include="Helpers\GeneralCalculations.cs" />
     <Compile Include="Inventory\InventoryUpdate.cs" />
+    <Compile Include="Inventory\ShotgunGauges.cs" />
     <Compile Include="Inventory\ShotgunHullInventory.cs" />
     <Compile Include="Inventory\ShotgunShotInventory.cs" />
     <Compile Include="Inventory\ShotgunShotTypeInventory.cs" />
@@ -142,6 +143,7 @@
     <Compile Include="Types\RegistrySettings.cs" />
     <Compile Include="Types\SearchFieldsData.cs" />
     <Compile Include="Types\ShotgunBushingListings.cs" />
+    <Compile Include="Types\ShotgunGaugeData.cs" />
     <Compile Include="Types\ShotgunHullData.cs" />
     <Compile Include="Types\ShotgunPowderListings.cs" />
     <Compile Include="Types\ShotgunShotListings.cs" />

@@ -237,6 +237,7 @@
     <Compile Include="Listings\ShotgunShotInventoryTests.cs" />
     <Compile Include="Listings\ShotgunHullInventoryTests.cs" />
     <Compile Include="Listings\ShotgunShotTypeInventoryTests.cs" />
+    <Compile Include="Listings\ShotgunGaugesTests.cs" />
     <Compile Include="Listings\WadInventoryTests.cs" />
     <Compile Include="LoadersLog\FirearmsTests.cs" />
     <Compile Include="LoadersLog\LoadersLogAmmunitionTests.cs" />

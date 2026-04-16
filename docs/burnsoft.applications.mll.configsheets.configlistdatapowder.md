@@ -240,6 +240,34 @@ The error out.
 
 [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
 
+### **HasDefaultPowder(String, Int64, String&)**
+
+Determines whether [has default powder] [the specified database path].
+
+```csharp
+public static bool HasDefaultPowder(string databasePath, long Configid, String& errOut)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`Configid` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
+The configid.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+`true` if [has default powder] [the specified database path]; otherwise, `false`.
+
+#### Exceptions
+
+[Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
+
 ### **Add(String, Int64, Int64, Double, Double, Double, Double, Double, Double, Double, Double, Double, Boolean, String&)**
 
 Adds the specified database path.

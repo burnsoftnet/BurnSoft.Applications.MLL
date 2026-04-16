@@ -439,6 +439,24 @@ The value.
 [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 System.String.
 
+### **ShotgunGaugeDataData(List&lt;ShotgunGaugeData&gt;)**
+
+Shotguns the gauge data data.
+
+```csharp
+public static string ShotgunGaugeDataData(List<ShotgunGaugeData> value)
+```
+
+#### Parameters
+
+`value` [List&lt;ShotgunGaugeData&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+The value.
+
+#### Returns
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+System.String.
+
 ### **WadDataData(List&lt;WadData&gt;)**
 
 Wads the data data.
