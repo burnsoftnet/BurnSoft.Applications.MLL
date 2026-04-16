@@ -227,6 +227,30 @@ namespace BurnSoft.Applications.MLL.Inventory
             return GetList(databasePath, sql, out errOut);
         }
         /// <summary>
+        /// Gets the maximum charge for the selected wad
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.String.</returns>
+        public static string GetMaxCharge(string databasePath, long id, out string errOut)
+        {
+            string sAns = "";
+            errOut = "";
+            try
+            {
+                List<WadData> lst =  GetDetails(databasePath, id, out errOut);
+                foreach(WadData i in lst)
+                {
+                    sAns = i.LoadInOzText;
+                }
+            }
+            catch (Exception e) {
+                errOut = ErrorMessage("GetMaxCharge", e);
+            }
+            return sAns;
+        }
+        /// <summary>
         /// Datas the exists.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
