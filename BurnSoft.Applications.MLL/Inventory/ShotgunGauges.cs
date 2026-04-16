@@ -212,18 +212,19 @@ namespace BurnSoft.Applications.MLL.Inventory
             string sql = $"Select * from List_SG_Gauge where id={id}";
             return GetList(databasePath, sql, out errOut);
         }
+        
         /// <summary>
-        /// Gets the name of the gauge.
+        /// Gets the name of the gauge
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="id">The identifier.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns>System.String.</returns>
         /// <exception cref="System.Exception"></exception>
-        public static string GetGaugeName(string databasePath, long id, out string errOut)
+        public static string GetName(string databasePath, long id, out string errOut)
         {
-            string sAns = "";
             errOut = "";
+            string sAns = "";
             try
             {
                 string sql = $"Select * from List_SG_Gauge where id={id}";
@@ -232,11 +233,12 @@ namespace BurnSoft.Applications.MLL.Inventory
                 foreach (ShotgunGaugeData i in lst)
                 {
                     sAns = i.Name;
+                    break;
                 }
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage("GetGaugeName", e);
+                errOut = ErrorMessage("GetName", e);
             }
             return sAns;
         }
