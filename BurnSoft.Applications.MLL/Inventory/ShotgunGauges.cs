@@ -110,7 +110,7 @@ namespace BurnSoft.Applications.MLL.Inventory
 
         public static List<ShotgunGaugeData> GetAll(string databasePath, out string errOut)
         {
-            string sql = $"Select * from List_SG_Gauge order by FType ASC";
+            string sql = $"Select * from List_SG_Gauge order by ga ASC";
             return GetList(databasePath, sql, out errOut);
         }
 
@@ -120,7 +120,7 @@ namespace BurnSoft.Applications.MLL.Inventory
             long lAns = 0;
             try
             {
-                string sql = $"Select * from List_SG_Gauge where FType='{name}'";
+                string sql = $"Select * from List_SG_Gauge where ga='{name}'";
                 List<ShotgunGaugeData> lst = GetList(databasePath, sql, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 foreach (ShotgunGaugeData i in lst)
@@ -136,9 +136,29 @@ namespace BurnSoft.Applications.MLL.Inventory
             return lAns;
         }
 
+        public static long GenerateGaugeId(string databasePath, string name, out string errOut)
+        {
+            errOut = "";
+            long lAns = 0;
+            try
+            {
+                if (!DataExists(databasePath, name, out errOut))
+                {
+                    if (errOut.Length > 0) throw new Exception(errOut);
+                    if (!Add(databasePath, name, out errOut)) throw new Exception(errOut);
+                }
+                lAns = GetId(databasePath, name, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetId", e);
+            }
+            return lAns;
+        }
+
         public static List<ShotgunGaugeData> GetDetails(string databasePath, string name, out string errOut)
         {
-            string sql = $"Select * from List_SG_Gauge where FType='{name}'";
+            string sql = $"Select * from List_SG_Gauge where ga='{name}'";
             return GetList(databasePath, sql, out errOut);
         }
 
