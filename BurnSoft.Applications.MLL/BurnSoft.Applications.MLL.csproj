@@ -142,6 +142,7 @@
     <Compile Include="Types\RegistrySettings.cs" />
     <Compile Include="Types\SearchFieldsData.cs" />
     <Compile Include="Types\ShotgunBushingListings.cs" />
+    <Compile Include="Types\ShotgunGaugeData.cs" />
     <Compile Include="Types\ShotgunHullData.cs" />
     <Compile Include="Types\ShotgunPowderListings.cs" />
     <Compile Include="Types\ShotgunShotListings.cs" />
