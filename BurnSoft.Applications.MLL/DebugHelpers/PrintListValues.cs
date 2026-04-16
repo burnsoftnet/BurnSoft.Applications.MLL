@@ -657,6 +657,26 @@ namespace BurnSoft.Applications.MLL.DebugHelpers
             return sAns;
         }
         /// <summary>
+        /// Shotguns the gauge data data.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string ShotgunGaugeDataData(List<ShotgunGaugeData> value)
+        {
+            string sAns = "";
+            if (value.Count > 0)
+            {
+                foreach (ShotgunGaugeData v in value)
+                {
+                    sAns += $"id : {v.Id}{Environment.NewLine}";
+                    sAns += $"Name : {v.Name}{Environment.NewLine}";
+                    sAns += $"LastSync : {v.LastSync}{Environment.NewLine}";
+                    sAns += $"{Environment.NewLine}";
+                }
+            }
+            return sAns;
+        }
+        /// <summary>
         /// Wads the data data.
         /// </summary>
         /// <param name="value">The value.</param>
