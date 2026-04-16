@@ -85,7 +85,7 @@ namespace BurnSoft.Applications.MLL.Search
                         Description = d["dis"] != DBNull.Value ? d["dis"].ToString().Trim() : "",
                         ColumnName = d["colname"] != DBNull.Value ? d["colname"].ToString().Trim() : "",
                         ColumnType = d["cType"] != DBNull.Value ? d["cType"].ToString().Trim() : "",
-                        LastSync = d["sync_lastupdate"].ToString().Trim(),
+                        LastSync = d["sync_lastupdate"] != DBNull.Value ? d["sync_lastupdate"].ToString().Trim() : DateTime.Now.ToString()
                     });
                 }
             }

@@ -96,7 +96,7 @@ namespace BurnSoft.Applications.MLL.LoadersLog
                         PatternDensity = d["pd"] != DBNull.Value ? d["pd"].ToString().Trim() : "",
                         Yards = Convert.ToInt32(d["yds"]),
                         Notes = d["notes"] != DBNull.Value ? d["notes"].ToString().Trim() : "",
-                        LastSync = d["sync_lastupdate"].ToString().Trim(),
+                        LastSync = d["sync_lastupdate"] != DBNull.Value ? d["sync_lastupdate"].ToString().Trim() : DateTime.Now.ToString()
                     });
                 }
             }

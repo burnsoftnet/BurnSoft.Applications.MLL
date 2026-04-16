@@ -100,7 +100,7 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
                         ListTypeId = Convert.ToInt32(d["LTID"]),
                         BushingId = d["BushingId"] != DBNull.Value ? Convert.ToInt32(d["BushingId"]) : 0,
                         ChargeBarId = d["ChargeBarId"] != DBNull.Value ?  Convert.ToInt32(d["ChargeBarId"]) : 0,
-                        LastSync = d["sync_lastupdate"].ToString().Trim(),
+                        LastSync = d["sync_lastupdate"] != DBNull.Value ? d["sync_lastupdate"].ToString().Trim() : DateTime.Now.ToString()
                     });
                 }
             }

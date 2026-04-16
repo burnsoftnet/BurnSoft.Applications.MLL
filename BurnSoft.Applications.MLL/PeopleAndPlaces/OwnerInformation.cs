@@ -98,7 +98,7 @@ namespace BurnSoft.Applications.MLL.PeopleAndPlaces
                         UserName = d["UserName"] != DBNull.Value ? d["UserName"].ToString().Trim() : "",
                         Forgot = d["Password_Forgot"] != DBNull.Value ? One.Decrypt(d["Password_Forgot"].ToString().Trim()) : "",
                         ForgetPhrase = d["Password_Forgot_word"] != DBNull.Value ? One.Decrypt(d["Password_Forgot_word"].ToString().Trim()) : "",
-                        LastSync = d["sync_lastupdate"].ToString().Trim(),
+                        LastSync = d["sync_lastupdate"] != DBNull.Value ? d["sync_lastupdate"].ToString().Trim() : DateTime.Now.ToString()
                     });
                 }
             }

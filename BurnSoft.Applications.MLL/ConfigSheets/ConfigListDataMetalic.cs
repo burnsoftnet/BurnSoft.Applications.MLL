@@ -91,7 +91,7 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
                         PrimerId = Convert.ToInt32(d["PRID"]),
                         CaseId = Convert.ToInt32(d["CAID"]),
                         Source = d["Source"] != DBNull.Value ? d["Source"].ToString().Trim() : "",
-                        LastSync = d["sync_lastupdate"].ToString().Trim(),
+                        LastSync = d["sync_lastupdate"] != DBNull.Value ? d["sync_lastupdate"].ToString().Trim() : DateTime.Now.ToString()
                     });
                 }
             }

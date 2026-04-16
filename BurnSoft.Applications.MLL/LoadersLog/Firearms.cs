@@ -92,8 +92,8 @@ namespace BurnSoft.Applications.MLL.LoadersLog
                         Barrel = d["Barrel"] != DBNull.Value ? d["Barrel"].ToString().Trim() : "",
                         SerialNo = d["SerialNo"] != DBNull.Value ? d["SerialNo"].ToString().Trim() : "",
                         GunType = d["GType"] != DBNull.Value ? d["GType"].ToString().Trim() : "",
-                        Exclude = Convert.ToInt32(d["Exclude"]) == 1,
-                        LastSync = d["sync_lastupdate"].ToString().Trim(),
+                        Exclude = d["Exclude"] != DBNull.Value ? Convert.ToInt32(d["Exclude"]) == 1: false,
+                        LastSync = d["sync_lastupdate"] != DBNull.Value ? d["sync_lastupdate"].ToString().Trim() : DateTime.Now.ToString()
                     });
                 }
             }

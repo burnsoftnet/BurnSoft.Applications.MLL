@@ -90,7 +90,7 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
                         IsShotGun = Convert.ToInt32(d["IsShotGun"]) == 1 ? true : false,
                         IsActive = Convert.ToInt32(d["IsActive"]) == 1 ? true : false,
                         IsFavorite = Convert.ToInt32(d["IsFav"]) == 1 ? true : false,
-                        LastSync = d["sync_lastupdate"].ToString().Trim(),
+                        LastSync = d["sync_lastupdate"] != DBNull.Value ? d["sync_lastupdate"].ToString().Trim() : DateTime.Now.ToString()
                     });
                 }
             }
@@ -470,6 +470,32 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
             }
             return bAns;
         }
+        /// <summary>
+        /// Sets the personal.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="isPersonal">if set to <c>true</c> [is personal].</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool SetPersonal(string databasePath, long id, bool isPersonal, out string errOut)
+        {
+            errOut = "";
+            bool bAns = false;
+            try
+            {
+                int iPersonal = isPersonal ? 1 : 0;
+                string sql = $"UPDATE Config_List_Name set IsPersonal={iPersonal} where id={id}";
+
+                bAns = Database.Execute(databasePath, sql, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("SetPersonal", e);
+            }
+            return bAns;
+        }
+
         /// <summary>
         /// Updates the notes.
         /// </summary>

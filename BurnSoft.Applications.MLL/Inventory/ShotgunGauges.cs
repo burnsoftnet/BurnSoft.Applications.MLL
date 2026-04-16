@@ -1,23 +1,23 @@
 ﻿using BurnSoft.Applications.MLL.Types;
+using BurnSoft.Universal;
 using System;
 using System.Collections.Generic;
 using System.Data;
 
 
-namespace BurnSoft.Applications.MLL.LoadersLog
+namespace BurnSoft.Applications.MLL.Inventory
 {
     /// <summary>
-    /// Class LoadersLogAmmunition handles the data in the 
-    /// Loaders_Log_Ammunition_Audit_Audit 
+    /// Class ShotgunGauges handles the data in the List_SG_Gauge table
     /// </summary>
-    public class LoadersLogAmmunitionAudit
+    public class ShotgunGauges
     {
         #region "Exception Error Handling"
 
         /// <summary>
         /// The class location
         /// </summary>
-        private static string ClassLocation = "BurnSoft.Applications.MLL.Inventory.LoadersLogAmmunitionAudit";
+        private static string ClassLocation = "BurnSoft.Applications.MLL.Inventory.ShotgunGauges";
 
         /// <summary>
         /// Errors the message for regular Exceptions
@@ -64,29 +64,25 @@ namespace BurnSoft.Applications.MLL.LoadersLog
         private static string ErrorMessage(string functionName, ArgumentNullException e) =>
             $"{ClassLocation}.{functionName} - {e.Message}";
 
-        #endregion                                        
+        #endregion                                
         /// <summary>
         /// Gets the data.
         /// </summary>
         /// <param name="dt">The dt.</param>
         /// <param name="errOut">The error out.</param>
-        /// <returns>List&lt;LoadersLogAmmunitionAuditData&gt;.</returns>
-        private static List<LoadersLogAmmunitionAuditData> GetData(DataTable dt, out string errOut)
+        /// <returns>List&lt;ShotgunGaugeData&gt;.</returns>
+        private static List<ShotgunGaugeData> GetData(DataTable dt, out string errOut)
         {
-            List<LoadersLogAmmunitionAuditData> lst = new List<LoadersLogAmmunitionAuditData>();
+            List<ShotgunGaugeData> lst = new List<ShotgunGaugeData>();
             errOut = "";
             try
             {
                 foreach (DataRow d in dt.Rows)
                 {
-                    lst.Add(new LoadersLogAmmunitionAuditData()
+                    lst.Add(new ShotgunGaugeData()
                     {
                         Id = Convert.ToInt32(d["id"]),
-                        ConfigId = Convert.ToInt32(d["CFID"]),
-                        DateCreated = d["dtc"] != DBNull.Value ? d["dtc"].ToString().Trim() : "",
-                        Qty = Convert.ToInt32(d["Qty"]),
-                        EstimatedCostToMakeTotal = Convert.ToDouble(d["ec"]),
-                        EstimatedCostToMalePerRound = Convert.ToDouble(d["ecpr"]),
+                        Name = d["ga"] != DBNull.Value ? d["ga"].ToString().Trim() : "",
                         LastSync = d["sync_lastupdate"] != DBNull.Value ? d["sync_lastupdate"].ToString().Trim() : DateTime.Now.ToString()
                     });
                 }
@@ -103,11 +99,11 @@ namespace BurnSoft.Applications.MLL.LoadersLog
         /// <param name="databasePath">The database path.</param>
         /// <param name="sql">The SQL.</param>
         /// <param name="errOut">The error out.</param>
-        /// <returns>List&lt;LoadersLogAmmunitionAuditData&gt;.</returns>
+        /// <returns>List&lt;ShotgunGaugeData&gt;.</returns>
         /// <exception cref="System.Exception"></exception>
-        private static List<LoadersLogAmmunitionAuditData> GetList(string databasePath, string sql, out string errOut)
+        private static List<ShotgunGaugeData> GetList(string databasePath, string sql, out string errOut)
         {
-            List<LoadersLogAmmunitionAuditData> lst = new List<LoadersLogAmmunitionAuditData>();
+            List<ShotgunGaugeData> lst = new List<ShotgunGaugeData>();
             errOut = "";
             try
             {
@@ -128,30 +124,30 @@ namespace BurnSoft.Applications.MLL.LoadersLog
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="errOut">The error out.</param>
-        /// <returns>List&lt;LoadersLogAmmunitionAuditData&gt;.</returns>
-        public static List<LoadersLogAmmunitionAuditData> GetAll(string databasePath, out string errOut)
+        /// <returns>List&lt;ShotgunGaugeData&gt;.</returns>
+        public static List<ShotgunGaugeData> GetAll(string databasePath, out string errOut)
         {
-            string sql = $"Select * from Loaders_Log_Ammunition_Audit order by CFID ASC";
+            string sql = $"Select * from List_SG_Gauge order by ga ASC";
             return GetList(databasePath, sql, out errOut);
         }
         /// <summary>
         /// Gets the identifier.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
-        /// <param name="configId">The configuration identifier.</param>
+        /// <param name="name">The name.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns>System.Int64.</returns>
         /// <exception cref="System.Exception"></exception>
-        public static long GetId(string databasePath, long configId, out string errOut)
+        public static long GetId(string databasePath, string name, out string errOut)
         {
             errOut = "";
             long lAns = 0;
             try
             {
-                string sql = $"Select * from Loaders_Log_Ammunition_Audit where CFID={configId}";
-                List<LoadersLogAmmunitionAuditData> lst = GetList(databasePath, sql, out errOut);
+                string sql = $"Select * from List_SG_Gauge where ga='{name}'";
+                List<ShotgunGaugeData> lst = GetList(databasePath, sql, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
-                foreach (LoadersLogAmmunitionAuditData i in lst)
+                foreach (ShotgunGaugeData i in lst)
                 {
                     lAns = i.Id;
                     break;
@@ -163,30 +159,88 @@ namespace BurnSoft.Applications.MLL.LoadersLog
             }
             return lAns;
         }
-
+        /// <summary>
+        /// Generates the gauge identifier by cgecking to see if it already exists, if it 
+        /// does not then add it and then return the id, if it already exists then it 
+        /// will return the id of the existing gauge name
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int64.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static long GenerateGaugeId(string databasePath, string name, out string errOut)
+        {
+            errOut = "";
+            long lAns = 0;
+            try
+            {
+                if (!DataExists(databasePath, name, out errOut))
+                {
+                    if (errOut.Length > 0) throw new Exception(errOut);
+                    if (!Add(databasePath, name, out errOut)) throw new Exception(errOut);
+                }
+                lAns = GetId(databasePath, name, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetId", e);
+            }
+            return lAns;
+        }
         /// <summary>
         /// Gets the details.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
-        /// <param name="id">The identifier.</param>
+        /// <param name="name">The name.</param>
         /// <param name="errOut">The error out.</param>
-        /// <returns>List&lt;LoadersLogAmmunitionAuditData&gt;.</returns>
-        public static List<LoadersLogAmmunitionAuditData> GetDetails(string databasePath, long id, out string errOut)
+        /// <returns>List&lt;ShotgunGaugeData&gt;.</returns>
+        public static List<ShotgunGaugeData> GetDetails(string databasePath, string name, out string errOut)
         {
-            string sql = $"Select * from Loaders_Log_Ammunition_Audit where id={id}";
+            string sql = $"Select * from List_SG_Gauge where ga='{name}'";
             return GetList(databasePath, sql, out errOut);
         }
         /// <summary>
         /// Gets the details.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
-        /// <param name="configId">The configuration identifier.</param>
+        /// <param name="id">The identifier.</param>
         /// <param name="errOut">The error out.</param>
-        /// <returns>List&lt;LoadersLogAmmunitionAuditData&gt;.</returns>
-        public static List<LoadersLogAmmunitionAuditData> GetDetails(string databasePath, int configId, out string errOut)
+        /// <returns>List&lt;ShotgunGaugeData&gt;.</returns>
+        public static List<ShotgunGaugeData> GetDetails(string databasePath, long id, out string errOut)
         {
-            string sql = $"Select * from Loaders_Log_Ammunition_Audit where cfid={configId}";
+            string sql = $"Select * from List_SG_Gauge where id={id}";
             return GetList(databasePath, sql, out errOut);
+        }
+        
+        /// <summary>
+        /// Gets the name of the gauge
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.String.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static string GetName(string databasePath, long id, out string errOut)
+        {
+            errOut = "";
+            string sAns = "";
+            try
+            {
+                string sql = $"Select * from List_SG_Gauge where id={id}";
+                List<ShotgunGaugeData> lst = GetList(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                foreach (ShotgunGaugeData i in lst)
+                {
+                    sAns = i.Name;
+                    break;
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetName", e);
+            }
+            return sAns;
         }
         /// <summary>
         /// Datas the exists.
@@ -201,7 +255,7 @@ namespace BurnSoft.Applications.MLL.LoadersLog
             errOut = @"";
             try
             {
-                List<LoadersLogAmmunitionAuditData> lst = GetAll(databasePath, out errOut);
+                List<ShotgunGaugeData> lst = GetAll(databasePath, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 bAns = lst.Count > 0;
             }
@@ -215,43 +269,18 @@ namespace BurnSoft.Applications.MLL.LoadersLog
         /// Datas the exists.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
-        /// <param name="id">The identifier.</param>
+        /// <param name="name">The name.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="System.Exception"></exception>
-        public static bool DataExists(string databasePath, long id, out string errOut)
+        public static bool DataExists(string databasePath, string name, out string errOut)
         {
             bool bAns = false;
             errOut = @"";
             try
             {
 
-                List<LoadersLogAmmunitionAuditData> lst = GetDetails(databasePath, id, out errOut);
-                if (errOut.Length > 0) throw new Exception(errOut);
-                bAns = lst.Count > 0;
-            }
-            catch (Exception e)
-            {
-                errOut = ErrorMessage("DataExists", e);
-            }
-            return bAns;
-        }
-        /// <summary>
-        /// Datas the exists.
-        /// </summary>
-        /// <param name="databasePath">The database path.</param>
-        /// <param name="configId">The configuration identifier.</param>
-        /// <param name="errOut">The error out.</param>
-        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        /// <exception cref="System.Exception"></exception>
-        public static bool DataExists(string databasePath, int configId, out string errOut)
-        {
-            bool bAns = false;
-            errOut = @"";
-            try
-            {
-
-                List<LoadersLogAmmunitionAuditData> lst = GetDetails(databasePath, configId, out errOut);
+                List<ShotgunGaugeData> lst = GetDetails(databasePath, name, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 bAns = lst.Count > 0;
             }
@@ -265,27 +294,16 @@ namespace BurnSoft.Applications.MLL.LoadersLog
         /// Adds the specified database path.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
-        /// <param name="configId">The configuration identifier.</param>
-        /// <param name="dateCreated">The date created.</param>
-        /// <param name="qty">The qty.</param>
-        /// <param name="estimatedTotalCost">The estimated total cost.</param>
-        /// <param name="estimatedCostPerRound">The estimated cost per round.</param>
+        /// <param name="name">The name.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        /// <exception cref="System.Exception"></exception>
-        public static bool Add(string databasePath, long configId, string dateCreated, long qty,
-            double estimatedTotalCost, double estimatedCostPerRound, out string errOut)
+        public static bool Add(string databasePath, string name, out string errOut)
         {
             errOut = "";
             bool bAns = false;
             try
             {
-                if (errOut.Length > 0) throw new Exception(errOut);
-                string sql = $"INSERT INTO Loaders_Log_Ammunition_Audit(CFID,dtc,qty," +
-                    $"ec,ecpr,sync_lastupdate) VALUES(" +
-                    $"{configId}, '{dateCreated}', {qty}, " +
-                    $"{estimatedTotalCost}, {estimatedCostPerRound}, Now())";
-
+                string sql = $"INSERT INTO List_SG_Gauge(ga, sync_lastupdate) VALUES('{name}', Now())";
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
             catch (Exception e)
@@ -299,25 +317,17 @@ namespace BurnSoft.Applications.MLL.LoadersLog
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="id">The identifier.</param>
-        /// <param name="configId">The configuration identifier.</param>
-        /// <param name="dateCreated">The date created.</param>
-        /// <param name="qty">The qty.</param>
-        /// <param name="estimatedTotalCost">The estimated total cost.</param>
-        /// <param name="estimatedCostPerRound">The estimated cost per round.</param>
+        /// <param name="name">The name.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        /// <exception cref="System.Exception"></exception>
-        public static bool Update(string databasePath, long id, long configId, string dateCreated, 
-            long qty, double estimatedTotalCost, double estimatedCostPerRound, out string errOut)
+        public static bool Update(string databasePath, long id, string name, out string errOut)
         {
             errOut = "";
             bool bAns = false;
             try
             {
-                if (errOut.Length > 0) throw new Exception(errOut);
-                string sql = $"UPDATE Loaders_Log_Ammunition_Audit set CFID={configId}," +
-                    $"dtc='{dateCreated}',qty={qty},ec={estimatedTotalCost}, " +
-                    $"ecpr={estimatedCostPerRound}, sync_lastupdate=Now() where id={id}";
+                BSOtherObjects o = new BSOtherObjects();
+                string sql = $"UPDATE List_SG_Gauge set ga='{name}', sync_lastupdate=Now() where id={id}";
 
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
@@ -340,7 +350,7 @@ namespace BurnSoft.Applications.MLL.LoadersLog
             bool bAns = false;
             try
             {
-                string sql = $"DELETE from Loaders_Log_Ammunition_Audit where id={id}";
+                string sql = $"DELETE from List_SG_Gauge where id={id}";
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
             catch (Exception e)
@@ -353,45 +363,23 @@ namespace BurnSoft.Applications.MLL.LoadersLog
         /// Deletes the specified database path.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
-        /// <param name="configId">The configuration identifier.</param>
+        /// <param name="name">The name.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="System.Exception"></exception>
-        public static bool Delete(string databasePath, int configId, out string errOut)
+        public static bool Delete(string databasePath, string name, out string errOut)
         {
             errOut = "";
             bool bAns = false;
             try
             {
-                long id = GetId(databasePath, configId, out errOut);
+                long id = GetId(databasePath, name, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 bAns = Delete(databasePath, id, out errOut);
             }
             catch (Exception e)
             {
                 errOut = ErrorMessage("Delete", e);
-            }
-            return bAns;
-        }
-        /// <summary>
-        /// Deletes the by configuration identifier.
-        /// </summary>
-        /// <param name="databasePath">The database path.</param>
-        /// <param name="id">The identifier.</param>
-        /// <param name="errOut">The error out.</param>
-        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public static bool DeleteByConfigId(string databasePath, long id, out string errOut)
-        {
-            errOut = "";
-            bool bAns = false;
-            try
-            {
-                string sql = $"DELETE from Loaders_Log_Ammunition_Audit where CFID={id}";
-                bAns = Database.Execute(databasePath, sql, out errOut);
-            }
-            catch (Exception e)
-            {
-                errOut = ErrorMessage("DeleteByConfigId", e);
             }
             return bAns;
         }

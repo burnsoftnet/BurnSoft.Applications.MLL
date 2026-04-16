@@ -92,7 +92,7 @@ namespace BurnSoft.Applications.MLL.Inventory
                         Price = Convert.ToDouble(d["Price"]),
                         LoadInOz = Convert.ToDouble(d["load_d"]),
                         EstimatedPricePerItem = Convert.ToDouble(d["eppw"]),
-                        LastSync = d["sync_lastupdate"].ToString().Trim(),
+                        LastSync = d["sync_lastupdate"] != DBNull.Value ? d["sync_lastupdate"].ToString().Trim() : DateTime.Now.ToString()
                     });
                 }
             }

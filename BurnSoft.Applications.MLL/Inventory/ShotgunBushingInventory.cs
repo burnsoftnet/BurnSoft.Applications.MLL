@@ -86,7 +86,7 @@ namespace BurnSoft.Applications.MLL.Inventory
                         Charge = d["sCharge"] != DBNull.Value ? d["sCharge"].ToString().Trim() : "",
                         ForShot = Convert.ToInt32(d["ForShot"]),
                         ForPowder = Convert.ToInt32(d["ForPowder"]),
-                        LastSync = d["sync_lastupdate"].ToString().Trim(),
+                        LastSync = d["sync_lastupdate"] != DBNull.Value ? d["sync_lastupdate"].ToString().Trim() : DateTime.Now.ToString()
                     });
                 }
             }

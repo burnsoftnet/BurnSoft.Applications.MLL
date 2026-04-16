@@ -82,7 +82,7 @@ namespace BurnSoft.Applications.MLL.Inventory
                     {
                         Id = Convert.ToInt32(d["id"]),
                         Caliber = d["Cal"] != DBNull.Value ? d["Cal"].ToString().Trim() : "",
-                        LastSync = d["sync_lastupdate"].ToString().Trim(),
+                        LastSync = d["sync_lastupdate"] != DBNull.Value ? d["sync_lastupdate"].ToString().Trim() : DateTime.Now.ToString()
                     });
                 }
             }

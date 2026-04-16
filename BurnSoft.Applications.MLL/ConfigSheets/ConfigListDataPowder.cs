@@ -1,10 +1,8 @@
-﻿using BurnSoft.Applications.MLL.AutoFill;
-using BurnSoft.Applications.MLL.Types;
+﻿using BurnSoft.Applications.MLL.Types;
 using BurnSoft.Universal;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Runtime.CompilerServices;
 
 namespace BurnSoft.Applications.MLL.ConfigSheets
 {
@@ -96,7 +94,7 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
                         CupsMid = Convert.ToDouble(d["CUPS_Mid"]),
                         CupsMax = Convert.ToDouble(d["CUPS_Max"]),
                         IsDefault = Convert.ToInt32(d["IsPref"]) == 1 ? true : false,
-                        LastSync = d["sync_lastupdate"].ToString().Trim(),
+                        LastSync = d["sync_lastupdate"] != DBNull.Value ? d["sync_lastupdate"].ToString().Trim() : DateTime.Now.ToString()
                     });
                 }
             }
@@ -311,6 +309,32 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
             return bAns;
         }
         /// <summary>
+        /// Determines whether [has default powder] [the specified database path].
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="Configid">The configid.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if [has default powder] [the specified database path]; otherwise, <c>false</c>.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool HasDefaultPowder(string databasePath, long Configid, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"Select * from Config_List_Powder_Data_NSG where CLNID={Configid} and IsPref=1";
+                List<ConfigListPowderData> lst = GetList(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                bAns = lst.Count > 0;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("HasDefaultPowder", e);
+            }
+            return bAns;
+        }
+
+        /// <summary>
         /// Adds the specified database path.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
@@ -329,8 +353,8 @@ namespace BurnSoft.Applications.MLL.ConfigSheets
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool Add(string databasePath, long ConfgNameId, long PowderId, double LoadMin,
-            double LoadMid, double LoadMax, double FpsMin, double FpsMid, double FpsMax, double CupsMin, double CupsMid, double CupsMax,
-            bool isDefault, out string errOut)
+            double LoadMid, double LoadMax, double FpsMin, double FpsMid, double FpsMax, double CupsMin, 
+            double CupsMid, double CupsMax, bool isDefault, out string errOut)
         {
             errOut = "";
             bool bAns = false;

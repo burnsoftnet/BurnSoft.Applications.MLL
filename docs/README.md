@@ -104,6 +104,8 @@
 
 [ShotgunBushingInventory](./burnsoft.applications.mll.inventory.shotgunbushinginventory.md)
 
+[ShotgunGauges](./burnsoft.applications.mll.inventory.shotgungauges.md)
+
 [ShotgunHullInventory](./burnsoft.applications.mll.inventory.shotgunhullinventory.md)
 
 [ShotgunPowderInventory](./burnsoft.applications.mll.inventory.shotgunpowderinventory.md)
@@ -199,6 +201,8 @@
 [SearchFieldsData](./burnsoft.applications.mll.types.searchfieldsdata.md)
 
 [ShotgunBushingListings](./burnsoft.applications.mll.types.shotgunbushinglistings.md)
+
+[ShotgunGaugeData](./burnsoft.applications.mll.types.shotgungaugedata.md)
 
 [ShotgunHullData](./burnsoft.applications.mll.types.shotgunhulldata.md)
 
